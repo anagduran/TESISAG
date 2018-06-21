@@ -37,7 +37,7 @@ const server ={
             ? 'localhost'
             :address
 
-            const pot = app.locals.config.PORT
+            const port = app.locals.config.PORT
             if(process.env.NODE_ENV!='test'){
                 console.log(`Server opened lsiten on http://${host}:${port}`)
             }

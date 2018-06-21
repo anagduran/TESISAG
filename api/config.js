@@ -1,8 +1,8 @@
 //configuracion de express
 
-import express from "express"
-import logger from "morgan"
-import bodyparser from "body-parser"
+import express from 'express'
+import logger from 'morgan'
+import bodyparser from 'body-parser'
 import {config} from "dotenv"
 
 
@@ -15,7 +15,7 @@ export default app => {
     app.set('env', SETTINGS.parsed.ENV)
     app.set('config',SETTINGS.parsed)
     app.locals.env=app.get('env')
-    app.locals,config = app.get('config')
+    app.locals.config = app.get('config')
 
     if(process.env.NODE_ENV!== 'test'){
         app.use(logger('combined'))
@@ -31,4 +31,4 @@ export default app => {
 
 
 //cargando rutas
-app.use('/category', categoryRouter)
+//app.use('/category', categoryRouter)

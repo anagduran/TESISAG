@@ -4,7 +4,8 @@
   "description": "tesis ana duran",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --require 'babel-register' api/index.js "
   },
   "author": "ana duran",
   "license": "ISC",
