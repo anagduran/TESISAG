@@ -3,7 +3,16 @@ import config from './config'
 import express from 'express'
 import routes from './routes'
 
-const host = 'mongodb://127.0.0.1/27017/TRIVIA'
+const config ={ 
+    hostname: "127.0.0.1",
+    port: 3000,
+    db: {
+        url: "mongodb://localhost/TRIVIA"
+    }
+}
+
+
+/*const host = 'mongodb://127.0.0.1/27017/TRIVIA'
 
 mongoose.set('debug',true)
 mongoose.Promise= global.Promise
@@ -21,7 +30,9 @@ conn.on('error', err=>{
 })
 
 
-conn.on('connected', ()=> console.log('conectado a mongo'))
+conn.on('connected', ()=> console.log('conectado a mongo')) */
+
+mongoose.connect(config.db.url);
 
 let _server 
 const server ={
@@ -48,7 +59,8 @@ const server ={
    }
 }
 
-export default server 
+export default server
+
 
 if(!module.parent){
     server.start()
