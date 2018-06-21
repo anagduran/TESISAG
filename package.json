@@ -1,0 +1,14 @@
+{
+  "name": "tigana",
+  "version": "1.0.0",
+  "description": "tesis ana duran",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ana duran",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^10.5.0"
+  }
+}
