@@ -3,7 +3,7 @@ import config from './config'
 import express from 'express'
 import routes from './routes'
 
-const config ={ 
+const config2 ={ 
     hostname: "127.0.0.1",
     port: 3000,
     db: {
@@ -32,7 +32,7 @@ conn.on('error', err=>{
 
 conn.on('connected', ()=> console.log('conectado a mongo')) */
 
-mongoose.connect(config.db.url);
+mongoose.connect(config2.db.url);
 
 let _server 
 const server ={
