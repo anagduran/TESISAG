@@ -3,9 +3,21 @@ import category from "../models/category"
 //obtener informacion de las categorias
 
 function getCategories(req,res){
-    let categoryId = req.params.id;
+    
+    category.find({}).exec((err,categories)=>{
+        if(err)
+        return res.status(500).send({message: 'Error en el servidor'});
 
-    category.find({}, (err,categories)=>{
-        res.status(200).send(categories)
+        if(categories){
+            //console.log(req.body)
+            res.json(categories)
+        }else {
+            return res.status(400).send({
+                message: 'no hay categories'
+            })
+        }
     })
+
 }
+
+module.exports ={ getCategories};

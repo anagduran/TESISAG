@@ -4,6 +4,7 @@ import express from 'express'
 import logger from 'morgan'
 import bodyparser from 'body-parser'
 import {config} from "dotenv"
+import cors from 'cors'
 
 
 //const app = express();
@@ -23,7 +24,7 @@ export default app => {
 
     app.use(bodyparser.urlencoded({extended: false}));
     app.use(bodyparser.json());
-
+    app.use(cors())
     
 }
 

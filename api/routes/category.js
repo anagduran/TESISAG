@@ -3,9 +3,7 @@ import categoryController from "../controllers/category"
 
 const router = express.Router()
 
-router.get('/category', (req,res,next)=>{
-    res.status(200)
-})
+router.get('/', categoryController.getCategories)
 
 export default router
 

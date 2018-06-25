@@ -3,16 +3,16 @@ import config from './config'
 import express from 'express'
 import routes from './routes'
 
-const config2 ={ 
+/*const config2 ={ 
     hostname: "127.0.0.1",
-    port: 3000,
+    port: 27017,
     db: {
-        url: "mongodb://localhost/TRIVIA"
+        url: 'mongodb://127.0.0.1/27017/TRIVIA'
     }
-}
+}*/
 
 
-/*const host = 'mongodb://127.0.0.1/27017/TRIVIA'
+const host = 'mongodb://127.0.0.1:27017/TRIVIA'
 
 mongoose.set('debug',true)
 mongoose.Promise= global.Promise
@@ -30,9 +30,9 @@ conn.on('error', err=>{
 })
 
 
-conn.on('connected', ()=> console.log('conectado a mongo')) */
+conn.on('connected', ()=> console.log('conectado a mongo')) 
 
-mongoose.connect(config2.db.url);
+//mongoose.connect(config2.db.url);
 
 let _server 
 const server ={

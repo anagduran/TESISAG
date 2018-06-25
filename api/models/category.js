@@ -1,11 +1,12 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
-const Schema =  mongoose.Schema;
+//const Schema = new  mongoose.Schema;
 
-const categorySchema = Schema({
-    _id: Schema.ObjectId,
+const categorySchema = new mongoose.Schema({
+    _id: mongoose.Schema.ObjectId,
     name:{type: String, require: true},
     description: String
 })
 
-export default mongoose.model('Category', categorySchema)
+//const category = connection.model('category', categorySchema)
+export default mongoose.model('category', categorySchema)
