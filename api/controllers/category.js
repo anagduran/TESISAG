@@ -1,29 +1,23 @@
 import category from "../models/category"
 import mongoose from "mongoose"
+
+
+
 //obtener informacion de las categorias
-
-function getCategories(req,res){
+function getCategories(req,res, next){
     console.log("aqui en el controlador")
-    //res.status(200).send({ message: "entrando al controlador"})
 
-   category.find({},function(err,categories){
-        console.log(categories);
-        res.send(categories)
-   })
-   
-   
-    /* category.find(function(err,categories){
-        console.log(categories);
-        res.json(categories)
-    }); */
+    category.find()
+            .exec()
+            .then(categories => { 
+                    console.log(categories);
+                    res.status(200).json(categories)
+                    })
+            .catch(err => {
+                console.log(err);
+                rest.status(500).json({error: err})
+            });
     
-    /*category.find({}).exec().then(categories=>{
-        console.log("dentro del find ")
-        res.send(categories)
-    });*/
-
-
-
 }
 
-module.exports ={ getCategories};
+module.exports ={getCategories};

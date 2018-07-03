@@ -2,24 +2,14 @@ import mongoose from 'mongoose'
 import config from './config'
 import express from 'express'
 import routes from './routes'
+import {thisTypeAnnotation} from 'babel-types'
+import bodyparser from 'body-parser'
 
-/*const config2 ={ 
-    hostname: "127.0.0.1",
-    port: 27017,
-    db: {
-        url: 'mongodb://127.0.0.1/27017/TRIVIA'
-    }
-}*/
+//const host = 'mongodb://127.0.0.1/TRIVIA'
 
 
-const host = 'mongodb://127.0.0.1:27017/TRIVIA'
 
-mongoose.set('debug',true)
-mongoose.Promise= global.Promise
-
-//moogoose.connect('mongodb://127.0.0.1/27017/TRIVIA')
-
-const conn = mongoose.createConnection(
+/*const conn = mongoose.createConnection(
     host,
     {poolSize: 200}
 )
@@ -30,9 +20,13 @@ conn.on('error', err=>{
 })
 
 
-conn.on('connected', ()=> console.log('conectado a mongo')) 
+conn.on('connected', ()=> console.log('conectado a mongo')) */
 
-//mongoose.connect(config2.db.url);
+mongoose.connect('mongodb://127.0.0.1/TRIVIA')
+
+mongoose.Promise= global.Promise
+
+
 
 let _server 
 const server ={
