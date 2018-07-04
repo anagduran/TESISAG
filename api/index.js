@@ -5,29 +5,11 @@ import routes from './routes'
 import {thisTypeAnnotation} from 'babel-types'
 import bodyparser from 'body-parser'
 
-//const host = 'mongodb://127.0.0.1/TRIVIA'
-
-
-
-/*const conn = mongoose.createConnection(
-    host,
-    {poolSize: 200}
-)
-
-conn.on('error', err=>{
-    console.log('Error',err)
-    return ProcessingInstruction.exit()
-})
-
-
-conn.on('connected', ()=> console.log('conectado a mongo')) */
-
+//CONEXION A MONGODB
 mongoose.connect('mongodb://127.0.0.1/TRIVIA')
-
 mongoose.Promise= global.Promise
 
-
-
+//SERVIDOR
 let _server 
 const server ={
     start(){
