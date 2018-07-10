@@ -51,21 +51,23 @@ function newCategory(req,res,next) {
 // modificar una categoria
 function updateCategoryByID(req, res, next){
     console.log("aqui en el update de category");
-    const id = req.params.categoryByID;
+    const id = req.params.categoryID;
+    const cambios = req.body;
     const updateOps = {};
+    const q = category.where({_id: id });
 
     for(const ops of req.body){
         updateOps[ops.propName] = ops.value;
     }
 
-    category.update({id: id}, {$set: updateOps})
-            .exec()
+    category.where({'_id':id}).update( {$set: updateOps}).exec()
             .then(result =>{
                 if(result){
                 res.status(200).json(result)
                 }
                 else {
-                    res.status(404).json({message: "id incorrecto, no existe la categoria"})
+                    console.log("en el else")
+                    res.status(404).json(result)
                 }
             })
             .catch(err =>{
@@ -77,30 +79,21 @@ function updateCategoryByID(req, res, next){
 //eliminar una categoria
 function deleteCategoryByID(req, res, next){
     console.log("dentro de la funcion delete category")
-    const id = req.params.categoryByID;
-
+    const id = req.params.categoryID;
+    
     category.findByIdAndRemove(id).exec().then(result=>{
         if(result){
-            res.status(200).json({message: "eliminado exitosamente"})
+            res.status(200).json(result)
         }
         else {
-            res.status(404).json({message: "no existe la categoria a eliminar"})
+            res.status(404).json(result)
         }
     })
-    /*category.remove({_id: id})
-            .exec()
-            .then(result =>{
-                if(result){
-                    res.status(200).json({message: "eliminado exitosamente"})
-                }
-                else {
-                    res.status(404).json({message: "no existe la categoria, no se puede eliminar"})
-                }
-            })
-            .catch(err =>{
-                console.log(err);
-                res.status(500).json({error: err})
-            })*/
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({error: err})
+    })
+   
 }
 
 // consultar una categoria en particular
