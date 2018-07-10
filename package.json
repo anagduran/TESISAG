@@ -4,8 +4,7 @@
   "description": "tesis ana duran",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "win-start": "./node_modules/.bin/babel-node.cmd api/index.js",
+    "test": "mocha --compilers js:babel-register  api/tests/",
     "start": "node --require babel-register api/index.js "
   },
   "author": "ana duran",
@@ -25,7 +24,12 @@
     "babel-register": "^6.26.0",
     "babel-register-cli": "^5.0.0",
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
     "morgan": "^1.9.0",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "sinon": "^6.1.0",
+    "sinon-mongoose": "^2.2.0",
+    "supertest": "^3.1.0"
   }
 }
