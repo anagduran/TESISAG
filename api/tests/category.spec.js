@@ -1,23 +1,24 @@
 import sinon from "sinon"
 import chai from "chai"
-import mocks from "../mocks"
 import server from '../index'
 import {assert} from 'chai'
 import {expect} from 'chai'
 import {should} from 'chai'
 import request from 'supertest'
-import express from 'express'
+import chaiHttp from 'chai-http'
 
 
+chai.use(chaiHttp)
+let instance  = undefined
 describe('API CATEGORY', ()=>{
-    let instance  = undefined
+    
 
-   /* beforeEach(() =>{       
+  /* beforeEach(() =>{       
         instance = server.start()
         console.log('hola')
  
-    })
-*/
+    })*/
+
     /*afterEach(()=>{
        server.close()
        instance = undefined
@@ -26,7 +27,7 @@ describe('API CATEGORY', ()=>{
 
     describe('API GET ALL CATEGORIES', ()=>{
         it('debe obtener todas las categorias y devolver status 200', ()=>{ 
-           request('localhost:9000').get('/category').expect(200).end((err,res)=>{ 
+           request('http://localhost:9000').get('/category').expect(200).end((err,res)=>{ 
             if (err) throw err 
            })
 
@@ -34,15 +35,33 @@ describe('API CATEGORY', ()=>{
     })
 
    describe('API CREATE CATEGORY', ()=>{
-        it('debo crear una nueva categoria y retornar status 201',()=>{
-            request('localhost:9000').post('/category').end((err,res)=>{
-                assert(res.status, 201);
+        it('debe crear una nueva categoria y retornar status 201',()=>{
+            let categoria = {
+                name: "categoria de prueba tdd",
+                description: "descripcion de la categoria de prueba tdd"
+              
+            }
+            request('http://localhost:9000').post('/category').send(categoria).expect(201).end((err,res)=>{
+                //assert(res.status, 201);
+                console.log(categoria);
                 if(err) throw err
             })    
             
 
         })
     }) 
+
+  /* describe('API GET ONE CATEGORY', ()=>{
+        it('debe traer una categoria dado un id retornar status 200',()=>{
+            
+            request('http://localhost:9000').get('/category').expect(200).end((err,res)=>{
+                //assert(res.status, 200);
+                if(err) throw err
+            })    
+            
+
+        })
+    }) */
 
 })
 

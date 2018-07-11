@@ -10,6 +10,7 @@
   "author": "ana duran",
   "license": "ISC",
   "dependencies": {
+    "chai-http": "^4.0.0",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",

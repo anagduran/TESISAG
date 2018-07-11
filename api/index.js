@@ -25,7 +25,8 @@ const server ={
             :address
 
             const port = app.locals.config.PORT
-            if(process.env.NODE_ENV!='test'){
+            if(process.env.NODE_ENV!=='test'){
+                //app.use(logger('combined'))
                 console.log(`Server opened lsiten on http://${host}:${port}`)
             }
         })
@@ -36,6 +37,7 @@ const server ={
 }
 
 export default server
+
 
 
 if(!module.parent){
