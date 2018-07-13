@@ -6,28 +6,30 @@ import mongoose from "mongoose"
 //obtener informacion de las categorias
 function getCategories(req,res, next){
     console.log("aqui en la funcion de getCategories")
-
+    try {
     category.find()
             .exec()
             .then(categories => { 
                 if(categories.length>=0){
-                    console.log(categories);
-                    res.status(200).json(categories)
+                  res.status(200).render( 'category/categoryAll', { categorias: categories})
                 }else{
                     res.status(404).json({message: 'no hay categorias'})
                 }   
                 
-            })                
-            .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 res.status(500).json({error: err})
             })
+        }
+        catch(error) {
+            console.log(error)
+        }
         
     
 }
+
 //crear una nueva categoria
 function newCategory(req,res,next) {
-    console.log("aqui en la funcion newCategory")
 
     const categoria = new category({
         _id: new mongoose.Types.ObjectId(),
@@ -50,7 +52,7 @@ function newCategory(req,res,next) {
 
 // modificar una categoria
 function updateCategoryByID(req, res, next){
-    console.log("aqui en el update de category");
+
     const id = req.params.categoryID;
     const cambios = req.body;
     const updateOps = {};
@@ -82,7 +84,7 @@ function updateCategoryByID(req, res, next){
 
 //eliminar una categoria
 function deleteCategoryByID(req, res, next){
-    console.log("dentro de la funcion delete category")
+   
     const id = req.params.categoryID;
     
     if(id.length===24)
@@ -108,7 +110,7 @@ function deleteCategoryByID(req, res, next){
 
 // consultar una categoria en particular
 function getCategoryID(req,res,next) {
-    console.log("aqui en el getcategory por ID");
+
     const id = req.params.categoryID;
     
     if(id.length===24)
@@ -119,6 +121,7 @@ function getCategoryID(req,res,next) {
                 
                 if(categoryByID){
                    // console.log(categoryByID);
+                   res.status(200).render( 'category/categoryDetail', { categoria: categoryByID})
                     res.status(200).json(categoryByID)
                 }
                 else {
