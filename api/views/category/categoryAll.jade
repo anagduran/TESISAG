@@ -3,9 +3,13 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" type="text/css" href="../public/style.css")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         title ALL CATEGORIES
     body
-    table
+    h1 CATEGORIAS 
+        i.fa.fa-bars
+    table#general
       thead
         tr.head
             th ID Categoria
@@ -17,9 +21,19 @@ html(lang="en")
         -var i= -1
         each categoria in categorias  
             - ++i   
-            tr    
+            tr(class=(i % 2 == 0) ? 'odd' : 'even')  
                 td #{categoria._id}
                 td #{categoria.name} 
                 td #{categoria.description}
                 td 
+                    a(href='/category/#{categoria._id}') 
+                        i.fa.fa-eye
+                    a(href='/category/edit/#{categoria._id}') 
+                        i.fas.fa-pencil-alt
+                    a(href='/category/#{categoria._id}') 
+                        i.fas.fa-trash-alt
+                    
+
+    a(href='/') BACK - 
+                
         

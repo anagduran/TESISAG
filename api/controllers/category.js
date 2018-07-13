@@ -66,7 +66,8 @@ function updateCategoryByID(req, res, next){
         category.where({'_id':id}).update( {$set: updateOps}).exec()
                 .then(result =>{
                     if(result.nModified===1){
-                        res.status(200).json({message: "modificado con exito"})
+                        res.status(200).render('category/categoryAll')
+                       
                     }
                     else {                        
                         res.status(404).json({message: 'no encontrado'})
@@ -138,4 +139,12 @@ function getCategoryID(req,res,next) {
         res.status(404).json({message: "no valid entry for provided ID"})
     }
 }
-module.exports ={getCategories, newCategory, getCategoryID, deleteCategoryByID, updateCategoryByID};
+
+function form(req, res){
+    res.render('category/updateCategory')
+}
+
+function editCategory(req,res, next){
+    
+}
+module.exports ={getCategories, newCategory, getCategoryID, deleteCategoryByID, updateCategoryByID, form};

@@ -1,0 +1,15 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title EDIT CATEGORY
+    body
+
+    h1 EDITAR CATEGORIA
+
+    form(id='form', action='category/updateCategoryByID', method='POST')
+        input(id='id', name='id', type='hidden', value='#{categoria._id}')
+        input(id='name', name='name', value='#{categoria.name}')
+        input(id='description', name='description', value='#{categoria.description}')
+        input(type='submit', value='Update category')
