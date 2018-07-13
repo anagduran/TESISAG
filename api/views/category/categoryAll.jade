@@ -5,8 +5,21 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title ALL CATEGORIES
     body
-    h1 CATEGORIAS
-        ul
-        each categoria in categorias
-            li Categoria #{categoria.name} - #{categoria.description}
+    table
+      thead
+        tr.head
+            th ID Categoria
+            th Nombre Categoria 
+            th Descripcion Categoria
+            th Acciones
+      
+      tbody
+        -var i= -1
+        each categoria in categorias  
+            - ++i   
+            tr    
+                td #{categoria._id}
+                td #{categoria.name} 
+                td #{categoria.description}
+                td 
         
