@@ -10,7 +10,7 @@ function getCategories(req,res, next){
     category.find()
             .exec()
             .then(categories => { 
-                if(categories.length>=0){
+                if(categories) {
                   res.status(200).render( 'category/categoryAll', { categorias: categories})
                 }else{
                     res.status(404).json({message: 'no hay categorias'})
@@ -53,20 +53,19 @@ function newCategory(req,res,next) {
 // modificar una categoria
 function updateCategoryByID(req, res, next){
 
-    const id = req.params.categoryID;
-    const cambios = req.body;
-    const updateOps = {};
-    const q = category.where({_id: id});
+   const id = mongoose.Types.ObjectId(req.body.id)
+    
+   console.log(id);
+   
 
-    for(const ops of req.body){
-        updateOps[ops.propName] = ops.value;
-    }
-
-     if(id.length===24){
-        category.where({'_id':id}).update( {$set: updateOps}).exec()
+    if (mongoose.Types.ObjectId.isValid(id)) {
+        category.where({'_id': id}).update( {$set: {name: req.body.name, description: req.body.description}}).exec()
                 .then(result =>{
+                    
                     if(result.nModified===1){
-                        res.status(200).render('category/categoryAll')
+                        console.log(result)
+                        console.log(req.body)
+                        res.status(200).render('category/categoryDetail', {categoria: req.body})
                        
                     }
                     else {                        
@@ -76,10 +75,11 @@ function updateCategoryByID(req, res, next){
                 .catch(err =>{
                     res.status(500).json({error: err})
                 })
-        }
-        else{
-            res.status(404).json({message: 'error de id, incorrecto'})
-        }
+    }
+    else{
+        res.status(404).json({message: 'error de id, incorrecto'})
+       }
+ 
   
 }
 
@@ -88,7 +88,7 @@ function deleteCategoryByID(req, res, next){
    
     const id = req.params.categoryID;
     
-    if(id.length===24)
+    if(mongoose.Types.ObjectId.isValid(id))
     {
         category.findByIdAndRemove(id).exec().then(result=>{
             if(result){
@@ -114,7 +114,7 @@ function getCategoryID(req,res,next) {
 
     const id = req.params.categoryID;
     
-    if(id.length===24)
+    if(mongoose.Types.ObjectId.isValid(id))
     {
     category.findById(id)
             .exec()
@@ -145,6 +145,16 @@ function form(req, res){
 }
 
 function editCategory(req,res, next){
+    const id= req.params.categoryID;
+    
+    category.findById(id)
+            .exec()
+            .then(categoryByID =>{
+               
+                res.render('category/updateCategory', {categoria: categoryByID})
+            })
     
 }
-module.exports ={getCategories, newCategory, getCategoryID, deleteCategoryByID, updateCategoryByID, form};
+
+
+module.exports ={getCategories, newCategory, getCategoryID, deleteCategoryByID, updateCategoryByID, form, editCategory};

@@ -6,8 +6,9 @@ const router = express.Router()
 router.get('/', categoryController.getCategories)
 router.post('/',categoryController.newCategory)
 router.get('/:categoryID', categoryController.getCategoryID)
+router.get('/edit/:categoryID', categoryController.editCategory)
+router.put('/update/:categoryID', categoryController.updateCategoryByID)
 router.delete('/:categoryID', categoryController.deleteCategoryByID)
-router.post('/edit/:categoryID', categoryController.editCategory)
-router.post('/update', categoryController.updateCategoryByID)
+
 
 module.exports = router;

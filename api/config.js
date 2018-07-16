@@ -1,13 +1,13 @@
 //configuracion de express
 
-import express from 'express'
+
 import logger from 'morgan'
 import bodyparser from 'body-parser'
 import {config} from "dotenv"
 import cors from 'cors'
+import methodOverride from 'method-override'
 
 
-//const app = express();
 const SETTINGS = config()
 
 export default app => {
@@ -21,15 +21,12 @@ export default app => {
     if(process.env.NODE_ENV!== 'test'){
         app.use(logger('combined'))
     }
-
-    app.use(bodyparser.urlencoded({extended: false}));
+    
+    app.use(methodOverride("_method"))
     app.use(bodyparser.json());
+    app.use(bodyparser.urlencoded({extended: false}));
+    
+    
     app.use(cors())
     
 }
-
-
-
-
-//cargando rutas
-//app.use('/category', categoryRouter)

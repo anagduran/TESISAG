@@ -8,8 +8,9 @@ html(lang="en")
 
     h1 EDITAR CATEGORIA
 
-    form(id='form', action='category/updateCategoryByID', method='POST')
+    form(id='form', action='/category/update/#{categoria._id}?_method=PUT', method='POST')
+        
         input(id='id', name='id', type='hidden', value='#{categoria._id}')
-        input(id='name', name='name', value='#{categoria.name}')
-        input(id='description', name='description', value='#{categoria.description}')
+        input(id='name', name='name', type='text', value='#{categoria.name}')
+        input(id='description', name='description', type='text', value='#{categoria.description}')
         input(type='submit', value='Update category')
