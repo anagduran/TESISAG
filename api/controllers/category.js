@@ -155,7 +155,7 @@ function editCategory(req,res, next){
 
 function createCategory(req,res, next){
     console.log("dentro de la funcion nueva categoria")
-    redirect('category/newCategory')
+    res.render('category/newCategory')
     
   
 }
