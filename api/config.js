@@ -8,6 +8,7 @@ import cors from 'cors'
 import methodOverride from 'method-override'
 
 
+
 const SETTINGS = config()
 
 export default app => {
@@ -25,6 +26,7 @@ export default app => {
     app.use(methodOverride("_method"))
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({extended: false}));
+    
     
     
     app.use(cors())

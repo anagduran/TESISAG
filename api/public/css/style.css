@@ -1,0 +1,31 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+#button2 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+};
+
+form.link {
+ 
+    display: inline-block;
+}
+
+form.link #button1{
+ 
+    border: none;
+    display: inline-block;
+    padding: none;
+    
+    
+};
+
+h1 {
+    color: #5FA6D7;
+    font-family: sans-serif;
+}

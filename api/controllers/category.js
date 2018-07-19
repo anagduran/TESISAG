@@ -40,7 +40,7 @@ function newCategory(req,res,next) {
         categoria.save()
                     .then(nuevacategory => {
                     console.log(nuevacategory);
-                    res.status(201).json({createdCategory : nuevacategory})
+                    res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
                     })
                     .catch(err => {
                         console.log(err);
@@ -63,9 +63,7 @@ function updateCategoryByID(req, res, next){
                 .then(result =>{
                     
                     if(result.nModified===1){
-                        console.log(result)
-                        console.log(req.body)
-                        res.status(200).render('category/categoryDetail', {categoria: req.body})
+                    res.status(200).render('category/categoryDetail', {categoria: req.body})
                        
                     }
                     else {                        
@@ -92,10 +90,12 @@ function deleteCategoryByID(req, res, next){
     {
         category.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200).json({message: "borrado con exito"})
+            res.status(200).redirect('/')
+            //send('<h3>eliminado con exito</h3>')
+           // render('category/categoryAll', { categorias: categories})
             }
             else {
-                res.status(404).json({message: "error, ID no encontrado"})
+                res.status(404).json({message: "ERROR ID"})
             }
         })
         .catch(err =>{
@@ -121,8 +121,7 @@ function getCategoryID(req,res,next) {
             .then(categoryByID =>{
                 
                 if(categoryByID){
-                   // console.log(categoryByID);
-                   res.status(200).render( 'category/categoryDetail', { categoria: categoryByID})
+                    res.status(200).render( 'category/categoryDetail', { categoria: categoryByID})
                     res.status(200).json(categoryByID)
                 }
                 else {
@@ -140,9 +139,7 @@ function getCategoryID(req,res,next) {
     }
 }
 
-function form(req, res){
-    res.render('category/updateCategory')
-}
+
 
 function editCategory(req,res, next){
     const id= req.params.categoryID;
@@ -156,5 +153,12 @@ function editCategory(req,res, next){
     
 }
 
+function createCategory(req,res, next){
+    console.log("dentro de la funcion nueva categoria")
+    redirect('category/newCategory')
+    
+  
+}
 
-module.exports ={getCategories, newCategory, getCategoryID, deleteCategoryByID, updateCategoryByID, form, editCategory};
+
+module.exports ={createCategory, newCategory, getCategories,  getCategoryID, deleteCategoryByID, updateCategoryByID, editCategory};
