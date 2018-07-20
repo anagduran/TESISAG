@@ -1,5 +1,6 @@
 import category from "../models/category"
 import mongoose from "mongoose"
+import { lstat } from "fs";
 
 
 
@@ -7,6 +8,8 @@ import mongoose from "mongoose"
 function getCategories(req,res, next){
     console.log("aqui en la funcion de getCategories")
     try {
+    //realizo el find, ejecuto y luego si categorias existe envia status HTTP 200 y redirige a la
+    //vista categoryAll, sino envia status 404
     category.find()
             .exec()
             .then(categories => { 
@@ -23,29 +26,33 @@ function getCategories(req,res, next){
         }
         catch(error) {
             console.log(error)
-        }
-        
-    
+        }   
 }
 
 //crear una nueva categoria
 function newCategory(req,res,next) {
 
+    //creo la estructura de la nueva categoria
     const categoria = new category({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         description: req.body.description
     });
- 
-        categoria.save()
+        //realizo el save, si resulta exitoso envio estatus HTTP 201 y redirijo a la vista categoryDetail
+        //sino envio status HTTP 500
+        try{ 
+            categoria.save()
                     .then(nuevacategory => {
-                    console.log(nuevacategory);
-                    res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
-                    })
+                        res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
+                     })
                     .catch(err => {
                         console.log(err);
                         res.status(500).json({error: err})
-                    });   
+                    }); 
+        }  
+        catch(error){
+           console.log(error) 
+        }
     
 }
 
@@ -57,7 +64,8 @@ function updateCategoryByID(req, res, next){
     
    console.log(id);
    
-
+    // valido que el ID enviado sea correcto, si es asi realizo el update y si este resulta exitoso
+    // envio status 200 y redirijo a la vista categoryDetail, sino envio error 404
     if (mongoose.Types.ObjectId.isValid(id)) {
         category.where({'_id': id}).update( {$set: {name: req.body.name, description: req.body.description}}).exec()
                 .then(result =>{
@@ -86,6 +94,9 @@ function deleteCategoryByID(req, res, next){
    
     const id = req.params.categoryID;
     
+    //Valido el ID enviado si es correcto busco y elimino la categoria seleccionada
+    //AQUI FALTA VALIDAR QUE SI LA CATEGORIA TIENE PREGUNTAS ASOCIADAS NO SE PUEDE ELIMINAR
+    //FALTAN COSAS AQUI 
     if(mongoose.Types.ObjectId.isValid(id))
     {
         category.findByIdAndRemove(id).exec().then(result=>{
@@ -114,6 +125,8 @@ function getCategoryID(req,res,next) {
 
     const id = req.params.categoryID;
     
+    //Si el ID enviado escorrecto, realizo la busqueda y redirijo a la vista categoryDetail con status HTTP 200
+    //sino envio 404
     if(mongoose.Types.ObjectId.isValid(id))
     {
     category.findById(id)
@@ -122,7 +135,6 @@ function getCategoryID(req,res,next) {
                 
                 if(categoryByID){
                     res.status(200).render( 'category/categoryDetail', { categoria: categoryByID})
-                    res.status(200).json(categoryByID)
                 }
                 else {
                     res.status(404).json({message: 'no encontrado, ID incorrecto'})
@@ -140,24 +152,32 @@ function getCategoryID(req,res,next) {
 }
 
 
-
+//funcion que toma los parametros y los redirige a otra pagina para ser editados
 function editCategory(req,res, next){
-    const id= req.params.categoryID;
+
     
-    category.findById(id)
-            .exec()
-            .then(categoryByID =>{
-               
-                res.render('category/updateCategory', {categoria: categoryByID})
-            })
+    const id= req.params.categoryID;
+    if(mongoose.Types.ObjectId.isValid(id)){
+        category.findById(id)
+        .exec()
+        .then(categoryByID =>{           
+            res.render('category/updateCategory', {categoria: categoryByID})
+        }).catch(err=> {
+            res.status(404).json({message: "no valid entry for provided ID"})
+        })
+    }
+    else {
+        res.status(404).json({message: "no valid entry for provided ID"})
+    }
+   
+
     
 }
 
+//funcion que solo redirige para crear una nueva categoria
 function createCategory(req,res, next){
     console.log("dentro de la funcion nueva categoria")
     res.render('category/newCategory')
-    
-  
 }
 
 
