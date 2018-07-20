@@ -4,6 +4,7 @@ import express from 'express'
 import routes from './routes'
 import {thisTypeAnnotation} from 'babel-types'
 import bodyparser from 'body-parser'
+import path from 'path'
 
 //CONEXION A MONGODB
 mongoose.connect('mongodb://127.0.0.1/TRIVIA')
@@ -17,6 +18,12 @@ const server ={
 
         config(app)
         routes(app)
+        
+        app.set('views',path.join(__dirname,'/views'))
+        app.set('view engine', 'jade');
+        app.use('/public',express.static(path.join(__dirname, '/public')))
+        
+        
 
         _server = app.listen(app.locals.config.PORT, ()=>{
             const address = _server.address()
@@ -25,8 +32,10 @@ const server ={
             :address
 
             const port = app.locals.config.PORT
-            if(process.env.NODE_ENV!='test'){
+            if(process.env.NODE_ENV!=='test'){
+                //app.use(logger('combined'))
                 console.log(`Server opened lsiten on http://${host}:${port}`)
+                
             }
         })
     },
@@ -36,6 +45,7 @@ const server ={
 }
 
 export default server
+
 
 
 if(!module.parent){
