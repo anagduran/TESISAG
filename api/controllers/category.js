@@ -6,7 +6,7 @@ import { lstat } from "fs";
 
 //obtener informacion de las categorias
 function getCategories(req,res, next){
-    console.log("aqui en la funcion de getCategories")
+    
     try {
     //realizo el find, ejecuto y luego si categorias existe envia status HTTP 200 y redirige a la
     //vista categoryAll, sino envia status 404
