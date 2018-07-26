@@ -143,4 +143,10 @@ function updateQuestionByID(req, res){
     }
  
 }
-module.exports= {newQuestion, getQuestions, getQuestionID, deleteQuestionByID, updateQuestionByID}
+
+
+
+function createQuestion(req,res, next){
+    res.render('question/newQuestion')
+}
+module.exports= {newQuestion, getQuestions, getQuestionID, deleteQuestionByID, updateQuestionByID, createQuestion}

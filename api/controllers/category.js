@@ -176,7 +176,6 @@ function editCategory(req,res, next){
 
 //funcion que solo redirige para crear una nueva categoria
 function createCategory(req,res, next){
-    console.log("dentro de la funcion nueva categoria")
     res.render('category/newCategory')
 }
 
