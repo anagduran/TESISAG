@@ -43,8 +43,7 @@ function getQuestions(req, res)
             .exec()
             .then(questions => { 
                
-                    if(questions) {
-                       
+                    if(questions) {                        
                         res.status(200).render( 'question/questionAll', { preguntas: questions})
                     }else{
                         res.status(404).json({message: 'no hay preguntas'})
@@ -59,15 +58,7 @@ function getQuestions(req, res)
     }
 
 
-   
-
-    /*question.find()
-            .populate('category') 
-            .exec(function (err, questions){
-                //console.log(questions.category.name)
-                res.status(200).render('question/questionAll', {preguntas: questions})
-            })*/
-
+ 
 }
 
 
@@ -78,13 +69,15 @@ function getQuestionID(req, res){
    
     if(mongoose.Types.ObjectId.isValid(id)){
         question.findById(id)
+                .populate('category', ['name'])
                 .exec()
                 .then(questionByID =>{                
                     if(questionByID){
-                    res.status(200).json(questionByID)
+                        res.status(200).render( 'question/questionDetail', { pregunta: questionByID})
+                        
                     }
                     else {
-                    res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
                     }                
                 })
                 .catch(err=>{
