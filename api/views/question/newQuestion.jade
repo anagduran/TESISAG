@@ -11,6 +11,9 @@ html(lang="en")
             input(id='description', name='description', placeholder='Description')
             input(type='submit', value='new category')
             select(id="xxx", name="xxxyyy")
-                -for(var i = 1;i<10;i++){
-                option(value="#{i}") Some value for #{i}
+                -for(var i=1;i<=categorias.length;i++){
+                    -var categoryChange= JSON.parse(JSON.stringify(categorias))[i]; 
+                     option(value="#{categoryChange._id}") #{categoryChange.name}
                 -}
+               
+               

@@ -1,4 +1,5 @@
 import question from "../models/question"
+import category from "../models/category"
 import mongoose from "mongoose"
 
 //CREAR UNA NUEVA PREGUNTA
@@ -146,7 +147,15 @@ function updateQuestionByID(req, res){
 
 
 
-function createQuestion(req,res, next){
-    res.render('question/newQuestion')
+function createQuestion(req,res,next){
+
+   category.find({},{"name":1}).exec().then(categories =>{
+        res.render('question/newQuestion',{ categorias: categories})
+    })
+   
+    
+
 }
+
+
 module.exports= {newQuestion, getQuestions, getQuestionID, deleteQuestionByID, updateQuestionByID, createQuestion}
