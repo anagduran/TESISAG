@@ -10,10 +10,17 @@ html(lang="en")
             input(id='name', name='name', placeholder='Name')
             input(id='description', name='description', placeholder='Description')
             input(type='submit', value='new category')
-            select(id="xxx", name="xxxyyy")
-                -for(var i=1;i<=categorias.length;i++){
-                    -var categoryChange= JSON.parse(JSON.stringify(categorias))[i]; 
-                     option(value="#{categoryChange._id}") #{categoryChange.name}
-                -}
+            select(id="cmbboxCategorias" name="categoriasCombo")
+                -each categoria, i in categorias
+                    option(value=categoria._id) #{categoria.name}
+                
+              
+                  
+                   
+                     
+                   
+           
+
+            
                
                
