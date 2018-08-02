@@ -16,14 +16,13 @@ function newQuestion(req, res) {
         level: req.body.level,
         category: req.body.categoriasCombo
 
-    });
+    }); 
    
-   
-  
+    //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 
     try {
         pregunta.save()
                 .then(nuevapregunta => {
-                     res.status(201).json(nuevapregunta)
+                   res.status(201).render('question/questionDetail', {pregunta :nuevapregunta})
                 })
                 .catch(err => {
                     console.log(err);
@@ -38,6 +37,7 @@ function newQuestion(req, res) {
 
 
 //BUSCAR TODAS LAS PREGUNTAS DE LA BD
+//SI TODO ESTA BIEN RETORNA STATUS 200, SINO RETORNA STATUS 404. SI HAY ERROR DE CONEXION RETORNA STATUS 500
 function getQuestions(req, res)
 {
   try{
@@ -66,6 +66,7 @@ function getQuestions(req, res)
 
 
 //BUSCAR UNA PREGUNTA POR SU ID
+//SI EL ID ES EL CORRECTO RETORNA STATUS 200,SINO STATUS 404. SI HAY ERROR DE CONEXION RETORNA ERROR 500
 function getQuestionID(req, res){
 
     const id = req.params.questionID;
@@ -76,7 +77,7 @@ function getQuestionID(req, res){
                 .exec()
                 .then(questionByID =>{                
                     if(questionByID){
-                        res.status(200).render( 'question/questionDetail', { pregunta: questionByID})
+                        res.status(200).render('question/questionDetail', { pregunta: questionByID})
                         
                     }
                     else {
@@ -95,6 +96,8 @@ function getQuestionID(req, res){
 
 
 //ELIMINAR UNA PREGUNTA
+// SI LOGRA ELIMINAR LA PREGUNTA RETORNA STATUS 200, SI EL ID ENVIADO ES INCORRECTO RETORAN ERROR 404
+// SI HAY FALLA DE CONEXION CON EL SERVIDOR RETORNA ERROR 500
 function deleteQuestionByID(req,res){
 
     const id = req.params.questionID;    
@@ -121,6 +124,9 @@ function deleteQuestionByID(req,res){
 
 
 //MODIFICAR DATA DE UNA PREGUNTA 
+//SI EL ID ENVIADO ES CORRECTO Y LA MODIFICACION SE HIZO CON EXITO RETORNA STATUS 200, SI EL ID ES INCORRECTO
+// O NO SE HIZO LA MODIFICACION RETORNA STATUS 404, SI HAY FALLA DE CONEXION CON EL SERVIDOR RETORNA ERROR 500
+
 function updateQuestionByID(req, res){
 const id = mongoose.Types.ObjectId(req.body.id)
    // const id = req.params.questionID;
@@ -149,6 +155,9 @@ const id = mongoose.Types.ObjectId(req.body.id)
 
 
 
+//FUNCION QUE VALIDA EL ID ENVIADO PARA SER MODIFICADO, SI ES ASI REDIRIGE A LA VISTA UPDATE QUESTION
+// SI EL ID ES ERRONEO DEVUELVE STATUS 404
+//SI HAY ERROR DE CONEXION DEVUELVE STATUS 500
 function editQuestion(req,res){
 
     
@@ -169,7 +178,8 @@ function editQuestion(req,res){
         }
     })
 }
-   
+
+//FUNCION QUE REDIRIJE A LA VISTA NEW QUESTION
 function createQuestion(req,res,next){
 
    category.find({},{"name":1}).exec().then(categories =>{
