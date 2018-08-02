@@ -5,19 +5,21 @@ import mongoose from "mongoose"
 //CREAR UNA NUEVA PREGUNTA
 function newQuestion(req, res) {
 
-    const pregunta = new question({
+    
+
+   const pregunta = new question({
         
         _id: new mongoose.Types.ObjectId(),
         question: req.body.question,
         options: req.body.options,
         answer: req.body.answer,
         level: req.body.level,
-        category: req.body.category
+        category: req.body.categoriasCombo
 
     });
    
-   console.log(pregunta)
-   res.json(pregunta)
+   
+  
     try {
         pregunta.save()
                 .then(nuevapregunta => {
@@ -120,16 +122,16 @@ function deleteQuestionByID(req,res){
 
 //MODIFICAR DATA DE UNA PREGUNTA 
 function updateQuestionByID(req, res){
-    //const id = mongoose.Types.ObjectId(req.body.id)
-    const id = req.params.questionID;
+const id = mongoose.Types.ObjectId(req.body.id)
+   // const id = req.params.questionID;
    
     if (mongoose.Types.ObjectId.isValid(id)) {
         question.where({'_id': id})
-                .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category}})
+                .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category2}})
                 .exec()
                 .then(result =>{                    
                     if(result.nModified===1){
-                    res.status(200).json(question)                       
+                    res.status(200).render( 'question/questionDetail', { pregunta: req.body})                      
                     }
                     else {                        
                         res.status(404).json({message: 'no encontrado'})
@@ -147,6 +149,27 @@ function updateQuestionByID(req, res){
 
 
 
+function editQuestion(req,res){
+
+    
+    const id= req.params.questionID;
+    category.find({},{"name":1}).exec().then(categories =>{
+        if(mongoose.Types.ObjectId.isValid(id)){
+            question.findById(id)
+            .populate('category', ['name'])
+            .exec()
+            .then(questionByID =>{           
+                res.render('question/updateQuestion', {pregunta: questionByID, categorias: categories})
+            }).catch(err=> {
+                res.status(500).json({message: "Error en el servidor"})
+            })
+        }
+        else {
+            res.status(404).json({message: "no valid entry for provided ID"})
+        }
+    })
+}
+   
 function createQuestion(req,res,next){
 
    category.find({},{"name":1}).exec().then(categories =>{
@@ -158,4 +181,4 @@ function createQuestion(req,res,next){
 }
 
 
-module.exports= {newQuestion, getQuestions, getQuestionID, deleteQuestionByID, updateQuestionByID, createQuestion}
+module.exports= {newQuestion, getQuestions, getQuestionID, deleteQuestionByID, updateQuestionByID, createQuestion, editQuestion}

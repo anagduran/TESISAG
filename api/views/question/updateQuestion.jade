@@ -1,0 +1,75 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        script(src="https://code.jquery.com/jquery-3.3.1.js")
+        title EDIT QUESTION
+    body
+
+    h1 EDITAR PREGUNTA
+
+    form(id='form', action='/question/update/#{pregunta._id}?_method=PUT', method='POST', style='white-space:pre;')
+        
+        input(id='id', name='id', type='hidden', value='#{pregunta._id}') 
+        br 
+        br
+        input(id='question', name='question', type='text', value='#{pregunta.question}')
+        br
+        br
+        input(id='option1', name='options', type='text', value='#{pregunta.options[0]}')
+        br
+        br
+        input(id='option2', name='options', type='text', value='#{pregunta.options[1]}')
+        br
+        br
+        input(id='option3', name='options', type='text', value='#{pregunta.options[2]}')
+        br
+        br
+        input(id='answer', name='answer', type='text', value='#{pregunta.answer}')
+        br
+        br
+        input(id='level1', name='level', type='text', value='#{pregunta.level}', readonly="readonly")
+        select(id="nivel", name='level2', onChange="cambioValorComboNivel();")
+                option(value='bajo') bajo
+                option(value='medio') medio
+                option(value='alto') alto
+        br  
+        br
+        - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[0]; 
+        input(id='category', name='category', type='text', value='#{categoryChange.name}', readonly="readonly")
+        input(id='category2', name='category2', type='hidden', readonly="readonly", value='#{categoryChange._id}')
+        select(id="categorias" name="categoriasCombo" onChange="cambioValorComboCategoria();")
+                -each categoria, i in categorias
+                    option(value="#{categoria._id}") #{categoria.name}
+        br
+        br
+        input(type='submit', value='Update question')
+
+    script(type="text/javascript").
+        
+        function cambioValorComboNivel(){
+            var valor= document.getElementById("nivel").value;
+            console.log(valor);            
+            $('#level1').val(valor)
+            
+           
+        }
+
+        function cambioValorComboCategoria(){
+            
+            var valor = document.getElementById("categorias");
+            var valor2 = valor.selectedIndex;
+            var valor3=  valor.options[valor2].text; 
+            var valor4 = document.getElementById("categorias").value;
+            var oculto = document.getElementById("category2").value;
+            console.log(valor3);   
+            console.log(valor4);       
+            $('#category').val(valor3)
+            $('#category2').val(valor4)
+           
+        }
+   
+           
+        
+       
