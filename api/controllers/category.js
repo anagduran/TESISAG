@@ -1,6 +1,6 @@
 import category from "../models/category"
 import mongoose from "mongoose"
-import { lstat } from "fs";
+
 
 
 
@@ -31,13 +31,21 @@ function getCategories(req,res, next){
 
 //crear una nueva categoria
 function newCategory(req,res,next) {
+    
+    req.check('name','nombre de categoria muy largo').isLength({max: 10});
 
-    //creo la estructura de la nueva categoria
-    const categoria = new category({
+    var errors = req.validationErrors();
+    if (errors){
+        //console.log(errors)
+        res.render('category/newCategory', {error: errors});
+        return;
+    } else { 
+        //creo la estructura de la nueva categoria
+        const categoria = new category({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         description: req.body.description
-    });
+        });
         //realizo el save, si resulta exitoso envio estatus HTTP 201 y redirijo a la vista categoryDetail
         //sino envio status HTTP 500
         try{ 
@@ -53,6 +61,9 @@ function newCategory(req,res,next) {
         catch(error){
            console.log(error) 
         }
+        
+    }
+    
     
 }
 

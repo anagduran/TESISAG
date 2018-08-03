@@ -1,11 +1,11 @@
 //configuracion de express
 
-
 import logger from 'morgan'
 import bodyparser from 'body-parser'
 import {config} from "dotenv"
 import cors from 'cors'
 import methodOverride from 'method-override'
+import expressValidator from 'express-validator'
 
 
 
@@ -26,6 +26,7 @@ export default app => {
     app.use(methodOverride("_method"))
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({extended: false}));
+    app.use(expressValidator());
     
     
     
