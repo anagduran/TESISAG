@@ -9,9 +9,9 @@ html(lang="en")
          - if(error)
             ul
                 - for errors in error
-                    li !=  #{errors.msg}    
+                    li  #{errors.msg}    
                         
-        form(id='form', action='/category/new', method='POST')
+        form(id='form', action='/category/new', method='POST' autocomplete="off")
             input(id='name', name='name', placeholder='Name')
             input(id='description', name='description', placeholder='Description')
             input(type='submit', value='new category')

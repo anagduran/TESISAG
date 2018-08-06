@@ -32,7 +32,14 @@ function getCategories(req,res, next){
 //crear una nueva categoria
 function newCategory(req,res,next) {
     
-    req.check('name','nombre de categoria muy largo').isLength({max: 10});
+    req.check('name').isLength({min: 4}).withMessage('nombre de categoria muy corto');
+    req.check('name').notEmpty().withMessage('el nombre de la categoria no puede estar vacio');
+    req.check('name').matches(['a-z']['A-Z']).withMessage('No se permiten caracteres especiales ni numeros');
+
+    req.check('description').isLength({min: 10}).withMessage('La descripcion de la categoria muy corta');
+    req.check('description').notEmpty().withMessage('La descripcion de la categoria no puede estar vacia');
+    req.check('description').matches(['/a-z/']['/A-Z/']).withMessage('No se permiten caracteres especiales ni numeros');
+    
 
     var errors = req.validationErrors();
     if (errors){
