@@ -6,7 +6,12 @@ html(lang="en")
         title NEW CATEGORY
     body
         h1 New Category
-        form(id='form', action='/category/new', method='POST')
+         - if(error)
+            ul
+                - for errors in error
+                    li  #{errors.msg}    
+                        
+        form(id='form', action='/category/new', method='POST' autocomplete="off")
             input(id='name', name='name', placeholder='Name')
             input(id='description', name='description', placeholder='Description')
             input(type='submit', value='new category')

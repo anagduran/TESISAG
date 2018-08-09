@@ -1,0 +1,21 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title DETALLE DE PREGUNTA
+    body
+    h1 DETALLE DE PREGUNTA
+    - var cambio= JSON.parse(JSON.stringify(pregunta.category))[0]; 
+    
+     p ID: #{pregunta._id}   
+     p Pregunta: #{pregunta.question}
+     p Opcion1: #{pregunta.options[0]}
+     p Opcion2: #{pregunta.options[1]}
+     p Opcion3: #{pregunta.options[2]}
+     p Respuesta: #{pregunta.answer}
+     p Nivel: #{pregunta.level}
+     p Categoria: #{cambio.name}
+
+
+     a(href='/') BACK - 

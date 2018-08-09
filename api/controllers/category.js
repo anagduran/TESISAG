@@ -1,6 +1,6 @@
 import category from "../models/category"
 import mongoose from "mongoose"
-import { lstat } from "fs";
+
 
 
 
@@ -31,13 +31,28 @@ function getCategories(req,res, next){
 
 //crear una nueva categoria
 function newCategory(req,res,next) {
+    
+    req.check('name').isLength({min: 4}).withMessage('nombre de categoria muy corto');
+    req.check('name').notEmpty().withMessage('el nombre de la categoria no puede estar vacio');
+    req.check('name').matches(['a-z']['A-Z']).withMessage('No se permiten caracteres especiales ni numeros');
 
-    //creo la estructura de la nueva categoria
-    const categoria = new category({
+    req.check('description').isLength({min: 10}).withMessage('La descripcion de la categoria muy corta');
+    req.check('description').notEmpty().withMessage('La descripcion de la categoria no puede estar vacia');
+    req.check('description').matches(['/a-z/']['/A-Z/']).withMessage('No se permiten caracteres especiales ni numeros');
+    
+
+    var errors = req.validationErrors();
+    if (errors){
+        //console.log(errors)
+        res.render('category/newCategory', {error: errors});
+        return;
+    } else { 
+        //creo la estructura de la nueva categoria
+        const categoria = new category({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         description: req.body.description
-    });
+        });
         //realizo el save, si resulta exitoso envio estatus HTTP 201 y redirijo a la vista categoryDetail
         //sino envio status HTTP 500
         try{ 
@@ -53,6 +68,9 @@ function newCategory(req,res,next) {
         catch(error){
            console.log(error) 
         }
+        
+    }
+    
     
 }
 
@@ -176,7 +194,6 @@ function editCategory(req,res, next){
 
 //funcion que solo redirige para crear una nueva categoria
 function createCategory(req,res, next){
-    console.log("dentro de la funcion nueva categoria")
     res.render('category/newCategory')
 }
 
