@@ -6,7 +6,7 @@ html(lang="en")
         title NEW CATEGORY
     body
         h1 New Category
-         - if(error)
+        - if(error)
             ul
                 - for errors in error
                     li  #{errors.msg}    
