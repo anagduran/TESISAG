@@ -5,32 +5,45 @@ import mongoose from "mongoose"
 //CREAR UNA NUEVA PREGUNTA
 function newQuestion(req, res) {
 
+    req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
+    req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
+
+    req.check("level").matches(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
+
+    var errors = req.validationErrors();
     
-
-   const pregunta = new question({
-        
-        _id: new mongoose.Types.ObjectId(),
-        question: req.body.question,
-        options: req.body.options,
-        answer: req.body.answer,
-        level: req.body.level,
-        category: req.body.categoriasCombo
-
-    }); 
-   
-    //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 
-    try {
-        pregunta.save()
-                .then(nuevapregunta => {
-                   res.status(201).render('question/questionDetail', {pregunta :nuevapregunta})
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({error: err})
-                }); 
+    if(errors){
+        category.find({},{"name":1}).exec().then(categories =>{
+        res.render('question/newQuestion', {error: errors,  categorias: categories});
+        return;
+        })
     }
-    catch(error){
-        console.log(error)
+    else {    
+        const pregunta = new question({
+                
+                _id: new mongoose.Types.ObjectId(),
+                question: req.body.question,
+                options: req.body.options,
+                answer: req.body.answer,
+                level: req.body.level,
+                category: req.body.categoriasCombo
+
+            }); 
+        
+            //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 
+            try {
+                pregunta.save()
+                        .then(nuevapregunta => {
+                        res.status(201).render('question/questionDetail', {pregunta :nuevapregunta})
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            res.status(500).json({error: err})
+                        }); 
+            }
+            catch(error){
+                console.log(error)
+            }
     }
 
 }

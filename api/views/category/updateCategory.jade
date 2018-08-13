@@ -13,8 +13,8 @@ html(lang="en")
                         li  #{errors.msg}    
 
         form(id='form', action='/category/update/#{categoria._id}?_method=PUT', method='POST')
-            
-            input(id='id', name='id', type='hidden', value='#{categoria._id}')
+           
+            input(id='_id', name='_id', type='hidden', value='#{categoria._id}')
             input(id='name', name='name', type='text', value='#{categoria.name}')
             input(id='description', name='description', type='text', value='#{categoria.description}')
             input(type='submit', value='Update category')

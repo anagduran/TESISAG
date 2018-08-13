@@ -76,9 +76,7 @@ function newCategory(req,res,next) {
 
 
 // modificar una categoria
-function updateCategoryByID(req, res){
-
-   
+function updateCategoryByID(req, res){   
 
     req.check('name').isLength({min: 4}).withMessage('nombre de categoria muy corto');
     req.check('name').notEmpty().withMessage('el nombre de la categoria no puede estar vacio');
@@ -90,16 +88,14 @@ function updateCategoryByID(req, res){
     
     var errors = req.validationErrors();
     if (errors){
-        //console.log(errors)
-        console.log(req.body.id)
         res.render('category/updateCategory', {error: errors,  categoria: req.body});
         return;
     } else {
-        const id = mongoose.Types.ObjectId(req.body.id)
+        const id = mongoose.Types.ObjectId(req.body._id)
             // valido que el ID enviado sea correcto, si es asi realizo el update y si este resulta exitoso
             // envio status 200 y redirijo a la vista categoryDetail, sino envio error 404
             if (mongoose.Types.ObjectId.isValid(id)) {
-                console.log(req.body.id)
+                
                 category.where({'_id': id}).update( {$set: {name: req.body.name, description: req.body.description}}).exec()
                         .then(result =>{
                             

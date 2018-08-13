@@ -24,9 +24,9 @@ export default app => {
     }
     
    
-    
-    app.use(bodyparser.urlencoded({extended: false}));
     app.use(bodyparser.json());
+    app.use(bodyparser.urlencoded({extended: false}));
+    
     app.use(methodOverride("_method"));
     app.use(expressValidator());
     
