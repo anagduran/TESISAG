@@ -3,6 +3,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         title NEW QUESTION
     body
         h1 New Question
@@ -11,11 +12,11 @@ html(lang="en")
                 - for errors in error
                     li  #{errors.msg}  
         form(id='form', action='/question/new', method='POST' autocomplete="off")
-            input(id='question', name='question', placeholder='Question')
-            input(id='option1', name='options', placeholder='Option #1')
-            input(id='option2', name='options', placeholder='Options #2')
-            input(id='option3', name='options', placeholder='Options #3')
-            input(id='answer', name='answer', placeholder='Answer')
+            input(id='question', class='change' name='question', placeholder='Question')
+            input(id='option1', class='change', name='options', placeholder='Option #1')
+            input(id='option2', class='change', name='options', placeholder='Options #2')
+            input(id='option3', class='change', name='options', placeholder='Options #3')
+            input(id='answer', class='change', name='answer', placeholder='Answer')
             select(id="level", name='level')
                 option(value='select a level' selected) level
                 option(value='bajo') bajo

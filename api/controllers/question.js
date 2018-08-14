@@ -3,26 +3,38 @@ import category from "../models/category"
 import mongoose from "mongoose"
 
 //CREAR UNA NUEVA PREGUNTA
+
+function capitalizeFirstLetter(string){
+    let caracter =  string.charAt(0).toUpperCase()+ string.slice(1);
+    return caracter;
+}
+
 function newQuestion(req, res) {
 
     req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
     req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
-
-    req.check("level").matches(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
-
+    req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
+    req.check("answer").equals(req.body.options[2]).withMessage("la respuesta debe ser igual a la opcion 3")
+    
+    
     var errors = req.validationErrors();
     
     if(errors){
         category.find({},{"name":1}).exec().then(categories =>{
-        res.render('question/newQuestion', {error: errors,  categorias: categories});
-        return;
+            res.render('question/newQuestion', {error: errors,  categorias: categories});
+            return;
         })
     }
     else {    
+        let cambio = capitalizeFirstLetter(req.body.question);
+        let signoUno= '¿'
+        let signoDos= '?'
+        let preg = signoUno + cambio + signoDos;        
+        
         const pregunta = new question({
                 
                 _id: new mongoose.Types.ObjectId(),
-                question: req.body.question,
+                question: preg,
                 options: req.body.options,
                 answer: req.body.answer,
                 level: req.body.level,

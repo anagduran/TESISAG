@@ -31,3 +31,7 @@ h1 {
     color: #5FA6D7;
     font-family: sans-serif;
 }
+
+.change {
+    text-transform: capitalize;
+}
