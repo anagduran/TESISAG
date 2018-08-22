@@ -17,15 +17,19 @@ html(lang="en")
             input(id='option2', class='change', name='options', placeholder='Options #2')
             input(id='option3', class='change', name='options', placeholder='Options #3')
             input(id='answer', class='change', name='answer', placeholder='Answer')
-            select(id="level", name='level')
-                option(value='select a level' selected) level
-                option(value='bajo') bajo
-                option(value='medio') medio
-                option(value='alto') alto
-            select(id="cmbboxCategorias" name="categoriasCombo")
-                -each categoria, i in categorias
-                    option(value="#{categoria._id}") #{categoria.name}
-            input(type='submit', value='new question')
+            label Bajo 
+            input(type='radio', name='level', value='bajo')            
+            label Medio 
+            input(type='radio', name='level', value='medio')
+            label Alto 
+            input(type='radio', name='level', value='alto')
+            br
+            -each categoria, i in categorias
+                label #{categoria.name}
+                input(type='checkbox' name='categoriasCombo' value="#{categoria._id}") 
+                br
+            input(type='submit', value='new question')     
+            
                 
               
                   

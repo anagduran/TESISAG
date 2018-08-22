@@ -14,6 +14,7 @@ html(lang="en")
         input(id='id', name='id', type='hidden', value='#{pregunta._id}') 
         br 
         br
+        - console.log()
         input(id='question', name='question', type='text', value='#{pregunta.question}')
         br
         br
@@ -29,31 +30,43 @@ html(lang="en")
         input(id='answer', name='answer', type='text', value='#{pregunta.answer}')
         br
         br
-        input(id='level1', name='level', type='text', value='#{pregunta.level}', readonly="readonly")
-        select(id="nivel", name='level2', onChange="cambioValorComboNivel();")
-                option(value='bajo') bajo
-                option(value='medio') medio
-                option(value='alto') alto
-        br  
+        input(id='level1', name='level', type='text', value='#{pregunta.level}', readonly="readonly")        
+        br        
+        label Bajo 
+        input(type='radio', name='level2', value='bajo'  onChange='cambioValorComboNivel2();')            
+        label Medio 
+        input(type='radio', name='level2', value='medio'  onChange="cambioValorComboNivel2();")
+        label Alto 
+        input(type='radio', name='level2', value='alto'  onChange="cambioValorComboNivel2();") 
+
         br
         - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[0]; 
-        input(id='category', name='category', type='text', value='#{categoryChange.name}', readonly="readonly")
+        label #{categoryChange.name}
+        input(type='checkbox' name='category' value="#{categoryChange._id}" checked) 
         input(id='category2', name='category2', type='hidden', readonly="readonly", value='#{categoryChange._id}')
-        select(id="categorias" name="categoriasCombo" onChange="cambioValorComboCategoria();")
-                -each categoria, i in categorias
-                    option(value="#{categoria._id}") #{categoria.name}
+        br
+
+        -each categoria, i in categorias
+                label #{categoria.name}
+                input(type='checkbox' name='categoriasCombo' value="#{categoria._id}") 
+
+        
         br
         br
         input(type='submit', value='Update question')
 
     script(type="text/javascript").
         
-        function cambioValorComboNivel(){
-            var valor= document.getElementById("nivel").value;
-            console.log(valor);            
-            $('#level1').val(valor)
-            
-           
+        function cambioValorComboNivel2(){
+            var valor= document.getElementsByName("level2");
+
+             for(var i = 0;i < valor.length;i++)
+                {
+                    if(valor[i].checked)
+                    {
+                        $('#level1').val(valor[i].value)
+                    }
+                }           
         }
 
         function cambioValorComboCategoria(){

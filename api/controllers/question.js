@@ -156,6 +156,12 @@ function updateQuestionByID(req, res){
 const id = mongoose.Types.ObjectId(req.body.id)
    // const id = req.params.questionID;
    
+    req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
+    req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
+    req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
+    req.check("answer").equals(req.body.options[2]).withMessage("la respuesta debe ser igual a la opcion 3")
+    
+   
     if (mongoose.Types.ObjectId.isValid(id)) {
         question.where({'_id': id})
                 .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category2}})
