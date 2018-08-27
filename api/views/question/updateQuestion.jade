@@ -3,18 +3,23 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         script(src="https://code.jquery.com/jquery-3.3.1.js")
         title EDIT QUESTION
     body
 
     h1 EDITAR PREGUNTA
+        - if(error)
+            ul
+                - for errors in error
+                    li  #{errors.msg}  
 
     form(id='form', action='/question/update/#{pregunta._id}?_method=PUT', method='POST', style='white-space:pre;')
         
-        input(id='id', name='id', type='hidden', value='#{pregunta._id}') 
+        input(id='_id', name='_id', type='hidden', value='#{pregunta._id}') 
         br 
         br
-        - console.log()
+        
         input(id='question', name='question', type='text', value='#{pregunta.question}')
         br
         br
@@ -33,31 +38,47 @@ html(lang="en")
         input(id='level1', name='level', type='text', value='#{pregunta.level}', readonly="readonly")        
         br        
         label Bajo 
-        input(type='radio', name='level2', value='bajo'  onChange='cambioValorComboNivel2();')            
+        input(type='radio', name='level2', value='bajo'  onChange='cambioValorComboNivel();')            
         label Medio 
-        input(type='radio', name='level2', value='medio'  onChange="cambioValorComboNivel2();")
+        input(type='radio', name='level2', value='medio'  onChange="cambioValorComboNivel();")
         label Alto 
-        input(type='radio', name='level2', value='alto'  onChange="cambioValorComboNivel2();") 
+        input(type='radio', name='level2', value='alto'  onChange="cambioValorComboNivel();") 
 
         br
+        - console.log('antes del jsonparse')
+        - console.log(pregunta.category)
         - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[0]; 
-        label #{categoryChange.name}
-        input(type='checkbox' name='category' value="#{categoryChange._id}" checked) 
-        input(id='category2', name='category2', type='hidden', readonly="readonly", value='#{categoryChange._id}')
+        - console.log(categoryChange)
+       
+        select(type='combobox' name='category' multiple)
+            -each cat, i in pregunta.category                
+                option(value="#{cat._id}") #{cat.name} 
+         
+        button(class="fas fa-angle-right")
         br
-
-        -each categoria, i in categorias
-                label #{categoria.name}
-                input(type='checkbox' name='categoriasCombo' value="#{categoria._id}") 
-
+        button(class="fas fa-angle-left")
         
-        br
+        select(type='combobox' name='categoriaCombos2' multiple)
+            
+            -each categoria, i in categorias
+                - var j=0 
+                - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[j];  
+                - if(categoryChange._id != categoria._id)                    
+                  - {
+                        option(value= "#{categoria._id}") #{categoria.name}
+                        -j++   
+                    -}
+                
+        br         
+         
+        
+        br    
         br
         input(type='submit', value='Update question')
 
     script(type="text/javascript").
         
-        function cambioValorComboNivel2(){
+        function cambioValorComboNivel(){
             var valor= document.getElementsByName("level2");
 
              for(var i = 0;i < valor.length;i++)
@@ -69,20 +90,6 @@ html(lang="en")
                 }           
         }
 
-        function cambioValorComboCategoria(){
-            
-            var valor = document.getElementById("categorias");
-            var valor2 = valor.selectedIndex;
-            var valor3=  valor.options[valor2].text; 
-            var valor4 = document.getElementById("categorias").value;
-            var oculto = document.getElementById("category2").value;
-            console.log(valor3);   
-            console.log(valor4);       
-            $('#category').val(valor3)
-            $('#category2').val(valor4)
-           
-        }
-   
-           
-        
+       
+
        

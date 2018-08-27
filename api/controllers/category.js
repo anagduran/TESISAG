@@ -1,6 +1,6 @@
 import category from "../models/category"
 import mongoose from "mongoose"
-
+import question from "../models/question"
 
 
 
@@ -129,24 +129,38 @@ function deleteCategoryByID(req, res, next){
     //FALTAN COSAS AQUI 
     if(mongoose.Types.ObjectId.isValid(id))
     {
-        category.findByIdAndRemove(id).exec().then(result=>{
-            if(result){
-            res.status(200).redirect('/')
-            //send('<h3>eliminado con exito</h3>')
-           // render('category/categoryAll', { categorias: categories})
+       
+        question.findOne({category: id}).then(result =>{
+            if(result==null)
+            {
+                category.findByIdAndRemove(id).exec().then(result=>{
+                    if(result){
+                    res.status(200).redirect('/')
+                    //send('<h3>eliminado con exito</h3>')
+                    // render('category/categoryAll', { categorias: categories})
+                    }
+                    else {
+                        res.status(404).json({message: "ERROR ID"})
+                    }
+                })
+                .catch(err =>{
+                    console.log(err);
+                    res.status(500).json({error: err})
+                })
+            
             }
-            else {
-                res.status(404).json({message: "ERROR ID"})
+            else{
+                res.status(404).json({message: "Este id no se puede borrar porque tiene preguntas asociadas"}) 
             }
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({error: err})
-        })
-    }
+
+            
+        })       
+       
+    }        
     else{
         res.status(404).json({message: "error ID incorrecto"}) 
     }
+    
    
 }
 

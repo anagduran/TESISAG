@@ -25,9 +25,10 @@ html(lang="en")
       tbody
      
         -var i= -1
+       
+      
         
-        each pregunta in preguntas  
-            - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[0]; 
+        each pregunta in preguntas 
             - ++i   
             tr(class=(i % 2 == 0) ? 'odd' : 'even')  
                 td #{pregunta._id}
@@ -37,7 +38,12 @@ html(lang="en")
                 td #{pregunta.options[2]}
                 td #{pregunta.answer}
                 td #{pregunta.level}
-                td #{categoryChange.name}
+                -var j= 0
+                - each categoria in pregunta.category                   
+                    -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
+                    - ++j
+                    td #{categoryChange2.name}
+               
                 td 
                     a(href='/question/#{pregunta._id}') 
                         i.fa.fa-eye

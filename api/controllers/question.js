@@ -15,7 +15,9 @@ function newQuestion(req, res) {
     req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
     req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
     req.check("answer").equals(req.body.options[2]).withMessage("la respuesta debe ser igual a la opcion 3")
-    
+    req.check('categoriasCombo').exists().withMessage('Debe seleccionar por lo menos una categoria')
+  
+   
     
     var errors = req.validationErrors();
     
@@ -153,35 +155,48 @@ function deleteQuestionByID(req,res){
 // O NO SE HIZO LA MODIFICACION RETORNA STATUS 404, SI HAY FALLA DE CONEXION CON EL SERVIDOR RETORNA ERROR 500
 
 function updateQuestionByID(req, res){
-const id = mongoose.Types.ObjectId(req.body.id)
+const id = mongoose.Types.ObjectId(req.body._id)
    // const id = req.params.questionID;
-   
+   console.log("dentro de update question")
+   console.log(req.body.category)
     req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
     req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
     req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
     req.check("answer").equals(req.body.options[2]).withMessage("la respuesta debe ser igual a la opcion 3")
+    req.check('category').exists().withMessage('Debe seleccionar por lo menos una categoria')
     
-   
-    if (mongoose.Types.ObjectId.isValid(id)) {
-        question.where({'_id': id})
-                .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category2}})
-                .exec()
-                .then(result =>{                    
-                    if(result.nModified===1){
-                    res.status(200).render( 'question/questionDetail', { pregunta: req.body})                      
-                    }
-                    else {                        
-                        res.status(404).json({message: 'no encontrado'})
-                    }
-                 })
-                .catch(err =>{
-                    res.status(500).json({error: err})
-                })
+
+    var errors = req.validationErrors();
+    if (errors){
+        category.find({},{"name":1}).exec().then(categories =>{
+        console.log("dentro del if de errores")
+        console.log(req.body.category)
+        res.render('question/updateQuestion', {error: errors,  pregunta: req.body,  categorias: categories});
+       return;
+        })
+        
+    } 
+    else {
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            question.where({'_id': id})
+                    .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category}})
+                    .exec()
+                    .then(result =>{                    
+                        if(result.nModified===1){
+                        res.status(200).render( 'question/questionDetail', { pregunta: req.body})                      
+                        }
+                        else {                        
+                            res.status(404).json({message: 'no encontrado'})
+                        }
+                    })
+                    .catch(err =>{
+                        res.status(500).json({error: err})
+                    })
+        }
+        else{
+            res.status(404).json({message: 'error de id, incorrecto'})
+        }
     }
-    else{
-        res.status(404).json({message: 'error de id, incorrecto'})
-    }
- 
 }
 
 
