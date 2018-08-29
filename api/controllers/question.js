@@ -1,6 +1,7 @@
 import question from "../models/question"
 import category from "../models/category"
 import mongoose from "mongoose"
+import diff from 'simple-array-diff'
 
 //CREAR UNA NUEVA PREGUNTA
 
@@ -157,8 +158,7 @@ function deleteQuestionByID(req,res){
 function updateQuestionByID(req, res){
 const id = mongoose.Types.ObjectId(req.body._id)
    // const id = req.params.questionID;
-   console.log("dentro de update question")
-   console.log(req.body.category)
+  
     req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
     req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
     req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
@@ -168,11 +168,18 @@ const id = mongoose.Types.ObjectId(req.body._id)
 
     var errors = req.validationErrors();
     if (errors){
+
+          
+
         category.find({},{"name":1}).exec().then(categories =>{
-        console.log("dentro del if de errores")
-        console.log(req.body.category)
-        res.render('question/updateQuestion', {error: errors,  pregunta: req.body,  categorias: categories});
-       return;
+            question.findById(id)
+                    .populate('category', ['name'])
+                    .exec()
+                    .then(questionByID =>{ 
+                    var result = diff (questionByID.category, categories)
+                    res.render('question/updateQuestion', {error: errors,  pregunta: questionByID, categorias: result.added});
+                return;
+                    })
         })
         
     } 
@@ -213,8 +220,9 @@ function editQuestion(req,res){
             question.findById(id)
             .populate('category', ['name'])
             .exec()
-            .then(questionByID =>{           
-                res.render('question/updateQuestion', {pregunta: questionByID, categorias: categories})
+            .then(questionByID =>{                
+                var result = diff (questionByID.category, categories)
+                res.render('question/updateQuestion', {pregunta: questionByID, categorias: result.added})
             }).catch(err=> {
                 res.status(500).json({message: "Error en el servidor"})
             })

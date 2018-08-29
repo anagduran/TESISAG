@@ -45,36 +45,31 @@ html(lang="en")
         input(type='radio', name='level2', value='alto'  onChange="cambioValorComboNivel();") 
 
         br
-        - console.log('antes del jsonparse')
-        - console.log(pregunta.category)
-        - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[0]; 
-        - console.log(categoryChange)
        
-        select(type='combobox' name='category' multiple)
+       
+        select(id="origen" type='combobox' name='category' multiple)
             -each cat, i in pregunta.category                
                 option(value="#{cat._id}") #{cat.name} 
+
+
          
-        button(class="fas fa-angle-right")
-        br
-        button(class="fas fa-angle-left")
+        input(type='button' id="pasar" value=' pasar a der')
         
-        select(type='combobox' name='categoriaCombos2' multiple)
-            
-            -each categoria, i in categorias
-                - var j=0 
-                - var categoryChange= JSON.parse(JSON.stringify(pregunta.category))[j];  
-                - if(categoryChange._id != categoria._id)                    
-                  - {
-                        option(value= "#{categoria._id}") #{categoria.name}
-                        -j++   
-                    -}
+        input(type='button' id="quitar" value='pasar a izq')
+        
+        select(id="destino" type='combobox' name='categoriaCombos2' multiple selected='selected') 
                 
-        br         
+            -each categoria, i in categorias       
+                option(value= "#{categoria._id}") #{categoria.name}                                                                
+        
+                
+                
+        br    
          
         
         br    
         br
-        input(type='submit', value='Update question')
+        input(id='botonUpdate' type='submit', value='Update question')
 
     script(type="text/javascript").
         
@@ -89,6 +84,31 @@ html(lang="en")
                     }
                 }           
         }
+
+        
+        $(document).ready(function(){
+            $('#pasar').click(function(){
+                $('#origen option:selected').remove().appendTo('#destino');
+                
+
+            })
+             $('#quitar').click(function(){
+                $('#destino option:selected').remove().appendTo('#origen');
+                
+
+            })
+
+            $('#botonUpdate').click(function(){
+                $('#origen option').prop('selected',true)
+                $('#destino option').prop('selected',false)
+            
+
+            })
+
+               
+        })
+        
+        
 
        
 
