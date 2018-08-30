@@ -15,9 +15,20 @@ form.link #button1{
     border: none;
     display: inline-block;
     padding: none;
+    color: #ff6666;
+    background-color: transparent;
     
     
 };
+
+.action-icon{
+    text-decoration: none;
+}
+
+#icon-edit{ color:#009933;}
+
+
+#icon-see{ color:#df80ff;}
 
 .boton {
     background-color: #4CAF50;
@@ -36,11 +47,6 @@ form.link #button1{
     font-family: 'Calibri';
 }
 
-.change {
-    text-transform: capitalize;
-}
-
-
 
 .tableAll{
     display: block;    
@@ -53,14 +59,42 @@ td {font-size: 16px;}
 
 #tdUno { width: 7%; }
 
-#tdTres {width: 350px;}
-/*ESTILO TABLAS*/
+#thDos { width: 200px; }
 
-.estilo-divtable{
-    padding-bottom: 50px;
+#tdDos { width: 200ps; }
+
+#tdTres {width: 350px;}
+
+.estilo-divtable{padding-bottom: 0px;}
+
+.back-style{
+    border: 1px solid;
+    text-decoration: none; 
 }
 
+.label-form-style{
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 80px;
+}
+.div-input-style {
+    padding-left: 30px;
+}
+.input-style{
+    background: #ffffff;
+    color: black;
+    padding-left: 10px;
+    
+}
+/*ESTILOS DE ROW*/
 
+.row-style{
+    display: inline-block;
+    padding-top: 80px;
+    padding-left: 100px;
+    padding-bottom: 20px;
+}
 /*ESTILOS MENU LATERAL*/
 
 .nav-side-menu {

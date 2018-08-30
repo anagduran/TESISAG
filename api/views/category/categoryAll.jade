@@ -9,15 +9,18 @@ html(lang="en")
         title ALL CATEGORIES
     include ../menuLateral.jade
 
-    h1(class='h1All') CATEGORIAS 
+    div(class='container')
+        div(class='row')
+            div(class='col-md-3 offset-2 row-style')
+                h2(class='h1All') Categorias
 
  
-    div(class='estilo-divtable col-md-6 offset-md-4 table-responsive')        
-        table(id='tablaUno' class='tableAll table table-striped table-sm')
+    div(class='estilo-divtable col-md-6 offset-3 table-responsive')        
+        table(id='tablaUno' class='tableAll table table-striped table-sm table-bordered')
             thead
                 tr.head
                     th #
-                    th(class='thAll') Nombre Categoria 
+                    th(id='thDos' class='thAll') Nombre Categoria 
                     th(class='thAll') Descripcion Categoria
                     th(class='thAll') Acciones
             
@@ -27,20 +30,25 @@ html(lang="en")
                     - ++i   
                     tr(class=(i % 2 == 0) ? 'odd' : 'even')
                         td(id='tdUno') #{i}
-                        td #{categoria.name} 
-                        td(ID='tdTres') #{categoria.description}
+                        td(id='tdDos') #{categoria.name} 
+                        td(id='tdTres') #{categoria.description}
                         td 
-                            a(href='/category/#{categoria._id}') 
-                                i.fa.fa-eye
-                            a(href='/category/edit/#{categoria._id}') 
-                                i.fas.fa-pencil-alt
+                            a(class='action-icon' href='/category/#{categoria._id}') 
+                                i(id='icon-see' class='fa fa-eye')
+                            a(class='action-icon' href='/category/edit/#{categoria._id}') 
+                                i(id='icon-edit' class='fas fa-pencil-alt')
                             form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
                                 button(type="submit" class= "fas fa-trash-alt" id="button1")
                         
-                
-    a(href='/') BACK - 
-    br
-    a(href='/category/create') new category
+    div(class='row')
+        div(class='col-sm-4 offset-3')        
+            a(href='/' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back 
+            
+        div(class='col-sm-4 col-sm-offset-6')
+            a(href='/category/create' class='btn btn-outline-success' role='button') Nueva Categoria
 
-                
+    footer(class='page-footer font-small blue')
+        div(class="footer-copyright text-center py-3")© 2018 Copyright.
+       
+             
         

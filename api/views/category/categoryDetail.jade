@@ -3,12 +3,27 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title DETALLE DE CATEGORIA
-    body
-    h1 DETALLE DE CATEGORIA
+        title Detalle de Categoria #{categoria.name}
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Detalle de Categoria
+        
+        div(class='row')
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Nombre de la Categoria
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{categoria.name}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Descripcion de la Categoria
+                div(class='sol-sm-10')
+                    input(type='text' size='50' class='input-style form-control' value= '#{categoria.description}' readonly)
 
-     p ID: #{categoria._id}   
-     p Name: #{categoria.name}
-     p Description: #{categoria.description}
-
-     a(href='/') BACK - 
+        
+        div(class='row')
+            div(class='col-sm-4 offset-2')        
+                a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Categories
+              
