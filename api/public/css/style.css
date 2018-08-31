@@ -1,5 +1,3 @@
-@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-
 body {
     margin: 0px;
     padding: 0px;
@@ -20,6 +18,9 @@ form.link #button1{
     
     
 };
+.prueba{
+    margin: 0;
+}
 
 .action-icon{
     text-decoration: none;
@@ -80,6 +81,7 @@ td {font-size: 16px;}
 }
 .div-input-style {
     padding-left: 30px;
+    margin: 0;
 }
 .input-style{
     background: #ffffff;
@@ -87,7 +89,15 @@ td {font-size: 16px;}
     padding-left: 10px;
     
 }
-/*ESTILOS DE ROW*/
+
+.div-style-end
+{
+    padding-top: 60px;
+}
+
+.input-style-update{
+    float: right;
+}
 
 .row-style{
     display: inline-block;
@@ -95,6 +105,9 @@ td {font-size: 16px;}
     padding-left: 100px;
     padding-bottom: 20px;
 }
+
+
+
 /*ESTILOS MENU LATERAL*/
 
 .nav-side-menu {

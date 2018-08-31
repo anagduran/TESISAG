@@ -3,18 +3,35 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title EDIT CATEGORY
-    body
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../../public/css/style.css")
+        link(rel="stylesheet" href="../../public/css/bootstrap.css")
+        title Editar Categoria #{categoria.name}
 
-        h1 EDITAR CATEGORIA
-        - if(error)
-                ul
-                    - for errors in error
-                        li  #{errors.msg}    
+    include ../menuLateral.jade
 
-        form(id='form', action='/category/update/#{categoria._id}?_method=PUT', method='POST')
-           
-            input(id='_id', name='_id', type='hidden', value='#{categoria._id}')
-            input(id='name', name='name', type='text', value='#{categoria.name}')
-            input(id='description', name='description', type='text', value='#{categoria.description}')
-            input(type='submit', value='Update category')
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Editar Categoria: #{categoria.name}  
+                - if(error)
+                    ul(class='list-group ul-style')     
+                        h5 Arreglar los siguientes errores:
+                        - for errors in error
+                            li(class='list-group-item list-group-item-danger') #{errors.msg}    
+
+        div(class='row')
+            div(class='col offset-2')
+                form(id='form', action='/category/update/#{categoria._id}?_method=PUT', method='POST' autocomplete="off")                    
+                    input(id='_id', name='_id', type='hidden', value='#{categoria._id}')
+                    
+                    div
+                        label(class='label-form-style') Nombre
+                        input(class='input-style form-control' id='name', name='name', type='text', value='#{categoria.name}')
+                    div
+                        label(class='label-form-style') Descripcion
+                        input(class='input-style form-control' id='description', name='description', type='text', value='#{categoria.description}')
+                    div(class='div-style-end')
+                         a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                         input(type='submit', class='input-style-update btn btn-success' value='Update category')
+                        

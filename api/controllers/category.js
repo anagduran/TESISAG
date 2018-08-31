@@ -78,13 +78,13 @@ function newCategory(req,res,next) {
 // modificar una categoria
 function updateCategoryByID(req, res){   
 
-    req.check('name').isLength({min: 4}).withMessage('nombre de categoria muy corto');
-    req.check('name').notEmpty().withMessage('el nombre de la categoria no puede estar vacio');
-    req.check('name').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales ni numeros en el campo Nombre');
+    req.check('name').isLength({min: 4}).withMessage('El nombre es muy corto');
+    req.check('name').notEmpty().withMessage('El nombre no puede estar vacio');
+    req.check('name').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales, espacios en blanco o numeros en el campo Nombre');
  
-    req.check('description').isLength({min: 10}).withMessage('La descripcion de la categoria muy corta');
-    req.check('description').notEmpty().withMessage('La descripcion de la categoria no puede estar vacia');
-    req.check('description').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales ni numeros en el campo Descripcion');
+    req.check('description').isLength({min: 10}).withMessage('La descripcion es muy corta');
+    req.check('description').notEmpty().withMessage('La descripcion no puede estar vacia');
+    req.check('description').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales, espacios en blanco o numeros en el campo Descripcion');
     
     var errors = req.validationErrors();
     if (errors){

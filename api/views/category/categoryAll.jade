@@ -37,7 +37,21 @@ html(lang="en")
                                 i(id='icon-see' class='fa fa-eye')
                             a(class='action-icon' href='/category/edit/#{categoria._id}') 
                                 i(id='icon-edit' class='fas fa-pencil-alt')
-                            form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
+                            button(type='button' id='button1' class='fas fa-trash-alt')                            
+                            div(class="modal fade" id="myModal" role="dialog")
+                                    div(class="modal-dialog")
+                                        div(class="modal-content")
+                                            div(class="modal-body")
+       
+                                            div(class="modal-footer")
+                                                button(type="button" class="btn btn-default" id="closeModal") Close
+                                                button(type="button" class="btn btn-success" id="closeModal") Aceptar
+             
+                                
+                                
+                                
+                                
+                                form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
                                 button(type="submit" class= "fas fa-trash-alt" id="button1")
                         
     div(class='row')
@@ -51,4 +65,14 @@ html(lang="en")
         div(class="footer-copyright text-center py-3")© 2018 Copyright.
        
              
-        
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $('#button1').click(function(){
+                var modal = $("#myModal");
+
+
+                modal.find(".modal-body").append('<form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")>');
+
+            })
+        }
+
