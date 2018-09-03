@@ -7,6 +7,7 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
+        script(src='../public/js/bootstrap.js')
         include menuLateral.jade
 
 
@@ -18,6 +19,19 @@ html(lang="en")
                     h1 hola aqui en la api
                     title= title
                     h1= message
+            
+            button(type='button' id='button5' class='btn btn-outline-success' data-toggle="modal" data-target="#myModal") Modal                   
+            div(id="myModal" class="modal fade col-sm-offset-6"  role="dialog")
+                div(class="modal-dialog")
+                    div(class="modal-content")
+                        div(class='modal-header')
+                            h5 Eliminar Categoria
+                            button(type='button' class='close' data-dismiss='modal')
+                        div(class="modal-body")
+                            h5 ¿Estas seguro que desea eliminar este registro?
+                        div(class="modal-footer")
+                            button(type="button" class="btn btn-default" id="closeModal") Close                                            
+                            button(type="button" class="btn btn-success" id="closeModal2") Aceptar
             
 
 

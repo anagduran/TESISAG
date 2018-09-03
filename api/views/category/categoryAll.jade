@@ -6,6 +6,10 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='../public/js/bootstrap.js')
+        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        
         title ALL CATEGORIES
     include ../menuLateral.jade
 
@@ -37,22 +41,24 @@ html(lang="en")
                                 i(id='icon-see' class='fa fa-eye')
                             a(class='action-icon' href='/category/edit/#{categoria._id}') 
                                 i(id='icon-edit' class='fas fa-pencil-alt')
-                            button(type='button' id='button1' class='fas fa-trash-alt')                            
-                            div(class="modal fade" id="myModal" role="dialog")
-                                    div(class="modal-dialog")
-                                        div(class="modal-content")
-                                            div(class="modal-body")
-       
-                                            div(class="modal-footer")
-                                                button(type="button" class="btn btn-default" id="closeModal") Close
-                                                button(type="button" class="btn btn-success" id="closeModal") Aceptar
+                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2")                            
+                            div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
+                                div(class="modal-dialog" role='document')
+                                    div(class="modal-content")
+                                        div(class='modal-header')
+                                            h5 Eliminar Categoria                                            
+                                        div(class="modal-body")
+                                            ¿Estas seguro que desea eliminar este registro?
+                                        div(class="modal-footer")
+                                            button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                                            form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
+                                                button(type="button" class="btn btn-success" id="closeModal2") Aceptar
              
                                 
                                 
                                 
                                 
-                                form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
-                                button(type="submit" class= "fas fa-trash-alt" id="button1")
+                               
                         
     div(class='row')
         div(class='col-sm-4 offset-3')        
@@ -61,18 +67,22 @@ html(lang="en")
         div(class='col-sm-4 col-sm-offset-6')
             a(href='/category/create' class='btn btn-outline-success' role='button') Nueva Categoria
 
-    footer(class='page-footer font-small blue')
-        div(class="footer-copyright text-center py-3")© 2018 Copyright.
        
-             
-    script(type="text/javascript").
-        $(document).ready(function() {
-            $('#button1').click(function(){
-                var modal = $("#myModal");
 
+    footer(class='page-footer font-small blue')
+        div(class="footer-copyright text-center pr-3")© 2018 Copyright.
+       
+    
+    
+    
+script(type="text/javascript").
+        $(window).load(function(){
+            $('#myModal2').modal('show');
+        });
 
-                modal.find(".modal-body").append('<form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")>');
+        $(window).load(function () {
+            $('#myModal2').modal('hide');
+        
+        });
 
-            })
-        }
 
