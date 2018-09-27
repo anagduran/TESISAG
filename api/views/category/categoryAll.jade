@@ -70,7 +70,7 @@ html(lang="en")
        
 
     footer(class='page-footer font-small blue')
-        div(class="footer-copyright text-center pr-3")© 2018 Copyright.
+        div(class="footer-copyright text-center pr-3")© 2018 Copyright. 
        
     
     
@@ -82,7 +82,19 @@ script(type="text/javascript").
 
         $(window).load(function () {
             $('#myModal2').modal('hide');
-        
         });
+
+            
+        $(document).ready(function(){
+            $('#myModal2').on('show.bs.modal',function(){
+
+                $('#closeModal2').click(function(){ 
+                    console.log('Hola');
+                    $form.append(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
+                })
+            })
+        })
+        
+    
 
 
