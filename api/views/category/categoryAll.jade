@@ -13,10 +13,16 @@ html(lang="en")
         title ALL CATEGORIES
     include ../menuLateral.jade
 
+    
+
     div(class='container')
         div(class='row')
             div(class='col-md-3 offset-2 row-style')
                 h2(class='h1All') Categorias
+
+    - if(message)
+        li #{message}
+    
 
  
     div(class='estilo-divtable col-md-6 offset-3 table-responsive')        
@@ -41,18 +47,23 @@ html(lang="en")
                                 i(id='icon-see' class='fa fa-eye')
                             a(class='action-icon' href='/category/edit/#{categoria._id}') 
                                 i(id='icon-edit' class='fas fa-pencil-alt')
-                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2")                            
-                            div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
-                                div(class="modal-dialog" role='document')
-                                    div(class="modal-content")
-                                        div(class='modal-header')
-                                            h5 Eliminar Categoria                                            
-                                        div(class="modal-body")
-                                            ¿Estas seguro que desea eliminar este registro?
-                                        div(class="modal-footer")
-                                            button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
-                                            form(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
-                                                button(type="button" class="btn btn-success" id="closeModal2") Aceptar
+                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= categoria._id onclick='obtenervalor(`#{categoria._id}`);')                            
+                           
+                            
+                            
+    div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
+        div(class="modal-dialog" role='document')
+            div(class="modal-content")
+                div(class='modal-header')
+                    h5 Eliminar Categoria   
+                    input(type='text' id='lista' style="visibility:hidden")                                        
+                div(class="modal-body")
+                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    form(action="" class= "link" method="POST" id='formEliminar')
+                    a(class="btn btn-success" href='#' name='POST' onclick='enviar();') Aceptar
+                        
              
                                 
                                 
@@ -76,25 +87,22 @@ html(lang="en")
     
     
 script(type="text/javascript").
-        $(window).load(function(){
-            $('#myModal2').modal('show');
-        });
 
-        $(window).load(function () {
-            $('#myModal2').modal('hide');
-        });
+    function obtenervalor(id) {
+        $('#lista').val(id);       
+    }
 
-            
-        $(document).ready(function(){
-            $('#myModal2').on('show.bs.modal',function(){
-
-                $('#closeModal2').click(function(){ 
-                    console.log('Hola');
-                    $form.append(action='/category/delete/#{categoria._id}?_method=DELETE' class= "link" method="POST")
-                })
-            })
-        })
-        
+    function enviar(){       
+        var id = document.getElementById('lista').value;            
+        var action = '/category/delete/' 
+        var action2 = '?_method=DELETE'
+        var total = action.concat(id,action2);        
+        document.getElementById("formEliminar").action = total;
+        document.getElementById("formEliminar").submit();        
+    
+    }
+    
+     
     
 
 
