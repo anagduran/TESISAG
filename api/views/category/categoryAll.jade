@@ -98,10 +98,19 @@ script(type="text/javascript").
         var action2 = '?_method=DELETE'
         var total = action.concat(id,action2);        
         document.getElementById("formEliminar").action = total;
-        document.getElementById("formEliminar").submit();        
+        document.getElementById("formEliminar").submit();  
+
+         
+              
     
     }
-    
+
+    $(document).ready(function () {
+     var decode= decodeURIComponent(location.href('mensaje'));     
+     console.log(decode);
+    });
+
+  
      
     
 

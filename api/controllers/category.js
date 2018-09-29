@@ -123,6 +123,9 @@ function updateCategoryByID(req, res){
 function deleteCategoryByID(req, res, next){
    
     const id = mongoose.Types.ObjectId(req.params.categoryID)
+    var referencia = req.header('Referer')
+    let exito = 'eliminado exitosamente'
+
     
     //Valido el ID enviado si es correcto busco y elimino la categoria seleccionada
     //AQUI FALTA VALIDAR QUE SI LA CATEGORIA TIENE PREGUNTAS ASOCIADAS NO SE PUEDE ELIMINAR
@@ -135,16 +138,11 @@ function deleteCategoryByID(req, res, next){
             {
                 category.findByIdAndRemove(id).exec().then(result=>{
                     if(result){
-                        category.find()
-                                .exec()
-                                .then(categories => {
-                                    if(categories) {
-                                        res.status(200).render( 'category/categoryAll', { categorias: categories})
-                                      }else{
-                                          res.status(404).json({message: 'no hay categorias'})
-                                      }   
-                                 })                 
+                        
+                        res.status(200).redirect(referencia+"?mensaje="+exito)
                     
+                               
+    
                     }
                     else {
                         res.status(404).json({message: "ERROR ID"})
