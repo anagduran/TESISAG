@@ -124,7 +124,8 @@ function deleteCategoryByID(req, res, next){
    
     const id = mongoose.Types.ObjectId(req.params.categoryID)
     var referencia = req.header('Referer')
-    let exito = 'eliminado exitosamente'
+    let exito = 'Categoria eliminada exitosamente'
+    let fallo = 'Esta categoria no se puede eliminar porque tiene preguntas asociadas'
 
     
     //Valido el ID enviado si es correcto busco y elimino la categoria seleccionada
@@ -139,10 +140,7 @@ function deleteCategoryByID(req, res, next){
                 category.findByIdAndRemove(id).exec().then(result=>{
                     if(result){
                         
-                        res.status(200).redirect(referencia+"?mensaje="+exito)
-                    
-                               
-    
+                        res.status(200).redirect(referencia)   
                     }
                     else {
                         res.status(404).json({message: "ERROR ID"})
@@ -159,7 +157,7 @@ function deleteCategoryByID(req, res, next){
                         .exec()
                         .then(categories => {
                             if(categories) {
-                                res.status(404).render('category/categoryAll', {categorias: categories, message: "Este id no se puede borrar porque tiene preguntas asociadas"})
+                                res.status(404).redirect(referencia) 
                             }
                         })
                

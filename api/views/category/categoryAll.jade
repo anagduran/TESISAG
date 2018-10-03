@@ -14,17 +14,19 @@ html(lang="en")
     include ../menuLateral.jade
 
     
-
-    div(class='container')
-        div(class='row')
-            div(class='col-md-3 offset-2 row-style')
-                h2(class='h1All') Categorias
-
-    - if(message)
-        li #{message}
     
 
- 
+                
+
+    - if(message)
+        li #{message}     
+
+    div(class="col-md-6 offset-3  alert-style alert alert-success alert-dismissable" id='mensajeExito' style="visibility:hidden")
+                button(type="button" class="close" data-dismiss="alert")&times;
+        
+    div(class='col-md-3 offset-3 row-style')
+        h2(class='h1All') Categorias
+
     div(class='estilo-divtable col-md-6 offset-3 table-responsive')        
         table(id='tablaUno' class='tableAll table table-striped table-sm table-bordered')
             thead
@@ -100,15 +102,35 @@ script(type="text/javascript").
         document.getElementById("formEliminar").action = total;
         document.getElementById("formEliminar").submit();  
 
-         
-              
-    
+          
     }
 
-    $(document).ready(function () {
-     var decode= decodeURIComponent(location.href('mensaje'));     
-     console.log(decode);
+    $(document).ready(function () {    
+        var msj = getParameterByName('mensaje');
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/category/delete/?_method=DELETE', true);
+        xhr.send(null);
+        console.log('UNSENT', xhr.status);
+        if(xhr.status==200){
+            $('#mensajeExito').append(' Categoria eliminada existosamente')
+            $('#mensajeExito').css('visibility', 'visible')
+        }  
+           
     });
+
+    
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+   
+    
 
   
      
