@@ -98,25 +98,53 @@ script(type="text/javascript").
         var id = document.getElementById('lista').value;            
         var action = '/category/delete/' 
         var action2 = '?_method=DELETE'
-        var total = action.concat(id,action2);        
+        var total = action.concat(id,action2);      
+        
+         $.ajax({      
+                url: total,
+                type: 'DELETE',
+                statusCode: {
+                    302: function () {
+                        alert('ALOOO');
+                        console.log("200 - Success");
+                    }
+                },
+            });
+
         document.getElementById("formEliminar").action = total;
-        document.getElementById("formEliminar").submit();  
+       /*  $.ajax({      
+                url: total,
+                type: 'DELETE',
+                statusCode: {
+                    302: function () {
+                        alert('ALOOO');
+                        console.log("200 - Success");
+                    }
+                },
+            });*/
+        
+        
+       // document.getElementById("formEliminar").submit();
+        
+           
+
+     
+         
 
           
     }
 
-    $(document).ready(function () {    
-        var msj = getParameterByName('mensaje');
+    function validarStatus(url) {    
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', '/category/delete/?_method=DELETE', true);
+        xhr.open('DELETE', url, false);
         xhr.send(null);
         console.log('UNSENT', xhr.status);
-        if(xhr.status==200){
+       /* if(xhr.status==200){
             $('#mensajeExito').append(' Categoria eliminada existosamente')
             $('#mensajeExito').css('visibility', 'visible')
-        }  
+        }*/  
            
-    });
+    };
 
     
     function getParameterByName(name, url) {
@@ -129,6 +157,8 @@ script(type="text/javascript").
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
+
+   
    
     
 
