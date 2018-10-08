@@ -140,7 +140,7 @@ function deleteCategoryByID(req, res, next){
                 category.findByIdAndRemove(id).exec().then(result=>{
                     if(result){
                         
-                        res.status(200).redirect(referencia)   
+                        res.status(200) 
                     }
                     else {
                         res.status(404).json({message: "ERROR ID"})
