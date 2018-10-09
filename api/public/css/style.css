@@ -48,12 +48,38 @@ form.link {
     font-family: 'Calibri';
 }
 
+/*.tbody-style {
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+*/
+thead {
+    width: 500px;
+  
+}
+ 
+tbody {
+    width: 500px;
+   
+}
+
+.estilo-divtable
+{padding-bottom: 0px;
+   /* overflow-y: auto;
+    height: 200px;*/
+    
+}
 
 .tableAll{
     display: block;    
     font-size: 20px;
     text-align: center; 
     margin: 0 auto; 
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 300px;
+    white-space: nowrap;
 }
 
 td {font-size: 16px;}
@@ -66,7 +92,7 @@ td {font-size: 16px;}
 
 #tdTres {width: 350px;}
 
-.estilo-divtable{padding-bottom: 0px;}
+
 
 .back-style{
     border: 1px solid;
