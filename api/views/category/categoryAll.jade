@@ -6,9 +6,13 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
+        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.css")
+ 
+       
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')
         script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        
         
         title  Categorias
     include ../menuLateral.jade
@@ -24,27 +28,27 @@ html(lang="en")
     div(class="col-md-6 offset-3  alert-style alert alert-success alert-dismissable" id='mensajeExito' style="visibility:hidden")
                 button(type="button" class="close" data-dismiss="alert")&times;
         
-    div(class='col-md-3 offset-3 row-style')
+    div(class='col-md-3 offset-2 row-style')
         h2(class='h1All') Categorias
 
-    div(class='estilo-divtable col-md-6 offset-3 table-responsive')        
-        table(id='tablaUno' class='tableAll table table-striped table-sm table-bordered')
+    div(class='estilo-divtable col-md-6 offset-2 table-responsive')        
+        table(width='100%' id='tablaUno' class='tableAll table table-striped table-sm table-bordered')
             thead
                 tr.head
                     th #
-                    th(id='thDos' class='thAll') Nombre Categoria 
-                    th(class='thAll') Descripcion Categoria
-                    th(class='thAll') Acciones
+                    th(id='thDos') Nombre Categoria 
+                    th Descripcion Categoria
+                    th Acciones
             
             tbody
                 -var i= -1
                 each categoria in categorias  
                     - ++i   
                     tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                        td(id='tdUno') #{i}
-                        td(id='tdDos') #{categoria.name} 
+                        td(id='tdUno' ) #{i}
+                        td(id='tdDos' ) #{categoria.name} 
                         td(id='tdTres') #{categoria.description}
-                        td 
+                        td
                             a(class='action-icon' href='/category/#{categoria._id}') 
                                 i(id='icon-see' class='fa fa-eye')
                             a(class='action-icon' href='/category/edit/#{categoria._id}') 
@@ -74,14 +78,14 @@ html(lang="en")
                                
                         
     div(class='row')
-        div(class='col-sm-4 offset-3')        
+        div(class='col-sm-4 offset-2')        
             a(href='/' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back 
             
         div(class='col-sm-4 col-sm-offset-6')
             a(href='/category/create' class='btn btn-outline-success' role='button') Nueva Categoria
 
        
-
+    script(type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.js")
     footer(class='page-footer font-small blue')
         div(class="footer-copyright text-center pr-3")© 2018 Copyright. 
        
@@ -89,6 +93,10 @@ html(lang="en")
     
     
 script(type="text/javascript").
+
+    $(document).ready(function() {
+        $('#tablaUno').DataTable();
+    } );
 
     function obtenervalor(id) {
         $('#lista').val(id);       

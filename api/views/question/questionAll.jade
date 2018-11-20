@@ -6,6 +6,9 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
+        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.css")       
+        
+        
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')
         script(type="text/javascript" src='../public/js/bootstrap.min.js')
@@ -13,14 +16,14 @@ html(lang="en")
         title  Preguntas
     include ../menuLateral.jade
 
-    div(class='col-md-3 offset-3 row-style')
+    div(class='col-md-3 offset-2 row-style')
         h2(class='h1All') Preguntas
     
-    div(class='estilo-divtable col-9 offset-3 table-responsive' style="")  
-         table(id='tablaUno' class='tableAll table table-striped table-sm table-bordered' style="overflow-x:auto")       
+    div(class='estilo-divtable col-9 offset-2 table-responsive' style="")  
+         table(id='tablaUno' class='tableAll table table-striped table-sm table-bordered')       
             thead
                 tr.head
-                    th #
+                    th(class='thead-light') #
                     th(class='thAll') Pregunta 
                     th(class='thAll') Opción 1
                     th(class='thAll') Opción 2
@@ -60,9 +63,16 @@ html(lang="en")
                             button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                            
 
               
-                
     a(href='/') BACK - 
     br
     a(href='/question/create') new question
+    script(type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.js")  
+    
 
-   
+script(type="text/javascript").
+
+    $(document).ready(function() {
+            $('#tablaUno').DataTable();
+    } );
+
+     
