@@ -25,10 +25,6 @@ html(lang="en")
                 tr.head
                     th(class='thead-light') #
                     th(class='thAll') Pregunta 
-                    th(class='thAll') Opción 1
-                    th(class='thAll') Opción 2
-                    th(class='thAll') Opción 3
-                    th(class='thAll') Respuesta
                     th(class='thAll') Nivel
                     th(class='thAll') Categoria
                     th(class='thAll') Acciones
@@ -44,28 +40,44 @@ html(lang="en")
                     tr(class=(i % 2 == 0) ? 'odd' : 'even')  
                         td(id='tdUno') #{i}
                         td #{pregunta.question} 
-                        td #{pregunta.options[0]}
-                        td #{pregunta.options[1]}
-                        td #{pregunta.options[2]}
-                        td #{pregunta.answer}
                         td #{pregunta.level}
-                        -var j= 0
-                        - each categoria in pregunta.category                   
-                            -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
-                            - ++j
-                            td #{categoryChange2.name}
+                        td
+                            -var j= 0
+                            - each categoria in pregunta.category                   
+                                -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
+                                - ++j
+                                p #{categoryChange2.name},
                     
                         td 
                             a(href='/question/#{pregunta._id}') 
                                 i(id='icon-see' class='fa fa-eye')
                             a(href='/question/edit/#{pregunta._id}') 
-                                i(id='icon-edit' class='fas fa-pencil-alt')                            
-                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                            
+                                i(id='icon-edit' class='fas fa-pencil-alt')   
+                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                                                     
+                            
 
-              
-    a(href='/') BACK - 
-    br
-    a(href='/question/create') new question
+
+    div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
+        div(class="modal-dialog" role='document')
+            div(class="modal-content")
+                div(class='modal-header')
+                    h5 Eliminar Pregunta   
+                    input(type='text' id='lista' style="visibility:hidden")                                        
+                div(class="modal-body")
+                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    form(action="" class= "link" method="POST" id='formEliminar')
+                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
+                        
+    div(class='row')
+        div(class='col-sm-4 offset-2')        
+            a(href='/' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Atras           
+   
+
+        div(class='col-sm-4 col-sm-offset-6')
+            a(href='/question/create' class='btn btn-outline-success' role='button') Nueva Categoria
+    
     script(type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.js")  
     
 
@@ -74,5 +86,81 @@ script(type="text/javascript").
     $(document).ready(function() {
             $('#tablaUno').DataTable();
     } );
+
+
+     function obtenervalor(id) {
+        $('#lista').val(id);       
+    }
+
+    function enviar(){       
+        var id = document.getElementById('lista').value;            
+        var action = '/question/delete/' 
+        var action2 = '?_method=DELETE'
+        var total = action.concat(id,action2);      
+        
+         $.ajax({      
+                url: total,
+                type: 'DELETE',
+                statusCode: {
+                    200: function () {
+                        alert('ALOOO');
+                        console.log("200 - Success");
+                    }
+                },
+            });
+
+        document.getElementById("formEliminar").action = total;
+             
+       // document.getElementById("formEliminar").submit();
+          
+    }
+
+    $('#eliminar').click(function(){
+        var id = document.getElementById('lista').value;            
+        var action = '/question/delete/' 
+        var action2 = '?_method=DELETE'
+        var total = action.concat(id,action2);   
+        console.log(total);
+       // document.getElementById("formEliminar").action = total;  
+        
+        $.ajax({      
+                url: total,
+                type: 'DELETE',
+                statusCode: {
+                    200: function () {
+                        alert('eliminado exitosamente desde ajax');
+                        console.log("200 - Success");
+                    },
+                    404: function() {
+                        console.log('400 error desde ajax');
+                    }
+                },
+            });
+        //document.getElementById("formEliminar").submit();
+    });
+
+    function validarStatus(url) {    
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', url, false);
+        xhr.send(null);
+        console.log('UNSENT', xhr.status);
+       /* if(xhr.status==200){
+            $('#mensajeExito').append(' Categoria eliminada existosamente')
+            $('#mensajeExito').css('visibility', 'visible')
+        }*/  
+           
+    };
+
+    
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
 
      

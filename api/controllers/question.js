@@ -134,7 +134,7 @@ function deleteQuestionByID(req,res){
     if(mongoose.Types.ObjectId.isValid(id)){
         question.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200).json(result)         
+                res.status(200)        
             }
             else {
                 res.status(404).json({message: "ERROR ID"})

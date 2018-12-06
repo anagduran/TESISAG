@@ -32,12 +32,11 @@ html(lang="en")
         h2(class='h1All') Categorias
 
     div(class='estilo-divtable col-md-6 offset-2 table-responsive')        
-        table(width='100%' id='tablaUno' class='tableAll table table-striped table-sm table-bordered')
+        table(width='100%' id='tablaUno' class='display tableAll table table-striped table-sm table-bordered')
             thead
                 tr.head
                     th #
                     th(id='thDos') Nombre Categoria 
-                    th Descripcion Categoria
                     th Acciones
             
             tbody
@@ -47,7 +46,7 @@ html(lang="en")
                     tr(class=(i % 2 == 0) ? 'odd' : 'even')
                         td(id='tdUno' ) #{i}
                         td(id='tdDos' ) #{categoria.name} 
-                        td(id='tdTres') #{categoria.description}
+                        
                         td
                             a(class='action-icon' href='/category/#{categoria._id}') 
                                 i(id='icon-see' class='fa fa-eye')

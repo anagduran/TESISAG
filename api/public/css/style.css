@@ -104,15 +104,85 @@ td {font-size: 16px;}
     font-weight: bold;
     padding-right: 80px;
 }
+
+.label-form-style2{
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 60px;
+}
+
 .div-input-style {
     padding-left: 30px;
     margin: 0;
 }
+
+.div-input-style2 {
+    padding-left: 41px;
+    margin: 0;
+}
+
+.div-input-style3 {
+    padding-left: 82px;
+    margin: 0;
+}
+
+.div-input-style4 {
+    padding-left: 25px;
+    margin: 0;
+}
+
+.label-radio-button-style{
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.label-radio-button-style2{
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 5px;
+    padding-left: 20px;
+}
+.select-style {
+    width: 30%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    position: relative;
+    left: -105px;
+}
+
+.select-style2{
+    width: 30%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    position: relative;
+    right: -460px;
+    top: -120px;
+}
+
+
 .input-style{
     background: #ffffff;
     color: black;
     padding-left: 10px;
     
+}
+.button-change-style-der{
+    position: absolute;
+    float: right;
+    left: 35%;
+    top: 68%;
+}
+
+.button-change-style-izq{
+    position: relative;    
+    left: 35%;
+    top: -35px;
 }
 
 .div-style-end
