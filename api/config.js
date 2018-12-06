@@ -23,9 +23,11 @@ export default app => {
         app.use(logger('combined'))
     }
     
-    app.use(methodOverride("_method"))
+   
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({extended: false}));
+    
+    app.use(methodOverride("_method"));
     app.use(expressValidator());
     
     

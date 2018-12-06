@@ -3,16 +3,44 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title NEW CATEGORY
-    body
-        h1 New Category
-         - if(error)
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
+        link(rel="stylesheet" href="../public/css/bootstrap.css")
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='../public/js/bootstrap.js')
+        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        title Nueva Categoria
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Nueva Categoria
+
+
+        - if(error)
             ul
                 - for errors in error
                     li  #{errors.msg}    
                         
         form(id='form', action='/category/new', method='POST' autocomplete="off")
-            input(id='name', name='name', placeholder='Name')
-            input(id='description', name='description', placeholder='Description')
-            input(type='submit', value='new category')
+         div(class='row')
+            div(class='form-group row offset-3')
+                Label(class='label-form-style') Nombre 
+                div(class='sol-sm-10 div-input-style')
+                    input(size='65' class='input-style form-control' id='name', name='name', placeholder='Name')
+
+            div(class='form-group row offset-3')
+                Label(class='label-form-style') Descripcion
+                div(class='sol-sm-10')
+                    input(size='65' class='input-style form-control' id='description', name='description', placeholder='Description')
+            
+            
+                div(class='col-sm-4 margin-div-cancel')        
+                    a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                
+                div(class='col-3 margin-div-agree')
+                    input(type='submit', class='btn btn-outline-success'  value='Agree')
+                
+
 

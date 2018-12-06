@@ -3,19 +3,65 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title DETALLE DE PREGUNTA
-    body
-    h1 DETALLE DE PREGUNTA
-    - var cambio= JSON.parse(JSON.stringify(pregunta.category))[0]; 
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
+        link(rel="stylesheet" href="../public/css/bootstrap.css")
+        title Detalle de Pregunta 
+    include ../menuLateral.jade
+
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Detalle de Pregunta
+
+
+        div(class='row')
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Pregunta
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{pregunta.question}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Opción 1
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{pregunta.options[0]}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Opción 2
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{pregunta.options[1]}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Opción 3
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{pregunta.options[2]}' readonly)
+
+            div(class='form-group row offset-2')
+                Label(class='label-form-style2') Respuesta
+                div(class='sol-sm-10 div-input-style2')
+                    input(type='text' size='50' class='input-style form-control' value= '#{pregunta.answer}' readonly)
+
+
+            div(class='form-group row offset-2')
+                Label(class='label-form-style2') Nivel
+                div(class='sol-sm-10 div-input-style3')
+                    input(type='text' size='50' class='input-style form-control' value= '#{pregunta.level}' readonly)
+
+
+            div(class='form-group row offset-2')
+                Label(class='label-form-style2') Categoria(s)
+                div(class='sol-sm-10 div-input-style4') 
+                               
+                        -var j= 0
+                        - each categoria in pregunta.category                   
+                            -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
+                            - ++j       
+                            p #{categoryChange2.name}
+
+        div(class='row')
+            div(class='col-sm-4 offset-1')        
+                a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Questions
+              
     
-     p ID: #{pregunta._id}   
-     p Pregunta: #{pregunta.question}
-     p Opcion1: #{pregunta.options[0]}
-     p Opcion2: #{pregunta.options[1]}
-     p Opcion3: #{pregunta.options[2]}
-     p Respuesta: #{pregunta.answer}
-     p Nivel: #{pregunta.level}
-     p Categoria: #{cambio.name}
-
-
-     a(href='/') BACK - 
+    
+     

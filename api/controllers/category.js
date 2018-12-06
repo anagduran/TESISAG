@@ -1,6 +1,6 @@
 import category from "../models/category"
 import mongoose from "mongoose"
-
+import question from "../models/question"
 
 
 
@@ -34,11 +34,11 @@ function newCategory(req,res,next) {
     
     req.check('name').isLength({min: 4}).withMessage('nombre de categoria muy corto');
     req.check('name').notEmpty().withMessage('el nombre de la categoria no puede estar vacio');
-    req.check('name').matches(['a-z']['A-Z']).withMessage('No se permiten caracteres especiales ni numeros');
+    req.check('name').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales ni numeros en el campo Nombre');
 
     req.check('description').isLength({min: 10}).withMessage('La descripcion de la categoria muy corta');
     req.check('description').notEmpty().withMessage('La descripcion de la categoria no puede estar vacia');
-    req.check('description').matches(['/a-z/']['/A-Z/']).withMessage('No se permiten caracteres especiales ni numeros');
+    req.check('description').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales ni numeros en el campo Descripcion');
     
 
     var errors = req.validationErrors();
@@ -76,65 +76,101 @@ function newCategory(req,res,next) {
 
 
 // modificar una categoria
-function updateCategoryByID(req, res, next){
+function updateCategoryByID(req, res){   
 
-   const id = mongoose.Types.ObjectId(req.body.id)
-    
-   console.log(id);
-   
-    // valido que el ID enviado sea correcto, si es asi realizo el update y si este resulta exitoso
-    // envio status 200 y redirijo a la vista categoryDetail, sino envio error 404
-    if (mongoose.Types.ObjectId.isValid(id)) {
-        category.where({'_id': id}).update( {$set: {name: req.body.name, description: req.body.description}}).exec()
-                .then(result =>{
-                    
-                    if(result.nModified===1){
-                    res.status(200).render('category/categoryDetail', {categoria: req.body})
-                       
-                    }
-                    else {                        
-                        res.status(404).json({message: 'no encontrado'})
-                    }
-                 })
-                .catch(err =>{
-                    res.status(500).json({error: err})
-                })
-    }
-    else{
-        res.status(404).json({message: 'error de id, incorrecto'})
-       }
+    req.check('name').isLength({min: 4}).withMessage('El nombre es muy corto');
+    req.check('name').notEmpty().withMessage('El nombre no puede estar vacio');
+    req.check('name').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales, espacios en blanco o numeros en el campo Nombre');
  
+    req.check('description').isLength({min: 10}).withMessage('La descripcion es muy corta');
+    req.check('description').notEmpty().withMessage('La descripcion no puede estar vacia');
+    req.check('description').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales, espacios en blanco o numeros en el campo Descripcion');
+    
+    var errors = req.validationErrors();
+    if (errors){
+        res.render('category/updateCategory', {error: errors,  categoria: req.body});
+        return;
+    } else {
+        const id = mongoose.Types.ObjectId(req.body._id)
+            // valido que el ID enviado sea correcto, si es asi realizo el update y si este resulta exitoso
+            // envio status 200 y redirijo a la vista categoryDetail, sino envio error 404
+            if (mongoose.Types.ObjectId.isValid(id)) {
+                
+                category.where({'_id': id}).update( {$set: {name: req.body.name, description: req.body.description}}).exec()
+                        .then(result =>{
+                            
+                            if(result.nModified===1){
+                            res.status(200).render('category/categoryDetail', {categoria: req.body})
+                            
+                            }
+                            else {                        
+                                res.status(404).json({message: 'no encontrado'})
+                            }
+                        })
+                        .catch(err =>{
+                            res.status(500).json({error: err})
+                        })
+            }
+            else{
+                res.status(404).json({message: 'error de id, incorrecto'})
+            }
+        }
+        
   
 }
 
 //eliminar una categoria
 function deleteCategoryByID(req, res, next){
    
-    const id = req.params.categoryID;
+    const id = mongoose.Types.ObjectId(req.params.categoryID)
+    var referencia = req.header('Referer')
+    let exito = 'Categoria eliminada exitosamente'
+    let fallo = 'Esta categoria no se puede eliminar porque tiene preguntas asociadas'
+
     
     //Valido el ID enviado si es correcto busco y elimino la categoria seleccionada
     //AQUI FALTA VALIDAR QUE SI LA CATEGORIA TIENE PREGUNTAS ASOCIADAS NO SE PUEDE ELIMINAR
     //FALTAN COSAS AQUI 
     if(mongoose.Types.ObjectId.isValid(id))
     {
-        category.findByIdAndRemove(id).exec().then(result=>{
-            if(result){
-            res.status(200).redirect('/')
-            //send('<h3>eliminado con exito</h3>')
-           // render('category/categoryAll', { categorias: categories})
+       
+        question.findOne({category: id}).then(result =>{
+            if(result==null)
+            {
+                category.findByIdAndRemove(id).exec().then(result=>{
+                    if(result){
+                        
+                        res.status(200) 
+                    }
+                    else {
+                        res.status(404).json({message: "ERROR ID"})
+                    }
+                })
+                .catch(err =>{
+                    console.log(err);
+                    res.status(500).json({error: err})
+                })
+            
             }
-            else {
-                res.status(404).json({message: "ERROR ID"})
+            else{
+                category.find()
+                        .exec()
+                        .then(categories => {
+                            if(categories) {
+                                res.status(404).redirect(referencia) 
+                            }
+                        })
+               
             }
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({error: err})
-        })
-    }
+
+            
+        })       
+       
+    }        
     else{
         res.status(404).json({message: "error ID incorrecto"}) 
     }
+    
    
 }
 
@@ -175,18 +211,20 @@ function editCategory(req,res, next){
 
     
     const id= req.params.categoryID;
-    if(mongoose.Types.ObjectId.isValid(id)){
-        category.findById(id)
-        .exec()
-        .then(categoryByID =>{           
-            res.render('category/updateCategory', {categoria: categoryByID})
-        }).catch(err=> {
-            res.status(404).json({message: "no valid entry for provided ID"})
-        })
-    }
-    else {
-        res.status(404).json({message: "no valid entry for provided ID"})
-    }
+      
+            if(mongoose.Types.ObjectId.isValid(id)){
+                category.findById(id)
+                .exec()
+                .then(categoryByID =>{           
+                    res.render('category/updateCategory', {categoria: categoryByID})
+                }).catch(err=> {
+                    res.status(404).json({message: "no valid entry for provided ID"})
+                })
+            }
+            else {
+                res.status(404).json({message: "no valid entry for provided ID"})
+            }
+        
    
 
     
