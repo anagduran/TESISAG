@@ -2,35 +2,13 @@ import mongoose from "mongoose"
 import game from "../models/game"
 
 
-function newGame(req,res,next) {
-    var estadoDefault = "sin inicio"
-    const partida = new game({
-        _id: new mongoose.Types.ObjectId(),
-        date: req.body.date,
-        questions: req.body.questions,
-        prize: req.body.prize,
-        status: estadoDefault
-        });
-       
-        try{ 
-            partida.save()
-                    .then(nuevapartida => {
-                        res.status(200).json({partida: nuevapartida})
-                     })
-                    .catch(err => {
-                        console.log(err);
-                        res.status(500).json({error: err})
-                    }); 
-        }  
-        catch(error){
-           console.log(error) 
-        }
-}
+
 
 function newGame(req,res,next) {
     var estadoDefault = "sin inicio"
     const partida = new game({
         _id: new mongoose.Types.ObjectId(),
+        title: req.body.title,
         date: req.body.date,
         questions: req.body.questions,
         prize: req.body.prize,
@@ -59,7 +37,7 @@ function getGames(req,res,next){
                 .then(games => { 
                    
                         if(games) {                        
-                            res.status(200).json( { partidas: games})
+                            res.status(200).render( 'game/gameAll', { partidas: games})
                         }else{
                             res.status(404).json({message: 'no hay preguntas'})
                         }   
@@ -82,11 +60,11 @@ function getGameID(req,res,next){
         game.findById(id)
                 .exec()
                 .then(gameByID =>{                
-                    if(gameByID){
-                        res.status(200).json( { partida: gameByID})
+                    if(gameByID){ 
+                        res.status(200).render( 'game/gameDetail',{ partida: gameByID})
                         
                     }
-                    else {
+                    else { 
                         res.status(404).json({message: 'no encontrado, ID incorrecto'})
                     }                
                 })
@@ -107,7 +85,7 @@ function updateGameByID(req, res, next){
 
     if (mongoose.Types.ObjectId.isValid(id)) {
         game.where({'_id': id})
-                .update( {$set: {date: req.body.date, questions: req.body.questions, prize: req.body.prize, status: req.body.status}})
+                .update( {$set: {title: req.body.title, date: req.body.date, questions: req.body.questions, prize: req.body.prize, status: req.body.status}})
                 .exec()
                 .then(result =>{                    
                     if(result.nModified===1){

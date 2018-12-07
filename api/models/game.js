@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 
 const gameSchema =  mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    title: {type: String},
     date:{type: Date } ,
     questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'question'}],
     prize: {type: String},
