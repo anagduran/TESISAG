@@ -6,6 +6,12 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
+
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='../public/js/bootstrap.js')
+        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        
+
         title Detalle de Pregunta 
     include ../menuLateral.jade
 
@@ -17,28 +23,52 @@ html(lang="en")
 
         div(class='row')
             div(class='form-group row offset-2')
-                Label(class='label-form-style') Titulo
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{partida.title}' readonly)
+                Label(class='label-form-style3') Titulo
+                div(class='sol-sm-10 div-input-style6')
+                    input(type='text' size='50' class='form-control' value= '#{partida.title}' readonly)
         
             
             div(class='form-group row offset-2')
-                Label(class='label-form-style') Fecha y Hora
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{partida.date}' readonly)
+                Label(class='label-form-style3') Fecha y Hora
+                div(class='sol-sm-10 div-input-style5')
+                    input(type='text' size='50' class='form-control' value= '#{partida.date}' readonly)
             
             
             div(class='form-group row offset-2')
-                Label(class='label-form-style') Status
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{partida.status}' readonly)
+                Label(class='label-form-style3') Status
+                div(class='sol-sm-10 div-input-style6')
+                    input(type='text' size='50' class='form-control' value= '#{partida.status}' readonly)
 
             
             div(class='form-group row offset-2')
-                Label(class='label-form-style') Prize
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{partida.prize}' readonly)
+                Label(class='label-form-style3') Premio        
+                div(class='sol-sm-10 div-input-style7')
+                    input(type='text' size='50' class='form-control' value= '#{partida.prize}' readonly)
+        
+        
+        div(class='form-group row offset-2')
+            Label(class='label-form-style3') Preguntas
 
+        br
+        div(class='row offset-2')
+            div(id="accordion")
+                div(class="panel-style card")
+                    div(class="card-header") 
+                        a(class="card-link" data-toggle="collapse" href="#collapseOne") Pregunta 1
+                    
+                    div(id="collapseOne" class="collapse show" data-parent="#accordion")
+                        label opcion 1
+                        br
+                        div(class="card-body") Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo
+                
+                div(class="panel-style card")
+                        div(class="card-header")
+                            a(class="card-link" data-toggle="collapse" href="#collapseTwo") Collapsible Group 2
+                        
+                        div(id="collapseTwo" class="collapse show" data-parent="#accordion")
+                            div(class="card-body") Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do ei
+
+        br
         div(class='row')
             div(class='col-sm-4 offset-1')        
                 a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Regresar
