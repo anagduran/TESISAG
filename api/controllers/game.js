@@ -127,4 +127,9 @@ function deleteGameByID(req, res, next){
         res.status(404).json({message: "error ID incorrecto"}) 
     }
 }
-module.exports ={newGame, getGames, getGameID, updateGameByID, deleteGameByID};
+
+
+function createGame(req,res, next){
+    res.render('game/newGame')
+}
+module.exports ={newGame, getGames, getGameID, updateGameByID, deleteGameByID, createGame};

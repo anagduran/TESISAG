@@ -241,6 +241,55 @@ td {font-size: 16px;}
 .panel-style {
     width: 800px;
 }
+
+.level-label-form-style{
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 140px;
+
+}
+.div-style-form-game{
+    height: 38px;
+    width: 100px;
+}
+.input-group {
+    position: relative;
+    left: 160px;
+    top: -35px;
+    display: table;
+    border-collapse: separate;
+}
+.div-input-position {
+    position: relative;
+    top: -30px;
+    
+}
+.input-group .input-group-addon {
+    border-radius : 4px ;
+    border-color: #d2d6de;
+    background-color: #fff;
+}
+
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    position: relative;    
+    left:-1px;
+}
+.input-group-addon:first-child {
+    border-right: 0;
+}
+
+
+
 /*ESTILOS MENU LATERAL*/
 
 .nav-side-menu {

@@ -1,0 +1,101 @@
+
+import 
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
+        link(rel="stylesheet" href="../public/css/bootstrap.css")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        
+        link(rel="stylesheet" href="../public/css/bootstrap-datepicker.min.css")
+        
+        
+        
+        
+        link(rel="stylesheet", type= "text/css", href="../public/css/bootstrap-select.css")
+        
+       
+        
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")
+        
+
+        
+               
+       
+      
+        script(type="text/javascript" src='../public/js/bootstrap-select.js')
+        script(type="text/javascript" src='../public/js/bootstrap-select.min.js')
+ 
+        
+        
+        
+        
+        
+
+
+
+       
+        title Nueva Partida
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Nueva Paritda
+
+
+    form(id='form', action='/game/new', method='POST' autocomplete="off")
+         div(class='row')
+            div(class='form-group row offset-3 div-style-ana')
+                Label(class='label-form-style') Titulo 
+                div(class='sol-sm-10 div-input-style')
+                    input(size='65' class='input-style form-control' id='title', name='title')
+            
+            div(class='form-group row offset-3 div-style-form-game')
+                Label(class='label-form-style') Fecha 
+
+            div(class='row div-input-position') 
+                div(class="input-group date"  width='170')
+                    input(type="text" class=" form-control pull-right" id="datepicker")                  
+                    div(class="input-group-addon")
+                        i(class="fa fa-calendar")
+                    
+            div(class='form-group row offset-3')
+                Label(class='label-form-style') Premio
+                div(class='sol-sm-10 div-input-style')
+                    input(size='65' class='input-style form-control' id='prize', name='prize')
+
+
+                
+            div(class="form-group row offset-3 ")   
+                select(class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..")
+                    option(value="" disabled selected) Choose your country
+                    option Mustard
+                    option Ketchup
+                    option Relish
+
+
+script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+script(type="text/javascript" src='../public/js/bootstrap.js')
+script(type="text/javascript" src='../public/js/bootstrap.min.js')
+script(type="text/javascript" src='../public/js/daterangerpicker.js')
+script(type="text/javascript" src='../public/js/daterangerpicker.min.js')
+script(type="text/javascript" src='../public/js/bootstrap-datepicker.min.js')
+script(type="text/javascript" src='../public/js/bootstrap-colorpicker.min.js')
+script(type="text/javascript" src='../public/js/bootstrap-timepicker.min.js')
+
+script(type="text/javascript").
+
+    $(document).ready(function() {
+        $('#datepicker').datepicker({
+            autoclose: true
+        })
+    });
+     
+
+    
+
+   
+    
