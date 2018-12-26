@@ -5,13 +5,13 @@ const notificationSchema =  mongoose.Schema({
     subject: {type: String},
     message: {type: String},
     creationDate: {type: Date},
-    dateShipping:  {type: Date}, 
+    sendDate: {type: Date}, 
     game: {type: mongoose.Schema.Types.ObjectId, ref: 'game'}
 },{ 
     versionKey: false
 });
 
-const notification =mongoose.model('notification', notificationSchema, 'notification')
+const notification = mongoose.model('notification', notificationSchema, 'notification')
 
 
 module.exports = notification;

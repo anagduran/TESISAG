@@ -33,7 +33,7 @@ function newNotification(req,res,next) {
         subject: req.body.subject,
         message: req.body.message,
         creationDate: req.body.creationDate,
-        dateShipping: req.body.dateShipping,
+        sendDate: req.body.sendDate,
         game: req.body.game
       
         
@@ -42,7 +42,7 @@ function newNotification(req,res,next) {
         try{ 
             notificacion.save()
                     .then(nuevanotificacion => {
-                        res.status(200).json({newNotificacion: nuevanotificacion })
+                        res.status(200).json({newNotificacion: nuevanotificacion})
                      })
                     .catch(err => {
                         console.log(err);

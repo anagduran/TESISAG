@@ -15,8 +15,8 @@ export default app => {
     app.use('/game', game)
     app.use('/variable', variable)
     app.use('/user', user)
-    app.use('/suggestedQuestion', user)
-    app.use('/notification', user)
+    app.use('/suggestedQuestion', suggestedQuestion)
+    app.use('/notification', notification)
     
         
 }
