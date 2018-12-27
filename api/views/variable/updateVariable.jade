@@ -22,16 +22,16 @@ html(lang="en")
 
         div(class='row')
             div(class='col offset-2')    
-                form(id='form', action='/variable/update/#{config._id}?_method=PUT', method='POST', style='white-space:pre;')
-                    input(id='_id', name='_id', type='hidden', value='#{config._id}') 
+                form(id='form', action='/variable/update/#{variableC._id}?_method=PUT', method='POST', style='white-space:pre;')
+                    input(id='_id', name='_id', type='hidden', value='#{variableC._id}') 
 
                     div
                         label(class='label-form-style') Titulo
-                        input(class='input-style form-control' id='title', name='title', type='text', value='#{config.title}')
+                        input(class='input-style form-control' id='title', name='title', type='text', value='#{variableC.title}')
                     br
                     div
                         label(class='label-form-style') Descripcion
-                        input(class='input-style form-control' id='description', name='description', type='text', value='#{config.description}')
+                        input(class='input-style form-control' id='description', name='description', type='text', value='#{variableC.description}')
 
                     div(class='div-style-end')
                          a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancelar

@@ -17,10 +17,10 @@ html(lang="en")
             div(class='col offset-2 row-style')
                 h2 Nueva Variable de Configuracion
 
-        - if(error)
-            ul
-                - for errors in error
-                    li  #{errors.msg}  
+                - if(error)
+                    ul(class='list-group ul-style') 
+                        - for errors in error
+                            li(class='list-group-item list-group-item-danger') #{errors.msg}  
 
 
         form(id='form', action='/variable/new', method='POST' autocomplete="off")

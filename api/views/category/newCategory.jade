@@ -18,10 +18,10 @@ html(lang="en")
                 h2 Nueva Categoria
 
 
-        - if(error)
-            ul
-                - for errors in error
-                    li  #{errors.msg}    
+            - if(error)
+                ul(class='list-group ul-style')
+                    - for errors in error
+                        li(class='list-group-item list-group-item-danger')  #{errors.msg}    
                         
         form(id='form', action='/category/new', method='POST' autocomplete="off")
          div(class='row')
