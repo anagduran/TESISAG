@@ -1,0 +1,34 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
+        link(rel="stylesheet" href="../public/css/bootstrap.css")
+        title Detalle de la Variable
+    include ../menuLateral.jade
+
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Detalle de la Variable de Configuracion
+
+
+        div(class='row')
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Titulo
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{variableC.title}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Descripcion
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{variableC.description}' readonly)
+
+        
+        div(class='row')
+            div(class='col-sm-4 offset-1')        
+                a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Variables
+
+    

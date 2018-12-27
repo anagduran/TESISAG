@@ -4,10 +4,10 @@ import variableController from "../controllers/variable"
 const router = express.Router()
 
 router.get('/', variableController.getVariables)
-//router.get('/create', questionController.createQuestion)
+router.get('/create', variableController.createVariable)
 router.post('/new', variableController.newVariable)
 router.get('/:variableID',variableController.getVariableID)
-//router.get('/edit/:questionID', questionController.editQuestion)
+router.get('/edit/:variableID', variableController.editVariable)
 router.put('/update/:variableID', variableController.updateVariableByID)
 router.delete('/delete/:variableID', variableController.deleteVariableByID)
 

@@ -1,0 +1,44 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
+        link(rel="stylesheet" href="../public/css/bootstrap.css")
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='../public/js/bootstrap.js')
+        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        title Nueva Variable de Configuracion
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Nueva Variable de Configuracion
+
+        - if(error)
+            ul
+                - for errors in error
+                    li  #{errors.msg}  
+
+
+        form(id='form', action='/variable/new', method='POST' autocomplete="off")
+         div(class='row')
+            div(class='form-group row offset-3')
+                Label(class='label-form-style') Titulo 
+                div(class='sol-sm-10 div-input-style')
+                    input(size='65' id='question', class='input-style form-control' name='title')
+
+            div(class='form-group row offset-3')
+                Label(class='label-form-style') Descripcion 
+                div(class='sol-sm-10 div-input-style')
+                     input(size='65' id='option1', class='input-style form-control', name='description')      
+
+                div(class='col-sm-4 margin-div-cancel') 
+                    a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancelar
+                
+                div(class='col-3 margin-div-agree')
+                        input(type='submit', class='btn btn-outline-success'  value='Crear Nueva Variable')
+            
+              

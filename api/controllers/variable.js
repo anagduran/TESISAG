@@ -11,8 +11,8 @@ function newVariable(req,res,next) {
        
         try{ 
             variableC.save()
-                    .then(nuevavariable => {
-                        res.status(200).json({variableC: nuevavariable})
+                    .then(nuevavariable => { 
+                        res.status(201).render('variable/variableDetail',{variableC: nuevavariable})
                      })
                     .catch(err => {
                         console.log(err);
@@ -31,7 +31,7 @@ function getVariables(req,res,next){
                 .then(variables => { 
                    
                         if(variables) {                        
-                            res.status(200).json({ variableConfiguracion: variables})
+                            res.status(200).render('variable/variableAll',{variableConfiguracion: variables})
                         }else{
                             res.status(404).json({message: 'no hay variables'})
                         }   
@@ -83,7 +83,7 @@ function updateVariableByID(req, res, next){
                 .exec()
                 .then(result =>{                    
                     if(result.nModified===1){
-                    res.status(200).json({variable: req.body})                      
+                    res.status(200).render('variable/variableDetail',{variableC: req.body})                      
                     }
                     else {                        
                         res.status(404).json({message: 'no encontrado'})
@@ -106,7 +106,7 @@ function deleteVariableByID(req, res, next){
     if(mongoose.Types.ObjectId.isValid(id)){
         variable.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200).json({message: "eliminado con exito"})      
+                res.status(200)     
             }
             else {
                 res.status(404).json({message: "ERROR ID"})
@@ -121,9 +121,29 @@ function deleteVariableByID(req, res, next){
         res.status(404).json({message: "error ID incorrecto"}) 
     }
 }
-/*
 
-function createGame(req,res, next){
-    res.render('game/newGame')
-}*/
-module.exports ={newVariable, getVariables, getVariableID, updateVariableByID, deleteVariableByID};
+function editVariable(req,res, next){
+
+    
+    const id= req.params.variableID;
+      
+            if(mongoose.Types.ObjectId.isValid(id)){
+                variable.findById(id)
+                .exec()
+                .then(variableByID =>{           
+                    res.render('variable/updateVariable', {config: variableByID})
+                }).catch(err=> {
+                    res.status(404).json({message: "no valid entry for provided ID"})
+                })
+            }
+            else {
+                res.status(404).json({message: "no valid entry for provided ID"})
+            }
+        
+     
+}
+
+function createVariable(req,res, next){
+    res.render('variable/newVariable')
+}
+module.exports ={editVariable, createVariable, newVariable, getVariables, getVariableID, updateVariableByID, deleteVariableByID};
