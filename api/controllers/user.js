@@ -95,27 +95,40 @@ function getUserID(req,res,next){
 
 function updateUserByID(req, res, next){
 
-    //const id = mongoose.Types.ObjectId(req.body._id)
-    const id = req.params.userID;
+    req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');
+    req.check('nickname').notEmpty().withMessage('El nickname no puede estar vacio');
 
-    if (mongoose.Types.ObjectId.isValid(id)) {
-        user.where({'_id': id})
-                .update( {$set: {nickname: req.body.nickname, country_code: req.body.country_code, phone: req.body.phone, shared_code: req.body.shared_code,  referral_code: req.body.referral_code,extra_life: req.body.extra_life, balance: req.body.balance, }})
-                .exec()
-                .then(result =>{                    
-                    if(result.nModified===1){
-                    res.status(200).render('user/userDetail',{usuario: req.body})                      
-                    }
-                    else {                        
-                        res.status(404).json({message: 'no encontrado'})
-                    }
-                })
-                .catch(err =>{
-                    res.status(500).json({error: err})
-                })
+    req.check('phone').isLength({min: 4}).withMessage('El telefono es muy corto, minimo 8 digitos');
+    req.check('phone').notEmpty().withMessage('El numero de telefono no puede estar vacio');
+    req.check('phone').matches('[0-9]').withMessage('Solo se permiten numeros en el campo de Telefono');
+
+    var errors = req.validationErrors();
+    if (errors){
+        res.render('user/updateUser', {error: errors, usuario: req.body});
+        return;   
     }
     else{
-        res.status(404).json({message: 'error de id, incorrecto'})
+        //const id = req.params.userID; 
+        const id = mongoose.Types.ObjectId(req.body._id)
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            user.where({'_id': id})
+                    .update( {$set: {nickname: req.body.nickname, country_code: req.body.country_code, phone: req.body.phone }})
+                    .exec()
+                    .then(result =>{                    
+                        if(result.nModified===1){
+                        res.status(200).render('user/userDetail',{usuario: req.body})                      
+                        }
+                        else {                        
+                            res.status(404).json({message: 'no encontrado'})
+                        }
+                    })
+                    .catch(err =>{
+                        res.status(500).json({error: err})
+                    })
+        }
+        else{
+            res.status(404).json({message: 'error de id, incorrecto'})
+        }
     }
 }
 
