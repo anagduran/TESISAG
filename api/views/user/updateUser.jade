@@ -1,0 +1,64 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../../public/css/style.css")
+        link(rel="stylesheet" href="../../public/css/bootstrap.css")
+        title Editar Usuario
+
+    include ../menuLateral.jade
+
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Editar Usuario
+                - if(error)
+                    ul(class='list-group ul-style')  
+                        h5 Arreglar los siguientes errores:
+                        - for errors in error
+                            li(class='list-group-item list-group-item-danger')  #{errors.msg}  
+
+
+        div(class='row')
+            div(class='col offset-2')    
+                form(id='form', action='/user/update/#{usuario._id}?_method=PUT', method='POST', style='white-space:pre;')
+                    input(id='_id', name='_id', type='hidden', value='#{usuario._id}') 
+
+                    div
+                        label(class='label-form-style') Nickname
+                        input(class='input-style form-control' id='nickname', name='nickname', type='text', value='#{usuario.nickname}')
+                    br
+                    div
+                        label(class='label-form-style') Avatar
+                        input(class='input-style form-control' id='avatar', name='avatar', type='text', value='#{usuario.avatar}')
+
+                    br
+                    div
+                        label(class='label-form-style') Codigo de Area
+                        input(class='input-style form-control' id='country_code', name='country_code', type='text', value='#{usuario.country_code}')
+                    br
+                    div
+                        label(class='label-form-style') Telefono
+                        input(class='input-style form-control' id='phone', name='phone', type='text', value='#{usuario.phone}')
+                    br
+                    div
+                        label(class='label-form-style') Codigo para Compartir
+                        input(class='input-style form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
+                    br
+                    div
+                        label(class='label-form-style') Codigo de Referencia
+                        input(class='input-style form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
+                    br
+                    div
+                        label(class='label-form-style') Vidas Extra
+                        input(class='input-style form-control' id='extra_life', name='extra_life', type='text', value='#{usuario.extra_life}', readonly)
+                    br
+                    div
+                        label(class='label-form-style') Balance
+                        input(class='input-style form-control' id='balance', name='balance', type='text', value='#{usuario.balance}', readonly)
+
+                    div(class='div-style-end')
+                         a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancelar
+                         input(type='submit', class='input-style-update btn btn-success' value='Guardar cambios')

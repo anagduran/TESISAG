@@ -48,7 +48,21 @@ html(lang="en")
                             a(href='/user/edit/#{usuario._id}') 
                                 i(id='icon-edit' class='fas fa-pencil-alt')   
                             button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= usuario._id onclick='obtenervalor(`#{usuario._id}`);')
-
+    
+    
+    div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
+        div(class="modal-dialog" role='document')
+            div(class="modal-content")
+                div(class='modal-header')
+                    h5 Eliminar Usuario   
+                    input(type='text' id='lista' style="visibility:hidden")                                        
+                div(class="modal-body")
+                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    form(action="" class= "link" method="POST" id='formEliminar')
+                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
+                        
     div(class='row')
         div(class='col-sm-4 offset-2') 
             a(href='/user/create' class='btn btn-outline-success' role='button') Nuevo Usuario      
@@ -64,3 +78,31 @@ script(type="text/javascript").
     $(document).ready(function() {
             $('#tablaUno').DataTable();
     } );                                              
+
+    function obtenervalor(id) {
+        $('#lista').val(id);       
+    }
+
+    $('#eliminar').click(function(){
+        var id = document.getElementById('lista').value;            
+        var action = '/user/delete/' 
+        var action2 = '?_method=DELETE'
+        var total = action.concat(id,action2);   
+        console.log(total);
+        document.getElementById("formEliminar").action = total;  
+        
+        $.ajax({      
+                url: total,
+                type: 'DELETE',
+                statusCode: {
+                    200: function () {
+                        alert('eliminado exitosamente desde ajax');
+                        console.log("200 - Success");
+                    },
+                    404: function() {
+                        console.log('400 error desde ajax');
+                    }
+                },
+            });
+        document.getElementById("formEliminar").submit();
+    });

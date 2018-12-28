@@ -7,7 +7,7 @@ router.get('/', userController.getUsers)
 router.get('/create', userController.createUser)
 router.post('/new', userController.newUser)
 router.get('/:userID', userController.getUserID)
-//router.get('/edit/:questionID', questionController.editQuestion)
+router.get('/edit/:userID', userController.editUser)
 router.put('/update/:userID', userController.updateUserByID)
 router.delete('/delete/:userID', userController.deleteUserByID)
 

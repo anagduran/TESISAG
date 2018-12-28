@@ -223,11 +223,7 @@ function editCategory(req,res, next){
             }
             else {
                 res.status(404).json({message: "no valid entry for provided ID"})
-            }
-        
-   
-
-    
+            }  
 }
 
 //funcion que solo redirige para crear una nueva categoria
