@@ -1,0 +1,57 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
+        link(rel="stylesheet" href="../public/css/bootstrap.css")
+        title Detalle de Usuario 
+    include ../menuLateral.jade
+
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 row-style')
+                h2 Detalle de Usuario
+
+
+        div(class='row')
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Nickname
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.nickname}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Avatar
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.avatar}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Codigo de Area
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.country_code}' readonly)
+            
+            div(class='form-group row offset-2')
+                Label(class='label-form-style') Telefono
+                div(class='sol-sm-10 div-input-style')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.phone}' readonly)
+
+            div(class='form-group row offset-2')
+                Label(class='label-form-style2') Codigo a compartir
+                div(class='sol-sm-10 div-input-style2')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.shared_code}' readonly)
+
+
+            div(class='form-group row offset-2')
+                Label(class='label-form-style2') Vidas extra
+                div(class='sol-sm-10 div-input-style3')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.extra_life}' readonly)
+
+            div(class='form-group row offset-2')
+                Label(class='label-form-style2') Balance
+                div(class='sol-sm-10 div-input-style3')
+                    input(type='text' size='50' class='input-style form-control' value= '#{usuarioN.balance}' readonly)
+
+        div(class='row')
+            div(class='col-sm-4 offset-1')        
+                a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Users

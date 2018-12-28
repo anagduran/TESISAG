@@ -19,7 +19,7 @@ function newUser(req,res,next) {
         try{ 
             usuario.save()
                     .then(nuevouser => {
-                        res.status(200).json({newusuario: nuevouser})
+                        res.status(200).render('user/userDetail',{usuarioN: nuevouser})
                      })
                     .catch(err => {
                         console.log(err);
@@ -38,7 +38,7 @@ function getUsers(req,res,next){
                 .then(users => { 
                    
                         if(users) {                        
-                            res.status(200).json({usuarios: users})
+                            res.status(200).render('user/userAll',{usuarios: users})
                         }else{
                             res.status(404).json({message: 'no hay variables'})
                         }   
@@ -129,8 +129,8 @@ function deleteUserByID(req, res, next){
     }
 }
 
-/*
-function createGame(req,res, next){
-    res.render('game/newGame')
-}*/
-module.exports ={newUser,  getUsers, getUserID, updateUserByID, deleteUserByID};
+
+function createUser(req,res, next){
+    res.render('user/newUser')
+}
+module.exports ={createUser, newUser,  getUsers, getUserID, updateUserByID, deleteUserByID};

@@ -4,7 +4,7 @@ import userController from "../controllers/user"
 const router = express.Router()
 
 router.get('/', userController.getUsers)
-//router.get('/create', questionController.createQuestion)
+router.get('/create', userController.createUser)
 router.post('/new', userController.newUser)
 router.get('/:userID', userController.getUserID)
 //router.get('/edit/:questionID', questionController.editQuestion)
