@@ -9,13 +9,13 @@ html(lang="en")
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')
         script(type="text/javascript" src='../public/js/bootstrap.min.js')
-        title Nueva Variable de Configuracion
+        title New Setting
     include ../menuLateral.jade
     
     div(class='container')
         div(class='row')
             div(class='col offset-2 row-style')
-                h2 Nueva Variable de Configuracion
+                h2 New Setting
 
                 - if(error)
                     ul(class='list-group ul-style') 
@@ -25,20 +25,18 @@ html(lang="en")
 
         form(id='form', action='/variable/new', method='POST' autocomplete="off")
          div(class='row')
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Titulo 
-                div(class='sol-sm-10 div-input-style')
-                    input(size='65' id='question', class='input-style form-control' name='title')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Title 
+                input(id='question', class='form-control' name='title' placeholder='title')
 
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Descripcion 
-                div(class='sol-sm-10 div-input-style')
-                     input(size='65' id='option1', class='input-style form-control', name='description')      
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Description                
+                input(id='option1', class='form-control', name='description' placeholder='description')      
 
-                div(class='col-sm-4 margin-div-cancel') 
-                    a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancelar
+            div(class='col-sm-4 margin-div-cancel offset-2') 
+                a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                 
-                div(class='col-3 margin-div-agree')
-                        input(type='submit', class='btn btn-outline-success'  value='Crear Nueva Variable')
+            div(class='col-3 margin-div-agree offset-2')
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
             
               

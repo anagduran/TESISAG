@@ -37,56 +37,58 @@ html(lang="en")
 
 
        
-        title Nueva Partida
+        title New Game
     include ../menuLateral.jade
     
     div(class='container')
         div(class='row')
             div(class='col offset-2 row-style')
-                h2 Nueva Paritda
+                h2 New Game
 
 
-    form(id='form', action='/game/new', method='POST' autocomplete="off")
-         div(class='row')
-            div(class='form-group row offset-3 div-style-ana')
-                Label(class='label-form-style') Titulo 
-                div(class='sol-sm-10 div-input-style')
-                    input(size='65' class='input-style form-control' id='title', name='title')
-            
-            div(class='form-group row offset-3 div-style-form-game')
-                Label(class='label-form-style') Fecha 
-
-            
-            div(class="row div-input-position input-calendar-style input-group date")
-                    input(type="text" class="form-control pull-right" id="datepicker")                  
-                    div(class="input-group-addon")
-                        i(class="fa fa-calendar")
-            
-            
-            div(class='row form-group offset-6')
-                Label(class='label-form-style') Hora 
-            
-            div(class="row div-input-position input-calendar-style input-append")
-                    input(type="text" data-format="HH:mm:ss" class="form-control pull-right" id="timepicker")                  
-                    div(class="input-group-addon")
-                        i(data-time-icon="icon-time" class="fa fa-calendar")
-
-            div(class="row")
-                div(class='calendar-time')
-
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Premio
-                div(class='sol-sm-10 div-input-style')
-                    input(size='65' class='input-style form-control' id='prize', name='prize')
-
+        form(id='form', action='/game/new', method='POST' autocomplete="off")
+            div(class='row')
+                div(class='form-group col-7 offset-2')
+                    Label(class='label-form-style') Title
+                    input(class='form-control' id='title', name='title')
+                
+                div(class='form-group col-7 offset-2')
+                    Label(class='label-form-style') Date           
+                    input(type="text" class="form-control pull-right" id="datepicker" name='date')           
+                
+                div(class='form-group col-3 offset-2')
+                    Label(class='label-form-style') Time
+                    select(id='hora', class='form-control', name='tome')
+                        option 1:00
+                        option 2:00
+                        option 3:00
+                        option 4:00
+                        option 5:00
+                        option 6:00
+                        option 7:00
+                        option 8:00
+                        option 9:00
+                        option 10:00
+                        option 11:00
+                        option 12:00
+                    select(id='ampm', class='ampm-style form-control', name='ampm')
+                        option AM
+                        option PM
+                    
 
                 
-            div(class="form-group row offset-3 ")   
-                select(class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..")
-                    option(value="" disabled selected) Choose your country
-                    option Mustard
-                    option Ketchup
-                    option Relish
+                div(class='form-group col-7 offset-2')
+                    Label(class='label-form-style') Prize                
+                    input(class='form-control' id='prize', name='prize')
+
+
+                    
+                div(class="form-group col-7 offset-3")   
+                    select(class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..")
+                        option(value="" disabled selected) Choose your country
+                        option Mustard
+                        option Ketchup
+                        option Relish
 
 
 script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
@@ -105,11 +107,6 @@ script(type="text/javascript").
 
         
   
-
-        $('#timepicker').timepicker({
-        language: 'en',
-        pick12HourFormat: true
-        });
 
     });
      

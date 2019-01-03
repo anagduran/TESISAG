@@ -9,38 +9,38 @@ html(lang="en")
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')
         script(type="text/javascript" src='../public/js/bootstrap.min.js')
-        title Nueva Categoria
+        title New Category
     include ../menuLateral.jade
     
     div(class='container')
         div(class='row')
             div(class='col offset-2 row-style')
-                h2 Nueva Categoria
+                h2 New Category
 
 
-            - if(error)
-                ul(class='list-group ul-style')
-                    - for errors in error
-                        li(class='list-group-item list-group-item-danger')  #{errors.msg}    
-                        
+                - if(error)
+                    ul(class='list-group ul-style')
+                        - for errors in error
+                            li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;
         form(id='form', action='/category/new', method='POST' autocomplete="off")
          div(class='row')
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Nombre 
-                div(class='sol-sm-10 div-input-style')
-                    input(size='65' class='input-style form-control' id='name', name='name', placeholder='Name')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Name 
+                input(class='form-control' id='name', name='name', placeholder='Name')
 
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Descripcion
-                div(class='sol-sm-10')
-                    input(size='65' class='input-style form-control' id='description', name='description', placeholder='Description')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Description    
+                input(size='65' class='form-control' id='description', name='description', placeholder='Description')
             
-            
-                div(class='col-sm-4 margin-div-cancel')        
-                    a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancelar
                 
-                div(class='col-3 margin-div-agree')
-                    input(type='submit', class='btn btn-outline-success'  value='Agree')
+            div(class='col-sm-4 margin-div-cancel offset-2')        
+                a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                 
+            div(class='col-3 margin-div-agree offset-2')
+                input(type='submit', class='btn btn-outline-success'  value='Save')
+                
+script(type="text/javascript").
 
-
+    $('.alert').alert()

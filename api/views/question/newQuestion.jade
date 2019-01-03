@@ -9,13 +9,13 @@ html(lang="en")
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')
         script(type="text/javascript" src='../public/js/bootstrap.min.js')
-        title Nueva Pregunta
+        title New Question
     include ../menuLateral.jade
     
     div(class='container')
         div(class='row')
             div(class='col offset-2 row-style')
-                h2 Nueva Pregunta
+                h2 New Question
 
                 - if(error)
                     ul(class='list-group ul-style') 
@@ -26,36 +26,31 @@ html(lang="en")
 
         form(id='form', action='/question/new', method='POST' autocomplete="off")
          div(class='row')
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Pregunta 
-                div(class='sol-sm-10 div-input-style')
-                    input(size='65' id='question', class='input-style form-control' name='question')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Question                
+                input(id='question', class='form-control' name='question')
                    
 
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Opción 1 
-                div(class='sol-sm-10 div-input-style')
-                     input(size='65' id='option1', class='input-style form-control', name='options')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Option 1                 
+                input(id='option1', class='form-control', name='options')
 
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Opción 2
-                div(class='sol-sm-10 div-input-style')
-                    input(size='65' id='option2', class='input-style form-control', name='options')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Option 2                
+                input(id='option2', class='form-control', name='options')
             
 
-             div(class='form-group row offset-3')
-                Label(class='label-form-style') Opción 3
-                div(class='sol-sm-10 div-input-style')           
-                    input(size='65' id='option3', class='input-style form-control', name='options')
+             div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Option 3                         
+                input(id='option3', class='form-control', name='options')
             
             
-            div(class='form-group row offset-3')
-                Label(class='label-form-style') Respuesta
-                div(class='sol-sm-10 div-input-style')  
-                    input(size='65' id='answer', class='input-style form-control', name='answer')
+            div(class='form-group col-8 offset-2')
+                Label(class='label-form-style') Answer                
+                input(id='answer', class='form-control', name='answer')
             
-            div(class='offset-3')
-                Label(class='level-label-form-style') Nivel
+            div(class='col-8 offset-2')
+                Label(class='level-label-form-style') Level
                 
                 label(class= "label-radio-button-style") Bajo 
                 input(type='radio', name='level', value='bajo')      
@@ -68,8 +63,8 @@ html(lang="en")
 
             br
             br
-            div(class='form-group row offset-3')
-                Label(class='level-label-form-style') Categorias
+            div(class='form-group col-8 offset-2')
+                Label(class='level-label-form-style') Categories
                 -each categoria, i in categorias
                     div(class='col-sm-10')
                        div(class="form-check form-check-inline")
@@ -77,11 +72,11 @@ html(lang="en")
                         label(class="form-check-label" for="gridCheck1") #{categoria.name}
                            
                                           
-                div(class='col-sm-4 margin-div-cancel') 
-                    a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancelar
+            div(class='col-sm-4 margin-div-cancel offset-2') 
+                    a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                 
-                div(class='col-3 margin-div-agree')
-                        input(type='submit', class='btn btn-outline-success'  value='Crear Nueva Pregunta')
+            div(class='col-3 margin-div-agree offset-2')
+                        input(type='submit', class='btn btn-outline-success'  value='Save')
             
             
                 

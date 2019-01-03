@@ -102,7 +102,7 @@ td {font-size: 16px;}
     font-family: 'Calibri';
     font-size: 20px;
     font-weight: bold;
-    padding-right: 80px;
+    
 }
 
 .label-form-style3{
@@ -189,9 +189,9 @@ td {font-size: 16px;}
 
 
 .input-style{
-    background: #ffffff;
-    color: black;
-    padding-left: 10px;
+    position: relative;
+    width: 70%;
+    left: 30px;
     
 }
 .button-change-style-der{
@@ -296,6 +296,12 @@ td {font-size: 16px;}
     left: 89px !important;
     height: 50px !important;
 
+}
+
+.ampm-style {
+    position: relative;
+    left: 350px;
+    top: -38px;
 }
 /*ESTILOS MENU LATERAL*/
 
