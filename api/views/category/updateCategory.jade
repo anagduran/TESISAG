@@ -9,10 +9,11 @@ html(lang="en")
         title Update Category
 
     include ../menuLateral.jade
+    br
 
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
+            div(class='col offset-1')
                 h2 Update Category: #{categoria.name}  
                 - if(error)
                     ul(class='list-group ul-style')     
@@ -21,7 +22,8 @@ html(lang="en")
                              li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times;  
-
+        br
+        br
         div(class='row')
             div(class='col offset-2')
                 form(id='form', action='/category/update/#{categoria._id}?_method=PUT', method='POST' autocomplete="off")                    

@@ -76,7 +76,14 @@ html(lang="en")
 script(type="text/javascript").
 
     $(document).ready(function() {
-            $('#tablaUno').DataTable();
+            $('#tablaUno').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+           
     } );                                              
 
     function obtenervalor(id) {

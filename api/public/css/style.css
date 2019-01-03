@@ -1,6 +1,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-family: 'Calibri';
 }
 
 form.link {
@@ -43,54 +44,20 @@ form.link {
 };
 
 
-.h1All {
-   
-    font-family: 'Calibri';
-}
-
-/*.tbody-style {
-    height: 200px;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-*/
-thead {
-    width: 500px;
-  
-}
- 
-tbody {
-    width: 500px;
-   
-}
-
 .estilo-divtable
 {padding-bottom: 0px;
     width: 100%;}
 
 .tableAll{
-    display: block;    
-    font-size: 20px;
+      
+    font-size: 18px;  
     text-align: center; 
-    margin: 0 auto;    
-    width: 5000px;
-    
-    /*height: 300px;*/
-    
 }
 
-td {font-size: 16px;}
+td {font-size: 16px; text-align: center;}
 
-.tableAll td:nth-child(1) {
-    width: 15%;
-}
-.tableAll td:nth-child(2) {
-    width: 100%;
-}
-
-.tableAll td:nth-child(3) {
-    width: 100%;
-    
+footer {
+    display: block;
 }
 
 .back-style{
@@ -217,10 +184,8 @@ td {font-size: 16px;}
 }
 
 .row-style{
-    display: inline-block;
-    padding-top: 70px;
-    padding-left: 100px;
-    padding-bottom: 20px;
+    display: fixed;
+    top: -40px;
 }
 
 .alert-style {    

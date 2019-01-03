@@ -6,24 +6,23 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
-        title Detalle de Categoria #{categoria.name}
+        title Category Detail 
     include ../menuLateral.jade
-    
+    br
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
-                h2 Detalle de Categoria
-        
-        div(class='row')
-            div(class='form-group row offset-2')
+            div(class='col-md-3 offset-1')
+                h2 Category Detail
+        br
+        br
+        div(class='row offset-2')
+            div(class='form-group col-8')
                 Label(class='label-form-style') Nombre
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{categoria.name}' readonly)
+                input(type='text' class='form-control' value= '#{categoria.name}' readonly)
             
-            div(class='form-group row offset-2')
+            div(class='form-group col-8')
                 Label(class='label-form-style') Descripcion
-                div(class='sol-sm-10')
-                    input(type='text' size='50' class='input-style form-control' value= '#{categoria.description}' readonly)
+                input(type='text' class='form-control' value= '#{categoria.description}' readonly)
 
         
         div(class='row')
