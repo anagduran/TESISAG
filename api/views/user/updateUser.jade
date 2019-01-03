@@ -18,7 +18,9 @@ html(lang="en")
                     ul(class='list-group ul-style')  
                         h5 Arreglar los siguientes errores:
                         - for errors in error
-                            li(class='list-group-item list-group-item-danger')  #{errors.msg}  
+                            li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;  
 
 
         div(class='row')
@@ -26,34 +28,34 @@ html(lang="en")
                 form(id='form', action='/user/update/#{usuario._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{usuario._id}') 
 
-                    div
+                    div(class='col-8')
                         label(class='label-form-style') Nickname
-                        input(class='input-style form-control' id='nickname', name='nickname', type='text', value='#{usuario.nickname}')
+                        input(class='form-control' id='nickname', name='nickname', type='text', value='#{usuario.nickname}')
                     br
-                    div
-                        label(class='label-form-style') Codigo de Area
-                        input(class='input-style form-control' id='country_code', name='country_code', type='text', value='#{usuario.country_code}')
+                    div(class='col-8')
+                        label(class='label-form-style') Country Code
+                        input(class='form-control' id='country_code', name='country_code', type='text', value='#{usuario.country_code}')
                     br
-                    div
-                        label(class='label-form-style') Telefono
-                        input(class='input-style form-control' id='phone', name='phone', type='text', value='#{usuario.phone}')
+                    div(class='col-8')
+                        label(class='label-form-style') Phone
+                        input(class='form-control' id='phone', name='phone', type='text', value='#{usuario.phone}')
                     br
-                    div
-                        label(class='label-form-style') Codigo para Compartir
-                        input(class='input-style form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
+                    div(class='col-8')
+                        label(class='label-form-style') Shared Code
+                        input(class='form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
                     br
-                    div
-                        label(class='label-form-style') Codigo de Referencia
-                        input(class='input-style form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
+                    div(class='col-8')
+                        label(class='label-form-style') Referal Code
+                        input(class='form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
                     br
-                    div
-                        label(class='label-form-style') Vidas Extra
-                        input(class='input-style form-control' id='extra_life', name='extra_life', type='text', value='#{usuario.extra_life}', readonly)
+                    div(class='col-8')
+                        label(class='label-form-style') Extra Lifes
+                        input(class='form-control' id='extra_life', name='extra_life', type='text', value='#{usuario.extra_life}', readonly)
                     br
-                    div
+                    div(class='col-8')
                         label(class='label-form-style') Balance
-                        input(class='input-style form-control' id='balance', name='balance', type='text', value='#{usuario.balance}', readonly)
+                        input(class='form-control' id='balance', name='balance', type='text', value='#{usuario.balance}', readonly)
 
                     div(class='div-style-end')
-                         a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancelar
-                         input(type='submit', class='input-style-update btn btn-success' value='Guardar cambios')
+                         a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                         input(type='submit', class='input-style-update btn btn-success' value='Save')

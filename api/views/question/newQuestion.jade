@@ -18,9 +18,12 @@ html(lang="en")
                 h2 New Question
 
                 - if(error)
-                    ul(class='list-group ul-style') 
+                    ul(class='list-group ul-style')
+                        h5 Arreglar los siguientes errores: 
                         - for errors in error
-                            li(class='list-group-item list-group-item-danger')  #{errors.msg}  
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times; 
 
 
 
@@ -28,37 +31,37 @@ html(lang="en")
          div(class='row')
             div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Question                
-                input(id='question', class='form-control' name='question')
+                input(id='question', class='form-control' name='question' placeholder='type question')
                    
 
             div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Option 1                 
-                input(id='option1', class='form-control', name='options')
+                input(id='option1', class='form-control', name='options' placeholder='type option 1')
 
             div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Option 2                
-                input(id='option2', class='form-control', name='options')
+                input(id='option2', class='form-control', name='options' placeholder='type option 2')
             
 
              div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Option 3                         
-                input(id='option3', class='form-control', name='options')
+                input(id='option3', class='form-control', name='options' placeholder='type option 3')
             
             
             div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Answer                
-                input(id='answer', class='form-control', name='answer')
+                input(id='answer', class='form-control', name='answer' placeholder='type answer, debe ser la misma a la opcion 3')
             
             div(class='col-8 offset-2')
                 Label(class='level-label-form-style') Level
-                
-                label(class= "label-radio-button-style") Bajo 
+                br
+                label(class= "label-radio-button-style") Low 
                 input(type='radio', name='level', value='bajo')      
                                     
-                label(class= "label-radio-button-style2") Medio 
+                label(class= "label-radio-button-style2") Medium
                 input(type='radio', name='level', value='medio')
 
-                label(class= "label-radio-button-style2") Alto 
+                label(class= "label-radio-button-style2") High 
                 input(type='radio', name='level', value='alto')
 
             br
