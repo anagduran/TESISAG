@@ -12,7 +12,7 @@ html(lang="en")
 
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
+            div(class='col offset-2 pt-3')
                 h2 Update Question
                 - if(error)
                     ul(class='list-group ul-style')  
@@ -22,7 +22,7 @@ html(lang="en")
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times;
 
-
+        br
         div(class='row')
             div(class='col offset-2')    
                 form(id='form', action='/question/update/#{pregunta._id}?_method=PUT', method='POST', style='white-space:pre;')
@@ -47,7 +47,7 @@ html(lang="en")
 
                     br
                     div(class='col-8')
-                        label(class='label-form-style') Anwser
+                        label(class='label-form-style') Answer
                         input(class='form-control' id='answer', name='answer', type='text', value='#{pregunta.answer}')
 
                     br

@@ -6,60 +6,63 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
-        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.css")
- 
-       
-        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
-        script(type="text/javascript" src='../public/js/bootstrap.js')
-        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        link(rel="stylesheet" href="../public/css/dataTables.bootstrap4.min.css")
         
         
-        title  Partidas
+        title Games
     include ../menuLateral.jade
 
 
 
-    div(class='col-md-3 offset-2 row-style')
-        h2(class='h1All') Partidas
+    div(class='col-md-3 offset-2 pt-3')
+        h2(class='h1All') Games
+
+    br
+    div(class='content')
+        div(class='row offset-2 pl-12')
+            div(class='col-10')               
+                    div(class='box-body')        
+                        table(id='tablaUno' class='table table-sm table-bordered table-striped')
+                            thead
+                                tr 
+                                    th(class='tableAll') #
+                                    th(class='tableAll') Title
+                                    th(class='tableAll') Status
+                                    th(class='tableAll') Acciones
+
+                            tbody
+                                -var i= -1
+                                each partida in partidas 
+                                    - ++i   
+                                    tr
+                                        td #{i}
+                                        td #{partida.title} 
+                                        td #{partida.status} 
+                                        
+                                        td
+                                            a(class='action-icon' href='/game/#{partida._id}') 
+                                                i(id='icon-see' class='fa fa-eye')
+                                            a(class='action-icon' href='/game/edit/#{partida._id}') 
+                                                i(id='icon-edit' class='fas fa-pencil-alt')
+                                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= partida._id onclick='obtenervalor(`#{partida._id}`);')                            
+                    
 
 
-    div(class='estilo-divtable col-md-6 offset-2 table-responsive')        
-        table(width='100%' id='tablaUno' class='display tableAll table table-striped table-sm table-bordered')
-            thead
-                tr.head
-                    th #
-                    th(id='thDos') Titulo
-                    th(id='thDos') Status
-                    th Acciones
-
-            tbody
-                -var i= -1
-                each partida in partidas 
-                    - ++i   
-                    tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                        td(id='tdUno' ) #{i}
-                        td #{partida.title} 
-                        td #{partida.status} 
-                        
-                        td
-                            a(class='action-icon' href='/game/#{partida._id}') 
-                                i(id='icon-see' class='fa fa-eye')
-                            a(class='action-icon' href='/game/edit/#{partida._id}') 
-                                i(id='icon-edit' class='fas fa-pencil-alt')
-                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= partida._id onclick='obtenervalor(`#{partida._id}`);')                            
-    
 
 
 
-
-
-
+    br
     div(class='row')     
         div(class='col-sm-4 offset-2')      
-            a(href='/game/create' class='btn btn-outline-success' role='button') Nueva Partida
+            a(href='/game/create' class='btn btn-outline-success' role='button') New Game
 
        
-    script(type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.js")
+    script(type="text/javascript" src='../public/js/bootstrap.js') 
+    script(type="text/javascript" src="../public/js/jquery.min.js")
+    script(type="text/javascript" src="../public/js/bootstrap.min.js")
+    script(type="text/javascript" src="../public/js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="../public/js/dataTables.bootstrap4.min.js")
+            
 
 
     br

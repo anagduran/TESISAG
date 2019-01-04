@@ -9,17 +9,11 @@ html(lang="en")
         link(rel="stylesheet" href="../public/css/dataTables.bootstrap4.min.css")
        
         
-        
-        
-        
-        
         title  Categories
     include ../menuLateral.jade
 
     
-    
-
-                
+       
 
     - if(message)
         li #{message}     
@@ -27,9 +21,10 @@ html(lang="en")
     div(class="col-md-6 offset-3  alert-style alert alert-success alert-dismissable" id='mensajeExito' style="visibility:hidden")
                 button(type="button" class="close" data-dismiss="alert")&times;
 
-                
-    div(class='col-md-3 offset-2 row-style')
-        h2(class='h1All') Categories
+
+    div(class='col-md-3 offset-2 pt-3')
+        h2 Categories
+    br
     div(class='content')
         div(class='row offset-2')
             div(class='col-10')               
@@ -45,9 +40,9 @@ html(lang="en")
                                 -var i= -1
                                 each categoria in categorias  
                                     - ++i   
-                                    tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                                        td(id='tdUno' ) #{i}
-                                        td(id='tdDos' ) #{categoria.name} 
+                                    tr
+                                        td #{i}
+                                        td #{categoria.name} 
                                         
                                         td
                                             a(class='action-icon' href='/category/#{categoria._id}') 

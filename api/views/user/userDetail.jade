@@ -6,48 +6,44 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
-        title Detalle de Usuario 
+        title User Detail 
     include ../menuLateral.jade
 
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
-                h2 Detalle de Usuario
+            div(class='col offset-2 pt-3')
+                h2 User Detail
 
 
-        div(class='row')
-            div(class='form-group row offset-2')
-                Label(class='label-form-style') Nickname
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{usuario.nickname}' readonly)
+        div(class='row offset-2')
+            div(class='form-group col-8')
+                Label(class='label-form-style') Nickname                
+                input(type='text' class='form-control' value= '#{usuario.nickname}' readonly)
             
            
-            div(class='form-group row offset-2')
-                Label(class='label-form-style') Codigo de Area
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{usuario.country_code}' readonly)
+            div(class='form-group col-8')
+                Label(class='label-form-style') Country Code                
+                input(type='text' class='form-control' value= '#{usuario.country_code}' readonly)
             
-            div(class='form-group row offset-2')
-                Label(class='label-form-style') Telefono
-                div(class='sol-sm-10 div-input-style')
-                    input(type='text' size='50' class='input-style form-control' value= '#{usuario.phone}' readonly)
+            div(class='form-group col-8')
+                Label(class='label-form-style') Phone                
+                input(type='text' class='form-control' value= '#{usuario.phone}' readonly)
 
-            div(class='form-group row offset-2')
-                Label(class='label-form-style2') Codigo a compartir
-                div(class='sol-sm-10 div-input-style2')
-                    input(type='text' size='50' class='input-style form-control' value= '#{usuario.share_code}' readonly)
+            div(class='form-group col-8')
+                Label(class='label-form-style') Shared Code
+                input(type='text' class='form-control' value= '#{usuario.share_code}' readonly)
 
 
-            div(class='form-group row offset-2')
-                Label(class='label-form-style2') Vidas extra
-                div(class='sol-sm-10 div-input-style3')
-                    input(type='text' size='50' class='input-style form-control' value= '#{usuario.extra_life}' readonly)
+            div(class='form-group col-8')
+                Label(class='label-form-style') Extra Life
+                input(type='text' class='form-control' value= '#{usuario.extra_life}' readonly)
 
-            div(class='form-group row offset-2')
-                Label(class='label-form-style2') Balance
-                div(class='sol-sm-10 div-input-style3')
-                    input(type='text' size='50' class='input-style form-control' value= '#{usuario.balance}' readonly)
+            div(class='form-group col-8')
+                Label(class='label-form-style') Balance
+                input(type='text' class='form-control' value= '#{usuario.balance}' readonly)
 
         div(class='row')
             div(class='col-sm-4 offset-1')        
                 a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Users
+
+        br

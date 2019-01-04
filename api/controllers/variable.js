@@ -68,7 +68,7 @@ function getVariableID(req,res,next){
                 .exec()
                 .then(variableByID =>{                
                     if(variableByID){ 
-                        res.status(200).json({variableConfiguracion: variableByID})
+                        res.status(200).render('variable/variableDetail',{variableC: variableByID})
                         
                     }
                     else { 

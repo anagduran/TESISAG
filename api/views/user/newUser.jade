@@ -14,7 +14,7 @@ html(lang="en")
     
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
+            div(class='col offset-2 pt-3')
                 h2 New User
 
                 - if(error)
@@ -26,12 +26,12 @@ html(lang="en")
                             
 
 
-
+        br
         form(id='form', action='/user/new', method='POST' autocomplete="off")
          div(class='row')
             div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Nickname              
-                input(id='nickname', class='form-control' name='nickname' placeholder='nickname')
+                input(id='nickname', class='form-control' name='nickname' placeholder='type a nickname')
                    
 
             div(class='form-group col-8 offset-2')
@@ -43,7 +43,7 @@ html(lang="en")
             
             div(class='form-group col-8 offset-2')
                 Label(class='label-form-style') Phone                
-                input(id='phone', class='form-control', name='phone' placeholder='phone')
+                input(id='phone', class='form-control', name='phone' placeholder='type a phone number')
 
 
             div(class='col-sm-4 margin-div-cancel offset-2') 

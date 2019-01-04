@@ -14,7 +14,7 @@ html(lang="en")
     
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
+            div(class='col offset-2 pt-3')
                 h2 New Setting
 
                 - if(error)
@@ -25,16 +25,16 @@ html(lang="en")
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times; 
 
-
+        br
         form(id='form', action='/variable/new', method='POST' autocomplete="off")
-         div(class='row')
-            div(class='form-group col-8 offset-2')
+         div(class='row offset-2')
+            div(class='form-group col-8')
                 Label(class='label-form-style') Title 
-                input(id='question', class='form-control' name='title' placeholder='title')
+                input(id='question', class='form-control' name='title' placeholder='type a title')
 
-            div(class='form-group col-8 offset-2')
+            div(class='form-group col-8')
                 Label(class='label-form-style') Description                
-                input(id='option1', class='form-control', name='description' placeholder='description')      
+                input(id='option1', class='form-control', name='description' placeholder='type a description')      
 
             div(class='col-sm-4 margin-div-cancel offset-2') 
                 a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel

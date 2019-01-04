@@ -12,7 +12,7 @@ html(lang="en")
 
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
+            div(class='col offset-2 pt-3')
                 h2 Editar Setting
                 - if(error)
                     ul(class='list-group ul-style')  
@@ -21,7 +21,7 @@ html(lang="en")
                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times;
-
+        br
         div(class='row')
             div(class='col offset-2')    
                 form(id='form', action='/variable/update/#{variableC._id}?_method=PUT', method='POST', style='white-space:pre;')
