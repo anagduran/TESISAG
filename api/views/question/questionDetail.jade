@@ -47,6 +47,9 @@ html(lang="en")
                         -var j= 0
                         - each categoria in pregunta.category                   
                             -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
+                            - console.log(pregunta.category[j])
+                            - console.log(categoryChange2)
+                            - console.log(categoryChange2.name)
                             - ++j       
                             p(size='65' class='form-control' readonly) #{categoryChange2.name}
 

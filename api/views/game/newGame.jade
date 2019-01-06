@@ -7,23 +7,18 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
         link(rel="stylesheet" href="../public/css/bootstrap.css")
-        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
-        
-        link(rel="stylesheet" href="../public/css/bootstrap-datepicker.min.css")
-        link(rel="stylesheet" href="../public/css/select2.min.css")
-        
-        
-        
-        
-        link(rel="stylesheet", type= "text/css", href="../public/css/bootstrap-select.css")
-        
-       
-        
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")        
+        link(rel='stylesheet' href='../public/css/bootstrap-datepicker.min.css')
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")
-
-
-
+        link(rel="stylesheet" href="../public/css/select2.min.css")       
+        link(rel="stylesheet", type= "text/css", href="../public/css/bootstrap-select.css")       
+        
+        
+        
        
+
+
+        
         title New Game
     include ../menuLateral.jade
     
@@ -41,31 +36,34 @@ html(lang="en")
                 
                 div(class='form-group col-7 offset-2')
                     Label(class='label-form-style') Date           
-                    input(type="text" class="form-control pull-right" id="datepicker" name='date' placeholder='pick a date')           
+                    input(class="form-control pull-right" id="datepicker" placeholder='pick a date' name='date')           
                 
                 div(class='form-group col-3 offset-2')
-                    Label(class='label-form-style') Time
-                    div(class='col-9')
-                        select(id='hora', class='form-control', name='time')
-                            option 1:00
-                            option 2:00
-                            option 3:00
-                            option 4:00
-                            option 5:00
-                            option 6:00
-                            option 7:00
-                            option 8:00
-                            option 9:00
-                            option 10:00
-                            option 11:00
-                            option 12:00
-                    div(class='col-9 ampm-style')
-                        select(id='ampm', class='form-control', name='ampm')
-                            option AM
-                            option PM
+                    Label(class='label-form-style') Time                   
+                    select(id='hora', class='form-control', name='time')
+                        option 05:00
+                        option 06:00
+                        option 07:00
+                        option 08:00
+                        option 09:00
+                        option 10:00
+                        option 11:00
+                        option 12:00
+                        option 13:00
+                        option 14:00
+                        option 15:00
+                        option 16:00
+                        option 17:00
+                        option 18:00
+                        option 19:00
+                        option 20:00
+                        option 21:00
+                        option 22:00
+                        option 23:00
+                   
                     
-
-                
+                    
+                        
                 div(class='form-group col-7 offset-2')
                     Label(class='label-form-style') Prize                
                     input(class='form-control' id='prize', name='prize' placeholder='type a prize')
@@ -73,30 +71,23 @@ html(lang="en")
 
                 div(class="form-group col-8 offset-2")                    
                     Label(class='label-form-style')  Low Level Questions
-                    select(id='lowq' class="form-control select2" multiple="multiple" data-limit='4' data-placeholder="Select four Question" style="width: 87%;")
-                        option 1
-                        option 2
-                        option 3
-                        option 4
-                        option 5
+                    select(id='lowq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                        -each bajo in bajos
+                            option(value='#{bajo._id}') #{bajo.question}
+                       
                 
                 div(class="form-group col-8 offset-2")                    
                     Label(class='label-form-style')  Medium Level Questions
-                    select(id='mediumq' class="form-control select2" multiple="multiple" data-limit='4' data-placeholder="Select four Question" style="width: 87%;")
-                        option 1
-                        option 2
-                        option 3
-                        option 4
-                        option 5
+                    select(id='mediumq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                        -each medio in medios
+                            option(value='#{medio._id}') #{medio.question}
+                        
                 
                 div(class="form-group col-8 offset-2")                    
                     Label(class='label-form-style')  High Level Questions
-                    select(id='highq' class="form-control select2" multiple="multiple" data-limit='4' data-placeholder="Select four Question" style="width: 87%;")
-                        option 1
-                        option 2
-                        option 3
-                        option 4
-                        option 5
+                    select(id='highq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                       -each alto in altos
+                            option(value='#{alto._id}') #{alto.question} 
                 br
                 div(class='col-sm-4 margin-div-cancel offset-2')        
                     a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
@@ -104,23 +95,25 @@ html(lang="en")
                 div(class='col-3 margin-div-agree offset-2')
                     input(type='submit', class='btn btn-outline-success'  value='Save')
                 
-script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
-script(type="text/javascript" src='../public/js/bootstrap.js')
-script(type="text/javascript" src='../public/js/bootstrap.min.js')
-script(type="text/javascript" src='../public/js/bootstrap-datepicker.min.js')
-script(type="text/javascript" src='../public/js/bootstrap-colorpicker.min.js')
-script(type="text/javascript" src='../public/js/bootstrap-select.js')
-script(type="text/javascript" src='../public/js/bootstrap-select.min.js')
-script(type="text/javascript" src='../public/js/select2.full.min.js')
 
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        script(type="text/javascript" src="../public/js/moment.min.js") 
+        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        script(type='text/javascript' src='../public/js/bootstrap-datepicker.min.js')
+       
+        
+        
+        
+        script(type="text/javascript" src='../public/js/bootstrap.js')
+        script(type="text/javascript" src='../public/js/select2.full.min.js')
+
+      
 
 
 script(type="text/javascript").
 
     $(document).ready(function() {
-        $('#datepicker').datepicker({
-            autoclose: true
-        });
+        $('#datepicker').datepicker();
 
         $('.select2').select2();
 
@@ -131,7 +124,7 @@ script(type="text/javascript").
         var last_valid_selection3 = null;
 
         $("#lowq").change(function() {
-            if ($(this).val().length > 3) {
+            if ($(this).val().length > 4) {
               $(this).val(last_valid_selection);
             } else {
               last_valid_selection = $(this).val();
@@ -139,7 +132,7 @@ script(type="text/javascript").
         });
 
         $("#mediumq").change(function() {
-            if ($(this).val().length > 3) {
+            if ($(this).val().length > 4) {
               $(this).val(last_valid_selection2);
             } else {
               last_valid_selection2 = $(this).val();
@@ -147,7 +140,7 @@ script(type="text/javascript").
         });
 
         $("#highq").change(function() {
-            if ($(this).val().length > 3) {
+            if ($(this).val().length > 4) {
               $(this).val(last_valid_selection2);
             } else {
               last_valid_selection2 = $(this).val();

@@ -1,16 +1,21 @@
 import mongoose from "mongoose"
 import game from "../models/game"
-
+import question from "../models/question"
+import diff from 'simple-array-diff'
 
 
 
 function newGame(req,res,next) {
     var estadoDefault = "sin inicio"
+    var ver = req.body.date;    
+    var tiempo = req.body.time;
+    var concatFecha = ver + 'T' + tiempo;
+    
     const partida = new game({
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title,
-        date: req.body.date,
-        questions: req.body.questions,
+        date: concatFecha,
+        questions: req.body.preguntasCombo,
         prize: req.body.prize,
         status: estadoDefault
         });
@@ -18,7 +23,7 @@ function newGame(req,res,next) {
         try{ 
             partida.save()
                     .then(nuevapartida => {
-                        res.status(200).json({partida: nuevapartida})
+                        res.status(200).render({partida: nuevapartida})
                      })
                     .catch(err => {
                         console.log(err);
@@ -58,20 +63,20 @@ function getGameID(req,res,next){
    
     if(mongoose.Types.ObjectId.isValid(id)){
         game.findById(id)
-                .exec()
-                .then(gameByID =>{                
-                    if(gameByID){ 
-                        res.status(200).render( 'game/gameDetail',{ partida: gameByID})
+            .populate('questions', ['question'])
+            .exec()
+            .then(gameByID =>{                
+                if(gameByID){ 
+                    res.status(200).render('game/gameDetail',{ partida: gameByID})
                         
-                    }
-                    else { 
-                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
-                    }                
-                })
-                .catch(err=>{
-                    console.log(err);
-                    res.status(500).json({error: err})
-                })
+                }
+                else { 
+                    res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                }                
+            })
+            .catch(err=>{                
+                res.status(500).json({error: err})
+            })
     }
     else{
         res.status(404).json({message: "no valid entry for provided ID"})
@@ -104,10 +109,10 @@ function updateGameByID(req, res, next){
     }
 }
 
-function deleteGameByID(req, res, next){
+function deleteGameByID(req, res){
     
     const id = req.params.gameID;    
-    console.log(id)
+    console.log(id);
     
     if(mongoose.Types.ObjectId.isValid(id)){
         game.findByIdAndRemove(id).exec().then(result=>{
@@ -115,7 +120,7 @@ function deleteGameByID(req, res, next){
                 res.status(200).json({message: "eliminado con exito"})      
             }
             else {
-                res.status(404).json({message: "ERROR ID"})
+                res.status(404).json({message: "ERROR"})
             }
         })
         .catch(err =>{
@@ -130,6 +135,41 @@ function deleteGameByID(req, res, next){
 
 
 function createGame(req,res, next){
-    res.render('game/newGame')
+    question.find({level:"bajo"},{"question":1}).exec().then( result1 =>{
+        question.find({level:"medio"},{"question":1}).exec().then(result2 =>{
+            question.find({level:"alto"},{"question":1}).exec().then(result3 => {
+                res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
+            })
+        })
+    })
+
 }
-module.exports ={newGame, getGames, getGameID, updateGameByID, deleteGameByID, createGame};
+
+function editGame(req,res){
+
+    
+    const id= req.params.gameID;
+    
+
+    question.find({level:"bajo"},{"question":1}).exec().then(result1 =>{
+    
+        if(mongoose.Types.ObjectId.isValid(id)){
+         
+            game.findById(id)
+                .populate('questions', ['question'])
+                .exec()
+                .then(gameByID =>{                        
+                    var cambiando = JSON.parse(JSON.stringify(gameByID.questions));                    
+                    var resultado = diff (cambiando, result1);              
+                    res.render('game/updateGame', {partida: gameByID, bajo: resultado.added})
+                }).catch(err=> {
+                    res.status(500).json({message: "Error en el servidor"})
+                })
+        }
+        else {
+            res.status(404).json({message: "no valid entry for provided ID"})
+        }
+    })
+}
+
+module.exports ={editGame, newGame, getGames, getGameID, updateGameByID, deleteGameByID, createGame};

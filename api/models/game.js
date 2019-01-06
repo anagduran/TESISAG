@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const gameSchema =  mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     title: {type: String},
-    date:{type: Date } ,
+    date:{type: String } ,
     questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'question'}],
     prize: {type: String},
     status: {type: String, estatus: ["sin inicio", "en progreso", "finalizada"]}, 
@@ -12,7 +12,7 @@ const gameSchema =  mongoose.Schema({
     versionKey: false
 });
 
-const question =mongoose.model('game', gameSchema, 'game')
+const game =mongoose.model('game', gameSchema, 'game')
 
 
-module.exports = question;
+module.exports = game;

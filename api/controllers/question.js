@@ -220,8 +220,10 @@ function editQuestion(req,res){
             question.findById(id)
             .populate('category', ['name'])
             .exec()
-            .then(questionByID =>{                
+            .then(questionByID =>{      
+
                 var result = diff (questionByID.category, categories)
+                console.log(result);
                 res.render('question/updateQuestion', {pregunta: questionByID, categorias: result.added})
             }).catch(err=> {
                 res.status(500).json({message: "Error en el servidor"})

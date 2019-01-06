@@ -6,11 +6,56 @@ html(lang="en")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
         link(rel="stylesheet", type= "text/css", href="../../public/css/style.css")
         link(rel="stylesheet" href="../../public/css/bootstrap.css")
-        title Editar Partida
+        title Update Game
 
     include ../menuLateral.jade
 
     div(class='container')
         div(class='row')
             div(class='col offset-2 row-style')
-                h2 Editar Partida
+                h2 Update Game
+        
+        br
+        div(class='row')
+            div(class='col offset-2')    
+                form(id='form', action='/partida/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;')
+                    input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
+
+                    div(class='col-8')
+                        label(class='label-form-style') Title
+                        input(class='form-control' id='title', name='title', type='text', value='#{partida.title}')
+                    br
+                    div(class='col-8')
+                        label(class='label-form-style') Date
+                        input(class='form-control' id='date', name='date', type='text', value='#{partida.date}')
+                    br
+                    div(class='col-8')
+                        label(class='label-form-style') Prize
+                        input(class='form-control' id='prize', name='prize', type='text', value='#{partida.prize}')
+                    br
+                    div(class='col-8')
+                        label(class='label-form-style') Status
+                        input(class='form-control' id='status', name='status', type='text', value='#{partida.status}')
+                    br
+                    div(class='col-8')
+                        label(class='label-form-style') Low Questions
+                        select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
+                            -each bajo, i in partida.questions              
+                                option(value="#{bajo._id}") #{bajo.question}
+
+                         select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                            
+                            -each bajos, i in bajo     
+                                option(value= "#{bajos._id}") #{bajos.question} 
+
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='../public/js/bootstrap.js')
+        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        script(type='text/javascript' src='../public/js/jquery.multi-select.js') 
+
+
+    script(type="text/javascript").
+
+        $('#lowq').multiSelect();
+
+
