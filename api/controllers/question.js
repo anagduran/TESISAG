@@ -220,9 +220,13 @@ function editQuestion(req,res){
             question.findById(id)
             .populate('category', ['name'])
             .exec()
-            .then(questionByID =>{      
-
-                var result = diff (questionByID.category, categories)
+            .then(questionByID =>{   
+                console.log('categorias de la pregunta');   
+                console.log(questionByID.category);
+                console.log('categorias');
+                console.log(categories);
+                var result = diff (questionByID.category, categories);
+                console.log('diff');
                 console.log(result);
                 res.render('question/updateQuestion', {pregunta: questionByID, categorias: result.added})
             }).catch(err=> {

@@ -47,6 +47,33 @@ html(lang="en")
                             
                             -each bajos, i in bajo     
                                 option(value= "#{bajos._id}") #{bajos.question} 
+                    br
+                    div(class='col-8')
+                        label(class='label-form-style') Medium Questions
+                        select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
+                            -each medio, i in partida2.questions              
+                                option(value="#{medio._id}") #{medio.question}
+
+                         select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                            
+                            -each medios, i in medio    
+                                option(value= "#{medios._id}") #{medios.question} 
+                    br
+                    div(class='col-8')
+                        label(class='label-form-style') High Questions
+                        select(class="select-style" id="highq"  name='preguntasCombo' multiple)
+                            -each alto, i in partida3.questions              
+                                option(value="#{alto._id}") #{alto.question}
+
+                         select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                            
+                            -each altos, i in alto    
+                                option(value= "#{altos._id}") #{altos.question} 
+
+
+                    
+
+                    
 
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')

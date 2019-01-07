@@ -152,23 +152,56 @@ function editGame(req,res){
     
 
     question.find({level:"bajo"},{"question":1}).exec().then(result1 =>{
-    
-        if(mongoose.Types.ObjectId.isValid(id)){
-         
-            game.findById(id)
-                .populate('questions', ['question'])
-                .exec()
-                .then(gameByID =>{                        
-                    var cambiando = JSON.parse(JSON.stringify(gameByID.questions));                    
-                    var resultado = diff (cambiando, result1);              
-                    res.render('game/updateGame', {partida: gameByID, bajo: resultado.added})
-                }).catch(err=> {
-                    res.status(500).json({message: "Error en el servidor"})
-                })
-        }
-        else {
-            res.status(404).json({message: "no valid entry for provided ID"})
-        }
+        question.find({level:"medio"},{"question":1}).exec().then(result2 =>{
+            question.find({level:"alto"},{"question":1}).exec().then(result3 =>{
+                if(mongoose.Types.ObjectId.isValid(id)){
+                
+                    game.findById(id)
+                        .populate('questions', ['question'])
+                        .exec()
+                        .then(gameByID =>{  
+                            game.findById(id)
+                            .populate('questions', {path: 'question', match: {level: 'medio'}})
+                            .exec()
+                            .then(gameByID2 =>{
+
+                                game.findById(id)
+                                .populate('questions', ['question'])
+                                .populate({path: 'questions', match: {level: 'alto'}})
+                                .exec()
+                                .then(gameByID3 =>{
+                                                                 
+                                    var resultado = diff (gameByID.questions, result1);    
+                                    console.log("preguntas nivel bajo");
+                                    console.log(result1);
+                                    console.log("preguntas nivel bajo de la partida");
+                                    console.log(gameByID.questions);
+                                    console.log("diff bajos");
+                                    console.log(resultado);  
+                                    console.log("preguntas nivel medio de la partida");
+                                    console.log(gameByID2.questions);
+                                    var resultado2 = diff (gameByID2.questions, result2); 
+                                    console.log("diff medios");
+                                    console.log(resultado2);  
+                                    var resultado3 = diff (gameByID.questions, result3);      
+                                    console.log("diff altos");
+                                    console.log(resultado3);  
+                                    res.render('game/updateGame', {partida: gameByID, partida2: gameByID2, partida3: gameByID3, bajo: resultado.added, medio: resultado2.added, alto: resultado3.common})
+
+
+                                })
+
+                            })                                            
+                            
+                        }).catch(err=> {
+                            res.status(500).json({message: "Error en el servidor"})
+                        })
+                }
+                else {
+                    res.status(404).json({message: "no valid entry for provided ID"})
+                }
+            })
+        })
     })
 }
 
