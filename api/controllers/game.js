@@ -160,38 +160,20 @@ function editGame(req,res){
                         .populate('questions', ['question'])
                         .exec()
                         .then(gameByID =>{  
-                            game.findById(id)
-                            .populate('questions', {path: 'question', match: {level: 'medio'}})
-                            .exec()
-                            .then(gameByID2 =>{
-
-                                game.findById(id)
-                                .populate('questions', ['question'])
-                                .populate({path: 'questions', match: {level: 'alto'}})
-                                .exec()
-                                .then(gameByID3 =>{
+                           
                                                                  
                                     var resultado = diff (gameByID.questions, result1);    
-                                    console.log("preguntas nivel bajo");
-                                    console.log(result1);
-                                    console.log("preguntas nivel bajo de la partida");
-                                    console.log(gameByID.questions);
-                                    console.log("diff bajos");
-                                    console.log(resultado);  
-                                    console.log("preguntas nivel medio de la partida");
-                                    console.log(gameByID2.questions);
-                                    var resultado2 = diff (gameByID2.questions, result2); 
-                                    console.log("diff medios");
-                                    console.log(resultado2);  
+                                
+                                    var resultado2 = diff (gameByID.questions, result2); 
+                                    
                                     var resultado3 = diff (gameByID.questions, result3);      
-                                    console.log("diff altos");
-                                    console.log(resultado3);  
-                                    res.render('game/updateGame', {partida: gameByID, partida2: gameByID2, partida3: gameByID3, bajo: resultado.added, medio: resultado2.added, alto: resultado3.common})
+                                   
+                                    res.render('game/updateGame', {partida: gameByID, partidaBaja: resultado.common, partidaMedio: resultado2.common, partidaAlta: resultado3.common, bajo: resultado.added, medio: resultado2.added, alto: resultado3.added})
 
 
-                                })
+                               
 
-                            })                                            
+                                                                    
                             
                         }).catch(err=> {
                             res.status(500).json({message: "Error en el servidor"})

@@ -40,7 +40,7 @@ html(lang="en")
                     div(class='col-8')
                         label(class='label-form-style') Low Questions
                         select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
-                            -each bajo, i in partida.questions              
+                            -each bajo, i in partidaBaja            
                                 option(value="#{bajo._id}") #{bajo.question}
 
                          select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
@@ -51,7 +51,7 @@ html(lang="en")
                     div(class='col-8')
                         label(class='label-form-style') Medium Questions
                         select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
-                            -each medio, i in partida2.questions              
+                            -each medio, i in partidaMedio          
                                 option(value="#{medio._id}") #{medio.question}
 
                          select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
@@ -62,7 +62,7 @@ html(lang="en")
                     div(class='col-8')
                         label(class='label-form-style') High Questions
                         select(class="select-style" id="highq"  name='preguntasCombo' multiple)
-                            -each alto, i in partida3.questions              
+                            -each alto, i in partidaAlta             
                                 option(value="#{alto._id}") #{alto.question}
 
                          select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
