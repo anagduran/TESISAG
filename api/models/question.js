@@ -6,6 +6,7 @@ const questionSchema =  mongoose.Schema({
     options:[{type: String}],
     answer: {type: String},
     level:  {type: String, lvl: ["bajo", "medio", "alto"]}, 
+    status: {type: String, lvl: ["available", "not available"]},
     category: [{type: mongoose.Schema.Types.ObjectId, ref: 'category'}]
 },{ 
     versionKey: false

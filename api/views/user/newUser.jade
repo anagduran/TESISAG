@@ -17,6 +17,10 @@ html(lang="en")
             div(class='col offset-2 pt-3')
                 h2 New User
 
+                - if(error2 > 0)
+                     li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert") Nickname already exists   
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;
                 - if(error)
                     ul(class='list-group ul-style') 
                         - for errors in error

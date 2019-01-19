@@ -33,7 +33,7 @@ function newQuestion(req, res) {
         let signoUno= '¿'
         let signoDos= '?'
         let preg = signoUno + cambio + signoDos;        
-        
+        let estado ='available'
         const pregunta = new question({
                 
                 _id: new mongoose.Types.ObjectId(),
@@ -41,8 +41,10 @@ function newQuestion(req, res) {
                 options: req.body.options,
                 answer: req.body.answer,
                 level: req.body.level,
-                category: req.body.categoriasCombo
+                status: estado,
+                category: req.body.categoriasCombo,
 
+ 
             }); 
         
             //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 

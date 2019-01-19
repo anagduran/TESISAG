@@ -44,10 +44,11 @@ html(lang="en")
                                                 i(id='icon-see' class='fa fa-eye')
                                             a(class='action-icon' href='/game/edit/#{partida._id}') 
                                                 i(id='icon-edit' class='fas fa-pencil-alt')
-                                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= partida._id onclick='obtenervalor(`#{partida._id}`);')                            
-                    
-
-
+                                            - if (partida.status != 'sin inicio')
+                                                button(disable='true' type='button' class='fas fa-trash-alt button')                            
+                                            -else 
+                                                button( type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= partida._id onclick='obtenervalor(`#{partida._id}`);')      
+                                                                      
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
         div(class="modal-dialog" role='document')
             div(class="modal-content")

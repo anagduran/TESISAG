@@ -1,48 +1,57 @@
 import mongoose from "mongoose"
 import user from "../models/user"
+import random from 'randomstring'
 
 
 function newUser(req,res,next) {
+    var username = req.body.nickname;
+
     req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');
     req.check('nickname').notEmpty().withMessage('El nickname no puede estar vacio');
 
     req.check('phone').isLength({min: 4}).withMessage('El telefono es muy corto, minimo 8 digitos');
     req.check('phone').notEmpty().withMessage('El numero de telefono no puede estar vacio');
     req.check('phone').matches('[0-9]').withMessage('Solo se permiten numeros en el campo de Telefono');
-
+  
+    
+   var codigo = random.generate(4);
     var errors = req.validationErrors();
-    if (errors){
-        res.render('user/newUser', {error: errors});
-        return;
-    } else { 
-        var Defatult= 0;
-        var codigoShared= 1234;
-        
-        const usuarioN = new user({
-            _id: new mongoose.Types.ObjectId(),
-            nickname: req.body.nickname,
-            country_code: req.body.country_code,
-            phone: req.body.phone,
-            share_code: codigoShared,
-            extra_life: Defatult,
-            balance: Defatult
+    user.find({'nickname': username})
+        .exec()
+        .then(usuario =>  {
+        console.log(usuario.length);
+        if((usuario.length > 0) || (errors)) {
+            res.render('user/newUser', {error: errors , error2: usuario.length});
+            return;    
+        } else { 
+            var Defatult= 0;
+                     
+            const usuarioN = new user({
+                _id: new mongoose.Types.ObjectId(),
+                nickname: req.body.nickname,
+                country_code: req.body.country_code,
+                phone: req.body.phone,
+                share_code: codigo,
+                extra_life: Defatult,
+                balance: Defatult
+                
+                });
             
-            });
-        
-            try{ 
-                usuarioN.save()
-                        .then(nuevouser => {
-                            res.status(200).render('user/userDetail',{usuario: nuevouser})
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            res.status(500).json({error: err})
-                        }); 
-            }  
-            catch(error){
-            console.log(error) 
+                try{ 
+                    usuarioN.save()
+                            .then(nuevouser => {
+                                res.status(200).render('user/userDetail',{usuario: nuevouser})
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.status(500).json({error: err})
+                            }); 
+                }  
+                catch(error){
+                console.log(error) 
+                }
             }
-        }
+        });
 }
 
 function getUsers(req,res,next){

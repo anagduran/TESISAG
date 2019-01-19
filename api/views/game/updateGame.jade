@@ -14,11 +14,18 @@ html(lang="en")
         div(class='row')
             div(class='col offset-2 row-style')
                 h2 Update Game
-        
+                
+                - if(error)
+                    ul(class='list-group ul-style')
+                        h5 Arreglar los siguientes errores: 
+                        - for errors in error
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times; 
         br
         div(class='row')
             div(class='col offset-2')    
-                form(id='form', action='/partida/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;')
+                form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
 
                     div(class='col-8')
@@ -39,38 +46,66 @@ html(lang="en")
                     br
                     div(class='col-8')
                         label(class='label-form-style') Low Questions
+                    div(class='col-8')
                         select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
-                            -each bajo, i in partidaBaja            
-                                option(value="#{bajo._id}") #{bajo.question}
+                            -each bajo, i in partidaBaja                                         
+                                option(value="#{bajo._id}") #{bajo.question}    
+                                    
+                        
+                        div(class='button-change-style-der')
+                            input(type='button' id="pasarL" value='pasar a der')
+                        div(class="button-change-style-izq")
+                            input(type='button' id="quitarL" value='pasar a izq')
 
-                         select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                        select(class="select-style2" id="destinoL" type='combobox' name='preguntasCombo2' multiple selected='selected') 
                             
                             -each bajos, i in bajo     
                                 option(value= "#{bajos._id}") #{bajos.question} 
                     br
                     div(class='col-8')
-                        label(class='label-form-style') Medium Questions
+                        label(class='label-form-style') Medium Question
+                    div(class='col-8')
                         select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
                             -each medio, i in partidaMedio          
                                 option(value="#{medio._id}") #{medio.question}
 
-                         select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+
+                        div(class='button-change-style-der')
+                            input(type='button' id="pasarM" value='pasar a der')
+                        div(class="button-change-style-izq")
+                            input(type='button' id="quitarM" value='pasar a izq')
+
+
+                        select(class="select-style2" id="destinoM" type='combobox' name='preguntasCombo2' multiple selected='selected') 
                             
                             -each medios, i in medio    
                                 option(value= "#{medios._id}") #{medios.question} 
                     br
                     div(class='col-8')
                         label(class='label-form-style') High Questions
+                    div(class='col-8')
+
                         select(class="select-style" id="highq"  name='preguntasCombo' multiple)
                             -each alto, i in partidaAlta             
                                 option(value="#{alto._id}") #{alto.question}
 
-                         select(class="select-style2" id="destino" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+
+                        div(class='button-change-style-der')
+                            input(type='button' id="pasarH" value='pasar a der')
+                        div(class="button-change-style-izq")
+                            input(type='button' id="quitarH" value='pasar a izq')
+
+                        select(class="select-style2" id="destinoH" type='combobox' name='preguntasCombo2' multiple selected='selected') 
                             
                             -each altos, i in alto    
                                 option(value= "#{altos._id}") #{altos.question} 
 
+                    div(class='div-style-end')
+                         a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                         input(type='submit', class='input-style-update btn btn-success' value='Save' id='botonUpdate' disabled="true")
 
+                    
+        
                     
 
                     
@@ -78,11 +113,57 @@ html(lang="en")
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='../public/js/bootstrap.js')
         script(type="text/javascript" src='../public/js/bootstrap.min.js')
-        script(type='text/javascript' src='../public/js/jquery.multi-select.js') 
+  
 
 
     script(type="text/javascript").
 
-        $('#lowq').multiSelect();
+        $(document).ready(function() {
+
+            $('#pasarL').click(function(){
+                $('#lowq option:selected').remove().appendTo('#destinoL');
+                
+
+            });
+            $('#quitarL').click(function(){
+                $('#destinoL option:selected').remove().appendTo('#lowq');
+            });
+
+
+            $('#pasarM').click(function(){
+                $('#mediumq option:selected').remove().appendTo('#destinoM');
+                
+
+            });
+            $('#quitarM').click(function(){
+                $('#destinoM option:selected').remove().appendTo('#mediumq');
+            });
+
+            $('#pasarH').click(function(){
+                $('#highq option:selected').remove().appendTo('#destinoH');
+                
+
+            });
+            $('#quitarH').click(function(){
+                $('#destinoH option:selected').remove().appendTo('#highq');
+            });
+
+            $('#botonUpdate').click(function(){
+               
+                var x = document.getElementById('highq').length;
+                var y = document.getElementById('mediumq').length;
+                var z = document.getElementById('lowq').length;
+                if(x<5){
+                    $('#botonUpdate').prop("disabled",true);
+               
+                }
+                else {
+                     $('#botonUpdate').prop("disabled",true);
+                }
+
+            });
+
+        });
+
 
 

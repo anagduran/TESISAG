@@ -22,10 +22,18 @@ html(lang="en")
         title New Game
     include ../menuLateral.jade
     
-    div(class='container')
+    div(class='container-fluid')
         div(class='row')
             div(class='col offset-2 pt-3')
                 h2 New Game
+
+                - if(error)
+                    ul(class='list-group ul-style')
+                        h5 Arreglar los siguientes errores: 
+                        - for errors in error
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times; 
 
         br
         form(id='form', action='/game/new', method='POST' autocomplete="off")

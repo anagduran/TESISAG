@@ -26,7 +26,8 @@ html(lang="en")
                                     th(class='tableAll') #
                                     th(class='tableAll') Question 
                                     th(class='tableAll') Level
-                                    th(class='tableAll') Category
+                                    th(class='tableAll') Status
+                                     th(class='tableAll') Category
                                     th(class='tableAll') Actions
                         
                             tbody
@@ -41,20 +42,23 @@ html(lang="en")
                                         td #{i}
                                         td #{pregunta.question} 
                                         td #{pregunta.level}
+                                        td #{pregunta.status}
                                         td
                                             -var j= 0
                                             - each categoria in pregunta.category                   
                                                 -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
                                                 - ++j
-                                                p #{categoryChange2.name},
+                                                p #{categoryChange2.name}  
                                     
                                         td 
                                             a(href='/question/#{pregunta._id}') 
                                                 i(id='icon-see' class='fa fa-eye')
                                             a(href='/question/edit/#{pregunta._id}') 
-                                                i(id='icon-edit' class='fas fa-pencil-alt')   
-                                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                                                     
-                                            
+                                                i(id='icon-edit' class='fas fa-pencil-alt')  
+                                            - if (pregunta.status === 'not available') 
+                                                button(disabled="true" type='button' class='fas fa-trash-alt button')                                                     
+                                            - if  (pregunta.status === 'available')
+                                                button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                                                     
 
 
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
