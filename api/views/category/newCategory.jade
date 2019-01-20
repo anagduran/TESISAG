@@ -27,21 +27,20 @@ html(lang="en")
         br
         br
         form(id='form', action='/category/new', method='POST' autocomplete="off")
-         div(class='row')
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Name 
-                input(class='form-control' id='name', name='name', placeholder='type a name')
+            div(class='row offset-2')
+                div(class='form-group col-8')
+                    Label(class='label-form-style') Name 
+                    input(class='form-control' id='name', name='name', placeholder='type a name')
 
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Description    
-                input(size='65' class='form-control' id='description', name='description', placeholder='type a description')
+                div(class='form-group col-8')
+                    Label(class='label-form-style') Description    
+                    input(size='65' class='form-control' id='description', name='description', placeholder='type a description')
             
-                
-            div(class='col-sm-4 margin-div-cancel offset-2')        
-                a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
-                
-            div(class='col-3 margin-div-agree offset-2')
-                input(type='submit', class='btn btn-outline-success'  value='Save')
-                
+            br
+            div(class='row offset-2')
+                div(class='col d-flex justify-content-between')                  
+                    a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
+                        
 script(type="text/javascript").
 

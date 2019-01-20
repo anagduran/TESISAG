@@ -24,43 +24,45 @@ html(lang="en")
 
         br
         form(id='form', action='/question/new', method='POST' autocomplete="off")
-         div(class='row')
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Question                
-                input(id='question', class='form-control' name='question' placeholder='type question')
-                   
+            div(class='row offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Question                
+                    input(id='question', class='form-control' name='question' placeholder='type question')
 
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Option 1                 
-                input(id='option1', class='form-control', name='options' placeholder='type option 1')
+            br   
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Option 1                 
+                    input(id='option1', class='form-control', name='options' placeholder='type option 1')
 
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Option 2                
-                input(id='option2', class='form-control', name='options' placeholder='type option 2')
+                div(class='col')
+                    Label(class='label-form-style') Option 2                
+                    input(id='option2', class='form-control', name='options' placeholder='type option 2')
+                
             
-
-             div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Option 3                         
-                input(id='option3', class='form-control', name='options' placeholder='type option 3')
+                div(class='col')
+                    Label(class='label-form-style') Option 3                         
+                    input(id='option3', class='form-control', name='options' placeholder='type option 3')
             
-            
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Answer                
-                input(id='answer', class='form-control', name='answer' placeholder='type answer, debe ser la misma a la opcion 3')
-            
-            div(class='col-8 offset-2')
-                Label(class='level-label-form-style') Level
-                br
-                label(class= "label-radio-button-style") Low 
-                input(type='radio', name='level', value='bajo')      
-                                    
-                label(class= "label-radio-button-style2") Medium
-                input(type='radio', name='level', value='medio')
-
-                label(class= "label-radio-button-style2") High 
-                input(type='radio', name='level', value='alto')
-
             br
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Answer                
+                    input(id='answer', class='form-control', name='answer' placeholder='type answer, debe ser la misma a la opcion 3')
+            
+                div(class='col')
+                    Label(class='level-label-form-style') Level
+                    br
+                    label(class= "label-radio-button-style") Low 
+                    input(type='radio', name='level', value='bajo')      
+                                        
+                    label(class= "label-radio-button-style2") Medium
+                    input(type='radio', name='level', value='medio')
+
+                    label(class= "label-radio-button-style2") High 
+                    input(type='radio', name='level', value='alto')
+
+            
             br
             div(class='form-group col-8 offset-2')
                 Label(class='level-label-form-style') Categories
@@ -70,14 +72,13 @@ html(lang="en")
                         input(type='checkbox' class='form-check-input' name='categoriasCombo' value="#{categoria._id}") 
                         label(class="form-check-label" for="gridCheck1") #{categoria.name}
                            
-                                          
-            div(class='col-sm-4 margin-div-cancel offset-2') 
+            br
+            div(class='row form-group offset-2')  
+                div(class='col d-flex justify-content-between')                         
                     a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
                 
-            div(class='col-3 margin-div-agree offset-2')
-                        input(type='submit', class='btn btn-outline-success'  value='Save')
             
-        
 
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
         script(type="text/javascript" src='js/bootstrap.js')

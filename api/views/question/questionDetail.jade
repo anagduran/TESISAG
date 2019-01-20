@@ -14,48 +14,50 @@ html(lang="en")
                 h2 Question Detail
 
         br
-        div(class='row offset-2')
-            div(class='form-group col-8')
-                Label(class='label-form-style') Question        
-                input(type='text' class='form-control' value= '#{pregunta.question}' readonly)
+        div(class='form-group offset-2')
+            div(class='row')
+                div(class='col')
+                    Label(class='label-form-style') Question        
+                    input(type='text' class='form-control' value= '#{pregunta.question}' readonly)
             
-            div(class='form-group col-8')
-                Label(class='label-form-style') Option 1                
-                input(type='text' class='form-control' value= '#{pregunta.options[0]}' readonly)
+            br
+            div(class='row')
+                div(class='col')
+                    Label(class='label-form-style') Option 1                
+                    input(type='text' class='form-control' value= '#{pregunta.options[0]}' readonly)
+                
+                div(class='col')
+                    Label(class='label-form-style') Option 2                
+                    input(type='text' class='form-control' value= '#{pregunta.options[1]}' readonly)
+                
+                div(class='col')
+                    Label(class='label-form-style') Option 3               
+                    input(type='text' class='form-control' value= '#{pregunta.options[2]}' readonly)
             
-            div(class='form-group col-8')
-                Label(class='label-form-style') Option 2                
-                input(type='text' class='form-control' value= '#{pregunta.options[1]}' readonly)
+            br
+            div(class='row')
+                div(class='col')
+                    Label(class='label-form-style') Answer                
+                    input(type='text' class='form-control' value= '#{pregunta.answer}' readonly)
+
+
+                div(class='col')
+                    Label(class='label-form-style') Level                
+                    input(type='text' class='form-control' value= '#{pregunta.level}' readonly)
+
+
+                div(class='col')
+                    Label(class='label-form-style') Categories                            
+                            -var j= 0
+                            - each categoria in pregunta.category                   
+                                -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
+                                - ++j       
+                                p(size='65' class='form-control' readonly) #{categoryChange2.name}
+            br
+            div(class='row')
+                div(class='col justify-content-start')        
+                    a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Questions
             
-            div(class='form-group col-8')
-                Label(class='label-form-style') Option 3               
-                input(type='text' size='50' class='form-control' value= '#{pregunta.options[2]}' readonly)
-
-            div(class='form-group col-8')
-                Label(class='label-form-style2') Answer                
-                input(type='text' size='50' class='form-control' value= '#{pregunta.answer}' readonly)
-
-
-            div(class='form-group col-8')
-                Label(class='label-form-style2') Level                
-                input(type='text' class='form-control' value= '#{pregunta.level}' readonly)
-
-
-            div(class='form-group col-8')
-                Label(class='label-form-style2') Categories                            
-                        -var j= 0
-                        - each categoria in pregunta.category                   
-                            -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
-                            - console.log(pregunta.category[j])
-                            - console.log(categoryChange2)
-                            - console.log(categoryChange2.name)
-                            - ++j       
-                            p(size='65' class='form-control' readonly) #{categoryChange2.name}
-
-        div(class='row')
-            div(class='col-sm-4 offset-1')        
-                a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Questions
-        
         br
         br
     

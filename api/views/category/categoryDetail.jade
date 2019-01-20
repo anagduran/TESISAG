@@ -14,18 +14,18 @@ html(lang="en")
                 h2 Category Detail
         br
         br
-        div(class='row offset-2')
-            div(class='form-group col-8')
+        div(class='row form-group offset-2')
+            div(class='col')
                 Label(class='label-form-style') Nombre
                 input(type='text' class='form-control' value= '#{categoria.name}' readonly)
-            
-            div(class='form-group col-8')
+        div(class='row form-group offset-2')
+            div(class='col')
                 Label(class='label-form-style') Descripcion
                 input(type='text' class='form-control' value= '#{categoria.description}' readonly)
 
-        
-        div(class='row')
-            div(class='col-sm-4 offset-2')        
+        br
+        div(class='row offset-2')
+            div(class='col d-flex justify-content-start')        
                 a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Categories
 
 

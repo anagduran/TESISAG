@@ -37,16 +37,16 @@ html(lang="en")
 
         br
         form(id='form', action='/game/new', method='POST' autocomplete="off")
-            div(class='row')
-                div(class='form-group col-7 offset-2')
+            div(class='row form-group offset-2')
+                div(class='col')
                     Label(class='label-form-style') Title
                     input(class='form-control' id='title', name='title' placeholder='type a title')
                 
-                div(class='form-group col-7 offset-2')
+                div(class='col')
                     Label(class='label-form-style') Date           
                     input(class="form-control pull-right" id="datepicker" placeholder='pick a date' name='date')           
                 
-                div(class='form-group col-3 offset-2')
+                div(class='col')
                     Label(class='label-form-style') Time                   
                     select(id='hora', class='form-control', name='time')
                         option 05:00
@@ -68,39 +68,38 @@ html(lang="en")
                         option 21:00
                         option 22:00
                         option 23:00
-                   
-                    
-                    
                         
-                div(class='form-group col-7 offset-2')
+                div(class='col')
                     Label(class='label-form-style') Prize                
                     input(class='form-control' id='prize', name='prize' placeholder='type a prize')
 
+            br
+            div(class='row form-group offset-2')
+                div(class='col')                    
+                        Label(class='label-form-style')  Low Level Questions
+                        select(id='lowq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                            -each bajo in bajos
+                                option(value='#{bajo._id}') #{bajo.question}
 
-                div(class="form-group col-8 offset-2")                    
-                    Label(class='label-form-style')  Low Level Questions
-                    select(id='lowq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
-                        -each bajo in bajos
-                            option(value='#{bajo._id}') #{bajo.question}
-                       
-                
-                div(class="form-group col-8 offset-2")                    
+            br
+            div(class='row form-group offset-2')
+                div(class='col')                     
                     Label(class='label-form-style')  Medium Level Questions
                     select(id='mediumq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
                         -each medio in medios
                             option(value='#{medio._id}') #{medio.question}
                         
-                
-                div(class="form-group col-8 offset-2")                    
+            br
+            div(class='row form-group offset-2')
+                div(class='col')                   
                     Label(class='label-form-style')  High Level Questions
                     select(id='highq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
                        -each alto in altos
                             option(value='#{alto._id}') #{alto.question} 
-                br
-                div(class='col-sm-4 margin-div-cancel offset-2')        
+            br
+            div(class='row form-group offset-2')
+                div(class='col d-flex justify-content-between')       
                     a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
-                
-                div(class='col-3 margin-div-agree offset-2')
                     input(type='submit', class='btn btn-outline-success'  value='Save')
                 
 

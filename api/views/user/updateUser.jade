@@ -27,34 +27,38 @@ html(lang="en")
                 form(id='form', action='/user/update/#{usuario._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{usuario._id}') 
 
-                    div(class='col-8')
-                        label(class='label-form-style') Nickname
-                        input(class='form-control' id='nickname', name='nickname', type='text', value='#{usuario.nickname}')
+                    div(class='row')
+                        div(class='col')
+                            label(class='label-form-style') Nickname
+                            input(class='form-control' id='nickname', name='nickname', type='text', value='#{usuario.nickname}')
+                        
+                        div(class='col')
+                            label(class='label-form-style') Country Code
+                            input(class='form-control' id='country_code', name='country_code', type='text', value='#{usuario.country_code}')
+                        
+                        div(class='col')
+                            label(class='label-form-style') Phone
+                            input(class='form-control' id='phone', name='phone', type='text', value='#{usuario.phone}')
                     br
-                    div(class='col-8')
-                        label(class='label-form-style') Country Code
-                        input(class='form-control' id='country_code', name='country_code', type='text', value='#{usuario.country_code}')
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Phone
-                        input(class='form-control' id='phone', name='phone', type='text', value='#{usuario.phone}')
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Shared Code
-                        input(class='form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Referal Code
-                        input(class='form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Extra Lifes
-                        input(class='form-control' id='extra_life', name='extra_life', type='text', value='#{usuario.extra_life}', readonly)
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Balance
-                        input(class='form-control' id='balance', name='balance', type='text', value='#{usuario.balance}', readonly)
+                    div(class="row")
+                        div(class='col')
+                            label(class='label-form-style') Shared Code
+                            input(class='form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
+                        
+                        div(class='col')
+                            label(class='label-form-style') Referal Code
+                            input(class='form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
+                        
+                        div(class='col')
+                            label(class='label-form-style') Extra Lifes
+                            input(class='form-control' id='extra_life', name='extra_life', type='text', value='#{usuario.extra_life}', readonly)
+                        
+                        div(class='col')
+                            label(class='label-form-style') Balance
+                            input(class='form-control' id='balance', name='balance', type='text', value='#{usuario.balance}', readonly)
 
-                    div(class='div-style-end')
-                         a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
-                         input(type='submit', class='input-style-update btn btn-success' value='Save')
+                    br
+                    div(class='row')
+                        div(class='col d-flex justify-content-between')
+                            a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                            input(type='submit', class='input-style-update btn btn-success' value='Save')

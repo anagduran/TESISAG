@@ -13,36 +13,37 @@ html(lang="en")
             div(class='col offset-2 pt-3')
                 h2 User Detail
 
-
-        div(class='row offset-2')
-            div(class='form-group col-8')
+        br
+        div(class='row form-group offset-2')
+            div(class='col')
                 Label(class='label-form-style') Nickname                
                 input(type='text' class='form-control' value= '#{usuario.nickname}' readonly)
             
            
-            div(class='form-group col-8')
+            div(class='col')
                 Label(class='label-form-style') Country Code                
                 input(type='text' class='form-control' value= '#{usuario.country_code}' readonly)
             
-            div(class='form-group col-8')
+            div(class='col')
                 Label(class='label-form-style') Phone                
                 input(type='text' class='form-control' value= '#{usuario.phone}' readonly)
-
-            div(class='form-group col-8')
+        br
+        div(class='row form-group offset-2')
+            div(class='col')
                 Label(class='label-form-style') Shared Code
                 input(type='text' class='form-control' value= '#{usuario.share_code}' readonly)
 
 
-            div(class='form-group col-8')
+            div(class='col')
                 Label(class='label-form-style') Extra Life
                 input(type='text' class='form-control' value= '#{usuario.extra_life}' readonly)
 
-            div(class='form-group col-8')
+            div(class='col')
                 Label(class='label-form-style') Balance
                 input(type='text' class='form-control' value= '#{usuario.balance}' readonly)
-
-        div(class='row')
-            div(class='col-sm-4 offset-1')        
+        br
+        div(class='row offset-2')
+            div(class='col d-flex justify-content-start')        
                 a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Users
 
         br

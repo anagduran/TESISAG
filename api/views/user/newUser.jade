@@ -31,28 +31,27 @@ html(lang="en")
 
         br
         form(id='form', action='/user/new', method='POST' autocomplete="off")
-         div(class='row')
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Nickname              
-                input(id='nickname', class='form-control' name='nickname' placeholder='type a nickname')
-                   
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Nickname              
+                    input(id='nickname', class='form-control' name='nickname' placeholder='type a nickname')
+                    
 
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Country Code
-                select(id='country_code', class='form-control', name='country_code')
-                    option +58
-                    option +57
-                    option +51
+                div(class='col')
+                    Label(class='label-form-style') Country Code
+                    select(id='country_code', class='form-control', name='country_code')
+                        option +58
+                        option +57
+                        option +51
             
-            div(class='form-group col-8 offset-2')
-                Label(class='label-form-style') Phone                
-                input(id='phone', class='form-control', name='phone' placeholder='type a phone number')
+                div(class='col')
+                    Label(class='label-form-style') Phone                
+                    input(id='phone', class='form-control', name='phone' placeholder='type a phone number')
 
-
-            div(class='col-sm-4 margin-div-cancel offset-2') 
-                a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
-                
-            div(class='col-3 margin-div-agree offset-2')
+            br
+            div(class='row form-group offset-2')
+                div(class='col d-flex justify-content-between') 
+                    a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
             
             
