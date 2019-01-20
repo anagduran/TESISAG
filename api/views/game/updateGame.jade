@@ -4,105 +4,167 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
-        link(rel="stylesheet", type= "text/css", href="../../public/css/style.css")
-        link(rel="stylesheet" href="../../public/css/bootstrap.css")
+        link(rel="stylesheet", type= "text/css", href="/css/style.css")
+        link(rel="stylesheet" href="/css/bootstrap.css")
+        link(rel='stylesheet' href='/css/bootstrap-datepicker.min.css')
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")
         title Update Game
 
     include ../menuLateral.jade
 
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
+            div(class='offset-2 pt-3')
                 h2 Update Game
-                
-                - if(error)
-                    ul(class='list-group ul-style')
-                        h5 Arreglar los siguientes errores: 
-                        - for errors in error
-                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
-                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                                    span(aria-hidden="true")&times; 
+            
+                div(class='d-block')
+                    - if(error)
+                        ul(class='list-group ul-style')
+                            h5 Arreglar los siguientes errores: 
+                            - for errors in error
+                                li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                        span(aria-hidden="true")&times; 
         br
         div(class='row')
             div(class='col offset-2')    
                 form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
 
-                    div(class='col-8')
-                        label(class='label-form-style') Title
-                        input(class='form-control' id='title', name='title', type='text', value='#{partida.title}')
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Date
-                        input(class='form-control' id='date', name='date', type='text', value='#{partida.date}')
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Prize
-                        input(class='form-control' id='prize', name='prize', type='text', value='#{partida.prize}')
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Status
-                        input(class='form-control' id='status', name='status', type='text', value='#{partida.status}')
-                    br
-                    div(class='col-8')
-                        label(class='label-form-style') Low Questions
-                    div(class='col-8')
-                        select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
-                            -each bajo, i in partidaBaja                                         
-                                option(value="#{bajo._id}") #{bajo.question}    
-                                    
+                    div(class='row')
+                        div(class='col')
+                            label(class='label-form-style') Title
+                            input(class='form-control' id='title', name='title', type='text', value='#{partida.title}')
                         
-                        div(class='button-change-style-der')
-                            input(type='button' id="pasarL" value='pasar a der')
-                        div(class="button-change-style-izq")
-                            input(type='button' id="quitarL" value='pasar a izq')
-
-                        select(class="select-style2" id="destinoL" type='combobox' name='preguntasCombo2' multiple selected='selected') 
-                            
-                            -each bajos, i in bajo     
-                                option(value= "#{bajos._id}") #{bajos.question} 
+                        div(class='col')
+                            label(class='label-form-style') Status
+                            input(class='form-control' id='status', name='status', type='text', value='#{partida.status}' readonly)         
+            
                     br
-                    div(class='col-8')
-                        label(class='label-form-style') Medium Question
-                    div(class='col-8')
-                        select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
-                            -each medio, i in partidaMedio          
-                                option(value="#{medio._id}") #{medio.question}
+                    div(class='row')
+                        div(class='col')
+                            - var separar = partida.date.substring(0,10);
+                            label(class='label-form-style') Date
+                            input(class='form-control pull-right'  id="datepicker", name='date' value='#{separar}')
+                        
+                        
+                        div(class='col')
+                            - var separar2 = partida.date.substring(11,2);
+                            Label(class='label-form-style') Time                  
+                            select(id='hora', class='form-control', name='time')
+                                option #{separar2}
+                                option 05:00
+                                option 06:00
+                                option 07:00
+                                option 08:00
+                                option 09:00
+                                option 10:00
+                                option 11:00
+                                option 12:00
+                                option 13:00
+                                option 14:00
+                                option 15:00
+                                option 16:00
+                                option 17:00
+                                option 18:00
+                                option 19:00
+                                option 20:00
+                                option 21:00
+                                option 22:00
+                                option 23:00
+                    
+                    
+                    
+                        div(class='col')
+                            label(class='label-form-style') Prize
+                            input(class='form-control' id='prize', name='prize', type='text', value='#{partida.prize}')
+                    
 
-
-                        div(class='button-change-style-der')
-                            input(type='button' id="pasarM" value='pasar a der')
-                        div(class="button-change-style-izq")
-                            input(type='button' id="quitarM" value='pasar a izq')
-
-
-                        select(class="select-style2" id="destinoM" type='combobox' name='preguntasCombo2' multiple selected='selected') 
-                            
-                            -each medios, i in medio    
-                                option(value= "#{medios._id}") #{medios.question} 
                     br
-                    div(class='col-8')
-                        label(class='label-form-style') High Questions
-                    div(class='col-8')
+                    div(class= 'row')
+                        div(class= 'col')
+                            label(class='label-form-style') Low Questions
+                    div(class= 'row')
+                        div(class='col d-block d-flex justify-content-start')                            
+                            select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
+                                -each bajo, i in partidaBaja                                         
+                                    option(value="#{bajo._id}") #{bajo.question}    
+                    br                
+                    div(class='row')
+                        div(class='col d-flex justify-content-around')
+                                input(type='button' id="pasarL" value='Down LQ')
+                                input(type='button' id="quitarL" value='Up LQ')
 
-                        select(class="select-style" id="highq"  name='preguntasCombo' multiple)
-                            -each alto, i in partidaAlta             
-                                option(value="#{alto._id}") #{alto.question}
+                    br
+                    div(class='row')
+                        div(class= 'col')
+                            label(class='label-form-style') Low Questions System
+                    div(class='row')
+                        div(class='col')
+                            select(class="select-style" id="destinoL" type='combobox' name='preguntasCombo2' multiple selected='selected')  
+                                -each bajos, i in bajo     
+                                    option(value= "#{bajos._id}") #{bajos.question} 
+                    
+                    br
 
+                    div(class= 'row')
+                        div(class='col')
+                            label(class='label-form-style') Medium Question
+                    br
+                    div(class= 'row')
+                        div(class='col')
+                            select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
+                                -each medio, i in partidaMedio          
+                                    option(value="#{medio._id}") #{medio.question}
 
-                        div(class='button-change-style-der')
-                            input(type='button' id="pasarH" value='pasar a der')
-                        div(class="button-change-style-izq")
-                            input(type='button' id="quitarH" value='pasar a izq')
+                    br
+                    div(class= 'row')
+                        div(class='col d-flex justify-content-center')
+                            input(type='button' id="pasarM" value='down MQ')
+                            input(type='button' id="quitarM" value='up MQ')
 
-                        select(class="select-style2" id="destinoH" type='combobox' name='preguntasCombo2' multiple selected='selected') 
-                            
-                            -each altos, i in alto    
-                                option(value= "#{altos._id}") #{altos.question} 
+                    br
+                    div(class='row')
+                        div(class='col')
+                            label(class='label-form-style') Medium Question System
+                    br
+                    div(class= 'row')
+                        div(class='col')
+                            select(class="select-style" id="destinoM" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                                -each medios, i in medio    
+                                    option(value= "#{medios._id}") #{medios.question} 
+                    br
+                    div(class= 'row')
+                        div(class='col')
+                            label(class='label-form-style') High Questions
+                    br
+                    div(class= 'row')
+                        div(class='col')
+                            select(class="select-style" id="highq"  name='preguntasCombo' multiple)
+                                -each alto, i in partidaAlta             
+                                    option(value="#{alto._id}") #{alto.question}
 
-                    div(class='div-style-end')
-                         a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
-                         input(type='submit', class='input-style-update btn btn-success' value='Save' id='botonUpdate' disabled="true")
+                    br
+                    div(class= 'row')
+                        div(class='col d-flex justify-content-center')                        
+                            input(type='button' id="pasarH" value='down HQ')                        
+                            input(type='button' id="quitarH" value='up HQ')
+                    
+                    
+                    br
+                    div(class= 'row')
+                        div(class='col')
+                            label(class='label-form-style') High Questions System 
+                    div(class= 'row')
+                        div(class='col')
+                            select(class="select-style" id="destinoH" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                                -each altos, i in alto    
+                                    option(value= "#{altos._id}") #{altos.question}
+                    br
+                    div(class= 'row')
+                        div(class='col d-flex justify-content-between')
+                            a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                            input(type='submit', class='input-style-update btn btn-success' value='Save' id='botonUpdate')
 
                     
         
@@ -111,59 +173,71 @@ html(lang="en")
                     
 
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
-        script(type="text/javascript" src='../public/js/bootstrap.js')
-        script(type="text/javascript" src='../public/js/bootstrap.min.js')
+        script(type="text/javascript" src="/js/moment.min.js") 
+        script(type="text/javascript" src='/js/bootstrap.js')
+        script(type="text/javascript" src='/js/bootstrap.min.js')
+        script(type='text/javascript' src='/js/bootstrap-datepicker.min.js')
   
+        script(type="text/javascript" src='/js/bootstrap.js')
+
+script(type="text/javascript").
+
+    $(document).ready(function() {
+
+        $('#datepicker').datepicker();
 
 
-    script(type="text/javascript").
-
-        $(document).ready(function() {
-
-            $('#pasarL').click(function(){
-                $('#lowq option:selected').remove().appendTo('#destinoL');
+        $('#pasarL').click(function(){
+             $('#lowq option:selected').remove().appendTo('#destinoL');
+                    console.log('pasando a la derecha low');
+            });
                 
-
-            });
-            $('#quitarL').click(function(){
-                $('#destinoL option:selected').remove().appendTo('#lowq');
-            });
+        $('#quitarL').click(function(){
+                    $('#destinoL option:selected').remove().appendTo('#lowq');
+                });
 
 
-            $('#pasarM').click(function(){
-                $('#mediumq option:selected').remove().appendTo('#destinoM');
+                $('#pasarM').click(function(){
+                    $('#mediumq option:selected').remove().appendTo('#destinoM');
+                    
+
+                });
+                $('#quitarM').click(function(){
+                    $('#destinoM option:selected').remove().appendTo('#mediumq');
+                });
+
+                $('#pasarH').click(function(){
+                    $('#highq option:selected').remove().appendTo('#destinoH');
+                    
+
+                });
+                $('#quitarH').click(function(){
+                    $('#destinoH option:selected').remove().appendTo('#highq');
+                });
+
+                $('#botonUpdate').click(function(){
                 
-
-            });
-            $('#quitarM').click(function(){
-                $('#destinoM option:selected').remove().appendTo('#mediumq');
-            });
-
-            $('#pasarH').click(function(){
-                $('#highq option:selected').remove().appendTo('#destinoH');
+                    var x = document.getElementById('highq').length;
+                    var y = document.getElementById('mediumq').length;
+                    var z = document.getElementById('lowq').length;
+                    if(y == 4 && z == 4 && x == 4 ) {
+                    console.log('excelente');
+                    
+                        $('#lowq option').prop('selected',true)
+                        $('#mediumq option').prop('selected',true)
+                        $('#highq option').prop('selected',true)
+                        $('#destinoL option').prop('selected',true)
+                        $('#destinoM option').prop('selected',true)
+                        $('#destinoH option').prop('selected',true)
                 
+                    }
+                    else {
+                        alert('la cantidad de preguntas por nivel debe ser de 4, revisar');
+                    }
+
+                });
 
             });
-            $('#quitarH').click(function(){
-                $('#destinoH option:selected').remove().appendTo('#highq');
-            });
-
-            $('#botonUpdate').click(function(){
-               
-                var x = document.getElementById('highq').length;
-                var y = document.getElementById('mediumq').length;
-                var z = document.getElementById('lowq').length;
-                if(x<5){
-                    $('#botonUpdate').prop("disabled",true);
-               
-                }
-                else {
-                     $('#botonUpdate').prop("disabled",true);
-                }
-
-            });
-
-        });
 
 
 

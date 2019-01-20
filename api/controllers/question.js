@@ -186,6 +186,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
         
     } 
     else {
+        console.log(req.body.category);
         if (mongoose.Types.ObjectId.isValid(id)) {
             question.where({'_id': id})
                     .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category}})

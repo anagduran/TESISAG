@@ -34,7 +34,7 @@ function newGame(req,res,next) {
             var cambioArr = [];
             cambioArr = req.body.preguntasCombo;
             var concatFecha = ver + 'T' + tiempo;
-            
+            console.log(req.body.preguntasCombo);
             const partida = new game({
                 _id: new mongoose.Types.ObjectId(),
                 title: req.body.title,
@@ -162,17 +162,36 @@ function updateGameByID(req, res, next){
             })
         }); 
     } else {
+        console.log(req.body);
+        var comboP1 = req.body.preguntasCombo;
+        var comboP2 = req.body.preguntasCombo2;
 
-            if (mongoose.Types.ObjectId.isValid(id)) {
+
+        for (let i=0; i < comboP1.length; i++ )
+            {         
+                question.where({'_id': comboP1[i]})
+                            .update( {status: 'not available'})
+                            .exec()
+            }
+
+        for (let j=0; j < comboP2.length; j++ )
+        {         
+            question.where({'_id': comboP2[j]})
+                        .update( {status: 'available'})
+                        .exec()
+        }
+
+
+        if (mongoose.Types.ObjectId.isValid(id)) {
                 game.where({'_id': id})
                         .update( {$set: {title: req.body.title, date: req.body.date, questions: req.body.preguntasCombo, prize: req.body.prize, status: req.body.status}})
                         .exec()
-                        .then(result =>{                    
-                            if(result.nModified===1){
-                            res.status(200).render( 'game/gameDetail' , { partida: req.body})                      
+                        .then(result =>{                
+                            if(result.nModified===1){                               
+                            res.status(200).render( 'game/updateReadyGame' , { partida: req.body})                      
                             }
                             else {                        
-                                res.status(404).json({message: 'no encontrado'})
+                                res.status(404).json({message: 'holi 2no encontrado'})
                             }
                         })
                         .catch(err =>{

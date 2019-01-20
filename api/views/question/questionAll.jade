@@ -4,9 +4,9 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
-        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
-        link(rel="stylesheet" href="../public/css/bootstrap.css")
-        link(rel="stylesheet" href="../public/css/dataTables.bootstrap4.min.css")
+        link(rel="stylesheet", type= "text/css", href="/css/style.css")
+        link(rel="stylesheet" href="/css/bootstrap.css")
+        link(rel="stylesheet" href="/css/dataTables.bootstrap4.min.css")
        
         
         title  Questions
@@ -53,8 +53,14 @@ html(lang="en")
                                         td 
                                             a(href='/question/#{pregunta._id}') 
                                                 i(id='icon-see' class='fa fa-eye')
-                                            a(href='/question/edit/#{pregunta._id}') 
-                                                i(id='icon-edit' class='fas fa-pencil-alt')  
+                                            - if(pregunta.status === 'not available') {
+                                                a(class='no-active') 
+                                                    i(class='fas fa-pencil-alt icon-edit')  
+                                            -} 
+                                            -else {
+                                                a(href='/question/edit/#{pregunta._id}') 
+                                                    i( class='fas fa-pencil-alt icon-edit')  
+                                            -}
                                             - if (pregunta.status === 'not available') 
                                                 button(disabled="true" type='button' class='fas fa-trash-alt button')                                                     
                                             - if  (pregunta.status === 'available')
@@ -81,11 +87,11 @@ html(lang="en")
 
             
     
-    script(type="text/javascript" src='../public/js/bootstrap.js') 
-    script(type="text/javascript" src="../public/js/jquery.min.js")
-    script(type="text/javascript" src="../public/js/bootstrap.min.js")
-    script(type="text/javascript" src="../public/js/jquery.dataTables.min.js")
-    script(type="text/javascript" src="../public/js/dataTables.bootstrap4.min.js")
+    script(type="text/javascript" src='js/bootstrap.js') 
+    script(type="text/javascript" src="js/jquery.min.js")
+    script(type="text/javascript" src="js/bootstrap.min.js")
+    script(type="text/javascript" src="js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="js/dataTables.bootstrap4.min.js")
     
 script(type="text/javascript").
 
