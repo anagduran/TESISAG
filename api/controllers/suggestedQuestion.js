@@ -9,10 +9,10 @@ function getSuggestedQuestion(req,res,next){
                 .exec()
                 .then(suggested => { 
                    
-                        if(suggested) {                        
-                            res.status(200).json({usuarios: suggested})
+                        if(suggested) {   
+                            res.status(200).render('suggested/suggestedAll',{preguntas: suggested})                     
                         }else{
-                            res.status(404).json({message: 'no hay variables'})
+                            res.status(404).json({message: 'no hay preguntas sugeridas'})
                         }   
             
                 }).catch(err => {
@@ -79,4 +79,4 @@ function deleteUserByID(req, res, next){
 function createGame(req,res, next){
     res.render('game/newGame')
 }*/
-module.exports ={};
+module.exports ={getSuggestedQuestion};

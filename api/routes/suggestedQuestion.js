@@ -3,7 +3,7 @@ import suggestesdQuestionController from "../controllers/suggestedQuestion"
 
 const router = express.Router()
 
-//router.get('/', questionController.getQuestions)
+router.get('/', suggestesdQuestionController.getSuggestedQuestion)
 //router.get('/create', questionController.createQuestion)
 //router.post('/new', questionController.newQuestion)
 //router.get('/:questionID', questionController.getQuestionID)
