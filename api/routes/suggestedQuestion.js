@@ -4,9 +4,9 @@ import suggestesdQuestionController from "../controllers/suggestedQuestion"
 const router = express.Router()
 
 router.get('/', suggestesdQuestionController.getSuggestedQuestion)
-//router.get('/create', questionController.createQuestion)
-//router.post('/new', questionController.newQuestion)
-//router.get('/:questionID', questionController.getQuestionID)
+router.get('/create/:questionID', suggestesdQuestionController.createQuestion)
+router.post('/new', suggestesdQuestionController.newQuestion)
+router.get('/:questionID', suggestesdQuestionController.getQuestionID)
 //router.delete('/delete/:questionID', questionController.deleteQuestionByID)
 
 

@@ -51,7 +51,12 @@ function newQuestion(req, res) {
             try {
                 pregunta.save()
                         .then(nuevapregunta => {
-                        res.status(201).render('question/questionDetail', {pregunta :nuevapregunta})
+                            question.findById(nuevapregunta._id)
+                            .populate('category', ['name'])
+                            .exec()
+                            .then( newQ => {
+                                 res.status(201).render('question/questionDetail', {pregunta :newQ})
+                            })
                         })
                         .catch(err => {
                             console.log(err);
@@ -193,8 +198,13 @@ const id = mongoose.Types.ObjectId(req.body._id)
                     .exec()
                     .then(result =>{                    
                         if(result.nModified===1){
-                        res.status(200).render( 'question/questionDetail', { pregunta: req.body})                      
-                        }
+                            question.findById(id)
+                            .populate('category', ['name'])
+                            .exec()
+                            .then( cuestion => { 
+                                    res.status(200).render( 'question/questionDetail', { pregunta: cuestion})                      
+                                })
+                        }   
                         else {                        
                             res.status(404).json({message: 'no encontrado'})
                         }

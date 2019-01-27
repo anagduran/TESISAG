@@ -33,22 +33,34 @@ html(lang="en")
                             input(class='form-control' id='nickname', name='nickname', type='text', value='#{usuario.nickname}')
                         
                         div(class='col')
-                            label(class='label-form-style') Country Code
-                            input(class='form-control' id='country_code', name='country_code', type='text', value='#{usuario.country_code}')
+                            Label(class='label-form-style') Country Code
+                            select(id='country_code', class='form-control', name='country_code')
+                                option #{usuario.country_code}
+                                option +58
+                                option +57
+                                option +51
+                                option +49
+                                option +54
+                                option +55
+                                option +52
+                                option +53
+                                option +56
+                                option +598
+                                option +594
+                                option +595
+                                option +1
+                                option +502
+                                option +503
+                                option +504
+                                option +505
+                                option +506
+                                option +507
                         
                         div(class='col')
                             label(class='label-form-style') Phone
                             input(class='form-control' id='phone', name='phone', type='text', value='#{usuario.phone}')
                     br
                     div(class="row")
-                        div(class='col')
-                            label(class='label-form-style') Shared Code
-                            input(class='form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
-                        
-                        div(class='col')
-                            label(class='label-form-style') Referal Code
-                            input(class='form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
-                        
                         div(class='col')
                             label(class='label-form-style') Extra Lifes
                             input(class='form-control' id='extra_life', name='extra_life', type='text', value='#{usuario.extra_life}', readonly)
@@ -57,6 +69,15 @@ html(lang="en")
                             label(class='label-form-style') Balance
                             input(class='form-control' id='balance', name='balance', type='text', value='#{usuario.balance}', readonly)
 
+                        div(class='col')
+                            label(class='label-form-style') Shared Code
+                            input(class='form-control' id='shared_code', name='shared_code', type='text', value='#{usuario.shared_code}', readonly)
+                        
+
+                        div(class='col')
+                            label(class='label-form-style') Referral Code
+                            input(class='form-control' id='referral_code', name='referral_code', type='text', value='#{usuario.referral_code}', readonly)
+                        
                     br
                     div(class='row')
                         div(class='col d-flex justify-content-between')

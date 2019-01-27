@@ -1,0 +1,63 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        
+        title Suggested Question Detail 
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='offset-2 pt-3')
+                h2 Suggested Question Detail
+        br
+        br
+        form(id='form', action='/suggestedQuestion/new', method='POST')
+            input(id='_id', name='_id', type='hidden', value='#{pregunta._id}') 
+            
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Question
+                    input(type='text' class='form-control' name='question' value= '#{pregunta.question}' readonly)
+                    
+            
+            br
+
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Answer
+                    input(type='text' class='form-control' name='options' value= '#{pregunta.correctAnswer}' readonly)
+
+                div(class='col')
+                    Label(class='label-form-style') Option B
+                    input(type='text' class='form-control' name= 'options' value= '#{pregunta.optionB}' readonly)
+                    
+                div(class='col')
+                    Label(class='label-form-style') Option C
+                    input(type='text' class='form-control' name='options' value= '#{pregunta.optionC}' readonly)
+                    
+                div(class='col')
+                    Label(class='label-form-style') Category
+                    input(type='text' class='form-control' name='category' value= '#{pregunta.category}' readonly)
+            br
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='level-label-form-style') Level
+                    br
+                    label(class= "label-radio-button-style") Low 
+                    input(type='radio', name='level', value='bajo')      
+                                        
+                    label(class= "label-radio-button-style2") Medium
+                    input(type='radio', name='level', value='medio')
+
+                    label(class= "label-radio-button-style2") High 
+                    input(type='radio', name='level', value='alto')
+
+            br
+            div(class='row form-group offset-2')  
+                div(class='col d-flex justify-content-between')                         
+                    a(href='/suggested' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
+                

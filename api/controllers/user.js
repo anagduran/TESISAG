@@ -8,7 +8,7 @@ function newUser(req,res,next) {
 
     req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');
     req.check('nickname').notEmpty().withMessage('El nickname no puede estar vacio');
-
+    req.check('country_code').exists().withMessage('Debe seleccionar un codigo de pais');
     req.check('phone').isLength({min: 4}).withMessage('El telefono es muy corto, minimo 8 digitos');
     req.check('phone').notEmpty().withMessage('El numero de telefono no puede estar vacio');
     req.check('phone').matches('[0-9]').withMessage('Solo se permiten numeros en el campo de Telefono');
@@ -106,7 +106,7 @@ function updateUserByID(req, res, next){
 
     req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');
     req.check('nickname').notEmpty().withMessage('El nickname no puede estar vacio');
-
+    req.check('country_code').exists().withMessage('Debe seleccionar un codigo de pais');
     req.check('phone').isLength({min: 4}).withMessage('El telefono es muy corto, minimo 8 digitos');
     req.check('phone').notEmpty().withMessage('El numero de telefono no puede estar vacio');
     req.check('phone').matches('[0-9]').withMessage('Solo se permiten numeros en el campo de Telefono');
@@ -117,7 +117,7 @@ function updateUserByID(req, res, next){
         return;   
     }
     else{
-        //const id = req.params.userID; 
+
         const id = mongoose.Types.ObjectId(req.body._id)
         if (mongoose.Types.ObjectId.isValid(id)) {
             user.where({'_id': id})

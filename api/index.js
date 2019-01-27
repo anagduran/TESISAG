@@ -33,7 +33,7 @@ const server ={
 
             const port = app.locals.config.PORT
             if(process.env.NODE_ENV!=='test'){
-                //app.use(logger('combined'))
+                
                 console.log(`Server opened listen on http://${host}:${port}`)
                 
             }

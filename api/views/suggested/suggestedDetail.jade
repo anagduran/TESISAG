@@ -1,0 +1,121 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        
+        title Suggested Question Detail 
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='offset-2 pt-3')
+                h2 Suggested Question Detail
+        br
+        br
+        
+        div(class='row form-group offset-2')
+            div(class='col')
+                Label(class='label-form-style') Question
+                input(type='text' class='form-control' value= '#{pregunta.question}' readonly)
+                
+        
+        br    
+        div(class='row form-group offset-2')
+            div(class='col')
+                Label(class='label-form-style') Answer
+                input(type='text' class='form-control' value= '#{pregunta.correctAnswer}' readonly)
+
+            div(class='col')
+                Label(class='label-form-style') Option B
+                input(type='text' class='form-control' value= '#{pregunta.optionB}' readonly)
+                
+            div(class='col')
+                Label(class='label-form-style') Option C
+                input(type='text' class='form-control' value= '#{pregunta.optionC}' readonly)
+                
+            div(class='col')
+                Label(class='label-form-style') Category
+                input(type='text' class='form-control' value= '#{pregunta.category}' readonly)
+        br
+         
+        div(class='row form-group offset-2')  
+            div(class='col d-flex justify-content-between')                         
+                button(type='button' id='button1' class='btn btn-outline-danger' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);') Decline                                   
+                a(href='/suggestedQuestion/create/#{pregunta._id}' class='btn btn-outline-success pl-3 pr-3'  role="button") Accept
+    
+        
+        div(class='row offset-2')
+            div(class='col d-flex justify-content-start')        
+                a(href='/suggestedQuestion' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back
+
+
+
+
+    div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
+        div(class="modal-dialog" role='document')
+            div(class="modal-content")
+                div(class='modal-header')
+                    h5 Eliminar Pregunta   
+                    input(type='text' id='lista' style="visibility:hidden")                                        
+                div(class="modal-body")
+                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    form(action="" class= "link" method="POST" id='formEliminar')
+                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
+    
+
+    script(type="text/javascript").
+
+        function obtenervalor(id) {
+            $('#lista').val(id);       
+        }
+
+        function enviar(){       
+            var id = document.getElementById('lista').value;            
+            var action = '/category/delete/' 
+            var action2 = '?_method=DELETE'
+            var total = action.concat(id,action2);      
+            
+            $.ajax({      
+                    url: total,
+                    type: 'DELETE',
+                    statusCode: {
+                        200: function () {
+                            alert('ALOOO');
+                            console.log("200 - Success");
+                        }
+                    },
+                });
+
+            document.getElementById("formEliminar").action = total;
+                
+        // document.getElementById("formEliminar").submit();
+            
+        }
+
+        $('#eliminar').click(function(){
+            var id = document.getElementById('lista').value;            
+            var action = '/category/delete/' 
+            var action2 = '?_method=DELETE'
+            var total = action.concat(id,action2);   
+            console.log(total);
+            document.getElementById("formEliminar").action = total;  
+            
+            $.ajax({      
+                    url: total,
+                    type: 'DELETE',
+                    statusCode: {
+                        200: function () {
+                            alert('ALOOO');
+                            console.log("200 - Success");
+                        },
+                        404: function() {
+                            console.log('400 error');
+                        }
+                    },
+                });
+            document.getElementById("formEliminar").submit();
+        })

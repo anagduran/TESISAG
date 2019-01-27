@@ -55,7 +55,12 @@ function newGame(req,res,next) {
                 try{ 
                     partida.save()
                             .then(nuevapartida => {
-                                res.status(200).render('game/gameDetail',{partida: nuevapartida})
+                                game.findById(nuevapartida._id)
+                                    .populate('questions', ['question'])
+                                    .exec()
+                                .then( newG => {
+                                      res.status(200).render('game/gameDetail',{partida: newG})
+                                })
                             })
                             .catch(err => {
                                 console.log(err);
@@ -125,7 +130,7 @@ function updateGameByID(req, res, next){
 
     req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
-  //   req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
+    req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
     req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
@@ -165,7 +170,9 @@ function updateGameByID(req, res, next){
         console.log(req.body);
         var comboP1 = req.body.preguntasCombo;
         var comboP2 = req.body.preguntasCombo2;
-
+        var ver = req.body.date;
+        var tiempo = req.body.time;
+        var concatFecha = ver + 'T' + tiempo;
 
         for (let i=0; i < comboP1.length; i++ )
             {         
@@ -184,12 +191,17 @@ function updateGameByID(req, res, next){
 
         if (mongoose.Types.ObjectId.isValid(id)) {
                 game.where({'_id': id})
-                        .update( {$set: {title: req.body.title, date: req.body.date, questions: req.body.preguntasCombo, prize: req.body.prize, status: req.body.status}})
+                        .update( {$set: {title: req.body.title, date: concatFecha, questions: req.body.preguntasCombo, prize: req.body.prize, status: req.body.status}})
                         .exec()
                         .then(result =>{                
-                            if(result.nModified===1){                               
-                            res.status(200).render( 'game/updateReadyGame' , { partida: req.body})                      
-                            }
+                            if(result.nModified===1){  
+                                game.findById(id)
+                                .populate('questions', ['question'])
+                                .exec()
+                                .then(juego => {
+                                    res.status(200).render( 'game/gameDetail' , { partida: juego})    
+                                })
+                            }   
                             else {                        
                                 res.status(404).json({message: 'holi 2no encontrado'})
                             }
