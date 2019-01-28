@@ -12,6 +12,14 @@ html(lang="en")
         div(class='row')
             div(class='offset-2 pt-3')
                 h2 Suggested Question Detail
+                
+                - if(error)
+                    ul(class='list-group ul-style')
+                        h5 Arreglar los siguientes errores: 
+                        - for errors in error
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times; 
         br
         br
         form(id='form', action='/suggestedQuestion/new', method='POST')
@@ -40,7 +48,10 @@ html(lang="en")
                     
                 div(class='col')
                     Label(class='label-form-style') Category
-                    input(type='text' class='form-control' name='category' value= '#{pregunta.category}' readonly)
+                     - var categoryChange = JSON.parse(JSON.stringify(pregunta.category))[0]
+                    input(type='text' class='form-control'  value= '#{categoryChange.name}' readonly)
+                    input(type='hidden' class='form-control' name='category' value= '#{categoryChange._id}' readonly)
+            
             br
             div(class='row form-group offset-2')
                 div(class='col')

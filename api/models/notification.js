@@ -4,8 +4,8 @@ const notificationSchema =  mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     subject: {type: String},
     message: {type: String},
-    creationDate: {type: Date},
-    sendDate: {type: Date}, 
+    sendDate: {type: String},
+    type: {type: String}
     game: {type: mongoose.Schema.Types.ObjectId, ref: 'game'}
 },{ 
     versionKey: false

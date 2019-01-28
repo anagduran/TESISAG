@@ -17,7 +17,7 @@ function getSuggestedQuestion(req,res,next){
                         }   
             
                 }).catch(err => {
-                    console.log(err);
+                    
                     res.status(500).json({error: err})
                 })
         }catch(error){
@@ -32,9 +32,10 @@ function getQuestionID(req,res,next){
    
     if(mongoose.Types.ObjectId.isValid(id)){
         suggestedQuestion.findById(id)
-                         
+                         .populate('category', ['name']) 
                          .exec()
-                         .then(questionByID =>{                
+                         .then(questionByID =>{ 
+                                        
                                     if(questionByID){ 
                                         res.status(200).render('suggested/suggestedDetail',{pregunta: questionByID})
                                         
@@ -52,14 +53,14 @@ function getQuestionID(req,res,next){
         res.status(404).json({message: "no valid entry for provided ID"})
     }
 }
-/*
-function deleteUserByID(req, res, next){
+
+function deleteQuestionByID(req, res, next){
     
-    const id = req.params.userID;    
-    console.log(id)
+    const id = req.params.questionID;    
+
     
     if(mongoose.Types.ObjectId.isValid(id)){
-        user.findByIdAndRemove(id).exec().then(result=>{
+        suggestedQuestion.findByIdAndRemove(id).exec().then(result=>{
             if(result){
                 res.status(200).json({message: "eliminado con exito"})      
             }
@@ -77,12 +78,12 @@ function deleteUserByID(req, res, next){
     }
 }
 
-*/
+
 function createQuestion(req,res, next){
     const id = req.params.questionID;
     if(mongoose.Types.ObjectId.isValid(id)){
         suggestedQuestion.findById(id)
-                         
+                         .populate('category', ['name']) 
                          .exec()
                          .then(questionByID =>{                
                                     if(questionByID){ 
@@ -119,7 +120,7 @@ function newQuestion(req, res) {
     var errors = req.validationErrors();
     
     if(errors){
-        suggestedQuestion.findById(id).exec().then(SQ => {
+        suggestedQuestion.findById(id).populate('category', ['name']).exec().then(SQ => {
             res.render('suggested/newSuggested', {error: errors , pregunta: SQ});
             return;
         });
@@ -140,6 +141,7 @@ function newQuestion(req, res) {
                 answer: req.body.options[0],
                 level: req.body.level,
                 status: estado,
+                category: req.body.category
               
 
  
@@ -150,11 +152,11 @@ function newQuestion(req, res) {
                 pregunta.save()
                         .then(nuevapregunta => {
                             question.findById(nuevapregunta._id)
-                            
-                            .exec()
-                            .then( newQ => {
-                                 res.status(201).render('question/questionDetail', {pregunta :newQ})
-                            })
+                                    .populate('category', ['name'])
+                                    .exec()
+                                    .then( newQ => {
+                                        res.status(201).render('question/questionDetail', {pregunta :newQ})
+                                    })
                         })
                         .catch(err => {
                             console.log(err);
@@ -182,4 +184,4 @@ function newQuestion(req, res) {
 
 }
 
-module.exports ={getSuggestedQuestion , getQuestionID, createQuestion, newQuestion};
+module.exports ={getSuggestedQuestion , getQuestionID, createQuestion, newQuestion, deleteQuestionByID};
