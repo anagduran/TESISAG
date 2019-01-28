@@ -2,11 +2,13 @@ import mongoose from 'mongoose'
 
 const notificationSchema =  mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    subject: {type: String},
-    message: {type: String},
-    sendDate: {type: String},
-    type: {type: String},
-    game: {type: mongoose.Schema.Types.ObjectId, ref: 'game'}
+    notification : [{
+        type: {type: String},
+        subject: {type: String},
+        message: { type: String},
+        date: {type: String}
+    }]
+   
 },{ 
     versionKey: false
 });

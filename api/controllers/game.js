@@ -1,19 +1,19 @@
 import mongoose from "mongoose"
 import game from "../models/game"
 import question from "../models/question"
-import diff from 'simple-array-diff'
+
 
 
 
 function newGame(req,res,next) {
-    
+    /*
     req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
     req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
     req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
+    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');*/
 
     var errors = req.validationErrors();
     if (errors){
@@ -31,17 +31,39 @@ function newGame(req,res,next) {
             var estadoDefault = "sin inicio"
             var ver = req.body.date;    
             var tiempo = req.body.time;
+            var timeN = tiempo.substring(0,2);
+            var totalT = timeN - 1;
+            var concatT = totalT + ':50'
             var cambioArr = [];
             cambioArr = req.body.preguntasCombo;
             var concatFecha = ver + 'T' + tiempo;
-            console.log(req.body.preguntasCombo);
+            console.log(req.body.subject);
+            console.log(req.body.subject2);
+            console.log(timeN);
+            console.log(req.body.message2);
+            console.log(req.body.message);
+
+
+
             const partida = new game({
                 _id: new mongoose.Types.ObjectId(),
                 title: req.body.title,
                 date: concatFecha,
                 questions: req.body.preguntasCombo,
                 prize: req.body.prize,
-                status: estadoDefault
+                status: estadoDefault,
+                notification: [{
+                    type: 1,
+                    subject: req.body.subject,
+                    message: req.body.message,
+                    date: concatT,
+                }, {
+                    type: 2,
+                    subject: req.body.subject2,
+                    message: req.body.message2,
+                    date: tiempo
+                }]
+               
                 });
                 
             

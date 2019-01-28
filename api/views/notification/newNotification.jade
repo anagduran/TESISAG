@@ -26,20 +26,42 @@ html(lang="en")
                                     span(aria-hidden="true")&times;
         br
         br
-        form(id='form', action='/category/new', method='POST' autocomplete="off")
+        form(id='form', action='/notification/new', method='POST' autocomplete="off")
             div(class='row offset-2')
                 div(class='form-group col-8')
-                    Label(class='label-form-style') Name 
-                    input(class='form-control' id='name', name='name', placeholder='type a name')
+                    Label(class='label-form-style') type
+                    input(class='form-control' id='name', name='type', placeholder='type a name')
 
                 div(class='form-group col-8')
-                    Label(class='label-form-style') Description    
-                    input(size='65' class='form-control' id='description', name='description', placeholder='type a description')
-            
+                    Label(class='label-form-style') subject  
+                    input(size='65' class='form-control' id='description', name='subject', placeholder='type a description')
+
+                div(class='form-group col-8')
+                    Label(class='label-form-style') message  
+                    input(size='65' class='form-control' id='description', name='message', placeholder='type a description')
+
+                div(class='form-group col-8')
+                    Label(class='label-form-style') date
+                    input(size='65' class='form-control' id='description', name='date', placeholder='type a description')
+                div(class='form-group col-8')
+                    Label(class='label-form-style') type
+                    input(class='form-control' id='name', name='type2', placeholder='type a name')
+
+                div(class='form-group col-8')
+                    Label(class='label-form-style') subject  
+                    input(size='65' class='form-control' id='description', name='subject2', placeholder='type a description')
+
+                div(class='form-group col-8')
+                    Label(class='label-form-style') message  
+                    input(size='65' class='form-control' id='description', name='message2', placeholder='type a description')
+
+                div(class='form-group col-8')
+                    Label(class='label-form-style') date
+                    input(size='65' class='form-control' id='description', name='date2', placeholder='type a description')
             br
             div(class='row offset-2')
                 div(class='col d-flex justify-content-between')                  
-                    a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    a(href='/' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
                         
 script(type="text/javascript").

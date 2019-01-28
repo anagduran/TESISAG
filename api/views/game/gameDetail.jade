@@ -38,6 +38,40 @@ html(lang="en")
                 Label(class='label-form-style3') Prize                
                 input(type='text' size='50' class='form-control' value= '#{partida.prize}' readonly)
         
+        div(class='row form-group offset-2')
+            label(class='label-form-style3') Notification 1  
+        div(class='row form-group offset-2')
+            div(class='col') 
+                Label(class='label-form-style3') subject
+                - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                input(type='text' size='50' class='form-control' value= '#{changeNotification.subject}' readonly)
+            div(class='col') 
+                Label(class='label-form-style3') message
+                - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                input(type='text' size='50' class='form-control' value= '#{changeNotification.message}' readonly)
+            div(class='col') 
+                Label(class='label-form-style3') Time
+                - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                input(type='text' size='50' class='form-control' value= '#{changeNotification.date}' readonly)
+        
+        
+        div(class='row form-group offset-2')
+            label(class='label-form-style3') Notification 2
+        div(class='row form-group offset-2')
+            div(class='col')                
+                Label(class='label-form-style3') subject
+                - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
+                input(type='text' size='50' class='form-control' value= '#{changeNotification.subject}' readonly)
+            div(class='col') 
+                Label(class='label-form-style3') message
+                - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
+                input(type='text' size='50' class='form-control' value= '#{changeNotification.message}' readonly)
+            div(class='col') 
+                Label(class='label-form-style3') Time
+                - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
+                input(type='text' size='50' class='form-control' value= '#{changeNotification.date}' readonly)
+
+        br
         div(class='row offset-2 form-group')
             div(class='col')
                 Label(class='label-form-style3') Questions

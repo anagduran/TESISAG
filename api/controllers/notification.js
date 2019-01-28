@@ -10,7 +10,7 @@ function getNotifications(req,res,next){
                 .then(notificacion => { 
                    
                         if(notification) {                        
-                            res.status(200).json({notificaciones: notificacion})
+                            res.status(200).render('notification/newNotification')
                         }else{
                             res.status(404).json({message: 'no hay variables'})
                         }   
@@ -30,11 +30,18 @@ function newNotification(req,res,next) {
     
     const notificacion = new notification({
         _id: new mongoose.Types.ObjectId(),
+       notification: [{
+        type: req.body.type,
         subject: req.body.subject,
         message: req.body.message,
-        creationDate: req.body.creationDate,
-        sendDate: req.body.sendDate,
-        game: req.body.game
+        date: req.body.date, 
+       }, {
+        type: req.body.type2,
+        subject: req.body.subject2,
+        message: req.body.message2,
+        date: req.body.date2,
+        
+       }]
       
         
         });
