@@ -37,10 +37,9 @@ html(lang="en")
             div(class='col')
                 Label(class='label-form-style3') Prize                
                 input(type='text' size='50' class='form-control' value= '#{partida.prize}' readonly)
-        
+
         div(class='row form-group offset-2')
-            label(class='label-form-style3') Notification 1  
-        div(class='row form-group offset-2')
+            label(class='label-form-style d-flex align-items-center') Notification 1
             div(class='col') 
                 Label(class='label-form-style3') subject
                 - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
@@ -56,8 +55,7 @@ html(lang="en")
         
         
         div(class='row form-group offset-2')
-            label(class='label-form-style3') Notification 2
-        div(class='row form-group offset-2')
+            label(class='label-form-style d-flex align-items-center') Notification 2
             div(class='col')                
                 Label(class='label-form-style3') subject
                 - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]

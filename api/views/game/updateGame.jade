@@ -30,18 +30,13 @@ html(lang="en")
             div(class='col offset-2')    
                 form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
-
+                    label(class='label-form-style') DATA
+                    hr
                     div(class='row')
                         div(class='col')
                             label(class='label-form-style') Title
                             input(class='form-control' id='title', name='title', type='text', value='#{partida.title}')
-                        
-                        div(class='col')
-                            label(class='label-form-style') Status
-                            input(class='form-control' id='status', name='status', type='text', value='#{partida.status}' readonly)         
-            
-                    br
-                    div(class='row')
+
                         div(class='col')
                             - var separar = partida.date.substring(0,10);
                             label(class='label-form-style') Date
@@ -78,9 +73,43 @@ html(lang="en")
                         div(class='col')
                             label(class='label-form-style') Prize
                             input(class='form-control' id='prize', name='prize', type='text', value='#{partida.prize}')
-                    
 
+                        div(class='col')
+                            label(class='label-form-style') Status
+                            input(class='form-control' id='status', name='status', type='text', value='#{partida.status}' readonly)         
+                   
                     br
+                    label(class='label-form-style') NOTIFICATIONS
+                    hr
+                    div(class='row') 
+                        label(class='label-form-style d-flex align-items-center') Notification 1
+                        
+                        div(class='col')
+                            label(class='label-form-style') Subject
+                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.subject}')
+
+
+                        div(class='col')
+                            label(class='label-form-style') Message
+                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.message}')
+                    br 
+                    div(class='row')    
+                        label(class='label-form-style d-flex align-items-center') Notification 2
+                        
+                        div(class='col')
+                            label(class='label-form-style') Subject
+                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
+                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.subject}')
+                        
+                        div(class='col')
+                            label(class='label-form-style') Message
+                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.message}')
+                    br
+                    label(class='label-form-style') QUESTIONS
+                    hr
                     div(class= 'row')
                         div(class= 'col')
                             label(class='label-form-style') Low Questions
