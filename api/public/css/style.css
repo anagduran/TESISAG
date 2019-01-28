@@ -1,6 +1,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-family: 'Calibri';
 }
 
 form.link {
@@ -8,7 +9,7 @@ form.link {
     display: inline-block;
 }
 
- #button1{
+ .button{
  
     border: none;
     display: inline-block;
@@ -18,6 +19,8 @@ form.link {
     
     
 };
+
+
 .prueba{
     margin: 0;
 }
@@ -26,8 +29,12 @@ form.link {
     text-decoration: none;
 }
 
-#icon-edit{ color:#009933;}
+.icon-edit{ color:#009933;}
 
+.not-active { 
+    color:#009933;
+    pointer-events: none; 
+}
 
 #icon-see{ color:#df80ff;}
 
@@ -43,54 +50,20 @@ form.link {
 };
 
 
-.h1All {
-   
-    font-family: 'Calibri';
-}
-
-/*.tbody-style {
-    height: 200px;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-*/
-thead {
-    width: 500px;
-  
-}
- 
-tbody {
-    width: 500px;
-   
-}
-
 .estilo-divtable
 {padding-bottom: 0px;
     width: 100%;}
 
 .tableAll{
-    display: block;    
-    font-size: 20px;
+      
+    font-size: 18px;  
     text-align: center; 
-    margin: 0 auto;    
-    width: 5000px;
-    
-    /*height: 300px;*/
-    
 }
 
-td {font-size: 16px;}
+td {font-size: 16px; text-align: center;}
 
-.tableAll td:nth-child(1) {
-    width: 15%;
-}
-.tableAll td:nth-child(2) {
-    width: 100%;
-}
-
-.tableAll td:nth-child(3) {
-    width: 100%;
-    
+footer {
+    display: block;
 }
 
 .back-style{
@@ -98,11 +71,17 @@ td {font-size: 16px;}
     text-decoration: none; 
 }
 
-.label-form-style{
+.label-form-style{    
+    font-size: 18x;
+    font-weight: bold;
+    
+}
+
+.label-form-style3{
     font-family: 'Calibri';
     font-size: 20px;
     font-weight: bold;
-    padding-right: 80px;
+  
 }
 
 .label-form-style2{
@@ -132,6 +111,21 @@ td {font-size: 16px;}
     margin: 0;
 }
 
+.div-input-style5 {
+    padding-left: 25px;
+    margin: 0;
+}
+
+.div-input-style6 {
+    padding-left: 81px;
+    margin: 0;
+}
+
+.div-input-style7 {
+    padding-left: 70px;
+    margin: 0;
+}
+
 .label-radio-button-style{
     font-family: 'Calibri';
     font-size: 20px;
@@ -147,29 +141,20 @@ td {font-size: 16px;}
     padding-left: 20px;
 }
 .select-style {
-    width: 30%;
+    width: 85%;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    position: relative;
-    left: -105px;
+    
+    
 }
 
-.select-style2{
-    width: 30%;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    position: relative;
-    right: -460px;
-    top: -120px;
-}
 
 
 .input-style{
-    background: #ffffff;
-    color: black;
-    padding-left: 10px;
+    position: relative;
+    width: 70%;
+    left: 30px;
     
 }
 .button-change-style-der{
@@ -195,10 +180,8 @@ td {font-size: 16px;}
 }
 
 .row-style{
-    display: inline-block;
-    padding-top: 70px;
-    padding-left: 100px;
-    padding-bottom: 20px;
+    display: fixed;
+    top: -40px;
 }
 
 .alert-style {    
@@ -216,8 +199,72 @@ td {font-size: 16px;}
    
    margin-top: 50px;
 }
+.panel-style {
+    width: 800px;
+}
 
-/*ESTILOS MENU LATERAL*/
+.level-label-form-style{
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 140px;
+
+}
+.div-style-form-game{
+    height: 38px;
+    width: 100px;
+}
+.input-group {
+    position: relative;
+    left: 160px;
+    top: -35px;
+    display: table;
+    border-collapse: separate;
+}
+.div-input-position {
+    position: relative;
+    top: -30px;
+    
+}
+.input-group .input-group-addon {
+    border-radius : 4px ;
+    border-color: #d2d6de;
+    background-color: #fff;
+}
+
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    position: relative;    
+    left:-1px;
+}
+.input-group-addon:first-child {
+    border-right: 0;
+}
+
+
+.input-calendar-style {
+    position: relative !important; 
+    width: 300px !important;
+    top: -10px !important;
+    left: 89px !important;
+    height: 50px !important;
+
+}
+
+.ampm-style {
+    position: relative;
+    left: 200px;
+    top: -38px;
+}
+
 
 .nav-side-menu {
     overflow: auto;
@@ -265,7 +312,7 @@ td {font-size: 16px;}
 }
 .nav-side-menu ul .active,
 .nav-side-menu li .active {
-  /*border-left: 3px solid #d19b3d;*/
+
   background-color: #4f5b69;
 }
 
@@ -348,4 +395,73 @@ td {font-size: 16px;}
       display: block;
     
     }
+}
+
+
+
+span.multiselect-native-select {
+	position: relative
+}
+span.multiselect-native-select select {
+	border: 0!important;
+	clip: rect(0 0 0 0)!important;
+	height: 1px!important;
+	margin: -1px -1px -1px -3px!important;
+	overflow: hidden!important;
+	padding: 0!important;
+	position: absolute!important;
+	width: 1px!important;
+	left: 50%;
+	top: 30px
+}
+.multiselect-container {
+	position: absolute;
+	list-style-type: none;
+	margin: 0;
+	padding: 0
+}
+.multiselect-container .input-group {
+	margin: 5px
+}
+.multiselect-container>li {
+	padding: 0
+}
+.multiselect-container>li>a.multiselect-all label {
+	font-weight: 700
+}
+.multiselect-container>li.multiselect-group label {
+	margin: 0;
+	padding: 3px 20px 3px 20px;
+	height: 100%;
+	font-weight: 700
+}
+.multiselect-container>li.multiselect-group-clickable label {
+	cursor: pointer
+}
+.multiselect-container>li>a {
+	padding: 0
+}
+.multiselect-container>li>a>label {
+	margin: 0;
+	height: 100%;
+	cursor: pointer;
+	font-weight: 400;
+	padding: 3px 0 3px 30px
+}
+.multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox {
+	margin: 0
+}
+.multiselect-container>li>a>label>input[type=checkbox] {
+	margin-bottom: 5px
+}
+.btn-group>.btn-group:nth-child(2)>.multiselect.btn {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px
+}
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+	padding: 3px 20px 3px 40px
+}
+.form-inline .multiselect-container li a label.checkbox input[type=checkbox], .form-inline .multiselect-container li a label.radio input[type=radio] {
+	margin-left: -20px;
+	margin-right: 0
 }

@@ -1,0 +1,151 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        
+
+        
+        
+
+        title Game Detail
+    include ../menuLateral.jade
+
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 pt-3')
+                h2 Game Detail
+        
+        br
+        div(class='row form-group offset-2')
+            div(class='col')
+                Label(class='label-form-style3') Title
+                input(type='text' size='50' class='form-control' value= '#{partida.title}' readonly)
+        
+            
+            div(class='col')
+                Label(class='label-form-style3') Date and Time                
+                input(type='text' size='50' class='form-control' value= '#{partida.date}' readonly)
+            
+            
+            div(class='col')
+                Label(class='label-form-style3') Status                
+                input(type='text' size='50' class='form-control' value= '#{partida.status}' readonly)
+
+            
+            div(class='col')
+                Label(class='label-form-style3') Prize                
+                input(type='text' size='50' class='form-control' value= '#{partida.prize}' readonly)
+        
+        div(class='row offset-2 form-group')
+            div(class='col')
+                Label(class='label-form-style3') Questions
+        br
+        div(class='row offset-2 form-group')
+            div(class='col')
+                div(id="accordion")
+                    div(class="panel-style card text-center")
+                        div(class="card-header") 
+                            a(class="card-link" data-toggle="collapse" href="#collapseOne") Question 1
+                        
+                    
+                        div(id="collapseOne" class="collapse show" data-parent="#accordion")                                                       
+                            -var questionChange0 = JSON.parse(JSON.stringify(partida.questions))[0]                                   
+                            div(class="card-body") #{questionChange0.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseTwo") Question 2
+                            
+                            div(id="collapseTwo" class="collapse show" data-parent="#accordion")
+                                - var questionChange1 = JSON.parse(JSON.stringify(partida.questions))[1] 
+                                div(class="card-body") #{questionChange1.question}
+
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseThree") Question 3
+                            
+                            div(id="collapseThree" class="collapse show" data-parent="#accordion")
+                                - var questionChange2 = JSON.parse(JSON.stringify(partida.questions))[2] 
+                                div(class="card-body") #{questionChange2.question}
+
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseFour") Question 4
+                            
+                            div(id="collapseFour" class="collapse show" data-parent="#accordion")
+                                - var questionChange3 = JSON.parse(JSON.stringify(partida.questions))[3]
+                                div(class="card-body") #{questionChange3.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseFive") Question 5
+                            
+                            div(id="collapseFive" class="collapse show" data-parent="#accordion")
+                                - var questionChange4 = JSON.parse(JSON.stringify(partida.questions))[4]
+                                div(class="card-body") #{questionChange4.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseSix") Question 6
+                            
+                            div(id="collapseSix" class="collapse show" data-parent="#accordion")
+                                - var questionChange5 = JSON.parse(JSON.stringify(partida.questions))[5]
+                                div(class="card-body") #{questionChange5.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseSeven") Question 7
+                            
+                            div(id="collapseSeven" class="collapse show" data-parent="#accordion")
+                                - var questionChange6 = JSON.parse(JSON.stringify(partida.questions))[6]
+                                div(class="card-body") #{questionChange6.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseEight") Question 8
+                            
+                            div(id="collapseEight" class="collapse show" data-parent="#accordion")
+                                - var questionChange7 = JSON.parse(JSON.stringify(partida.questions))[7]
+                                div(class="card-body") #{questionChange7.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseNine") Question 9
+                            
+                            div(id="collapseNine" class="collapse show" data-parent="#accordion")
+                                - var questionChange8 = JSON.parse(JSON.stringify(partida.questions))[8]
+                                div(class="card-body") #{questionChange8.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseTen") Question 10
+                            
+                            div(id="collapseTen" class="collapse show" data-parent="#accordion")
+                                - var questionChange9 = JSON.parse(JSON.stringify(partida.questions))[9]
+                                div(class="card-body") #{questionChange9.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseEleven") Question 11
+                            
+                            div(id="collapseEleven" class="collapse show" data-parent="#accordion")
+                                - var questionChange10 = JSON.parse(JSON.stringify(partida.questions))[10]
+                                div(class="card-body") #{questionChange10.question}
+                    
+                    div(class="panel-style card text-center")
+                            div(class="card-header")
+                                a(class="card-link" data-toggle="collapse" href="#collapseTwelve") Question 12
+                            
+                            div(id="collapseTwelve" class="collapse show" data-parent="#accordion")
+                                - var questionChange11 = JSON.parse(JSON.stringify(partida.questions))[11]
+                                div(class="card-body") #{questionChange11.question}
+        br
+        div(class='row')
+            div(class='col-sm-4 offset-1')        
+                a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back
+
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='/js/bootstrap.js')
+        script(type="text/javascript" src='/js/bootstrap.min.js')

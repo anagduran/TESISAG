@@ -1,0 +1,79 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='/js/bootstrap.js')
+        script(type="text/javascript" src='/js/bootstrap.min.js')
+        title New User
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 pt-3')
+                h2 New User
+
+                - if(error2 > 0)
+                     li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert") Nickname already exists   
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;
+                - if(error)
+                    ul(class='list-group ul-style') 
+                        - for errors in error
+                            li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;
+                            
+
+
+        br
+        form(id='form', action='/user/new', method='POST' autocomplete="off")
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Nickname              
+                    input(id='nickname', class='form-control' name='nickname' placeholder='type a nickname')
+                    
+
+                div(class='col')
+                    Label(class='label-form-style') Country Code
+                    select(id='country_code', class='form-control', name='country_code')
+                        option +58
+                        option +57
+                        option +51
+                        option +49
+                        option +54
+                        option +55
+                        option +52
+                        option +53
+                        option +56
+                        option +598
+                        option +594
+                        option +595
+                        option +1
+                        option +502
+                        option +503
+                        option +504
+                        option +505
+                        option +506
+                        option +507
+
+
+            
+                div(class='col')
+                    Label(class='label-form-style') Phone                
+                    input(id='phone', class='form-control', name='phone' placeholder='type a phone number')
+
+            br
+            div(class='row form-group offset-2')
+                div(class='col d-flex justify-content-between') 
+                    a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
+            
+            
+                
+              
+
+           

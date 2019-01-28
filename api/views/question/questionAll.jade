@@ -4,57 +4,67 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
-        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
-        link(rel="stylesheet" href="../public/css/bootstrap.css")
-        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.css")       
+        link(rel="stylesheet", type= "text/css", href="/css/style.css")
+        link(rel="stylesheet" href="/css/bootstrap.css")
+        link(rel="stylesheet" href="/css/dataTables.bootstrap4.min.css")
+       
         
-        
-        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
-        script(type="text/javascript" src='../public/js/bootstrap.js')
-        script(type="text/javascript" src='../public/js/bootstrap.min.js')
-        
-        title  Preguntas
+        title  Questions
     include ../menuLateral.jade
 
-    div(class='col-md-3 offset-2 row-style')
-        h2(class='h1All') Preguntas
-    
-    div(class='estilo-divtable col-9 offset-2 table-responsive' style="")  
-         table(id='tablaUno' class='tableAll table table-striped table-sm table-bordered')       
-            thead
-                tr.head
-                    th(class='thead-light') #
-                    th(class='thAll') Pregunta 
-                    th(class='thAll') Nivel
-                    th(class='thAll') Categoria
-                    th(class='thAll') Acciones
         
-            tbody(class='tbody-style')
-     
-                -var i= -1
-       
-      
-        
-                each pregunta in preguntas 
-                    - ++i   
-                    tr(class=(i % 2 == 0) ? 'odd' : 'even')  
-                        td(id='tdUno') #{i}
-                        td #{pregunta.question} 
-                        td #{pregunta.level}
-                        td
-                            -var j= 0
-                            - each categoria in pregunta.category                   
-                                -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
-                                - ++j
-                                p #{categoryChange2.name},
+    div(class='col-md-3 offset-2 pt-4')
+        h2 Questions
+    br
+    div(class='content')
+        div(class='row offset-2')
+            div(class='col-11')               
+                    div(class='box-body')        
+                        table(id='tablaUno' class='table table-sm table-bordered table-striped')
+                            thead
+                                tr
+                                    th(class='tableAll') #
+                                    th(class='tableAll') Question 
+                                    th(class='tableAll') Level
+                                    th(class='tableAll') Status
+                                     th(class='tableAll') Category
+                                    th(class='tableAll') Actions
+                        
+                            tbody
                     
-                        td 
-                            a(href='/question/#{pregunta._id}') 
-                                i(id='icon-see' class='fa fa-eye')
-                            a(href='/question/edit/#{pregunta._id}') 
-                                i(id='icon-edit' class='fas fa-pencil-alt')   
-                            button(type='button' id='button1' class='fas fa-trash-alt' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                                                     
-                            
+                                -var i= -1
+                    
+                    
+                        
+                                each pregunta in preguntas 
+                                    - ++i   
+                                    tr  
+                                        td #{i}
+                                        td #{pregunta.question} 
+                                        td #{pregunta.level}
+                                        td #{pregunta.status}
+                                        td
+                                            -var j= 0
+                                            - each categoria in pregunta.category                   
+                                                -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
+                                                - ++j
+                                                p #{categoryChange2.name}  
+                                    
+                                        td 
+                                            a(href='/question/#{pregunta._id}') 
+                                                i(id='icon-see' class='fa fa-eye')
+                                            - if(pregunta.status === 'not available') {
+                                                a(class='no-active') 
+                                                    i(class='fas fa-pencil-alt icon-edit')  
+                                            -} 
+                                            -else {
+                                                a(href='/question/edit/#{pregunta._id}') 
+                                                    i( class='fas fa-pencil-alt icon-edit')  
+                                            -}
+                                            - if (pregunta.status === 'not available') 
+                                                button(disabled="true" type='button' class='fas fa-trash-alt button')                                                     
+                                            - if  (pregunta.status === 'available')
+                                                button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                                                     
 
 
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
@@ -71,16 +81,18 @@ html(lang="en")
                     a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
                         
     div(class='row')
-        div(class='col-sm-4 offset-2')        
-            a(href='/' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Atras           
-   
+        div(class='col-sm-4 offset-2') 
+            a(href='/question/create' class='btn btn-outline-success' role='button') New Question      
+                   
 
-        div(class='col-sm-4 col-sm-offset-6')
-            a(href='/question/create' class='btn btn-outline-success' role='button') Nueva Categoria
+            
     
-    script(type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/r-2.2.2/datatables.min.js")  
+    script(type="text/javascript" src='js/bootstrap.js') 
+    script(type="text/javascript" src="js/jquery.min.js")
+    script(type="text/javascript" src="js/bootstrap.min.js")
+    script(type="text/javascript" src="js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="js/dataTables.bootstrap4.min.js")
     
-
 script(type="text/javascript").
 
     $(document).ready(function() {
@@ -88,7 +100,7 @@ script(type="text/javascript").
     } );
 
 
-     function obtenervalor(id) {
+    function obtenervalor(id) {
         $('#lista').val(id);       
     }
 

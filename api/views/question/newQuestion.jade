@@ -3,41 +3,92 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
-        title NEW QUESTION
-    body
-        h1 New Question
-        - if(error)
-            ul
-                - for errors in error
-                    li  #{errors.msg}  
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+       
+        title New Question
+    include ../menuLateral.jade
+    
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 pt-3')
+                h2 New Question
+
+                - if(error)
+                    ul(class='list-group ul-style')
+                        h5 Arreglar los siguientes errores: 
+                        - for errors in error
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times; 
+
+
+        br
         form(id='form', action='/question/new', method='POST' autocomplete="off")
-            input(id='question', class='change' name='question', placeholder='Question')
-            input(id='option1', class='change', name='options', placeholder='Option #1')
-            input(id='option2', class='change', name='options', placeholder='Options #2')
-            input(id='option3', class='change', name='options', placeholder='Options #3')
-            input(id='answer', class='change', name='answer', placeholder='Answer')
-            label Bajo 
-            input(type='radio', name='level', value='bajo')            
-            label Medio 
-            input(type='radio', name='level', value='medio')
-            label Alto 
-            input(type='radio', name='level', value='alto')
-            br
-            -each categoria, i in categorias
-                label #{categoria.name}
-                input(type='checkbox' name='categoriasCombo' value="#{categoria._id}")
-                br
-            input(type='submit', value='new question')     
+            div(class='row offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Question                
+                    input(id='question', class='form-control' name='question' placeholder='type question')
+
+            br   
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Option 1                 
+                    input(id='option1', class='form-control', name='options' placeholder='type option 1')
+
+                div(class='col')
+                    Label(class='label-form-style') Option 2                
+                    input(id='option2', class='form-control', name='options' placeholder='type option 2')
+                
             
+                div(class='col')
+                    Label(class='label-form-style') Option 3                         
+                    input(id='option3', class='form-control', name='options' placeholder='type option 3')
+            
+            br
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Answer                
+                    input(id='answer', class='form-control', name='answer' placeholder='type answer, debe ser la misma a la opcion 3')
+            
+                div(class='col')
+                    Label(class='level-label-form-style') Level
+                    br
+                    label(class= "label-radio-button-style") Low 
+                    input(type='radio', name='level', value='bajo')      
+                                        
+                    label(class= "label-radio-button-style2") Medium
+                    input(type='radio', name='level', value='medio')
+
+                    label(class= "label-radio-button-style2") High 
+                    input(type='radio', name='level', value='alto')
+
+            
+            br
+            div(class='form-group col-8 offset-2')
+                Label(class='level-label-form-style') Categories
+                -each categoria, i in categorias
+                    div(class='col-sm-10')
+                       div(class="form-check form-check-inline")
+                        input(type='checkbox' class='form-check-input' name='categoriasCombo' value="#{categoria._id}") 
+                        label(class="form-check-label" for="gridCheck1") #{categoria.name}
+                           
+            br
+            div(class='row form-group offset-2')  
+                div(class='col d-flex justify-content-between')                         
+                    a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
+                
+            
+
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+        script(type="text/javascript" src='js/bootstrap.js')
+        script(type="text/javascript" src='.s/bootstrap.min.js')
                 
               
                   
                    
                      
                    
-           
-
             
                
                

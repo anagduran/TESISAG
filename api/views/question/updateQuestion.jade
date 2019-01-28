@@ -4,88 +4,104 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
-        link(rel="stylesheet", type= "text/css", href="../../public/css/style.css")
-        link(rel="stylesheet" href="../../public/css/bootstrap.css")
-        title Editar Pregunta
+       
+        title Update Question
 
     include ../menuLateral.jade
 
     div(class='container')
         div(class='row')
-            div(class='col offset-2 row-style')
-                h2 Editar Pregunta
+            div(class='col offset-2 pt-3')
+                h2 Update Question
                 - if(error)
                     ul(class='list-group ul-style')  
                         h5 Arreglar los siguientes errores:
                         - for errors in error
-                            li(class='list-group-item list-group-item-danger')  #{errors.msg}  
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;
 
-
+        br
         div(class='row')
             div(class='col offset-2')    
                 form(id='form', action='/question/update/#{pregunta._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{pregunta._id}') 
 
-                    div
-                        label(class='label-form-style') Pregunta
-                        input(class='input-style form-control' id='question', name='question', type='text', value='#{pregunta.question}')
+                    div(class='col')
+                        label(class='label-form-style') Question
+                        input(class='form-control' id='question', name='question', type='text', value='#{pregunta.question}')
                     br
-                    div
-                        label(class='label-form-style') Opción 1
-                        input(class='input-style form-control' id='option1', name='options', type='text', value='#{pregunta.options[0]}')
+                    div(class="row")                    
+                        div(class='col')
+                            label(class='label-form-style') Option 1
+                            input(class='form-control' id='option1', name='options', type='text', value='#{pregunta.options[0]}')
+
+                   
+                        div(class='col')
+                            label(class='label-form-style') Option 2
+                            input(class='form-control' id='option2', name='options', type='text', value='#{pregunta.options[1]}')
+                    br
+                    div(class="row")  
+                        div(class='col')
+                            label(class='label-form-style') Option 3
+                            input(class='form-control' id='option3', name='options', type='text', value='#{pregunta.options[2]}')
+
+                        
+                        div(class='col')
+                            label(class='label-form-style') Answer
+                            input(class='form-control' id='answer', name='answer', type='text', value='#{pregunta.answer}')
 
                     br
-                    div
-                        label(class='label-form-style') Opción 2
-                        input(class='input-style form-control' id='option2', name='options', type='text', value='#{pregunta.options[1]}')
-                    br
-                    div
-                        label(class='label-form-style') Opción 3
-                        input(class='input-style form-control' id='option3', name='options', type='text', value='#{pregunta.options[2]}')
+                    div(class="row")
+                        div(class='col')
+                            label(class='label-form-style') Question Level
+                            input(class='form-control' id='level1', name='level', type='text', value='#{pregunta.level}', readonly="readonly")
 
-                    br
-                    div
-                        label(class='label-form-style') Respuesta
-                        input(class='input-style form-control' id='answer', name='answer', type='text', value='#{pregunta.answer}')
+                    
 
+                        div(class='col')
+                            Label(class='label-form-style') Levels System
+                            br
+                            label(class= "label-radio-button-style") Low 
+                            input(type='radio', name='level2', value='bajo'  onChange='cambioValorComboNivel();')            
+                            label(class=" label-radio-button-style2") Medium 
+                            input(type='radio', name='level2', value='medio'  onChange="cambioValorComboNivel();")
+                            label(class ="label-radio-button-style2") High
+                            input(type='radio', name='level2', value='alto'  onChange="cambioValorComboNivel();") 
+        
                     br
-                    div
-                        label(class='label-form-style') Nivel
-                        input(class='input-style form-control' id='level1', name='level', type='text', value='#{pregunta.level}', readonly="readonly")
+                    div(class="row")
+                        label(class='label-form-style') Categories
+                    
+                    div(class="row")      
+                        div(class="col d-flex justify-content-start")                 
+                            select(class="select-style" id="origen" type='combobox' name='category' multiple)
+                                -each cat, i in pregunta.category                
+                                    option(value="#{cat._id}") #{cat.name} 
 
-                    br 
-
-                    div
-                        label(class= "label-radio-button-style") Bajo 
-                        input(type='radio', name='level2', value='bajo'  onChange='cambioValorComboNivel();')            
-                        label(class=" label-radio-button-style2") Medio 
-                        input(type='radio', name='level2', value='medio'  onChange="cambioValorComboNivel();")
-                        label(class ="label-radio-button-style2") Alto 
-                        input(type='radio', name='level2', value='alto'  onChange="cambioValorComboNivel();") 
-       
-                    br
-            
-                    label(class='label-form-style') Categoria(s)
-                    div                         
-                        select(class="select-style" id="origen" type='combobox' name='category' multiple)
-                            -each cat, i in pregunta.category                
-                                option(value="#{cat._id}") #{cat.name} 
-                        div(class='button-change-style-der')
-                            input(type='button' id="pasar" value=' pasar a der')
-                        div(class="button-change-style-izq")
+                    
+                        div(class="col")                        
+                            input(type='button' id="pasar" value='pasar a der')                        
                             input(type='button' id="quitar" value='pasar a izq')
                     
-                        select(class="select-style2" id="destino" type='combobox' name='categoriaCombos2' multiple selected='selected') 
-                            
-                            -each categoria, i in categorias       
-                                option(value= "#{categoria._id}") #{categoria.name} 
+                    
+                        
 
+                    
+                        div(class="col")  
+                            label(class='label-form-style') Categories System
+                            select(class="select-style" id="destino" type='combobox' name='categoriaCombos2' multiple selected='selected') 
+                                
+                                -each categoria, i in categorias       
+                                    option(value= "#{categoria._id}") #{categoria.name} 
+                    br
+                    div(class='row')
+                        div(class='col d-flex justify-content-between')
+                            a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                            input(type='submit', class='input-style-update btn btn-success' value='Save' id='botonUpdate')
 
-                    div(class='div-style-end')
-                         a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancelar
-                         input(type='submit', class='input-style-update btn btn-success' value='Guardar cambios')
-                            
-                            
+                    
+        
                    
 
     script(type="text/javascript").

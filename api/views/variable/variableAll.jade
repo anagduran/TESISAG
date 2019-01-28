@@ -1,0 +1,110 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel="stylesheet", type= "text/css", href="/css/style.css")
+        link(rel="stylesheet" href="/css/bootstrap.css")
+        link(rel="stylesheet" href="/css/dataTables.bootstrap4.min.css")
+        
+        title  Settings
+    include ../menuLateral.jade
+
+    div(class='col-md-3 offset-2 pt-3')
+        h2 Settings
+    br
+    div(class='content')
+        div(class='row offset-2 pl-12')
+            div(class='col-10')               
+                    div(class='box-body')        
+                        table(id='tablaUno' class='table table-sm table-bordered table-striped')
+                            thead
+                                tr   
+                                    th(class='tableAll') #
+                                    th(class='tableAll') Title
+                                    th(class='tableAll') Description
+                                    th(class='tableAll') Actions
+                                    
+        
+                            tbody
+                    
+                                -var i= -1
+                    
+                    
+                        
+                                each variable in variableConfiguracion 
+                                    - ++i   
+                                    tr(class=(i % 2 == 0) ? 'odd' : 'even')  
+                                        td #{i}
+                                        td #{variable.title} 
+                                        td #{variable.description}
+                                        td 
+                                            a(href='/variable/#{variable._id}') 
+                                                i(id='icon-see' class='fa fa-eye')
+                                            a(href='/variable/edit/#{variable._id}') 
+                                                i( class='fas fa-pencil-alt icon-edit')   
+                                            button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= variable._id onclick='obtenervalor(`#{variable._id}`);')                                                     
+
+                    
+    div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
+        div(class="modal-dialog" role='document')
+            div(class="modal-content")
+                div(class='modal-header')
+                    h5 Eliminar Variable   
+                    input(type='text' id='lista' style="visibility:hidden")                                        
+                div(class="modal-body")
+                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    form(action="" class= "link" method="POST" id='formEliminar')
+                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
+    br                   
+    div(class='row')
+        div(class='col-sm-4 offset-2') 
+            a(href='/variable/create' class='btn btn-outline-success' role='button') New Setting     
+                   
+    script(type="text/javascript" src='js/bootstrap.js') 
+    script(type="text/javascript" src="js/jquery.min.js")
+    script(type="text/javascript" src="js/bootstrap.min.js")
+    script(type="text/javascript" src="js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="js/dataTables.bootstrap4.min.js")
+    
+      
+    
+
+script(type="text/javascript").
+
+    $(document).ready(function() {
+            $('#tablaUno').DataTable();
+    } );
+
+    function obtenervalor(id) {
+        $('#lista').val(id);       
+    }
+
+    $('#eliminar').click(function(){
+        var id = document.getElementById('lista').value;            
+        var action = '/variable/delete/' 
+        var action2 = '?_method=DELETE'
+        var total = action.concat(id,action2);   
+        console.log(total);
+        document.getElementById("formEliminar").action = total;  
+        
+        $.ajax({      
+                url: total,
+                type: 'DELETE',
+                statusCode: {
+                    200: function () {
+                        alert('ALOOO2');
+                        console.log("200 - Success");
+                    },
+                    404: function() {
+                        console.log('400 error');
+                    }
+                },
+            });
+        document.getElementById("formEliminar").submit();
+    });
+                       
+

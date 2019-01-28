@@ -1,0 +1,175 @@
+
+import 
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+       
+        
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")        
+        link(rel='stylesheet' href='/css/bootstrap-datepicker.min.css')
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/css/select2.min.css")       
+        link(rel="stylesheet", type= "text/css", href="/css/bootstrap-select.css")       
+        
+        
+        
+       
+
+
+        
+        title New Game
+    include ../menuLateral.jade
+    
+    div(class='container-fluid')
+        div(class='row')
+            div(class='col offset-2 pt-3')
+                h2 New Game
+
+                - if(error)
+                    ul(class='list-group ul-style')
+                        h5 Arreglar los siguientes errores: 
+                        - for errors in error
+                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times; 
+
+        br
+        form(id='form', action='/game/new', method='POST' autocomplete="off")
+            div(class='row form-group offset-2')
+                div(class='col')
+                    Label(class='label-form-style') Title
+                    input(class='form-control' id='title', name='title' placeholder='type a title')
+                
+                div(class='col')
+                    Label(class='label-form-style') Date           
+                    input(class="form-control pull-right" id="datepicker" placeholder='pick a date' name='date')           
+                
+                div(class='col')
+                    Label(class='label-form-style') Time                   
+                    select(id='hora', class='form-control', name='time')
+                        option 05:00
+                        option 06:00
+                        option 07:00
+                        option 08:00
+                        option 09:00
+                        option 10:00
+                        option 11:00
+                        option 12:00
+                        option 13:00
+                        option 14:00
+                        option 15:00
+                        option 16:00
+                        option 17:00
+                        option 18:00
+                        option 19:00
+                        option 20:00
+                        option 21:00
+                        option 22:00
+                        option 23:00
+                        
+                div(class='col')
+                    Label(class='label-form-style') Prize                
+                    input(class='form-control' id='prize', name='prize' placeholder='type a prize')
+
+            br
+            div(class='row form-group offset-2')
+                div(class='col')                    
+                        Label(class='label-form-style')  Low Level Questions
+                        select(id='lowq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                            -each bajo in bajos
+                                option(value='#{bajo._id}') #{bajo.question}
+
+            br
+            div(class='row form-group offset-2')
+                div(class='col')                     
+                    Label(class='label-form-style')  Medium Level Questions
+                    select(id='mediumq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                        -each medio in medios
+                            option(value='#{medio._id}') #{medio.question}
+                        
+            br
+            div(class='row form-group offset-2')
+                div(class='col')                   
+                    Label(class='label-form-style')  High Level Questions
+                    select(id='highq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
+                       -each alto in altos
+                            option(value='#{alto._id}') #{alto.question} 
+            br
+            div(class='row form-group offset-2')
+                div(class='col d-flex justify-content-between')       
+                    a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    input(type='submit', class='btn btn-outline-success'  value='Save')
+                
+
+        script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        script(type="text/javascript" src="/js/moment.min.js") 
+        script(type="text/javascript" src='/js/bootstrap.min.js')
+        script(type='text/javascript' src='/js/bootstrap-datepicker.min.js')
+       
+        
+        
+        
+        script(type="text/javascript" src='/js/bootstrap.js')
+        script(type="text/javascript" src='/js/select2.full.min.js')
+
+      
+
+
+script(type="text/javascript").
+
+    $(document).ready(function() {
+        $('#datepicker').datepicker();
+
+        $('.select2').select2();
+
+       
+
+        var last_valid_selection = null;
+        var last_valid_selection2 = null;
+        var last_valid_selection3 = null;
+
+        $("#lowq").change(function() {
+            if ($(this).val().length > 4) {
+              $(this).val(last_valid_selection);
+            } else {
+              last_valid_selection = $(this).val();
+            }          
+        });
+
+        $("#mediumq").change(function() {
+            if ($(this).val().length > 4) {
+              $(this).val(last_valid_selection2);
+            } else {
+              last_valid_selection2 = $(this).val();
+            }          
+        });
+
+        $("#highq").change(function() {
+            if ($(this).val().length > 4) {
+              $(this).val(last_valid_selection2);
+            } else {
+              last_valid_selection2 = $(this).val();
+            }          
+        });
+        
+   
+       
+    });
+
+    
+
+   
+    
+
+  
+        
+  
+
+   
+
+    
+
+   
+    

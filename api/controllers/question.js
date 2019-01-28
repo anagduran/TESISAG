@@ -33,7 +33,7 @@ function newQuestion(req, res) {
         let signoUno= '¿'
         let signoDos= '?'
         let preg = signoUno + cambio + signoDos;        
-        
+        let estado ='available'
         const pregunta = new question({
                 
                 _id: new mongoose.Types.ObjectId(),
@@ -41,15 +41,22 @@ function newQuestion(req, res) {
                 options: req.body.options,
                 answer: req.body.answer,
                 level: req.body.level,
-                category: req.body.categoriasCombo
+                status: estado,
+                category: req.body.categoriasCombo,
 
+ 
             }); 
         
             //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 
             try {
                 pregunta.save()
                         .then(nuevapregunta => {
-                        res.status(201).render('question/questionDetail', {pregunta :nuevapregunta})
+                            question.findById(nuevapregunta._id)
+                            .populate('category', ['name'])
+                            .exec()
+                            .then( newQ => {
+                                 res.status(201).render('question/questionDetail', {pregunta :newQ})
+                            })
                         })
                         .catch(err => {
                             console.log(err);
@@ -184,14 +191,20 @@ const id = mongoose.Types.ObjectId(req.body._id)
         
     } 
     else {
+        console.log(req.body.category);
         if (mongoose.Types.ObjectId.isValid(id)) {
             question.where({'_id': id})
                     .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category}})
                     .exec()
                     .then(result =>{                    
                         if(result.nModified===1){
-                        res.status(200).render( 'question/questionDetail', { pregunta: req.body})                      
-                        }
+                            question.findById(id)
+                            .populate('category', ['name'])
+                            .exec()
+                            .then( cuestion => { 
+                                    res.status(200).render( 'question/questionDetail', { pregunta: cuestion})                      
+                                })
+                        }   
                         else {                        
                             res.status(404).json({message: 'no encontrado'})
                         }
@@ -220,8 +233,14 @@ function editQuestion(req,res){
             question.findById(id)
             .populate('category', ['name'])
             .exec()
-            .then(questionByID =>{                
-                var result = diff (questionByID.category, categories)
+            .then(questionByID =>{   
+                console.log('categorias de la pregunta');   
+                console.log(questionByID.category);
+                console.log('categorias');
+                console.log(categories);
+                var result = diff (questionByID.category, categories);
+                console.log('diff');
+                console.log(result);
                 res.render('question/updateQuestion', {pregunta: questionByID, categorias: result.added})
             }).catch(err=> {
                 res.status(500).json({message: "Error en el servidor"})

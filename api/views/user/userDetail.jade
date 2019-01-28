@@ -1,0 +1,54 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+       
+        title User Detail 
+    include ../menuLateral.jade
+
+    div(class='container')
+        div(class='row')
+            div(class='col offset-2 pt-3')
+                h2 User Detail
+
+        br
+        div(class='row form-group offset-2')
+            div(class='col')
+                Label(class='label-form-style') Nickname                
+                input(type='text' class='form-control' value= '#{usuario.nickname}' readonly)
+            
+           
+            div(class='col')
+                Label(class='label-form-style') Country Code                
+                input(type='text' class='form-control' value= '#{usuario.country_code}' readonly)
+            
+            div(class='col')
+                Label(class='label-form-style') Phone                
+                input(type='text' class='form-control' value= '#{usuario.phone}' readonly)
+        br
+        div(class='row form-group offset-2')
+            div(class='col')
+                Label(class='label-form-style') Shared Code
+                input(type='text' class='form-control' value= '#{usuario.share_code}' readonly)
+
+
+            div(class='col')
+                Label(class='label-form-style') Extra Life
+                input(type='text' class='form-control' value= '#{usuario.extra_life}' readonly)
+
+            div(class='col')
+                Label(class='label-form-style') Balance
+                input(type='text' class='form-control' value= '#{usuario.balance}' readonly)
+
+            
+            div(class='col')
+                Label(class='label-form-style') Referral Code
+                input(type='text' class='form-control' value= '#{usuario.balance}' readonly)
+        br
+        div(class='row offset-2')
+            div(class='col d-flex justify-content-start')        
+                a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Users
+
+        br

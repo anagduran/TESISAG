@@ -4,10 +4,9 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
-        link(rel="stylesheet", type= "text/css", href="../public/css/style.css")
-        link(rel="stylesheet" href="../public/css/bootstrap.css")
-        script(src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")        
+        link(rel="stylesheet", type= "text/css", href="/css/style.css")
+        link(rel="stylesheet" href="/css/bootstrap.css")
+        script(src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous")      
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
         
 
@@ -24,9 +23,28 @@ html(lang="en")
                     li(data-toggle="collapse" data-target="#categories" class="collapsed active")
                         a(href='/category') 
                             i(class='fas fa-hashtag fa-lg') 
-                            p(class='estilo') Categories
-                    
+                            p(class='estilo') Categories                    
                     li(data-toggle="collapse" data-target="#questions" class="collapsed active")
                         a(href='/question') 
                             i(class='far fa-question-circle fa-lg') 
                             p(class='estilo') Questions
+                    li(data-toggle="collapse" data-target="#levels" class="collapsed active")
+                        a(href='/level') 
+                            i(class='fas fa-signal fa-lg') 
+                            p(class='estilo') Levels
+                    li(data-toggle="collapse" data-target="#games" class="collapsed active")
+                        a(href='/game') 
+                            i(class='fas fa-gamepad fa-lg fa-lg') 
+                            p(class='estilo') Games
+                    li(data-toggle="collapse" data-target="#users" class="collapsed active")
+                        a(href='/user') 
+                            i(class='fas fa-users fa-lg fa-lg') 
+                            p(class='estilo') Users
+                    li(data-toggle="collapse" data-target="#settings" class="collapsed active")
+                        a(href='/suggestedQuestion') 
+                            i(class='fas fa-plus-circle fa-lg') 
+                            p(class='estilo') Suggested Questions
+                    li(data-toggle="collapse" data-target="#settings" class="collapsed active")
+                        a(href='/variable') 
+                            i(class='fas fa-cog fa-lg fa-lg') 
+                            p(class='estilo') Settings
