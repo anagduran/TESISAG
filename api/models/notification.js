@@ -5,7 +5,7 @@ const notificationSchema =  mongoose.Schema({
     subject: {type: String},
     message: {type: String},
     sendDate: {type: String},
-    type: {type: String}
+    type: {type: String},
     game: {type: mongoose.Schema.Types.ObjectId, ref: 'game'}
 },{ 
     versionKey: false
