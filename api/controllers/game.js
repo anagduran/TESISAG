@@ -1,19 +1,61 @@
 import mongoose from "mongoose"
 import game from "../models/game"
 import question from "../models/question"
+import fcm from 'fcm-node'
+import user from '../models/user'
+import cronometro from 'node-cron'
+
+function createPushNotification(game) {
+    var serverkey = 'AAAA98IRcAQ:APA91bF8dcgsiMKqsuLz65q87e8tIiGUz_VFUHEeAjH_wAA3L_FK5tanevbY9ykqI08A2KUWXeYX_S1FeB91MaiZNVtc_O8IVsCHJbRDQmUl8-cBdcjcCcE1xacSBxA7YNaroe3MUQ3R';
+    var FCM = new fcm(serverkey);
+    var cambio = JSON.parse(JSON.stringify(game.notification))[0];
+    var titulo = cambio.subject;
+    var mensaje = cambio.message;
+    var cambio2 = JSON.parse(JSON.stringify(game.notification))[1];
+    var titulo2 = cambio.subject;
+    var mensaje2 = cambio.message;
+    var hora2 = cambio.date.split(":");
+   
+    var hora = cambio.date.substring(0,1);
+    var mes = parseInt(game.date.substring(0,1));
+    var dia = parseInt(game.date.substring(3,4));
+  
+
+    if(dia === 0){
+        var diaC = game.date.substring(4,5);
+    } else {
+  
+        var diaT = game.date.substring(3,5);
+    }
+
+    if (mes === 0) {
+
+        var mesC = game.date.substring(1,2);
+    }else {
+     
+        var mesT = game.date.substring(0,2);
+    }
+
+    var total = '50 ' + hora + ' * * *';
+    
 
 
+    cronometro.schedule('* * * * *' ,()=> {
+        console.log('aqi a las 3 y 58')
+    })
+
+}
 
 
 function newGame(req,res,next) {
     
-    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
+    /*req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
     req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
     req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
+    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');*/
 
     var errors = req.validationErrors();
     if (errors){
@@ -76,7 +118,9 @@ function newGame(req,res,next) {
                                     .populate('questions', ['question'])
                                     .exec()
                                 .then( newG => {
+                                        createPushNotification(newG);
                                       res.status(200).render('game/gameDetail',{partida: newG})
+                                      
                                 })
                             })
                             .catch(err => {
