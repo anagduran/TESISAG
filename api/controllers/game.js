@@ -6,14 +6,14 @@ import question from "../models/question"
 
 
 function newGame(req,res,next) {
-    /*
+    
     req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
     req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
     req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');*/
+    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
 
     var errors = req.validationErrors();
     if (errors){
@@ -145,13 +145,13 @@ function updateGameByID(req, res, next){
     //const id = mongoose.Types.ObjectId(req.body._id)
     const id = req.params.gameID;
 
-   /*req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
+    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
     req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
     req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');*/
+    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
 
     var errors = req.validationErrors();
     if (errors){
