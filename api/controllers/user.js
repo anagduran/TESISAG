@@ -3,7 +3,7 @@ import user from "../models/user"
 import random from 'randomstring'
 
 
-function newUser(req,res,next) {
+function newUser(req,res) {
     var username = req.body.nickname;
 
     req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');

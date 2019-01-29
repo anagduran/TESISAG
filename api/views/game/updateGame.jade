@@ -48,11 +48,11 @@ html(lang="en")
                             Label(class='label-form-style') Time                  
                             select(id='hora', class='form-control', name='time')
                                 option #{separar2}
-                                option 05:00
-                                option 06:00
-                                option 07:00
-                                option 08:00
-                                option 09:00
+                                option 5:00
+                                option 6:00
+                                option 7:00
+                                option 8:00
+                                option 9:00
                                 option 10:00
                                 option 11:00
                                 option 12:00
@@ -87,13 +87,13 @@ html(lang="en")
                         div(class='col')
                             label(class='label-form-style') Subject
                             - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
-                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.subject}')
+                            input(class='form-control' id='prize', name='subject', type='text', value='#{changeNotification.subject}')
 
 
                         div(class='col')
                             label(class='label-form-style') Message
                             - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
-                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.message}')
+                            input(class='form-control' id='prize', name='message', type='text', value='#{changeNotification.message}')
                     br 
                     div(class='row')    
                         label(class='label-form-style d-flex align-items-center') Notification 2
@@ -101,12 +101,12 @@ html(lang="en")
                         div(class='col')
                             label(class='label-form-style') Subject
                             - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
-                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.subject}')
+                            input(class='form-control' id='prize', name='subject2', type='text', value='#{changeNotification.subject}')
                         
                         div(class='col')
                             label(class='label-form-style') Message
                             - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
-                            input(class='form-control' id='prize', name='prize', type='text', value='#{changeNotification.message}')
+                            input(class='form-control' id='prize', name='message2', type='text', value='#{changeNotification.message}')
                     br
                     label(class='label-form-style') QUESTIONS
                     hr
@@ -135,7 +135,7 @@ html(lang="en")
                                     option(value= "#{bajos._id}") #{bajos.question} 
                     
                     br
-
+                    hr
                     div(class= 'row')
                         div(class='col')
                             label(class='label-form-style') Medium Question
@@ -163,6 +163,7 @@ html(lang="en")
                                 -each medios, i in medio    
                                     option(value= "#{medios._id}") #{medios.question} 
                     br
+                    hr
                     div(class= 'row')
                         div(class='col')
                             label(class='label-form-style') High Questions

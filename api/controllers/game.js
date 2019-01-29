@@ -217,7 +217,22 @@ function updateGameByID(req, res, next){
                                          date: concatFecha, 
                                          questions: req.body.preguntasCombo, 
                                          prize: req.body.prize, 
-                                         status: req.body.status}})
+                                         status: req.body.status,
+                                        notification: [{
+                                            type: 1,
+                                            subject: req.body.subject,
+                                            message: req.body.message,
+                                            date: concatT
+
+                                        },{
+                                            type: 2,
+                                            subject: req.body.subject2,
+                                            message: req.body.message2,
+                                            date: tiempo
+                                        }]
+
+                                        
+                                        }})
                         .exec()
                         .then(result =>{                
                             if(result.nModified===1){  
