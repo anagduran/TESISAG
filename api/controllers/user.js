@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import user from "../models/user"
 import random from 'randomstring'
+import randomToken from 'random-token'
 
 
 function newUser(req,res) {
@@ -15,6 +16,7 @@ function newUser(req,res) {
   
     
    var codigo = random.generate(4);
+   var device = randomToken(16);
     var errors = req.validationErrors();
     user.find({'nickname': username})
         .exec()
@@ -33,7 +35,8 @@ function newUser(req,res) {
                 phone: req.body.phone,
                 share_code: codigo,
                 extra_life: Defatult,
-                balance: Defatult
+                balance: Defatult,
+                id_device: device
                 
                 });
             

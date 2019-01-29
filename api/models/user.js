@@ -14,7 +14,8 @@ const userSchema = mongoose.Schema({
 	share_code: { type: String},
 	referral_code: { type: String},
 	extra_life: { type: Number},
-	balance: { type: Number }
+	balance: { type: Number },
+	id_device: {type: String}
 },
 {
     versionKey: false
