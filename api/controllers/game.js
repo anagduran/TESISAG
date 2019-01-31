@@ -8,46 +8,69 @@ import cronometro from 'node-cron'
 function createPushNotification(game) {
     var serverkey = 'AAAA98IRcAQ:APA91bF8dcgsiMKqsuLz65q87e8tIiGUz_VFUHEeAjH_wAA3L_FK5tanevbY9ykqI08A2KUWXeYX_S1FeB91MaiZNVtc_O8IVsCHJbRDQmUl8-cBdcjcCcE1xacSBxA7YNaroe3MUQ3R';
     var FCM = new fcm(serverkey);
+    
     var cambio = JSON.parse(JSON.stringify(game.notification))[0];
     var titulo = cambio.subject;
     var mensaje = cambio.message;
+    
     var cambio2 = JSON.parse(JSON.stringify(game.notification))[1];
     var titulo2 = cambio.subject;
     var mensaje2 = cambio.message;
-    var hora2 = cambio.date.split(":");
+    
+    var hora = cambio.date.split(":");
+    var mesC = "";
+    var diaC= "";
    
-    var hora = cambio.date.substring(0,1);
+   
     var mes = parseInt(game.date.substring(0,1));
     var dia = parseInt(game.date.substring(3,4));
-  
-
-    if(dia === 0){
-        var diaC = game.date.substring(4,5);
-    } else {
-  
-        var diaT = game.date.substring(3,5);
-    }
-
-    if (mes === 0) {
-
-        var mesC = game.date.substring(1,2);
-    }else {
-     
-        var mesT = game.date.substring(0,2);
-    }
-
-    var total = '50 ' + hora + ' * * *';
     
+    if(dia === 0){
+        if(mes === 0) {
+            diaC = game.date.substring(4,5);
+            mesC = game.date.substring(1,2); 
+        } else {
+            mesC = game.date.substring(0,2);
+            diaC = game.date.substring(4,5);
+        }
+       
+    } else {
+        if(mes === 0) {
+            diaC = game.date.substring(3,5);
+            mesC = game.date.substring(1,2); 
+        } else {
+            mesC = game.date.substring(0,2);
+            diaC = game.date.substring(3,5);
+        }
+       
+    }
 
+    var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC;
 
     cronometro.schedule('* * * * *' ,()=> {
-        console.log('aqi a las 3 y 58')
+        console.log('aqi a las 3 y 58');
+        var message = {
+            to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
+            notification: {
+                title: titulo,
+                body: mensaje
+            }
+        };
+        
+        FCM.send(message, (err,response) => {
+            if (err) {
+                console.log("Something has gone wrong!", err);
+            } else {
+                console.log("Successfully sent with response: ", response);
+            }
+        })
+
     })
 
 }
 
 
-function newGame(req,res,next) {
+function newGame(req,res) {
     
     /*req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
@@ -381,5 +404,6 @@ function editGame(req,res){
         })
     })
 }
+
 
 module.exports ={editGame, newGame, getGames, getGameID, updateGameByID, deleteGameByID, createGame};
