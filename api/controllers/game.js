@@ -14,10 +14,11 @@ function createPushNotification(game) {
     var mensaje = cambio.message;
     
     var cambio2 = JSON.parse(JSON.stringify(game.notification))[1];
-    var titulo2 = cambio.subject;
-    var mensaje2 = cambio.message;
+    var titulo2 = cambio2.subject;
+    var mensaje2 = cambio2.message;
     
     var hora = cambio.date.split(":");
+    var hora2 = cambio2.date.split(":");
     var mesC = "";
     var diaC= "";
    
@@ -46,7 +47,7 @@ function createPushNotification(game) {
     }
 
     var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC;
-
+    // ENVIO NOTIFICACION TIPO 1
     cronometro.schedule('* * * * *' ,()=> {
         console.log('aqi a las 3 y 58');
         var message = {
@@ -61,7 +62,30 @@ function createPushNotification(game) {
             if (err) {
                 console.log("Something has gone wrong!", err);
             } else {
-                console.log("Successfully sent with response: ", response);
+                console.log("Successfully sent with response:", response);
+            }
+        })
+
+    })
+
+     // ENVIO NOTIFICACION TIPO 2
+     var total2 = '0 ' + hora2[0] + ' ' + diaC + ' ' + mesC;
+     console.log(total2);
+     cronometro.schedule('* * * * *' ,()=> {
+        console.log('aqi a las 3 y 58');
+        var message = {
+            to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
+            notification: {
+                title: titulo2,
+                body: mensaje2
+            }
+        };
+        
+        FCM.send(message, (err,response) => {
+            if (err) {
+                console.log("Something has gone wrong!", err);
+            } else {
+                console.log("Successfully sent with response:", response);
             }
         })
 
@@ -72,13 +96,17 @@ function createPushNotification(game) {
 
 function newGame(req,res) {
     
-    /*req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
+    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
     req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
     req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
     req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');*/
+    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
+    req.check("subject").notEmpty().withMessage("El campo de subject no puede estar vacio");
+    req.check("message").notEmpty().withMessage("El campo de message no puede estar vacio");
+    req.check("subject2").notEmpty().withMessage("El campo de subject no puede estar vacio");
+    req.check("message2").notEmpty().withMessage("El campo de message no puede estar vacio");
 
     var errors = req.validationErrors();
     if (errors){
@@ -102,6 +130,9 @@ function newGame(req,res) {
             var cambioArr = [];
             cambioArr = req.body.preguntasCombo;
             var concatFecha = ver + 'T' + tiempo;
+            var totalT2 = timeN - 0;
+            var concatT2 = totalT2 + ':00'
+       
 
 
 
@@ -121,7 +152,7 @@ function newGame(req,res) {
                     type: 2,
                     subject: req.body.subject2,
                     message: req.body.message2,
-                    date: tiempo
+                    date: concatT2
                 }]
                
                 });
@@ -219,6 +250,10 @@ function updateGameByID(req, res, next){
     req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
     req.check('prize').matches('[0-9]').withMessage('Solo numeros');
     req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
+    req.check("subject").notEmpty().withMessage("El campo de subject no puede estar vacio");
+    req.check("message").notEmpty().withMessage("El campo de message no puede estar vacio");
+    req.check("subject2").notEmpty().withMessage("El campo de subject no puede estar vacio");
+    req.check("message2").notEmpty().withMessage("El campo de message no puede estar vacio");
 
     var errors = req.validationErrors();
     if (errors){
@@ -260,6 +295,8 @@ function updateGameByID(req, res, next){
         var timeN = tiempo.substring(0,2);
         var totalT = timeN - 1;
         var concatT = totalT + ':50'
+        var totalT2 = timeN - 0;
+        var concatT2 = totalT2 + ':00'
 
 
 
@@ -295,7 +332,7 @@ function updateGameByID(req, res, next){
                                             type: 2,
                                             subject: req.body.subject2,
                                             message: req.body.message2,
-                                            date: tiempo
+                                            date: concatT2
                                         }]
 
                                         
@@ -307,6 +344,7 @@ function updateGameByID(req, res, next){
                                 .populate('questions', ['question'])
                                 .exec()
                                 .then(juego => {
+                                    createPushNotification(juego);
                                     res.status(200).render( 'game/gameDetail' , { partida: juego})    
                                 })
                             }   
