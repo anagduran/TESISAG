@@ -4,6 +4,10 @@ body {
     font-family: 'Calibri';
 }
 
+#myChart{
+    width: 500px !important;
+    height: 500px !important;
+}
 form.link {
  
     display: inline-block;

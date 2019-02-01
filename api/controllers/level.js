@@ -1,12 +1,14 @@
-
+import question from '../models/question'
 
 function getLevel(req,res) {
 
-
-    res.render('level/levelIndex',{
-        title: 'API CONTROL PANEL',
-        message: 'aqui en el index del control panel de trivia'
+    question.aggregate([
+		{"$group" : {_id:"$level", count:{$sum:1}}}
+	]).exec().then(result =>{
+        
+        res.render('level/levelIndex',{ total: result})
     })
+   
 }
 
 module.exports ={getLevel};

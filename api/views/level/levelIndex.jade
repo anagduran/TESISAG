@@ -26,21 +26,48 @@ html(lang="en")
             
                 div(class="box-body offset-2")
                     canvas(id="myChart" width="400" height="400")
-                    
+    
+    
+    div(class='offset-2')
+        -var cambio = JSON.parse(JSON.stringify(total))[0]
+        -var cambio2 = JSON.parse(JSON.stringify(total))[1]
+        -var cambio3 = JSON.parse(JSON.stringify(total))[2]
+        input(type='hidden' value = '#{cambio._id}' id='position1')
+        input(type='hidden' value = '#{cambio2._id}' id='position2')
+        input(type='hidden' value = '#{cambio3._id}' id='position3')
+
+        -var cambio4 = JSON.parse(JSON.stringify(total))[0]
+        -var cambio5 = JSON.parse(JSON.stringify(total))[1]
+        -var cambio6 = JSON.parse(JSON.stringify(total))[2]
+        input(type='hidden' value = '#{cambio4.count}' id='position4')
+        input(type='hidden' value = '#{cambio5.count}' id='position5')
+        input(type='hidden' value = '#{cambio6.count}' id='position6')
+
         script(type="text/javascript" src='js/bootstrap.js') 
         script(type="text/javascript" src="js/jquery.min.js")
         script(type="text/javascript" src="js/bootstrap.min.js")
         script(type="text/javascript" src="js/Chart.min.js")
         
     script(type="text/javascript").
+        Chart.defaults.global.defaultFontSize = 40;
+        var level1 = document.getElementById("position1").value;
+        var level2 = document.getElementById("position2").value;
+        var level3 = document.getElementById("position3").value;
+    
+
+        var count1 = document.getElementById("position4").value;
+        var count2 = document.getElementById("position5").value;
+        var count3 = document.getElementById("position6").value;
+    
+
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ["Red  ", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: [level1 , level2, level3],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# of Levels',
+                    data: [count1, count2, count3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -61,14 +88,22 @@ html(lang="en")
                 }]
             },
             options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
+                title: {
+                    display: true,
+                    text: 'System Levels',
+                    fontSize: 40
+                   
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        fontSize: 40
+                    }
                 }
+            
             }
         }); 
+
+   
             
        
