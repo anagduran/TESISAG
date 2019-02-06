@@ -8,6 +8,7 @@ import level from './routes/level'
 import index from './routes/index'
 
 
+
 export default app => {
     app.use('/',index)
     app.use('/category', category)
@@ -17,6 +18,6 @@ export default app => {
     app.use('/user', user)
     app.use('/suggestedQuestion', suggestedQuestion)
     app.use('/level', level)
-    
+   
         
 }

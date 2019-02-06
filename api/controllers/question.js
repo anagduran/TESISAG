@@ -43,6 +43,7 @@ function newQuestion(req, res) {
                 level: req.body.level,
                 status: estado,
                 category: req.body.categoriasCombo,
+                created_at: new Date().toISOString()
 
  
             }); 

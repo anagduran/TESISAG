@@ -13,35 +13,62 @@ html(lang="en")
     include ../menuLateral.jade
 
 
-
-
-
-
-
-    div(class="box box-danger")
-            div(class="box-header with-border offset-2")
-                h3(class="box-title") Donut Chart
-
-                
-            
-                div(class="box-body offset-2")
-                    canvas(id="myChart" width="400" height="400")
-    
-    
     div(class='offset-2')
-        -var cambio = JSON.parse(JSON.stringify(total))[0]
-        -var cambio2 = JSON.parse(JSON.stringify(total))[1]
-        -var cambio3 = JSON.parse(JSON.stringify(total))[2]
-        input(type='hidden' value = '#{cambio._id}' id='position1')
-        input(type='hidden' value = '#{cambio2._id}' id='position2')
-        input(type='hidden' value = '#{cambio3._id}' id='position3')
 
         -var cambio4 = JSON.parse(JSON.stringify(total))[0]
         -var cambio5 = JSON.parse(JSON.stringify(total))[1]
         -var cambio6 = JSON.parse(JSON.stringify(total))[2]
+        
         input(type='hidden' value = '#{cambio4.count}' id='position4')
         input(type='hidden' value = '#{cambio5.count}' id='position5')
         input(type='hidden' value = '#{cambio6.count}' id='position6')
+        input(type='hidden' value = '#{totalQ}' id='totalQ')
+
+        -var cambio7 = JSON.parse(JSON.stringify(barras))[0]
+        -var cambio8 = JSON.parse(JSON.stringify(barras))[1]
+        -var cambio9 = JSON.parse(JSON.stringify(barras))[2]
+        input(type='hidden' value = '#{cambio7.count}' id='position7')
+        input(type='hidden' value = '#{cambio8.count}' id='position8')
+        input(type='hidden' value = '#{cambio9.count}' id='position9')
+
+    div(class='col-md-3 offset-2 pt-3')
+        h2(class='h1All') Levels
+    br
+    div(class='container-fluid')
+        div(class="offset-2")
+            div(class="row")
+                div(class="col-lg-3 col-xs-6")                       
+                    div(class="card bg-orange")
+                        div(class="card-body") Total de Preguntas: #{totalQ}
+                            
+
+                div(class="col-lg-3 col-xs-6")                       
+                    div(class="card bg-aqua")
+                        div(class="card-body") Preguntas Nivel Alto: #{cambio4.count}
+        
+                
+                div(class="col-lg-3 col-xs-6")
+                       
+                    div(class="card bg-green")
+                        div(class="card-body") Preguntas Nivel Medio: #{cambio5.count}
+      
+                
+                div(class="col-lg-3 col-xs-6")
+                       
+                    div(class="card bg-red")
+                        div(class="card-body") Preguntas Nivel Bajo: #{cambio6.count}
+      
+    br
+    div(class="box box-danger")
+            div(class="box-header with-border offset-2")
+                div(class="box-body")                    
+                    canvas(id="myChart2" width="400" height="400" class='chart-custom')
+                    canvas(id="myChart" width="400" height="400" class='chart-custom')
+                
+                    
+    
+    
+   
 
         script(type="text/javascript" src='js/bootstrap.js') 
         script(type="text/javascript" src="js/jquery.min.js")
@@ -49,22 +76,23 @@ html(lang="en")
         script(type="text/javascript" src="js/Chart.min.js")
         
     script(type="text/javascript").
-        Chart.defaults.global.defaultFontSize = 40;
-        var level1 = document.getElementById("position1").value;
-        var level2 = document.getElementById("position2").value;
-        var level3 = document.getElementById("position3").value;
+        Chart.defaults.global.defaultFontSize = 30;
+        var Q = document.getElementById("totalQ").value;
+        console.log(Q);
     
 
         var count1 = document.getElementById("position4").value;
         var count2 = document.getElementById("position5").value;
         var count3 = document.getElementById("position6").value;
-    
+        var count4 = document.getElementById("position7").value;
+        var count5 = document.getElementById("position8").value;
+        var count6 = document.getElementById("position9").value;
 
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: [level1 , level2, level3],
+                labels: ["High " , "Medium ", "Low "],
                 datasets: [{
                     label: '# of Levels',
                     data: [count1, count2, count3],
@@ -99,10 +127,123 @@ html(lang="en")
                     labels: {
                         fontSize: 40
                     }
+                },
+                 layout: {
+                        padding: {
+                            left: 50,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
                 }
             
             }
         }); 
+
+        var ctx = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov","Dec"],
+                datasets: [{
+                    label: ' High ',
+                    backgroundColor: [
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)',
+                        'rgba(132, 208, 158, 0.8)'
+                    
+                    ],
+                    yAxisID: 'y-axis-1',
+                    data: [count4, 19, 3, 5, 2, 3],
+                }, { 
+                    label: ' Medium ',
+                    backgroundColor: [
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)',
+                        'rgba(215, 47, 158, 0.8)'
+                    ],
+                    yAxisID: 'y-axis-2',
+                    data: [count5, 20, 4, 6, 3, 4],
+                }, { 
+                    label: ' Low ',
+                    backgroundColor: [
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)',
+                        'rgba(61, 69, 150, 0.8)'
+                    ],
+                    yAxisID: 'y-axis-3',
+                    data: [count6, 10, 5, 7, 4, 5],
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Number of Questions Created in 2019'
+                },
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                },
+                scales: {
+                    
+                    yAxes: [{
+                        type: 'linear',
+                        id: 'y-axis-1',
+                        ticks: {
+                        max: 20,
+                        min: 1 
+                        }
+                    }, {
+                        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for
+                        id: 'y-axis-2',
+                        display: false,
+                        ticks: {
+                        max: 20,
+                        min: 1 
+                        }
+                    }, 
+                    {
+                        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        id: 'y-axis-3',
+                        display: false,
+                        ticks: {
+                        max: 20,
+                        min: 1 
+                        }
+                    }]
+                }
+            }
+        });
 
    
             

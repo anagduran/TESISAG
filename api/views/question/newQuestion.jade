@@ -8,7 +8,7 @@ html(lang="en")
         title New Question
     include ../menuLateral.jade
     
-    div(class='container')
+    div(class='container-fluid')
         div(class='row')
             div(class='col offset-2 pt-3')
                 h2 New Question
@@ -25,28 +25,28 @@ html(lang="en")
         br
         form(id='form', action='/question/new', method='POST' autocomplete="off")
             div(class='row offset-2')
-                div(class='col')
+                div(class='col-10')
                     Label(class='label-form-style') Question                
                     input(id='question', class='form-control' name='question' placeholder='type question')
 
             br   
             div(class='row form-group offset-2')
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Option 1                 
                     input(id='option1', class='form-control', name='options' placeholder='type option 1')
 
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Option 2                
                     input(id='option2', class='form-control', name='options' placeholder='type option 2')
                 
             
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Option 3                         
                     input(id='option3', class='form-control', name='options' placeholder='type option 3')
             
             br
             div(class='row form-group offset-2')
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Answer                
                     input(id='answer', class='form-control', name='answer' placeholder='type answer, debe ser la misma a la opcion 3')
             
@@ -66,15 +66,17 @@ html(lang="en")
             br
             div(class='form-group col-8 offset-2')
                 Label(class='level-label-form-style') Categories
+                hr
                 -each categoria, i in categorias
-                    div(class='col-sm-10')
-                       div(class="form-check form-check-inline")
+                    div(class='form-check form-check-inline')                             
                         input(type='checkbox' class='form-check-input' name='categoriasCombo' value="#{categoria._id}") 
-                        label(class="form-check-label" for="gridCheck1") #{categoria.name}
+                        label(class="form-check-label" for="gridCheck1") #{categoria.name} 
+                        
+                        
                            
             br
             div(class='row form-group offset-2')  
-                div(class='col d-flex justify-content-between')                         
+                div(class='col-10 d-flex justify-content-between')                         
                     a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
                 

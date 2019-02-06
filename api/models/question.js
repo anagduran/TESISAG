@@ -7,7 +7,8 @@ const questionSchema =  mongoose.Schema({
     answer: {type: String},
     level:  {type: String, lvl: ["bajo", "medio", "alto"]}, 
     status: {type: String, lvl: ["available", "not available"]},
-    category: [{type: mongoose.Schema.Types.ObjectId, ref: 'category'}]
+    category: [{type: mongoose.Schema.Types.ObjectId, ref: 'category'}],
+    created_at: {type: Date}
 },{ 
     versionKey: false
 });

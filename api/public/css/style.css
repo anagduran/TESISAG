@@ -1,13 +1,33 @@
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0 !important;
+    padding: 0;
     font-family: 'Calibri';
 }
 
-#myChart{
-    width: 500px !important;
-    height: 500px !important;
+#myChart {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 400px !important;
+    height: 400px !important;
+    position: absolute !important;
+    top: 216 !important;
+    bottom: 0 !important;
+    left: 860 !important;
+    right: 0 !important;
 }
+
+#myChart2{
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 600px !important;
+    height: 600px !important;
+    position: absolute !important;
+    
+    
+}
+
 form.link {
  
     display: inline-block;
@@ -114,6 +134,39 @@ footer {
     padding-left: 25px;
     margin: 0;
 }
+
+.bg-orange{
+    background-color: #ff944d !important;
+    border-color: #ff944d !important;
+}
+
+.card-body{
+    color: white;
+    font-family: 'Calibri';
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.bg-aqua{
+    background-color: #6699ff !important;
+    border-color: #6699ff  !important;
+    
+}
+
+.bg-green {
+    background-color: #88ff4d !important; 
+    border-color: #88ff4d  !important;
+    
+}
+
+.bg-red {
+    background-color:  #ff9980 !important; 
+    border-color:  #ff9980  !important;
+    
+   
+}
+
 
 .div-input-style5 {
     padding-left: 25px;

@@ -8,24 +8,24 @@ html(lang="en")
         title Category Detail 
     include ../menuLateral.jade
     
-    div(class='container')
+    div(class='container-fluid')
         div(class='row')
             div(class='offset-2 pt-3')
                 h2 Category Detail
         br
         br
         div(class='row form-group offset-2')
-            div(class='col')
+            div(class='col-8')
                 Label(class='label-form-style') Name
                 input(type='text' class='form-control' value= '#{categoria.name}' readonly)
         div(class='row form-group offset-2')
-            div(class='col')
+            div(class='col-8')
                 Label(class='label-form-style') Description
                 input(type='text' class='form-control' value= '#{categoria.description}' readonly)
 
         br
         div(class='row offset-2')
-            div(class='col d-flex justify-content-start')        
+            div(class='col-8 d-flex justify-content-start')        
                 a(href='/category' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Categories
 
 
