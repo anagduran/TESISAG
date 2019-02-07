@@ -5,6 +5,7 @@ import routes from './routes'
 import {thisTypeAnnotation} from 'babel-types'
 import bodyparser from 'body-parser'
 import path from 'path'
+import {connect} from './socket'
 
 //CONEXION A MONGODB
 mongoose.connect('mongodb://127.0.0.1/TRIVIA')
@@ -25,6 +26,7 @@ const server ={
 
 
         _server = app.listen(app.locals.config.PORT, ()=>{
+            connect()
             const address = _server.address()
             const host = address.address==='::'
             ? 'localhost'
