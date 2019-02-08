@@ -6,6 +6,7 @@ import user from './routes/user'
 import suggestedQuestion from './routes/suggestedQuestion'
 import level from './routes/level'
 import index from './routes/index'
+import execute from './routes/executeGame'
 
 
 
@@ -18,6 +19,7 @@ export default app => {
     app.use('/user', user)
     app.use('/suggestedQuestion', suggestedQuestion)
     app.use('/level', level)
+    app.use('/executeGame', execute)
    
         
 }
