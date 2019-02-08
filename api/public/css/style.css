@@ -522,3 +522,21 @@ span.multiselect-native-select select {
 	margin-left: -20px;
 	margin-right: 0
 }
+
+/*LOGIN STYLES*/
+
+/*.h2-custom {
+    text-align: center;
+}*/
+
+
+.wrapper {	
+	margin-top: 140px;
+    margin-bottom: 80px;
+}
+
+
+.label-custom {
+    color: black;
+    font-family: 'Calibri'
+}
