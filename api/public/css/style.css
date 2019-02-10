@@ -540,3 +540,12 @@ span.multiselect-native-select select {
     color: black;
     font-family: 'Calibri'
 }
+
+.div-alert-custom{
+    display: none;
+}
+
+.p-alert-custom{
+    margin: 0;
+    font-weight: bold;
+}

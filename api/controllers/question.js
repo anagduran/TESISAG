@@ -15,7 +15,6 @@ function newQuestion(req, res) {
     req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
     req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
     req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
-    req.check("answer").equals(req.body.options[2]).withMessage("la respuesta debe ser igual a la opcion 3")
     req.check('categoriasCombo').exists().withMessage('Debe seleccionar por lo menos una categoria')
   
    
@@ -39,7 +38,7 @@ function newQuestion(req, res) {
                 _id: new mongoose.Types.ObjectId(),
                 question: preg,
                 options: req.body.options,
-                answer: req.body.answer,
+                answer: req.body.options[2],
                 level: req.body.level,
                 status: estado,
                 category: req.body.categoriasCombo,
@@ -170,7 +169,6 @@ const id = mongoose.Types.ObjectId(req.body._id)
     req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
     req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
     req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
-    req.check("answer").equals(req.body.options[2]).withMessage("la respuesta debe ser igual a la opcion 3")
     req.check('category').exists().withMessage('Debe seleccionar por lo menos una categoria')
     
 
