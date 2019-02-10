@@ -72,7 +72,7 @@ html(lang="en")
                 div(class="modal-footer")
                     button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
                     form(action="" class= "link" method="POST" id='formEliminar')
-                        a(class="btn btn-success" href='#' name='POST' id='eliminar') Aceptar             
+                    a(class="btn btn-success" href='#' name='POST' id='eliminar') Aceptar             
                                
     
     br                  
@@ -110,7 +110,7 @@ script(type="text/javascript").
 
    
 
-     $('#eliminar').click(function(){
+    $('#eliminar').click(function(){
         var id = document.getElementById('lista').value;            
         var action = '/category/delete/' 
         var action2 = '?_method=DELETE'

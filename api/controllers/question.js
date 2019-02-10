@@ -79,17 +79,13 @@ function getQuestions(req, res)
     question.find()
             .populate('category', ['name']) 
             .exec()
-            .then(questions => { 
-               
-                    if(questions) {                        
-                        res.status(200).render( 'question/questionAll', { preguntas: questions})
-                    }else{
-                        res.status(404).json({message: 'no hay preguntas'})
-                    }   
+            .then(questions => {                                                
+                res.status(200).render( 'question/questionAll', { preguntas: questions})
+                    
         
             }).catch(err => {
                 console.log(err);
-                res.status(500).json({error: err})
+                res.status(404).json({error: err})
             })
     }catch(error){
         console.log(error)
@@ -141,19 +137,38 @@ function deleteQuestionByID(req,res){
     if(mongoose.Types.ObjectId.isValid(id)){
         question.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200)        
+                question.find()
+                        .populate('category', ['name']) 
+                        .exec()
+                        .then(questions => {                                                
+                            res.status(200).render( 'question/questionAll', { message: "eliminado con exito", preguntas: questions})  
+                        })      
             }
             else {
-                res.status(404).json({message: "ERROR ID"})
+                question.find()
+                        .populate('category', ['name']) 
+                        .exec()
+                        .then(questions => {                                                
+                            res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                        })      
             }
         })
         .catch(err =>{
-            console.log(err);
-            res.status(500).json({error: err})
+            question.find()
+            .populate('category', ['name']) 
+            .exec()
+            .then(questions => {                                                
+                res.status(500).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+            })
         })
     }
     else{
-        res.status(404).json({message: "error ID incorrecto"}) 
+        question.find()
+        .populate('category', ['name']) 
+        .exec()
+        .then(questions => {                                                
+            res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+        })      
     }
 }
 

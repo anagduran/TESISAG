@@ -12,6 +12,17 @@ html(lang="en")
         title  Questions
     include ../menuLateral.jade
 
+    - if(message)
+        div(class='row')
+            div(class="col-9 offset-2 alert alert-success fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+    
+    - if(error)
+        div(class='row')
+            div(class="col-9 offset-2 alert alert-danger fade show" role="alert") #{error}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;     
         
     div(class='col-md-3 offset-2 pt-4')
         h2 Questions
@@ -87,11 +98,11 @@ html(lang="en")
 
             
     
-    script(type="text/javascript" src='js/bootstrap.js') 
-    script(type="text/javascript" src="js/jquery.min.js")
-    script(type="text/javascript" src="js/bootstrap.min.js")
-    script(type="text/javascript" src="js/jquery.dataTables.min.js")
-    script(type="text/javascript" src="js/dataTables.bootstrap4.min.js")
+    script(type="text/javascript" src='/js/bootstrap.js') 
+    script(type="text/javascript" src="/js/jquery.min.js")
+    script(type="text/javascript" src="/js/bootstrap.min.js")
+    script(type="text/javascript" src="/js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="/js/dataTables.bootstrap4.min.js")
     
 script(type="text/javascript").
 
@@ -104,64 +115,19 @@ script(type="text/javascript").
         $('#lista').val(id);       
     }
 
-    function enviar(){       
-        var id = document.getElementById('lista').value;            
-        var action = '/question/delete/' 
-        var action2 = '?_method=DELETE'
-        var total = action.concat(id,action2);      
-        
-         $.ajax({      
-                url: total,
-                type: 'DELETE',
-                statusCode: {
-                    200: function () {
-                        alert('ALOOO');
-                        console.log("200 - Success");
-                    }
-                },
-            });
+   
 
-        document.getElementById("formEliminar").action = total;
-             
-       // document.getElementById("formEliminar").submit();
-          
-    }
-
-    $('#eliminar').click(function(){
+     $('#eliminar').click(function(){
         var id = document.getElementById('lista').value;            
         var action = '/question/delete/' 
         var action2 = '?_method=DELETE'
         var total = action.concat(id,action2);   
         console.log(total);
-       // document.getElementById("formEliminar").action = total;  
-        
-        $.ajax({      
-                url: total,
-                type: 'DELETE',
-                statusCode: {
-                    200: function () {
-                        alert('eliminado exitosamente desde ajax');
-                        console.log("200 - Success");
-                    },
-                    404: function() {
-                        console.log('400 error desde ajax');
-                    }
-                },
-            });
-        //document.getElementById("formEliminar").submit();
+        document.getElementById("formEliminar").action = total;       
+        document.getElementById("formEliminar").submit();
     });
 
-    function validarStatus(url) {    
-        var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', url, false);
-        xhr.send(null);
-        console.log('UNSENT', xhr.status);
-       /* if(xhr.status==200){
-            $('#mensajeExito').append(' Categoria eliminada existosamente')
-            $('#mensajeExito').css('visibility', 'visible')
-        }*/  
-           
-    };
+   
 
     
     function getParameterByName(name, url) {

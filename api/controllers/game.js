@@ -193,13 +193,10 @@ function getGames(req,res,next){
     try{
         game.find()
                 .exec()
-                .then(games => { 
-                   
-                        if(games) {                        
-                            res.status(200).render( 'game/gameAll', { partidas: games})
-                        }else{
-                            res.status(404).json({message: 'no hay preguntas'})
-                        }   
+                .then(games => {                 
+                                           
+                    res.status(200).render( 'game/gameAll', { partidas: games})
+                        
             
                 }).catch(err => {
                     console.log(err);
@@ -380,19 +377,28 @@ function deleteGameByID(req, res){
             if(mongoose.Types.ObjectId.isValid(id)){
                 game.findByIdAndRemove(id).exec().then(result=>{
                     if(result){
-                        res.status(200).json({message: "eliminado con exito"})      
+                        game.find()
+                            .exec()
+                            .then(games => {                               
+                                res.status(200).render( 'game/gameAll', { message: "eliminado con exito", partidas: games})
+                            })
+                 
                     }
                     else {
-                        res.status(404).json({message: "ERROR"})
+                        game.find()
+                            .exec()
+                            .then(games => {                               
+                                res.status(404).render( 'game/gameAll', { message: "Error con el servidor, intente nuevamente", partidas: games})
+                            })
                     }
                 })
                 .catch(err =>{
                     console.log(err);
-                    res.status(500).json({error: err})
+                    res.status(500).render( 'game/gameAll', { message: "Error con el servidor, intente nuevamente", partidas: games})
                 })
             }
             else{
-                res.status(404).json({message: "error ID incorrecto"}) 
+                res.status(404).render( 'game/gameAll', { message: "Error con el servidor, intente nuevamente", partidas: games})
             }
         })
 }
