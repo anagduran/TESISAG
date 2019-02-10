@@ -41,17 +41,11 @@ function getVariables(req,res,next){
     try{
         variable.find()
                 .exec()
-                .then(variables => { 
-                   
-                        if(variables) {                        
-                            res.status(200).render('variable/variableAll',{variableConfiguracion: variables})
-                        }else{
-                            res.status(404).json({message: 'no hay variables'})
-                        }   
-            
+                .then(variables => {                               
+                    res.status(200).render('variable/variableAll',{variableConfiguracion: variables})          
                 }).catch(err => {
                     console.log(err);
-                    res.status(500).json({error: err})
+                    res.status(404).json({error: err})
                 })
         }catch(error){
             console.log(error)
@@ -130,19 +124,34 @@ function deleteVariableByID(req, res, next){
     if(mongoose.Types.ObjectId.isValid(id)){
         variable.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200)     
+                variable.find()
+                .exec()
+                .then(variables => {                               
+                    res.status(200).render('variable/variableAll',{message: "eliminado con exito", variableConfiguracion: variables})          
+                })     
             }
             else {
-                res.status(404).json({message: "ERROR ID"})
+                variable.find()
+                .exec()
+                .then(variables => {                               
+                    res.status(404).render('variable/variableAll',{message: "Error con el servidor, intente nuevamente", variableConfiguracion: variables})          
+                }) 
             }
         })
         .catch(err =>{
-            console.log(err);
-            res.status(500).json({error: err})
+            variable.find()
+                .exec()
+                .then(variables => {                               
+                    res.status(500).render('variable/variableAll',{message: "Error con el servidor, intente nuevamente", variableConfiguracion: variables})          
+                }) 
         })
     }
     else{
-        res.status(404).json({message: "error ID incorrecto"}) 
+        variable.find()
+                .exec()
+                .then(variables => {                               
+                    res.status(404).render('variable/variableAll',{message: "Error con el servidor, intente nuevamente", variableConfiguracion: variables})          
+                }) 
     }
 }
 

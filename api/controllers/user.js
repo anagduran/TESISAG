@@ -61,13 +61,8 @@ function getUsers(req,res,next){
     try{
         user.find()
                 .exec()
-                .then(users => { 
-                   
-                        if(users) {                        
-                            res.status(200).render('user/userAll',{usuarios: users})
-                        }else{
-                            res.status(404).json({message: 'no hay variables'})
-                        }   
+                .then(users => {                                            
+                    res.status(200).render('user/userAll',{usuarios: users})         
             
                 }).catch(err => {
                     console.log(err);
@@ -152,19 +147,38 @@ function deleteUserByID(req, res, next){
     if(mongoose.Types.ObjectId.isValid(id)){
         user.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200)     
+                user.find()
+                .exec()
+                .then(users => {                                            
+                    res.status(200).render('user/userAll',{message: "Eliminado con exito",usuarios: users})         
+            
+                })    
             }
             else {
-                res.status(404).json({message: "ERROR ID"})
+                user.find()
+                .exec()
+                .then(users => {                                            
+                    res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+            
+                })    
             }
         })
         .catch(err =>{
-            console.log(err);
-            res.status(500).json({error: err})
+            user.find()
+                .exec()
+                .then(users => {                                            
+                    res.status(500).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+            
+                })   
         })
     }
     else{
-        res.status(404).json({message: "error ID incorrecto"}) 
+        user.find()
+                .exec()
+                .then(users => {                                            
+                    res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+            
+                })  
     }
 }
 

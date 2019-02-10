@@ -11,6 +11,19 @@ html(lang="en")
         title  Settings
     include ../menuLateral.jade
 
+
+    - if(message)
+        div(class='row')
+            div(class="col-9 offset-2 alert alert-success fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+    
+    - if(error)
+        div(class='row')
+            div(class="col-9 offset-2 alert alert-danger fade show" role="alert") #{error}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+                    
     div(class='col-md-3 offset-2 pt-3')
         h2 Settings
     br
@@ -64,11 +77,11 @@ html(lang="en")
         div(class='col-sm-4 offset-2') 
             a(href='/variable/create' class='btn btn-outline-success' role='button') New Setting     
                    
-    script(type="text/javascript" src='js/bootstrap.js') 
-    script(type="text/javascript" src="js/jquery.min.js")
-    script(type="text/javascript" src="js/bootstrap.min.js")
-    script(type="text/javascript" src="js/jquery.dataTables.min.js")
-    script(type="text/javascript" src="js/dataTables.bootstrap4.min.js")
+    script(type="text/javascript" src='/js/bootstrap.js') 
+    script(type="text/javascript" src="/js/jquery.min.js")
+    script(type="text/javascript" src="/js/bootstrap.min.js")
+    script(type="text/javascript" src="/js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="/js/dataTables.bootstrap4.min.js")
     
       
     
@@ -83,28 +96,16 @@ script(type="text/javascript").
         $('#lista').val(id);       
     }
 
+    
     $('#eliminar').click(function(){
         var id = document.getElementById('lista').value;            
         var action = '/variable/delete/' 
         var action2 = '?_method=DELETE'
         var total = action.concat(id,action2);   
         console.log(total);
-        document.getElementById("formEliminar").action = total;  
-        
-        $.ajax({      
-                url: total,
-                type: 'DELETE',
-                statusCode: {
-                    200: function () {
-                        alert('ALOOO2');
-                        console.log("200 - Success");
-                    },
-                    404: function() {
-                        console.log('400 error');
-                    }
-                },
-            });
+        document.getElementById("formEliminar").action = total;       
         document.getElementById("formEliminar").submit();
     });
+
                        
 
