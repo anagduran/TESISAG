@@ -81,49 +81,13 @@ html(lang="en")
             console.log(ident)  ;     
         }
 
-        function enviar(){       
-            var id = document.getElementById('lista').value;            
-            var action = '/suggestedQuestion/delete/' 
-            var action2 = '?_method=DELETE'
-            var total = action.concat(id,action2);      
-            
-            $.ajax({      
-                    url: total,
-                    type: 'DELETE',
-                    statusCode: {
-                        200: function () {
-                            alert('ALOOO');
-                            console.log("200 - Success");
-                        }
-                    },
-                });
-
-            document.getElementById("formEliminar").action = total;
-                
-        // document.getElementById("formEliminar").submit();
-            
-        }
-
         $('#eliminar').click(function(){
-            var id = document.getElementById('lista').value;            
-            var action = '/suggestedQuestion/delete/' 
-            var action2 = '?_method=DELETE'
-            var total = action.concat(id,action2);   
-            console.log(total);
-            document.getElementById("formEliminar").action = total;  
-            
-            $.ajax({      
-                    url: total,
-                    type: 'DELETE',
-                    statusCode: {
-                        200: function () {
-                            alert('ALOOO2');
-                            console.log("200 - Success");
-                        },
-                        404: function() {
-                            console.log('400 error');
-                        }
-                    },
-                });
-            document.getElementById("formEliminar").submit();
-        })
+        var id = document.getElementById('lista').value;            
+        var action = '/suggestedQuestion/delete/' 
+        var action2 = '?_method=DELETE'
+        var total = action.concat(id,action2);   
+        console.log(total);
+        document.getElementById("formEliminar").action = total;       
+        document.getElementById("formEliminar").submit();
+        });
+

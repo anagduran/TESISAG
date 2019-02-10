@@ -8,14 +8,9 @@ function getSuggestedQuestion(req,res,next){
     try{
         suggestedQuestion.find()
                 .exec()
-                .then(suggested => { 
-                   
-                        if(suggested) {   
-                            res.status(200).render('suggested/suggestedAll',{preguntas: suggested})                     
-                        }else{
-                            res.status(404).json({message: 'no hay preguntas sugeridas'})
-                        }   
-            
+                .then(suggested => {                     
+                    res.status(200).render('suggested/suggestedAll',{preguntas: suggested})                     
+                       
                 }).catch(err => {
                     
                     res.status(500).json({error: err})
@@ -62,19 +57,38 @@ function deleteQuestionByID(req, res, next){
     if(mongoose.Types.ObjectId.isValid(id)){
         suggestedQuestion.findByIdAndRemove(id).exec().then(result=>{
             if(result){
-                res.status(200).json({message: "eliminado con exito"})      
+                suggestedQuestion.find()
+                .exec()
+                .then(suggested => {                     
+                    res.status(200).render('suggested/suggestedAll',{message: "eliminado con exito" , preguntas: suggested})                     
+                       
+                }) 
             }
             else {
-                res.status(404).json({message: "ERROR ID"})
+                suggestedQuestion.find()
+                .exec()
+                .then(suggested => {                     
+                    res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                       
+                }) 
             }
         })
         .catch(err =>{
-            console.log(err);
-            res.status(500).json({error: err})
+            suggestedQuestion.find()
+                .exec()
+                .then(suggested => {                     
+                    res.status(500).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                       
+                }) 
         })
     }
     else{
-        res.status(404).json({message: "error ID incorrecto"}) 
+        suggestedQuestion.find()
+        .exec()
+        .then(suggested => {                     
+            res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+               
+        }) 
     }
 }
 
