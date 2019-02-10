@@ -16,11 +16,19 @@ html(lang="en")
        
 
     - if(message)
-        li #{message}     
+        div(class='row')
+            div(class="col-9 offset-2 alert alert-success fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+    
+    - if(error)
+        div(class='row')
+            div(class="col-9 offset-2 alert alert-danger fade show" role="alert") #{error}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;     
 
-    div(class="col-md-6 offset-3  alert-style alert alert-success alert-dismissable" id='mensajeExito' style="visibility:hidden")
-                button(type="button" class="close" data-dismiss="alert")&times;
 
+   
 
     div(class='col-md-3 offset-2 pt-3')
         h2 Categories
@@ -64,13 +72,7 @@ html(lang="en")
                 div(class="modal-footer")
                     button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
                     form(action="" class= "link" method="POST" id='formEliminar')
-                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
-                        
-             
-                                
-                                
-                                
-                                
+                        a(class="btn btn-success" href='#' name='POST' id='eliminar') Aceptar             
                                
     
     br                  
@@ -78,11 +80,11 @@ html(lang="en")
         div(class='col-sm-4 offset-2')           
             a(href='/category/create' class='btn btn-outline-success' role='button') New Category
 
-    script(type="text/javascript" src='js/bootstrap.js') 
-    script(type="text/javascript" src="js/jquery.min.js")
-    script(type="text/javascript" src="js/bootstrap.min.js")
-    script(type="text/javascript" src="js/jquery.dataTables.min.js")
-    script(type="text/javascript" src="js/dataTables.bootstrap4.min.js")
+    script(type="text/javascript" src='/js/bootstrap.js') 
+    script(type="text/javascript" src="/js/jquery.min.js")
+    script(type="text/javascript" src="/js/bootstrap.min.js")
+    script(type="text/javascript" src="/js/jquery.dataTables.min.js")
+    script(type="text/javascript" src="/js/dataTables.bootstrap4.min.js")
     
     
     footer(class="page-footer font-small blue")  
@@ -102,79 +104,25 @@ script(type="text/javascript").
     } );
 
     function obtenervalor(id) {
-        $('#lista').val(id);       
+        $('#lista').val(id); 
     }
+    
 
-    function enviar(){       
-        var id = document.getElementById('lista').value;            
-        var action = '/category/delete/' 
-        var action2 = '?_method=DELETE'
-        var total = action.concat(id,action2);      
-        
-         $.ajax({      
-                url: total,
-                type: 'DELETE',
-                statusCode: {
-                    200: function () {
-                        alert('ALOOO');
-                        console.log("200 - Success");
-                    }
-                },
-            });
+   
 
-        document.getElementById("formEliminar").action = total;
-             
-       // document.getElementById("formEliminar").submit();
-          
-    }
-
-    $('#eliminar').click(function(){
+     $('#eliminar').click(function(){
         var id = document.getElementById('lista').value;            
         var action = '/category/delete/' 
         var action2 = '?_method=DELETE'
         var total = action.concat(id,action2);   
         console.log(total);
-        document.getElementById("formEliminar").action = total;  
-        
-        $.ajax({      
-                url: total,
-                type: 'DELETE',
-                statusCode: {
-                    200: function () {
-                        alert('ALOOO');
-                        console.log("200 - Success");
-                    },
-                    404: function() {
-                        console.log('400 error');
-                    }
-                },
-            });
+        document.getElementById("formEliminar").action = total;       
         document.getElementById("formEliminar").submit();
     });
 
-    function validarStatus(url) {    
-        var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', url, false);
-        xhr.send(null);
-        console.log('UNSENT', xhr.status);
-       /* if(xhr.status==200){
-            $('#mensajeExito').append(' Categoria eliminada existosamente')
-            $('#mensajeExito').css('visibility', 'visible')
-        }*/  
-           
-    };
+   
 
-    
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-
+  
 
    
    

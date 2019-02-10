@@ -12,15 +12,14 @@ html(lang="en")
         include menuLateral.jade
 
 
-        div(class='container text-center')
+        div(class='container-fluid')
             div(class='row')
-                div(class="col-md-4")
-                    p Hola
-                div(class="col-md-4")
-                    h1 hola aqui en la api
-                    title= title
-                    h1= message
-            
+                div(class="col offset-2")
+                    p Welcome Admin
+                     - if(error)
+                        li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{error}    
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true")&times;
 
             
 

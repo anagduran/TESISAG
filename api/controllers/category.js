@@ -21,11 +21,11 @@ function getCategories(req,res, next){
                 
             }).catch(err => {
                 console.log(err);
-                res.status(500).json({error: err})
+                res.status(500).render( '/', { error: "Error de servidor, intente mas tarde"} )
             })
         }
         catch(error) {
-            console.log(error)
+            res.status(500).render( '/', { error: "Error de servidor, intente mas tarde"} )
         }   
 }
 
@@ -60,13 +60,13 @@ function newCategory(req,res,next) {
                     .then(nuevacategory => {
                         res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
                      })
-                    .catch(err => {
-                        console.log(err);
-                        res.status(500).json({error: err})
-                    }); 
         }  
         catch(error){
-           console.log(error) 
+            category.find()
+            .exec()
+            .then(categories => { 
+            res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+            })
         }
         
     }
@@ -104,16 +104,18 @@ function updateCategoryByID(req, res){
                             
                             }
                             else {                        
-                                res.status(404).json({message: 'no encontrado'})
+                                res.status(404)
                             }
                         })
                         .catch(err =>{
-                            res.status(500).json({error: err})
+                            category.find()
+                                    .exec()
+                                    .then(categories => { 
+                                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    })
                         })
             }
-            else{
-                res.status(404).json({message: 'error de id, incorrecto'})
-            }
+           
         }
         
   
@@ -130,7 +132,6 @@ function deleteCategoryByID(req, res, next){
     
     //Valido el ID enviado si es correcto busco y elimino la categoria seleccionada
     //AQUI FALTA VALIDAR QUE SI LA CATEGORIA TIENE PREGUNTAS ASOCIADAS NO SE PUEDE ELIMINAR
-    //FALTAN COSAS AQUI 
     if(mongoose.Types.ObjectId.isValid(id))
     {
        
@@ -138,37 +139,33 @@ function deleteCategoryByID(req, res, next){
             if(result==null)
             {
                 category.findByIdAndRemove(id).exec().then(result=>{
-                    if(result){
+                    if(result){   
+                        var mensaje= "Eliminado con exito"  
+                        category.find()
+                        .exec()
+                        .then(categories => {                                                     
+                            res.status(200).render( 'category/categoryAll', { message: mensaje, categorias: categories} )               
+                        })
                         
-                        res.status(200) 
+                      
                     }
                     else {
-                        res.status(404).json({message: "ERROR ID"})
+                        category.find()
+                                .exec()
+                                .then(categories => {                                                                
+                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                })
                     }
                 })
-                .catch(err =>{
-                    console.log(err);
-                    res.status(500).json({error: err})
-                })
+               
             
             }
-            else{
-                category.find()
-                        .exec()
-                        .then(categories => {
-                            if(categories) {
-                                res.status(404).redirect(referencia) 
-                            }
-                        })
-               
-            }
-
             
         })       
        
     }        
     else{
-        res.status(404).json({message: "error ID incorrecto"}) 
+        res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
     }
     
    
@@ -191,7 +188,12 @@ function getCategoryID(req,res,next) {
                     res.status(200).render( 'category/categoryDetail', { categoria: categoryByID})
                 }
                 else {
-                    res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                    category.find()
+                                .exec()
+                                .then(categories => {                                                                
+                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                })
+            
                 }
                 
             })

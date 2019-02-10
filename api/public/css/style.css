@@ -549,3 +549,7 @@ span.multiselect-native-select select {
     margin: 0;
     font-weight: bold;
 }
+
+.card-body-question{
+    color: black;
+}

@@ -74,7 +74,7 @@ html(lang="en")
             div(class='col')
                 Label(class='label-form-style3') Questions
         br
-        div(class='row offset-2 form-group')
+        div(class='row offset-3 form-group')
             div(class='col')
                 div(id="accordion")
                     div(class="panel-style card text-center")
@@ -83,8 +83,8 @@ html(lang="en")
                         
                     
                         div(id="collapseOne" class="collapse show" data-parent="#accordion")                                                       
-                            -var questionChange0 = JSON.parse(JSON.stringify(partida.questions))[0]                                   
-                            div(class="card-body") #{questionChange0.question}
+                            -var questionChange0 = JSON.parse(JSON.stringify(partida.questions))[0]                           
+                            div(class="card-body card-body-question") #{questionChange0.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -92,7 +92,7 @@ html(lang="en")
                             
                             div(id="collapseTwo" class="collapse show" data-parent="#accordion")
                                 - var questionChange1 = JSON.parse(JSON.stringify(partida.questions))[1] 
-                                div(class="card-body") #{questionChange1.question}
+                                div(class="card-body card-body-question") #{questionChange1.question}
 
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -100,7 +100,7 @@ html(lang="en")
                             
                             div(id="collapseThree" class="collapse show" data-parent="#accordion")
                                 - var questionChange2 = JSON.parse(JSON.stringify(partida.questions))[2] 
-                                div(class="card-body") #{questionChange2.question}
+                                div(class="card-body card-body-question") #{questionChange2.question}
 
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -108,7 +108,7 @@ html(lang="en")
                             
                             div(id="collapseFour" class="collapse show" data-parent="#accordion")
                                 - var questionChange3 = JSON.parse(JSON.stringify(partida.questions))[3]
-                                div(class="card-body") #{questionChange3.question}
+                                div(class="card-body card-body-question") #{questionChange3.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -116,7 +116,7 @@ html(lang="en")
                             
                             div(id="collapseFive" class="collapse show" data-parent="#accordion")
                                 - var questionChange4 = JSON.parse(JSON.stringify(partida.questions))[4]
-                                div(class="card-body") #{questionChange4.question}
+                                div(class="card-body card-body-question") #{questionChange4.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -124,7 +124,7 @@ html(lang="en")
                             
                             div(id="collapseSix" class="collapse show" data-parent="#accordion")
                                 - var questionChange5 = JSON.parse(JSON.stringify(partida.questions))[5]
-                                div(class="card-body") #{questionChange5.question}
+                                div(class="card-body card-body-question") #{questionChange5.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -132,7 +132,7 @@ html(lang="en")
                             
                             div(id="collapseSeven" class="collapse show" data-parent="#accordion")
                                 - var questionChange6 = JSON.parse(JSON.stringify(partida.questions))[6]
-                                div(class="card-body") #{questionChange6.question}
+                                div(class="card-body card-body-question") #{questionChange6.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -140,7 +140,7 @@ html(lang="en")
                             
                             div(id="collapseEight" class="collapse show" data-parent="#accordion")
                                 - var questionChange7 = JSON.parse(JSON.stringify(partida.questions))[7]
-                                div(class="card-body") #{questionChange7.question}
+                                div(class="card-body card-body-question") #{questionChange7.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -148,7 +148,7 @@ html(lang="en")
                             
                             div(id="collapseNine" class="collapse show" data-parent="#accordion")
                                 - var questionChange8 = JSON.parse(JSON.stringify(partida.questions))[8]
-                                div(class="card-body") #{questionChange8.question}
+                                div(class="card-body card-body-question") #{questionChange8.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -156,7 +156,7 @@ html(lang="en")
                             
                             div(id="collapseTen" class="collapse show" data-parent="#accordion")
                                 - var questionChange9 = JSON.parse(JSON.stringify(partida.questions))[9]
-                                div(class="card-body") #{questionChange9.question}
+                                div(class="card-body card-body-question") #{questionChange9.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -164,7 +164,7 @@ html(lang="en")
                             
                             div(id="collapseEleven" class="collapse show" data-parent="#accordion")
                                 - var questionChange10 = JSON.parse(JSON.stringify(partida.questions))[10]
-                                div(class="card-body") #{questionChange10.question}
+                                div(class="card-body card-body-question") #{questionChange10.question}
                     
                     div(class="panel-style card text-center")
                             div(class="card-header")
@@ -172,10 +172,10 @@ html(lang="en")
                             
                             div(id="collapseTwelve" class="collapse show" data-parent="#accordion")
                                 - var questionChange11 = JSON.parse(JSON.stringify(partida.questions))[11]
-                                div(class="card-body") #{questionChange11.question}
+                                div(class="card-body card-body-question") #{questionChange11.question}
         br
         div(class='row')
-            div(class='col-sm-4 offset-1')        
+            div(class='col offset-2')        
                 a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back
 
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 

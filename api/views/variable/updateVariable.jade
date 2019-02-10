@@ -9,7 +9,7 @@ html(lang="en")
 
     include ../menuLateral.jade
 
-    div(class='container')
+    div(class='container-fluid')
         div(class='row')
             div(class='col offset-2 pt-3')
                 h2 Editar Setting
@@ -34,6 +34,6 @@ html(lang="en")
                         label(class='label-form-style') Description
                         input(class='form-control' id='description', name='description', type='text', value='#{variableC.description}')
                     br
-                    div(class='col d-flex justify-content-between')
+                    div(class='col-8 d-flex justify-content-between')
                          a(href='/variable' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
                          input(type='submit', class='input-style-update btn btn-success' value='Save')

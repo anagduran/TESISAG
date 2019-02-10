@@ -222,6 +222,7 @@ function getGameID(req,res,next){
             .exec()
             .then(gameByID =>{                
                 if(gameByID){ 
+                    console.log(gameByID.questions)
                     res.status(200).render('game/gameDetail',{ partida: gameByID})
                         
                 }
@@ -400,21 +401,23 @@ function deleteGameByID(req, res){
 function createGame(req,res, next){
 
     question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
-        var rand = Math.floor(Math.random() *resultCount);
-        console.log(rand);
-        console.log(resultCount);
-        question.find({level:"bajo", status:"available"},{"question": 1}).skip(rand).limit(5).exec().then(result=> {
-          console.log(result);
+        question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+            question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+                var rand = Math.floor(Math.random() *resultCount);
+                var rand2 = Math.floor(Math.random() *resultCount2);
+                var rand3 = Math.floor(Math.random() *resultCount3);
+                question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).exec().then(result1=> {
+                    question.find({level:"medio", status:"available"},{"question": 1}).limit(5).exec().then(result2=> {
+                        question.find({level:"alto", status:"available"},{"question": 1}).limit(5).exec().then(result3=> {
+                            res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
+                        });                   
+                    });
+                });
+            });
         });
-      });
+    });
 
-    question.find({level:"bajo" , status:"available"},{"question":1}).exec().then( result1 =>{
-        question.find({level:"medio", status:"available"},{"question":1}).exec().then(result2 =>{
-            question.find({level:"alto", status:"available"},{"question":1}).exec().then(result3 => {
-                res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
-            })
-        })
-    })
+
 
 }
 
