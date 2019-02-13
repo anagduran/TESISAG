@@ -2,11 +2,11 @@ import mongoose from 'mongoose'
 import config from './config'
 import express from 'express'
 import routes from './routes'
-import {thisTypeAnnotation} from 'babel-types'
-import bodyparser from 'body-parser'
 import path from 'path'
 import {connect} from './socket'
 import session from 'express-session'
+import cookieParser from 'cookie-parser'
+
 
 //CONEXION A MONGODB
 mongoose.connect('mongodb://127.0.0.1/TRIVIA')
@@ -24,14 +24,17 @@ const server ={
         app.set('views',path.join(__dirname,'/views'))
         app.set('view engine', 'jade');
         app.use(express.static(path.join(__dirname ,'/public/')))
+        app.use(cookieParser());
         app.set('trust proxy', 1) // trust first proxy
         app.use(session({
-            secret: 'keyboard cat',
-            resave: false,
+            secret: 'keyboardcat',
+            resave: true,
             saveUninitialized: true,
             cookie: { secure: true }
         }))
-
+        
+   
+       
 
         _server = app.listen(app.locals.config.PORT, ()=>{
             connect()

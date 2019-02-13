@@ -1,9 +1,13 @@
 import express from "express"
 import categoryController from "../controllers/category"
+import log from "../middlewares/session"
 
 const router = express.Router()
+const loggin = log.isLoggedIn
 
-router.get('/', categoryController.getCategories)
+
+
+router.get('/', loggin , categoryController.getCategories)
 router.get('/create', categoryController.createCategory)
 router.post('/new',categoryController.newCategory)
 router.get('/:categoryID', categoryController.getCategoryID)
