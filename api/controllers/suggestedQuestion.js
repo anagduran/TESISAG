@@ -5,19 +5,19 @@ import question from "../models/question"
 
 
 function getSuggestedQuestion(req,res,next){
-    try{
+  
         suggestedQuestion.find()
-                .exec()
-                .then(suggested => {                     
-                    res.status(200).render('suggested/suggestedAll',{preguntas: suggested})                     
-                       
-                }).catch(err => {
-                    
-                    res.status(500).json({error: err})
-                })
-        }catch(error){
-            console.log(error)
-        }
+                        .exec()
+                        .then(suggested => {      
+                            if(suggested)    {                              
+                                res.status(200).render('suggested/suggestedAll',{preguntas: suggested}) 
+                            } else {
+                                res.status(404).render('index' , {error: "error en servidor intente nuevamente"}) 
+                            }                    
+                        }).catch(err => {                    
+                            res.status(404).render('index', {error: "error en servidor intente nuevamente"}) 
+                        })
+        
     
 
 }
@@ -36,16 +36,28 @@ function getQuestionID(req,res,next){
                                         
                                     }
                                     else { 
-                                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                                        suggestedQuestion.find()
+                                                         .exec()
+                                                         .then(suggested => { 
+                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                         })     
+                                        
                                     }                
                          })
                          .catch(err=>{
-                                    console.log(err);
-                                    res.status(500).json({message:"aqui en el error 500"})
+                            suggestedQuestion.find()
+                                             .exec()
+                                             .then(suggested => { 
+                                                    res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                            })     
                          })
         }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        suggestedQuestion.find()
+                         .exec()
+                         .then(suggested => { 
+                                res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                        })     
     }
 }
 
@@ -66,29 +78,29 @@ function deleteQuestionByID(req, res, next){
             }
             else {
                 suggestedQuestion.find()
-                .exec()
-                .then(suggested => {                     
-                    res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
-                       
-                }) 
+                                .exec()
+                                .then(suggested => {                     
+                                    res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                        
+                                }) 
             }
         })
         .catch(err =>{
             suggestedQuestion.find()
-                .exec()
-                .then(suggested => {                     
-                    res.status(500).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
-                       
-                }) 
+                            .exec()
+                            .then(suggested => {                     
+                                res.status(500).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                
+                            }) 
         })
     }
     else{
         suggestedQuestion.find()
-        .exec()
-        .then(suggested => {                     
-            res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
-               
-        }) 
+                        .exec()
+                        .then(suggested => {                     
+                            res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                
+                        }) 
     }
 }
 
@@ -105,16 +117,27 @@ function createQuestion(req,res, next){
                                         
                                     }
                                     else { 
-                                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                                        suggestedQuestion.find()
+                                                         .exec()
+                                                         .then(suggested => { 
+                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                         })     
                                     }                
                          })
                          .catch(err=>{
-                                    console.log(err);
-                                    res.status(500).json({message:"aqui en el error 500"})
+                            suggestedQuestion.find()
+                                             .exec()
+                                             .then(suggested => { 
+                                                res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                            })     
                          })
         }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        suggestedQuestion.find()
+                         .exec()
+                         .then(suggested => { 
+                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                        })     
     }
 
 }
@@ -162,7 +185,7 @@ function newQuestion(req, res) {
             }); 
         
             //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 
-            try {
+            
                 pregunta.save()
                         .then(nuevapregunta => {
                             question.findById(nuevapregunta._id)
@@ -173,22 +196,19 @@ function newQuestion(req, res) {
                                     })
                         })
                         .catch(err => {
-                            console.log(err);
-                            res.status(500).json({error: err})
+                            suggestedQuestion.find()
+                                             .exec()
+                                             .then(suggested => { 
+                                                    res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                            })     
                         }); 
-            }
-            catch(error){
-                console.log(error)
-            }
 
 
             try {
                 if(mongoose.Types.ObjectId.isValid(id)){
                     suggestedQuestion.findByIdAndRemove(id).exec();
                 }
-                else{
-                    res.status(404).json({message: "error IDs incorrecto"}) 
-                }
+               
             }
             catch(error){
                 console.log(error)

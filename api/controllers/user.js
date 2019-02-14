@@ -40,39 +40,46 @@ function newUser(req,res) {
                 
                 });
             
-                try{ 
+              
                     usuarioN.save()
                             .then(nuevouser => {
-                                res.status(200).render('user/userDetail',{usuario: nuevouser})
+                                if(nuevouser){
+                                    res.status(200).render('user/userDetail',{usuario: nuevouser})
+                                }
+                                else {
+                                    user.find()
+                                    .exec()
+                                    .then(users => {                                          
+                                        res.status(404).render('user/userAll',{usuarios: users,error: "Error de servidor, intente mas tarde" })         
+                                    })
+                                }
+                               
                             })
                             .catch(err => {
-                                console.log(err);
-                                res.status(500).json({error: err})
+                                user.find()
+                                    .exec()
+                                    .then(users => {                                          
+                                        res.status(500).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                                    })
                             }); 
-                }  
-                catch(error){
-                console.log(error) 
-                }
+                
+               
             }
         });
 }
 
 function getUsers(req,res,next){
-    try{
         user.find()
                 .exec()
-                .then(users => {                                            
-                    res.status(200).render('user/userAll',{usuarios: users})         
-            
+                .then(users => {  
+                    if(users){
+                        res.status(200).render('user/userAll',{usuarios: users})  
+                    }  else {
+                        res.status(404).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+                    }                                      
                 }).catch(err => {
-                    console.log(err);
-                    res.status(500).json({error: err})
+                    res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
                 })
-        }catch(error){
-            console.log(error)
-        }
-    
-
 }
 
 function getUserID(req,res,next){
@@ -83,20 +90,30 @@ function getUserID(req,res,next){
                 .exec()
                 .then(userByID =>{                
                     if(userByID){ 
-                        res.status(200).render('user/userDetail',{usuario: userByID})
-                        
+                        res.status(200).render('user/userDetail',{usuario: userByID})                        
                     }
                     else { 
-                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                        user.find()
+                        .exec()
+                        .then(users => {                                          
+                            res.status(5404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                        })
                     }                
                 })
                 .catch(err=>{
-                    console.log(err);
-                    res.status(500).json({message:"aqui en el error 500"})
+                    user.find()
+                        .exec()
+                        .then(users => {                                          
+                            res.status(500).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                        })
                 })
     }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        user.find()
+        .exec()
+        .then(users => {                                          
+            res.status(404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+        })
     }
 }
 
@@ -126,15 +143,27 @@ function updateUserByID(req, res, next){
                         res.status(200).render('user/userDetail',{usuario: req.body})                      
                         }
                         else {                        
-                            res.status(404).json({message: 'no encontrado'})
+                            user.find()
+                                .exec()
+                                .then(users => {                                          
+                                    res.status(404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                                })
                         }
                     })
                     .catch(err =>{
-                        res.status(500).json({error: err})
+                        user.find()
+                            .exec()
+                            .then(users => {                                          
+                                res.status(500).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                            })
                     })
         }
         else{
-            res.status(404).json({message: 'error de id, incorrecto'})
+            user.find()
+            .exec()
+            .then(users => {                                          
+                res.status(404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+            })
         }
     }
 }
@@ -151,7 +180,6 @@ function deleteUserByID(req, res, next){
                 .exec()
                 .then(users => {                                            
                     res.status(200).render('user/userAll',{message: "Eliminado con exito",usuarios: users})         
-            
                 })    
             }
             else {
@@ -159,7 +187,6 @@ function deleteUserByID(req, res, next){
                 .exec()
                 .then(users => {                                            
                     res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
-            
                 })    
             }
         })
@@ -168,17 +195,15 @@ function deleteUserByID(req, res, next){
                 .exec()
                 .then(users => {                                            
                     res.status(500).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
-            
                 })   
         })
     }
     else{
         user.find()
-                .exec()
-                .then(users => {                                            
-                    res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
-            
-                })  
+            .exec()
+            .then(users => {                                            
+                res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+            })  
     }
 }
 
@@ -190,14 +215,30 @@ function editUser(req,res, next){
             if(mongoose.Types.ObjectId.isValid(id)){
                 user.findById(id)
                 .exec()
-                .then(userByID =>{           
-                    res.render('user/updateUser', {usuario: userByID})
+                .then(userByID =>{  
+                    if(userByID)  {
+                        res.render('user/updateUser', {usuario: userByID})
+                    } else {
+                        user.find()
+                        .exec()
+                        .then(users => {                                            
+                            res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                        })  
+                    }
                 }).catch(err=> {
-                    res.status(404).json({message: "no valid entry for provided ID"})
+                    user.find()
+                        .exec()
+                        .then(users => {                                            
+                            res.status(500).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                        })  
                 })
             }
             else {
-                res.status(404).json({message: "no valid entry for provided ID"})
+                user.find()
+                    .exec()
+                    .then(users => {                                            
+                        res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                    })  
             }  
 }
 

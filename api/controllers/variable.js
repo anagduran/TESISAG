@@ -20,37 +20,55 @@ function newVariable(req,res,next) {
             description: req.body.description
             });
         
-            try{ 
+         
                 variableC.save()
                         .then(nuevavariable => { 
-                            res.status(201).render('variable/variableDetail',{variableC: nuevavariable})
+                            if(nuevavariable){
+                                res.status(201).render('variable/variableDetail',{variableC: nuevavariable})
+                            } else {
+                                variable.find()
+                                        .exec()
+                                        .then(variables => {                               
+                                            res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                        });
+                                }
+                           
                         })
                         .catch(err => {
-                            console.log(err);
-                            res.status(500).json({error: err})
+                            variable.find()
+                                        .exec()
+                                        .then(variables => {                               
+                                            res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                        });
                         }); 
-            }  
-            catch(error){
-            console.log(error);
-            }
+            
 
         }
 }
 
 function getVariables(req,res,next){
-    try{
+   
         variable.find()
                 .exec()
-                .then(variables => {                               
-                    res.status(200).render('variable/variableAll',{variableConfiguracion: variables})          
+                .then(variables => {  
+                    if(variables){
+                        res.status(200).render('variable/variableAll',{variableConfiguracion: variables})   
+                    }    
+                    else {
+                        variable.find()
+                                .exec()
+                                .then(variables => {                               
+                                    res.status(404).render('index',{ error: "Error al conectar con el servidor, intente nuevamente"})          
+                                });
+                    }                         
+                         
                 }).catch(err => {
-                    console.log(err);
-                    res.status(404).json({error: err})
-                })
-        }catch(error){
-            console.log(error)
-        }
-    
+                    variable.find()
+                            .exec()
+                            .then(variables => {                               
+                                res.status(500).render('index',{error: "Error al conectar con el servidor, intente nuevamente"})          
+                            });   
+                })  
 
 }
 
@@ -63,19 +81,29 @@ function getVariableID(req,res,next){
                 .then(variableByID =>{                
                     if(variableByID){ 
                         res.status(200).render('variable/variableDetail',{variableC: variableByID})
-                        
                     }
                     else { 
-                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                        variable.find()
+                                .exec()
+                                .then(variables => {                               
+                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                });
                     }                
                 })
                 .catch(err=>{
-                    console.log(err);
-                    res.status(500).json({message:"aqui en el error 500"})
-                })
+                    variable.find()
+                            .exec()
+                            .then(variables => {                               
+                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                            });
+                    })
     }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        variable.find()
+                .exec()
+                .then(variables => {                               
+                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                });
     }
 }
 
@@ -103,15 +131,27 @@ function updateVariableByID(req, res, next){
                         res.status(200).render('variable/variableDetail',{variableC: req.body})                      
                         }
                         else {                        
-                            res.status(404).json({message: 'no encontrado'})
+                            variable.find()
+                                    .exec()
+                                    .then(variables => {                               
+                                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                    });
                         }
                     })
                     .catch(err =>{
-                        res.status(500).json({error: err})
+                        variable.find()
+                                .exec()
+                                .then(variables => {                               
+                                    res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                });
                     })
         }
         else{
-            res.status(404).json({message: 'error de id, incorrecto'})
+            variable.find()
+                    .exec()
+                    .then(variables => {                               
+                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                    });
         }
     }
 }
@@ -163,14 +203,30 @@ function editVariable(req,res, next){
             if(mongoose.Types.ObjectId.isValid(id)){
                 variable.findById(id)
                 .exec()
-                .then(variableByID =>{           
-                    res.render('variable/updateVariable', {variableC: variableByID})
+                .then(variableByID =>{  
+                    if(variableByID) {        
+                        res.render('variable/updateVariable', {variableC: variableByID})
+                    }else {
+                        variable.find()
+                                .exec()
+                                .then(variables => {                               
+                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                });
+                    }
                 }).catch(err=> {
-                    res.status(404).json({message: "no valid entry for provided ID"})
+                    variable.find()
+                            .exec()
+                            .then(variables => {                               
+                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                            });
                 })
             }
             else {
-                res.status(404).json({message: "no valid entry for provided ID"})
+                variable.find()
+                .exec()
+                .then(variables => {                               
+                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                });
             }
         
      

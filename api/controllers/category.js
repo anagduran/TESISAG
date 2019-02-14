@@ -7,7 +7,7 @@ import question from "../models/question"
 //obtener informacion de las categorias
 function getCategories(req,res, next){
     
-    try {
+    
     //realizo el find, ejecuto y luego si categorias existe envia status HTTP 200 y redirige a la
     //vista categoryAll, sino envia status 404
     category.find()
@@ -16,17 +16,15 @@ function getCategories(req,res, next){
                 if(categories) {
                   res.status(200).render( 'category/categoryAll', { categorias: categories})
                 }else{
-                    res.status(404).json({message: 'no hay categorias'})
+                    res.status(404).render( 'index', { error: "Error de servidor, intente mas tarde"} )
                 }   
                 
             }).catch(err => {
                 console.log(err);
-                res.status(500).render( '/', { error: "Error de servidor, intente mas tarde"} )
+                res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
             })
-        }
-        catch(error) {
-            res.status(500).render( '/', { error: "Error de servidor, intente mas tarde"} )
-        }   
+        
+         
 }
 
 //crear una nueva categoria
@@ -55,19 +53,28 @@ function newCategory(req,res,next) {
         });
         //realizo el save, si resulta exitoso envio estatus HTTP 201 y redirijo a la vista categoryDetail
         //sino envio status HTTP 500
-        try{ 
+        
             categoria.save()
                     .then(nuevacategory => {
-                        res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
+                        if(nuevacategory) {
+                            res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
+                        }
+                        else {
+                            category.find()
+                                    .exec()
+                                    .then(categories => { 
+                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    })
+                        }
+                        
+                     }).catch(err => {
+                        category.find()
+                                    .exec()
+                                    .then(categories => { 
+                                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    })
                      })
-        }  
-        catch(error){
-            category.find()
-            .exec()
-            .then(categories => { 
-            res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
-            })
-        }
+        
         
     }
     
@@ -103,8 +110,13 @@ function updateCategoryByID(req, res){
                             res.status(200).render('category/categoryDetail', {categoria: req.body})
                             
                             }
-                            else {                        
-                                res.status(404)
+                            else { 
+                                category.find()
+                                    .exec()
+                                    .then(categories => { 
+                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    })                       
+                           
                             }
                         })
                         .catch(err =>{
@@ -156,6 +168,12 @@ function deleteCategoryByID(req, res, next){
                                     res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
                                 })
                     }
+                }).catch(err=>{
+                    category.find()
+                                .exec()
+                                .then(categories => {                                                                
+                                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                })
                 })
                
             
@@ -165,7 +183,11 @@ function deleteCategoryByID(req, res, next){
        
     }        
     else{
-        res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+        category.find()
+        .exec()
+        .then(categories => {                                                                
+            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+        })
     }
     
    
@@ -198,12 +220,19 @@ function getCategoryID(req,res,next) {
                 
             })
             .catch(err=>{
-                console.log(err);
-                res.status(500).json({error: err})
+                category.find()
+                .exec()
+                .then(categories => {                                                                
+                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                })
             })
     }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        category.find()
+        .exec()
+        .then(categories => {                                                                
+            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+        })
     }
 }
 
@@ -217,14 +246,31 @@ function editCategory(req,res, next){
             if(mongoose.Types.ObjectId.isValid(id)){
                 category.findById(id)
                 .exec()
-                .then(categoryByID =>{           
-                    res.render('category/updateCategory', {categoria: categoryByID})
+                .then(categoryByID =>{ 
+                    if(categoryByID) {
+                        res.status(200).render('category/updateCategory', {categoria: categoryByID})
+                    } else {
+                        category.find()
+                        .exec()
+                        .then(categories => {                                                                
+                            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                        })
+                    }   
+                   
                 }).catch(err=> {
-                    res.status(404).json({message: "no valid entry for provided ID"})
+                    category.find()
+                            .exec()
+                            .then(categories => {                                                                
+                                res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                            })
                 })
             }
             else {
-                res.status(404).json({message: "no valid entry for provided ID"})
+                category.find()
+                        .exec()
+                        .then(categories => {                                                                
+                            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                        })
             }  
 }
 

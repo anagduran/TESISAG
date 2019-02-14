@@ -48,7 +48,7 @@ function newQuestion(req, res) {
             }); 
         
             //GUARDA LA PREGUNTA Y RETORNA STATUS 201 SI SE HIZO CON EXITO, SINO RETORNO STATUS 500 
-            try {
+        
                 pregunta.save()
                         .then(nuevapregunta => {
                             question.findById(nuevapregunta._id)
@@ -62,10 +62,7 @@ function newQuestion(req, res) {
                             console.log(err);
                             res.status(500).json({error: err})
                         }); 
-            }
-            catch(error){
-                console.log(error)
-            }
+            
     }
 
 }
