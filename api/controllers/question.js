@@ -55,12 +55,28 @@ function newQuestion(req, res) {
                             .populate('category', ['name'])
                             .exec()
                             .then( newQ => {
-                                 res.status(201).render('question/questionDetail', {pregunta :newQ})
+                                if(newQ){
+                                    res.status(201).render('question/questionDetail', {pregunta :newQ})
+                                }
+                                else {
+                                    question.find()
+                                            .populate('category', ['name']) 
+                                            .exec()
+                                            .then(questions => {                                                
+                                                res.status(404).render( 'question/questionAll', { preguntas: questions, error: "error al conectar con el servidor intente nuevamente"})
+                                            })
+
+                                }
+                                
                             })
                         })
                         .catch(err => {
-                            console.log(err);
-                            res.status(500).json({error: err})
+                             question.find()
+                                     .populate('category', ['name']) 
+                                     .exec()
+                                     .then(questions => {                                                
+                                            res.status(500).render( 'question/questionAll', { preguntas: questions, error: "error al conectar con el servidor intente nuevamente"})
+                                    })
                         }); 
             
     }
@@ -72,7 +88,7 @@ function newQuestion(req, res) {
 //SI TODO ESTA BIEN RETORNA STATUS 200, SINO RETORNA STATUS 404. SI HAY ERROR DE CONEXION RETORNA STATUS 500
 function getQuestions(req, res)
 {
-  try{
+  
     question.find()
             .populate('category', ['name']) 
             .exec()
@@ -81,12 +97,9 @@ function getQuestions(req, res)
                     
         
             }).catch(err => {
-                console.log(err);
-                res.status(404).json({error: err})
+                res.status(404).render( 'index', { error: "Error de servidor, intente mas tarde"} )          
             })
-    }catch(error){
-        console.log(error)
-    }
+   
 
 
  
@@ -109,16 +122,30 @@ function getQuestionID(req, res){
                         
                     }
                     else {
-                        res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                        question.find()
+                                .populate('category', ['name']) 
+                                .exec()
+                                .then(questions => {                                                
+                                    res.status(404).render( 'question/questionAll', { preguntas: questions, error:" error con el servidor intente nuevamente"})               
+                                })
                     }                
                 })
                 .catch(err=>{
-                    console.log(err);
-                    res.status(500).json({error: err})
+                    question.find()
+                                .populate('category', ['name']) 
+                                .exec()
+                                .then(questions => {                                                
+                                    res.status(500).render( 'question/questionAll', { preguntas: questions, error:" error con el servidor intente nuevamente"})               
+                                })
                 })
     }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        question.find()
+        .populate('category', ['name']) 
+        .exec()
+        .then(questions => {                                                
+            res.status(404).render( 'question/questionAll', { preguntas: questions, error:" error con el servidor intente nuevamente"})               
+        })
     }
 }
 
@@ -152,20 +179,20 @@ function deleteQuestionByID(req,res){
         })
         .catch(err =>{
             question.find()
-            .populate('category', ['name']) 
-            .exec()
-            .then(questions => {                                                
-                res.status(500).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
-            })
+                    .populate('category', ['name']) 
+                    .exec()
+                    .then(questions => {                                                
+                        res.status(500).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                    })
         })
     }
     else{
         question.find()
-        .populate('category', ['name']) 
-        .exec()
-        .then(questions => {                                                
-            res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
-        })      
+                .populate('category', ['name']) 
+                .exec()
+                .then(questions => {                                                
+                    res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                })      
     }
 }
 
@@ -217,15 +244,30 @@ const id = mongoose.Types.ObjectId(req.body._id)
                                 })
                         }   
                         else {                        
-                            res.status(404).json({message: 'no encontrado'})
+                            question.find()
+                                    .populate('category', ['name']) 
+                                    .exec()
+                                    .then(questions => {                                                
+                                        res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                                    })
                         }
                     })
                     .catch(err =>{
-                        res.status(500).json({error: err})
+                        question.find()
+                                .populate('category', ['name']) 
+                                .exec()
+                                .then(questions => {                                                
+                                    res.status(500).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                                })
                     })
         }
         else{
-            res.status(404).json({message: 'error de id, incorrecto'})
+            question.find()
+                    .populate('category', ['name']) 
+                    .exec()
+                    .then(questions => {                                                
+                        res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                    })
         }
     }
 }
@@ -242,23 +284,27 @@ function editQuestion(req,res){
     category.find({},{"name":1}).exec().then(categories =>{
         if(mongoose.Types.ObjectId.isValid(id)){
             question.findById(id)
-            .populate('category', ['name'])
-            .exec()
-            .then(questionByID =>{   
-                console.log('categorias de la pregunta');   
-                console.log(questionByID.category);
-                console.log('categorias');
-                console.log(categories);
-                var result = diff (questionByID.category, categories);
-                console.log('diff');
-                console.log(result);
-                res.render('question/updateQuestion', {pregunta: questionByID, categorias: result.added})
-            }).catch(err=> {
-                res.status(500).json({message: "Error en el servidor"})
-            })
+                    .populate('category', ['name'])
+                    .exec()
+                    .then(questionByID =>{   
+                        var result = diff (questionByID.category, categories);
+                        res.render('question/updateQuestion', {pregunta: questionByID, categorias: result.added})
+                    }).catch(err=> {
+                        question.find()
+                                .populate('category', ['name']) 
+                                .exec()
+                                .then(questions => {                                                
+                                    res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                                })
+                    })
         }
         else {
-            res.status(404).json({message: "no valid entry for provided ID"})
+            question.find()
+                    .populate('category', ['name']) 
+                    .exec()
+                    .then(questions => {                                                
+                        res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                    })
         }
     })
 }

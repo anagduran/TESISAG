@@ -48,7 +48,7 @@ function createPushNotification(game) {
 
     var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC;
     // ENVIO NOTIFICACION TIPO 1
-    cronometro.schedule('* * * * *' ,()=> {
+    cronometro.schedule(total ,()=> {
         console.log('aqi a las 3 y 58');
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
@@ -71,7 +71,7 @@ function createPushNotification(game) {
      // ENVIO NOTIFICACION TIPO 2
      var total2 = '0 ' + hora2[0] + ' ' + diaC + ' ' + mesC;
      console.log(total2);
-     cronometro.schedule('* * * * *' ,()=> {
+     cronometro.schedule(total2 ,()=> {
         console.log('aqi a las 3 y 58');
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
@@ -110,14 +110,24 @@ function newGame(req,res) {
 
     var errors = req.validationErrors();
     if (errors){
-        question.find({level:"bajo" , status:"available"},{"question":1}).exec().then( result1 =>{
-            question.find({level:"medio", status:"available"},{"question":1}).exec().then(result2 =>{
-                question.find({level:"alto", status:"available"},{"question":1}).exec().then(result3 => {
-                    res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3, error: errors})
-                    return;
-                })
-            })
-        })
+        question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
+            question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+                question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+                    var rand = Math.floor(Math.random() *resultCount);
+                    var rand2 = Math.floor(Math.random() *resultCount2);
+                    var rand3 = Math.floor(Math.random() *resultCount3);
+                    question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).skip(rand).exec().then(result1=> {
+                        question.find({level:"medio", status:"available"},{"question": 1}).limit(5).skip(rand2).exec().then(result2=> {
+                            question.find({level:"alto", status:"available"},{"question": 1}).limit(5).skip(rand3).exec().then(result3=> {
+                                res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3,  error: errors})
+                                return;
+                            });                   
+                        });
+                    });
+                });
+            });
+        });
+                   
 
     } else {  
     
@@ -165,46 +175,41 @@ function newGame(req,res) {
                             .exec()
             }
             
-                try{ 
+               
                     partida.save()
                             .then(nuevapartida => {
                                 game.findById(nuevapartida._id)
                                     .populate('questions', ['question'])
                                     .exec()
                                 .then( newG => {
-                                        createPushNotification(newG);
+                                      createPushNotification(newG);
                                       res.status(200).render('game/gameDetail',{partida: newG})
                                       
                                 })
                             })
                             .catch(err => {
-                                console.log(err);
-                                res.status(500).json({error: err})
+                                game.find()
+                                    .exec()
+                                    .then(games => {          
+                                        res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                
+                                    })
                             }); 
                     
-                }  
-                catch(error){
-                console.log(error) 
-                }
+              
     }
 }
 
 function getGames(req,res,next){
-    try{
+    
         game.find()
-                .exec()
-                .then(games => {                 
-                                           
-                    res.status(200).render( 'game/gameAll', { partidas: games})
-                        
+            .exec()
+            .then(games => {          
+                res.status(200).render( 'game/gameAll', { partidas: games})                 
             
-                }).catch(err => {
-                    console.log(err);
-                    res.status(500).json({error: err})
-                })
-        }catch(error){
-            console.log(error)
-        }
+            }).catch(err => {                  
+                res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+            })
     
 
 }
@@ -219,20 +224,33 @@ function getGameID(req,res,next){
             .exec()
             .then(gameByID =>{                
                 if(gameByID){ 
-                    console.log(gameByID.questions)
-                    res.status(200).render('game/gameDetail',{ partida: gameByID})
-                        
+                    res.status(200).render('game/gameDetail',{ partida: gameByID})                       
                 }
                 else { 
-                    res.status(404).json({message: 'no encontrado, ID incorrecto'})
+                    game.find()
+                    .exec()
+                    .then(games => {          
+                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                
+                    })
                 }                
             })
             .catch(err=>{                
-                res.status(500).json({error: err})
+                game.find()
+                    .exec()
+                    .then(games => {          
+                        res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                
+                    })
             })
     }
     else{
-        res.status(404).json({message: "no valid entry for provided ID"})
+        game.find()
+        .exec()
+        .then(games => {          
+            res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+    
+        })
     }
 }
 
@@ -256,35 +274,51 @@ function updateGameByID(req, res, next){
     var errors = req.validationErrors();
     if (errors){
 
-        question.find({level:"bajo" , status:"available"},{"question":1}).exec().then(result1 =>{
-            question.find({level:"medio", status:"available"},{"question":1}).exec().then(result2 =>{
-                question.find({level:"alto", status:"available"},{"question":1}).exec().then(result3 =>{
-                    if(mongoose.Types.ObjectId.isValid(id)){
-                    
-                        game.findById(id)
-                            .populate('questions', ['question'])
-                            .exec()
-                            .then(gameByID =>{  
-                                                                                              
-                                var resultado = [];  
-                                var resultado2= [];
-                                var resultado3 = [];                                             
-                                resultado.push(gameByID.questions[0] , gameByID.questions[1], gameByID.questions[2], gameByID.questions[3]);
-                                resultado2.push(gameByID.questions[4] , gameByID.questions[5], gameByID.questions[6], gameByID.questions[7]);
-                                resultado3.push(gameByID.questions[8] , gameByID.questions[9], gameByID.questions[10], gameByID.questions[11]);
-                                  
-                                res.render('game/updateGame', { error: errors, partida: gameByID, partidaBaja: resultado, partidaMedio: resultado2, partidaAlta: resultado3, bajo: result1, medio: result2, alto: result3});
-                                return;
+        question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
+            question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+                question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+                    var rand = Math.floor(Math.random() *resultCount);
+                    var rand2 = Math.floor(Math.random() *resultCount2);
+                    var rand3 = Math.floor(Math.random() *resultCount3);
+
+
+
+                    question.find({level:"bajo" , status:"available"},{"question":1}).limit(5).skip(rand).exec().then(result1 =>{
+                        question.find({level:"medio", status:"available"},{"question":1}).limit(5).skip(rand2).exec().then(result2 =>{
+                            question.find({level:"alto", status:"available"},{"question":1}).limit(5).skip(rand3).exec().then(result3 =>{
+                                if(mongoose.Types.ObjectId.isValid(id)){
+                                
+                                    game.findById(id)
+                                        .populate('questions', ['question'])
+                                        .exec()
+                                        .then(gameByID =>{  
+                                                                                                        
+                                            var resultado = [];  
+                                            var resultado2= [];
+                                            var resultado3 = [];                                             
+                                            resultado.push(gameByID.questions[0] , gameByID.questions[1], gameByID.questions[2], gameByID.questions[3]);
+                                            resultado2.push(gameByID.questions[4] , gameByID.questions[5], gameByID.questions[6], gameByID.questions[7]);
+                                            resultado3.push(gameByID.questions[8] , gameByID.questions[9], gameByID.questions[10], gameByID.questions[11]);
+                                            
+                                            res.render('game/updateGame', { error: errors, partida: gameByID, partidaBaja: resultado, partidaMedio: resultado2, partidaAlta: resultado3, bajo: result1, medio: result2, alto: result3});
+                                            return;
+                                        })                  
+                                } else {
+                                    game.find()
+                                    .exec()
+                                    .then(games => {          
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                    })
+                                }
                             })
-                    } else {
-                            res.status(404).json({message: 'no encontrado'});
-                        }
+                        })
+                    })
                     
                 })
             })
         }); 
     } else {
-        console.log(req.body);
+      
         var comboP1 = req.body.preguntasCombo;
         var comboP2 = req.body.preguntasCombo2;
         var ver = req.body.date;
@@ -347,15 +381,30 @@ function updateGameByID(req, res, next){
                                 })
                             }   
                             else {                        
-                                res.status(404).json({message: 'holi 2no encontrado'})
+                                game.find()
+                                    .exec()
+                                    .then(games => {          
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                
+                                    })
                             }
                         })
                         .catch(err =>{
-                            res.status(500).json({error: err})
+                            game.find()
+                            .exec()
+                            .then(games => {          
+                                res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                        
+                            })
                         })
             }
             else{
-                res.status(404).json({message: 'error de id, incorrecto'})
+                game.find()
+                .exec()
+                .then(games => {          
+                    res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+            
+                })
             }
         }
 }
@@ -388,17 +437,17 @@ function deleteGameByID(req, res){
                         game.find()
                             .exec()
                             .then(games => {                               
-                                res.status(404).render( 'game/gameAll', { message: "Error con el servidor, intente nuevamente", partidas: games})
+                                res.status(404).render( 'game/gameAll', { error: "Error con el servidor, intente nuevamente", partidas: games})
                             })
                     }
                 })
                 .catch(err =>{
-                    console.log(err);
-                    res.status(500).render( 'game/gameAll', { message: "Error con el servidor, intente nuevamente", partidas: games})
+                   
+                    res.status(500).render( 'game/gameAll', { error: "Error con el servidor, intente nuevamente", partidas: games})
                 })
             }
             else{
-                res.status(404).render( 'game/gameAll', { message: "Error con el servidor, intente nuevamente", partidas: games})
+                res.status(404).render( 'game/gameAll', { error: "Error con el servidor, intente nuevamente", partidas: games})
             }
         })
 }
@@ -412,9 +461,9 @@ function createGame(req,res, next){
                 var rand = Math.floor(Math.random() *resultCount);
                 var rand2 = Math.floor(Math.random() *resultCount2);
                 var rand3 = Math.floor(Math.random() *resultCount3);
-                question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).exec().then(result1=> {
-                    question.find({level:"medio", status:"available"},{"question": 1}).limit(5).exec().then(result2=> {
-                        question.find({level:"alto", status:"available"},{"question": 1}).limit(5).exec().then(result3=> {
+                question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).skip(rand).exec().then(result1=> {
+                    question.find({level:"medio", status:"available"},{"question": 1}).limit(5).skip(rand2).exec().then(result2=> {
+                        question.find({level:"alto", status:"available"},{"question": 1}).limit(5).skip(rand3).exec().then(result3=> {
                             res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
                         });                   
                     });
@@ -431,35 +480,57 @@ function editGame(req,res){
 
     
     const id= req.params.gameID;
-    
-
-    question.find({level:"bajo" , status:"available"},{"question":1}).exec().then(result1 =>{
-        question.find({level:"medio", status:"available"},{"question":1}).exec().then(result2 =>{
-            question.find({level:"alto", status:"available"},{"question":1}).exec().then(result3 =>{
-                if(mongoose.Types.ObjectId.isValid(id)){
+    question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
+        question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+            question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+                var rand = Math.floor(Math.random() *resultCount);
+                var rand2 = Math.floor(Math.random() *resultCount2);
+                var rand3 = Math.floor(Math.random() *resultCount3);
+                question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).skip(rand).exec().then(result1=> {
+                    question.find({level:"medio", status:"available"},{"question": 1}).limit(5).skip(rand2).exec().then(result2=> {
+                        question.find({level:"alto", status:"available"},{"question": 1}).limit(5).skip(rand3).exec().then(result3=> {
+                            
+                            if(mongoose.Types.ObjectId.isValid(id)){
                 
-                    game.findById(id)
-                        .populate('questions', ['question'])
-                        .exec()
-                        .then(gameByID =>{  
-                                var resultado = [];  
-                                var resultado2= [];
-                                var resultado3 = [];                                             
-                                resultado.push(gameByID.questions[0] , gameByID.questions[1], gameByID.questions[2], gameByID.questions[3]);
-                                resultado2.push(gameByID.questions[4] , gameByID.questions[5], gameByID.questions[6], gameByID.questions[7]);
-                                resultado3.push(gameByID.questions[8] , gameByID.questions[9], gameByID.questions[10], gameByID.questions[11]);
-                                res.render('game/updateGame', {partida: gameByID, partidaBaja: resultado, partidaMedio: resultado2, partidaAlta: resultado3, bajo: result1, medio: result2, alto: result3})
-                                             
-                        }).catch(err=> {
-                            res.status(500).json({message: "Error en el servidor"})
-                        })
-                }
-                else {
-                    res.status(404).json({message: "no valid entry for provided ID"})
-                }
-            })
-        })
-    })
+                                game.findById(id)
+                                    .populate('questions', ['question'])
+                                    .exec()
+                                    .then(gameByID =>{  
+                                            var resultado = [];  
+                                            var resultado2= [];
+                                            var resultado3 = [];                                             
+                                            resultado.push(gameByID.questions[0] , gameByID.questions[1], gameByID.questions[2], gameByID.questions[3]);
+                                            resultado2.push(gameByID.questions[4] , gameByID.questions[5], gameByID.questions[6], gameByID.questions[7]);
+                                            resultado3.push(gameByID.questions[8] , gameByID.questions[9], gameByID.questions[10], gameByID.questions[11]);
+                                            res.render('game/updateGame', {partida: gameByID, partidaBaja: resultado, partidaMedio: resultado2, partidaAlta: resultado3, bajo: result1, medio: result2, alto: result3})
+                                                         
+                                    }).catch(err=> {
+                                        game.find()
+                                            .exec()
+                                            .then(games => {          
+                                                res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                            
+                                            })
+                                    })
+                            }
+                            else {
+                                game.find()
+                                    .exec()
+                                    .then(games => {          
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                            
+                                    })
+                                }
+                            
+                           
+                        });                   
+                    });
+                });
+            });
+        });
+    });
+
+    
 }
 
 

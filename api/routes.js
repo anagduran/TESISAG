@@ -12,7 +12,7 @@ import login from './routes/login'
 
 
 export default app => {
-    app.use('/',index)
+    // app.use('/',index)
     app.use('/category', category)
     app.use('/question', question)
     app.use('/game', game)
@@ -21,7 +21,7 @@ export default app => {
     app.use('/suggestedQuestion', suggestedQuestion)
     app.use('/level', level)
     app.use('/executeGame', execute)
-    app.use('/login', login)
+    app.use('/', login)
    
         
 }

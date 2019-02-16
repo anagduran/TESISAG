@@ -8,12 +8,12 @@ const loggin = log.isLoggedIn
 
 
 router.get('/', loggin , categoryController.getCategories)
-router.get('/create', categoryController.createCategory)
-router.post('/new',categoryController.newCategory)
-router.get('/:categoryID', categoryController.getCategoryID)
-router.get('/edit/:categoryID', categoryController.editCategory)
-router.put('/update/:categoryID', categoryController.updateCategoryByID)
-router.delete('/delete/:categoryID', categoryController.deleteCategoryByID)
+router.get('/create', loggin , categoryController.createCategory)
+router.post('/new',loggin  ,categoryController.newCategory)
+router.get('/:categoryID',loggin  , categoryController.getCategoryID)
+router.get('/edit/:categoryID',loggin  , categoryController.editCategory)
+router.put('/update/:categoryID',loggin  , categoryController.updateCategoryByID)
+router.delete('/delete/:categoryID', loggin  ,categoryController.deleteCategoryByID)
 
 
 module.exports = router;

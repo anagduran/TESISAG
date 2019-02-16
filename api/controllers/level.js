@@ -20,8 +20,10 @@ function getLevel(req,res) {
                     }    
                ]).exec().then(resultado => {
                 
-                     res.render('level/levelIndex',{ total: result, totalQ: contadorT, barras: resultado})
+                     res.status(200).render('level/levelIndex',{ total: result, totalQ: contadorT, barras: resultado})
                  })
+            }).catch(err=>{
+                res.render('index',{ error: "error al conectar con el servidor, intente nuevamente"})
             })
 
        

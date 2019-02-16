@@ -20,7 +20,6 @@ function getCategories(req,res, next){
                 }   
                 
             }).catch(err => {
-                console.log(err);
                 res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
             })
         

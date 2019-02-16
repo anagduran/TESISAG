@@ -5,6 +5,7 @@ import loginController from "../controllers/login"
 const router = express.Router()
 
 router.get('/', loginController.getLogin)
-router.post('/login', loginController.doingLogin)
+router.post('/home', loginController.doingLogin)
+router.get('/logout', loginController.logOut)
 
 module.exports = router;
