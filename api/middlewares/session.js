@@ -15,7 +15,7 @@ const middlewares = {
             else
                 {
                 console.log("en el else");
-                res.redirect('login'); 
+                res.redirect('/'); 
                 }
                 
       

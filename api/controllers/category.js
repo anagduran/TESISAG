@@ -94,6 +94,7 @@ function updateCategoryByID(req, res){
     
     var errors = req.validationErrors();
     if (errors){
+     
         res.render('category/updateCategory', {error: errors,  categoria: req.body});
         return;
     } else {

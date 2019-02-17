@@ -553,3 +553,9 @@ span.multiselect-native-select select {
 .card-body-question{
     color: black;
 }
+
+.forgot-custom-link{
+    color: blue !important;
+    font-family: 'Calibri';
+    font-size: 15px;
+}

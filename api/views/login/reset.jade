@@ -20,20 +20,21 @@ html(lang="en")
 
                 div(class="card  wrapper")
                     div(class="card-header text-center") 
-                        h2 Login
+                        h2 Reset Password
                     div(class="card-body")
-                        form(id='form', action='/home', method='POST' autocomplete="off")
+                        form(id='form', action='/reset', method='POST' autocomplete="off")
 
                             div(class='col') 
-                                label(class='label-custom') Email     
-                                input(type="text" class="form-control" name="email" placeholder="Enter Email Address" required="" autofocus="")
+                                label(class='label-custom') New Password     
+                                input(type="password" class="form-control" name="pw" placeholder="Enter New Password" required="" autofocus="")
                             br
-                            div(class='col')
-                                label(class='label-custom') Password   
-                                input(type="password" class="form-control" name="password" placeholder="Enter Password" required="")     
+                            div(class='col') 
+                                label(class='label-custom') Confirm Password     
+                                input(type="password" class="form-control" name="pw2" placeholder="Confirm new password" required="" autofocus="")
                             br
-                            button(class="btn btn-lg btn-primary btn-block" type="submit") Login
-                            a(href='/forgot' class="forgot-custom-link") Forgot Password?
+                           
+                            button(class="btn btn-lg btn-primary btn-block" type="submit") Update Password
+                        
 
 
 
