@@ -15,6 +15,17 @@ html(lang="en")
 
     div(class='container-fluid')
         div(class='row')
+            -if(message)
+                div(class="col mt-2 alert alert-success fade show" role="alert") #{message}    
+                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                        span(aria-hidden="true")&times;  
+            
+            -if(error)
+                div(class="col mt-2 alert alert-danger fade show" role="alert") #{error}    
+                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                        span(aria-hidden="true")&times;  
+        
+        div(class='row')
             div(class='col-sm-9 col-md-7 col-lg-5 mx-auto')
 
 
@@ -33,7 +44,8 @@ html(lang="en")
                                 input(type="password" class="form-control" name="password" placeholder="Enter Password" required="")     
                             br
                             button(class="btn btn-lg btn-primary btn-block" type="submit") Login
-                            a(href='/forgot' class="forgot-custom-link") Forgot Password?
+                            br
+                            a(href='/forgot' class="text-info font-weight-normal text-justify") Forgot Password?
 
 
 

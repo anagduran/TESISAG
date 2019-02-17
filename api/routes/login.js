@@ -10,7 +10,7 @@ router.get('/logout', loginController.logOut)
 router.get('/forgot', loginController.forgotPW)
 router.post('/forgot', loginController.doingResetPW)
 router.post('/reset', loginController.ResetPW)
-router.get('/reset', loginController.getResetPW)
+router.get('/reset/:token', loginController.getResetPW)
 
 
 

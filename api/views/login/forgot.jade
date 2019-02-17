@@ -15,6 +15,16 @@ html(lang="en")
 
     div(class='container-fluid')
         div(class='row')
+        -if(message)
+            div(class="mt-2 alert alert-info fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+        -if(error)
+            div(class="mt-2 alert alert-danger fade show" role="alert") #{error}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+        
+        div(class='row')
             div(class='col-sm-9 col-md-7 col-lg-5 mx-auto')
 
 
@@ -22,16 +32,17 @@ html(lang="en")
                     div(class="card-header text-center") 
                         h2 Forgot Password
                     div(class="card-body")
-                        p Please enter your email to send you a mail with instructions...
-                        form(id='form', action='/reset', method='POST' autocomplete="off")
-
+                        
+                        form(id='form', action='/forgot', method='POST' autocomplete="off")
+                            p(class='alert alert-info') Please enter your email to reset your password
                             div(class='col') 
                                 label(class='label-custom') Email     
                                 input(type="text" class="form-control" name="email" placeholder="Enter Email Address" required="" autofocus="")
                             br
                            
                             button(class="btn btn-lg btn-primary btn-block" type="submit") Reset Passoword
-                            a(href='/' class="forgot-custom-link") Back
+                            br
+                            a(href='/' class="text-info font-weight-normal text-justify") Back
 
 
 
