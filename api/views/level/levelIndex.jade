@@ -23,13 +23,23 @@ html(lang="en")
         input(type='hidden' value = '#{cambio5.count}' id='position5')
         input(type='hidden' value = '#{cambio6.count}' id='position6')
         input(type='hidden' value = '#{totalQ}' id='totalQ')
-
+        
+       
+        //- Febrero Barras
         -var cambio7 = JSON.parse(JSON.stringify(barras))[0]
         -var cambio8 = JSON.parse(JSON.stringify(barras))[1]
         -var cambio9 = JSON.parse(JSON.stringify(barras))[2]
         input(type='hidden' value = '#{cambio7.count}' id='position7')
         input(type='hidden' value = '#{cambio8.count}' id='position8')
         input(type='hidden' value = '#{cambio9.count}' id='position9')
+
+        //- Marzo Barras
+        //- -var cambioM1 = JSON.parse(JSON.stringify(barrasM))[0]
+        //- -var cambioM2 = JSON.parse(JSON.stringify(barrasM))[1]
+        //- -var cambioM3 = JSON.parse(JSON.stringify(barrasM))[2]
+        //- input(type='hidden' value = '#{cambioM1.count}' id='cm1')
+        //- input(type='hidden' value = '#{cambioM2.count}' id='cm2')
+        //- input(type='hidden' value = '#{cambioM3.count}' id='cm3')
 
     div(class='col-md-3 offset-2 pt-3')
         h2(class='h1All') Levels
@@ -78,7 +88,7 @@ html(lang="en")
     script(type="text/javascript").
         Chart.defaults.global.defaultFontSize = 30;
         var Q = document.getElementById("totalQ").value;
-        console.log(Q);
+
     
 
         var count1 = document.getElementById("position4").value;
@@ -87,6 +97,11 @@ html(lang="en")
         var count4 = document.getElementById("position7").value;
         var count5 = document.getElementById("position8").value;
         var count6 = document.getElementById("position9").value;
+
+        /* MARZO BARRAS
+        var cambioMar1 = document.getElementById("cm1").value;
+        var cambioMar2 = document.getElementById("cm2").value;
+        var cambioMar3 = document.getElementById("cm3").value;*/ 
 
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
@@ -165,7 +180,7 @@ html(lang="en")
                     
                     ],
                     yAxisID: 'y-axis-1',
-                    data: [count4, 19, 3, 5, 2, 3],
+                    data: [5,count4, 19, 3, 5, 2, 3],
                 }, { 
                     label: ' Medium ',
                     backgroundColor: [
@@ -183,7 +198,7 @@ html(lang="en")
                         'rgba(215, 47, 158, 0.8)'
                     ],
                     yAxisID: 'y-axis-2',
-                    data: [count5, 20, 4, 6, 3, 4],
+                    data: [4,count5, 19, 4, 6, 3, 4],
                 }, { 
                     label: ' Low ',
                     backgroundColor: [
@@ -201,7 +216,7 @@ html(lang="en")
                         'rgba(61, 69, 150, 0.8)'
                     ],
                     yAxisID: 'y-axis-3',
-                    data: [count6, 10, 5, 7, 4, 5],
+                    data: [4,count6,19, 5, 7, 4, 5],
                 }]
             },
             options: {

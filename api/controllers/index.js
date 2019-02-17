@@ -1,4 +1,4 @@
-import admin from '../models/admin'
+
 
 function getIndex(req,res,next) {
  

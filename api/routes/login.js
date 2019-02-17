@@ -7,5 +7,6 @@ const router = express.Router()
 router.get('/', loginController.getLogin)
 router.post('/home', loginController.doingLogin)
 router.get('/logout', loginController.logOut)
+router.get('/forgot', loginController.forgotPW)
 
 module.exports = router;

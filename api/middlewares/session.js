@@ -8,8 +8,6 @@ const middlewares = {
 
         
         token.find().exec().then(tk =>{
-            console.log("en el middlerware")
-            console.log(tk.length)
             if(tk.length>0)
             {
                 return next();

@@ -35,17 +35,31 @@ function doingLogin(req, res) {
                 }
                 else {
                         console.log("en el else"); 
-                        res.status(404).render("home");  
+                        res.status(404).render("/");  
                 }
         })
   
 }
 
 function logOut(req, res){
-        console.log("en el logout");
-        token.remove().exec();
-        res.status(200).render("/");
+       
+        token.remove().exec().then(result=>{
+                if(result)
+                {
+                  console.log("en el if de logout");
+                  res.status(200).render('login/login');
+                        
+                }
+                else {
+                        console.log("en el else");
+                res.status(200).render("index", {error: "error al tratar de cerrar sesion, intente nuevamente"});
+                }
+        });
+        
 }
 
+function forgotPW(req,res,next){
+        res.status(200).render('forgot')
+}
 
-module.exports ={getLogin, doingLogin, logOut};
+module.exports ={getLogin, doingLogin, logOut, forgotPW};
