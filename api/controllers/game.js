@@ -116,9 +116,9 @@ function newGame(req,res) {
                     var rand = Math.floor(Math.random() *resultCount);
                     var rand2 = Math.floor(Math.random() *resultCount2);
                     var rand3 = Math.floor(Math.random() *resultCount3);
-                    question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).skip(rand).exec().then(result1=> {
-                        question.find({level:"medio", status:"available"},{"question": 1}).limit(5).skip(rand2).exec().then(result2=> {
-                            question.find({level:"alto", status:"available"},{"question": 1}).limit(5).skip(rand3).exec().then(result3=> {
+                    question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
+                        question.find({level:"medio", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
+                            question.find({level:"alto", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
                                 res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3,  error: errors})
                                 return;
                             });                   
@@ -283,9 +283,9 @@ function updateGameByID(req, res, next){
 
 
 
-                    question.find({level:"bajo" , status:"available"},{"question":1}).limit(5).skip(rand).exec().then(result1 =>{
-                        question.find({level:"medio", status:"available"},{"question":1}).limit(5).skip(rand2).exec().then(result2 =>{
-                            question.find({level:"alto", status:"available"},{"question":1}).limit(5).skip(rand3).exec().then(result3 =>{
+                    question.find({level:"bajo" , status:"available"},{"question":1}).limit(10).skip(rand).exec().then(result1 =>{
+                        question.find({level:"medio", status:"available"},{"question":1}).limit(10).skip(rand2).exec().then(result2 =>{
+                            question.find({level:"alto", status:"available"},{"question":1}).limit(10).skip(rand3).exec().then(result3 =>{
                                 if(mongoose.Types.ObjectId.isValid(id)){
                                 
                                     game.findById(id)
@@ -461,9 +461,9 @@ function createGame(req,res, next){
                 var rand = Math.floor(Math.random() *resultCount);
                 var rand2 = Math.floor(Math.random() *resultCount2);
                 var rand3 = Math.floor(Math.random() *resultCount3);
-                question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).skip(rand).exec().then(result1=> {
-                    question.find({level:"medio", status:"available"},{"question": 1}).limit(5).skip(rand2).exec().then(result2=> {
-                        question.find({level:"alto", status:"available"},{"question": 1}).limit(5).skip(rand3).exec().then(result3=> {
+                question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
+                    question.find({level:"medio", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
+                        question.find({level:"alto", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
                             res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
                         });                   
                     });
@@ -486,9 +486,9 @@ function editGame(req,res){
                 var rand = Math.floor(Math.random() *resultCount);
                 var rand2 = Math.floor(Math.random() *resultCount2);
                 var rand3 = Math.floor(Math.random() *resultCount3);
-                question.find({level:"bajo", status:"available"},{"question": 1}).limit(5).skip(rand).exec().then(result1=> {
-                    question.find({level:"medio", status:"available"},{"question": 1}).limit(5).skip(rand2).exec().then(result2=> {
-                        question.find({level:"alto", status:"available"},{"question": 1}).limit(5).skip(rand3).exec().then(result3=> {
+                question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
+                    question.find({level:"medio", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
+                        question.find({level:"alto", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
                             
                             if(mongoose.Types.ObjectId.isValid(id)){
                 

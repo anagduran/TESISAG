@@ -18,6 +18,18 @@ html(lang="en")
 
                     
         
+    - if(message)
+        div(class='row')
+            div(class="mt-2 offset-2 alert alert-success fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+    
+    - if(error)
+        div(class='row')
+            div(class="mt-2 offset-2 alert alert-danger fade show" role="alert") #{error}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;     
+
 
         script(src='/js/bootstrap.js')
         script(type="text/javascript" src="/js/jquery.min.js")

@@ -178,7 +178,7 @@ function deleteQuestionByID(req, res, next){
                 suggestedQuestion.find()
                                 .exec()
                                 .then(suggested => {                     
-                                    res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                    res.status(404).render('suggested/suggestedAll',{error: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
                                         
                                 }) 
             }
@@ -187,7 +187,7 @@ function deleteQuestionByID(req, res, next){
             suggestedQuestion.find()
                             .exec()
                             .then(suggested => {                     
-                                res.status(500).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                res.status(500).render('suggested/suggestedAll',{error: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
                                 
                             }) 
         })
@@ -196,7 +196,7 @@ function deleteQuestionByID(req, res, next){
         suggestedQuestion.find()
                         .exec()
                         .then(suggested => {                     
-                            res.status(404).render('suggested/suggestedAll',{message: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                            res.status(404).render('suggested/suggestedAll',{error: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
                                 
                         }) 
     }
