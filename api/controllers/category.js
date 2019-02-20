@@ -16,11 +16,11 @@ function getCategories(req,res, next){
                 if(categories) {
                   res.status(200).render( 'category/categoryAll', { categorias: categories})
                 }else{
-                    res.status(404).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+                    res.status(404).render( 'index', { error: "Server error, try again"} )
                 }   
                 
             }).catch(err => {
-                res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+                res.status(500).render( 'index', { error: "Server error, try again"} )
             })
         
          
@@ -29,13 +29,13 @@ function getCategories(req,res, next){
 //crear una nueva categoria
 function newCategory(req,res,next) {
     
-    req.check('name').isLength({min: 4}).withMessage('nombre de categoria muy corto');
-    req.check('name').notEmpty().withMessage('el nombre de la categoria no puede estar vacio');
-    req.check('name').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales ni numeros en el campo Nombre');
+    req.check('name').isLength({min: 4}).withMessage('The name of the category can not be too short');
+    req.check('name').notEmpty().withMessage('The name of the category can not be empty');
+    req.check('name').matches('[a-zA-Z]').withMessage('No special characters or numbers are allowed in the "Name" field');
 
-    req.check('description').isLength({min: 10}).withMessage('La descripcion de la categoria muy corta');
-    req.check('description').notEmpty().withMessage('La descripcion de la categoria no puede estar vacia');
-    req.check('description').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales ni numeros en el campo Descripcion');
+    req.check('description').isLength({min: 10}).withMessage('The description of the category can not be too short');
+    req.check('description').notEmpty().withMessage('The description of the category can not be empty');
+    req.check('description').matches('[a-zA-Z]').withMessage('No special characters or numbers are allowed in the "Description" field');
     
 
     var errors = req.validationErrors();
@@ -56,13 +56,13 @@ function newCategory(req,res,next) {
             categoria.save()
                     .then(nuevacategory => {
                         if(nuevacategory) {
-                            res.status(201).render('category/categoryDetail',{categoria: nuevacategory})
+                            res.status(201).render('category/categoryDetail',{categoria: nuevacategory , message: "Category added successfully"})
                         }
                         else {
                             category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
                                     })
                         }
                         
@@ -70,7 +70,7 @@ function newCategory(req,res,next) {
                         category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
                                     })
                      })
         
@@ -83,15 +83,14 @@ function newCategory(req,res,next) {
 
 // modificar una categoria
 function updateCategoryByID(req, res){   
+    req.check('name').isLength({min: 4}).withMessage('The name of the category can not be too short');
+    req.check('name').notEmpty().withMessage('The name of the category can not be empty');
+    req.check('name').matches('[a-zA-Z]').withMessage('No special characters or numbers are allowed in the "Name" field');
 
-    req.check('name').isLength({min: 4}).withMessage('El nombre es muy corto');
-    req.check('name').notEmpty().withMessage('El nombre no puede estar vacio');
-    req.check('name').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales, espacios en blanco o numeros en el campo Nombre');
- 
-    req.check('description').isLength({min: 10}).withMessage('La descripcion es muy corta');
-    req.check('description').notEmpty().withMessage('La descripcion no puede estar vacia');
-    req.check('description').matches('[a-zA-Z]').withMessage('No se permiten caracteres especiales, espacios en blanco o numeros en el campo Descripcion');
-    
+    req.check('description').isLength({min: 10}).withMessage('The description of the category can not be too short');
+    req.check('description').notEmpty().withMessage('The description of the category can not be empty');
+    req.check('description').matches('[a-zA-Z]').withMessage('No special characters or numbers are allowed in the "Description" field');
+
     var errors = req.validationErrors();
     if (errors){
      
@@ -114,7 +113,7 @@ function updateCategoryByID(req, res){
                                 category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
                                     })                       
                            
                             }
@@ -123,7 +122,7 @@ function updateCategoryByID(req, res){
                             category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )
+                                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
                                     })
                         })
             }
@@ -137,10 +136,6 @@ function updateCategoryByID(req, res){
 function deleteCategoryByID(req, res, next){
    
     const id = mongoose.Types.ObjectId(req.params.categoryID)
-    var referencia = req.header('Referer')
-    let exito = 'Categoria eliminada exitosamente'
-    let fallo = 'Esta categoria no se puede eliminar porque tiene preguntas asociadas'
-
     
     //Valido el ID enviado si es correcto busco y elimino la categoria seleccionada
     //AQUI FALTA VALIDAR QUE SI LA CATEGORIA TIENE PREGUNTAS ASOCIADAS NO SE PUEDE ELIMINAR
@@ -152,11 +147,10 @@ function deleteCategoryByID(req, res, next){
             {
                 category.findByIdAndRemove(id).exec().then(result=>{
                     if(result){   
-                        var mensaje= "Eliminado con exito"  
                         category.find()
                         .exec()
                         .then(categories => {                                                     
-                            res.status(200).render( 'category/categoryAll', { message: mensaje, categorias: categories} )               
+                            res.status(200).render( 'category/categoryAll', { message: "Category successfully eliminated", categorias: categories} )               
                         })
                         
                       
@@ -165,14 +159,14 @@ function deleteCategoryByID(req, res, next){
                         category.find()
                                 .exec()
                                 .then(categories => {                                                                
-                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                                 })
                     }
                 }).catch(err=>{
                     category.find()
                                 .exec()
                                 .then(categories => {                                                                
-                                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                                 })
                 })
                
@@ -186,7 +180,7 @@ function deleteCategoryByID(req, res, next){
         category.find()
         .exec()
         .then(categories => {                                                                
-            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
         })
     }
     
@@ -213,7 +207,7 @@ function getCategoryID(req,res,next) {
                     category.find()
                                 .exec()
                                 .then(categories => {                                                                
-                                    res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                                 })
             
                 }
@@ -223,7 +217,7 @@ function getCategoryID(req,res,next) {
                 category.find()
                 .exec()
                 .then(categories => {                                                                
-                    res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                 })
             })
     }
@@ -231,7 +225,7 @@ function getCategoryID(req,res,next) {
         category.find()
         .exec()
         .then(categories => {                                                                
-            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
         })
     }
 }
@@ -253,7 +247,7 @@ function editCategory(req,res, next){
                         category.find()
                         .exec()
                         .then(categories => {                                                                
-                            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                         })
                     }   
                    
@@ -261,7 +255,7 @@ function editCategory(req,res, next){
                     category.find()
                             .exec()
                             .then(categories => {                                                                
-                                res.status(500).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                                res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                             })
                 })
             }
@@ -269,7 +263,7 @@ function editCategory(req,res, next){
                 category.find()
                         .exec()
                         .then(categories => {                                                                
-                            res.status(404).render( 'category/categoryAll', { error: "Error de servidor, intente mas tarde", categorias: categories} )                                   
+                            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
                         })
             }  
 }

@@ -191,7 +191,7 @@ function newGame(req,res) {
                                 game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                        res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                                 
                                     })
                             }); 
@@ -208,7 +208,7 @@ function getGames(req,res,next){
                 res.status(200).render( 'game/gameAll', { partidas: games})                 
             
             }).catch(err => {                  
-                res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+                res.status(500).render( 'index', { error: "Server error, try again"} )
             })
     
 
@@ -230,7 +230,7 @@ function getGameID(req,res,next){
                     game.find()
                     .exec()
                     .then(games => {          
-                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                 
                     })
                 }                
@@ -239,7 +239,7 @@ function getGameID(req,res,next){
                 game.find()
                     .exec()
                     .then(games => {          
-                        res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                        res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                                 
                     })
             })
@@ -248,7 +248,7 @@ function getGameID(req,res,next){
         game.find()
         .exec()
         .then(games => {          
-            res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+            res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
     
         })
     }
@@ -307,7 +307,7 @@ function updateGameByID(req, res, next){
                                     game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                                     })
                                 }
                             })
@@ -384,7 +384,7 @@ function updateGameByID(req, res, next){
                                 game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                                 
                                     })
                             }
@@ -393,7 +393,7 @@ function updateGameByID(req, res, next){
                             game.find()
                             .exec()
                             .then(games => {          
-                                res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                         
                             })
                         })
@@ -402,7 +402,7 @@ function updateGameByID(req, res, next){
                 game.find()
                 .exec()
                 .then(games => {          
-                    res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                    res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
             
                 })
             }
@@ -437,17 +437,17 @@ function deleteGameByID(req, res){
                         game.find()
                             .exec()
                             .then(games => {                               
-                                res.status(404).render( 'game/gameAll', { error: "Error con el servidor, intente nuevamente", partidas: games})
+                                res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
                             })
                     }
                 })
                 .catch(err =>{
                    
-                    res.status(500).render( 'game/gameAll', { error: "Error con el servidor, intente nuevamente", partidas: games})
+                    res.status(500).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
                 })
             }
             else{
-                res.status(404).render( 'game/gameAll', { error: "Error con el servidor, intente nuevamente", partidas: games})
+                res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
             }
         })
 }
@@ -508,7 +508,7 @@ function editGame(req,res){
                                         game.find()
                                             .exec()
                                             .then(games => {          
-                                                res.status(500).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                                res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                                             
                                             })
                                     })
@@ -517,7 +517,7 @@ function editGame(req,res){
                                 game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"error al comunicar con el servidor intente mas tarde"})                 
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
                                             
                                     })
                                 }
