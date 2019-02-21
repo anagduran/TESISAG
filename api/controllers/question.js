@@ -12,10 +12,10 @@ function capitalizeFirstLetter(string){
 
 function newQuestion(req, res) {
 
-    req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
-    req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
-    req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
-    req.check('categoriasCombo').exists().withMessage('Debe seleccionar por lo menos una categoria')
+    req.check("question").notEmpty().withMessage("The question field can not be empty.")
+    req.check("options").notEmpty().withMessage("The options fields can not be empty.")
+    req.check("level").isIn(['bajo','medio','alto']).withMessage("You must select a level.")
+    req.check('categoriasCombo').exists().withMessage('You must select at least one category.')
   
    
     
@@ -63,7 +63,7 @@ function newQuestion(req, res) {
                                             .populate('category', ['name']) 
                                             .exec()
                                             .then(questions => {                                                
-                                                res.status(404).render( 'question/questionAll', { preguntas: questions, error: "error al conectar con el servidor intente nuevamente"})
+                                                res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})
                                             })
 
                                 }
@@ -75,7 +75,7 @@ function newQuestion(req, res) {
                                      .populate('category', ['name']) 
                                      .exec()
                                      .then(questions => {                                                
-                                            res.status(500).render( 'question/questionAll', { preguntas: questions, error: "error al conectar con el servidor intente nuevamente"})
+                                            res.status(500).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})
                                     })
                         }); 
             
@@ -97,7 +97,7 @@ function getQuestions(req, res)
                     
         
             }).catch(err => {
-                res.status(404).render( 'index', { error: "Error de servidor, intente mas tarde"} )          
+                res.status(404).render( 'index', { error: "Server error, try again"} )          
             })
    
 
@@ -126,7 +126,7 @@ function getQuestionID(req, res){
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(404).render( 'question/questionAll', { preguntas: questions, error:" error con el servidor intente nuevamente"})               
+                                    res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})               
                                 })
                     }                
                 })
@@ -135,7 +135,7 @@ function getQuestionID(req, res){
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(500).render( 'question/questionAll', { preguntas: questions, error:" error con el servidor intente nuevamente"})               
+                                    res.status(500).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})               
                                 })
                 })
     }
@@ -144,7 +144,7 @@ function getQuestionID(req, res){
         .populate('category', ['name']) 
         .exec()
         .then(questions => {                                                
-            res.status(404).render( 'question/questionAll', { preguntas: questions, error:" error con el servidor intente nuevamente"})               
+            res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})               
         })
     }
 }
@@ -173,7 +173,7 @@ function deleteQuestionByID(req,res){
                         .populate('category', ['name']) 
                         .exec()
                         .then(questions => {                                                
-                            res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                            res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                         })      
             }
         })
@@ -182,7 +182,7 @@ function deleteQuestionByID(req,res){
                     .populate('category', ['name']) 
                     .exec()
                     .then(questions => {                                                
-                        res.status(500).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                        res.status(500).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                     })
         })
     }
@@ -191,7 +191,7 @@ function deleteQuestionByID(req,res){
                 .populate('category', ['name']) 
                 .exec()
                 .then(questions => {                                                
-                    res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                    res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                 })      
     }
 }
@@ -205,10 +205,10 @@ function updateQuestionByID(req, res){
 const id = mongoose.Types.ObjectId(req.body._id)
    // const id = req.params.questionID;
   
-    req.check("question").notEmpty().withMessage("El campo de pregunta no puede estar vacio")
-    req.check("options").notEmpty().withMessage("Los campos de opciones no pueden estar vacios")
-    req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
-    req.check('category').exists().withMessage('Debe seleccionar por lo menos una categoria')
+   req.check("question").notEmpty().withMessage("The question field can not be empty.")
+   req.check("options").notEmpty().withMessage("The options fields can not be empty.")
+   req.check("level").isIn(['bajo','medio','alto']).withMessage("You must select a level.")
+   req.check('categoriasCombo').exists().withMessage('You must select at least one category.')
     
 
     var errors = req.validationErrors();
@@ -248,7 +248,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                                     .populate('category', ['name']) 
                                     .exec()
                                     .then(questions => {                                                
-                                        res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                                        res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                                     })
                         }
                     })
@@ -257,7 +257,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(500).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                                    res.status(500).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                                 })
                     })
         }
@@ -266,7 +266,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                     .populate('category', ['name']) 
                     .exec()
                     .then(questions => {                                                
-                        res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                        res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                     })
         }
     }
@@ -294,7 +294,7 @@ function editQuestion(req,res){
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                                    res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                                 })
                     })
         }
@@ -303,7 +303,7 @@ function editQuestion(req,res){
                     .populate('category', ['name']) 
                     .exec()
                     .then(questions => {                                                
-                        res.status(404).render( 'question/questionAll', { error: "Error con el servidor, intente nuevamente", preguntas: questions})  
+                        res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
                     })
         }
     })
