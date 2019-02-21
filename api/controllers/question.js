@@ -56,7 +56,7 @@ function newQuestion(req, res) {
                             .exec()
                             .then( newQ => {
                                 if(newQ){
-                                    res.status(201).render('question/questionDetail', {pregunta :newQ})
+                                    res.status(201).render('question/questionDetail', {pregunta :newQ, message: "Question added successfully"})
                                 }
                                 else {
                                     question.find()
@@ -156,7 +156,7 @@ function getQuestionID(req, res){
 function deleteQuestionByID(req,res){
 
     const id = req.params.questionID;    
-    console.log(id)
+  
     
     if(mongoose.Types.ObjectId.isValid(id)){
         question.findByIdAndRemove(id).exec().then(result=>{
@@ -165,7 +165,7 @@ function deleteQuestionByID(req,res){
                         .populate('category', ['name']) 
                         .exec()
                         .then(questions => {                                                
-                            res.status(200).render( 'question/questionAll', { message: "eliminado con exito", preguntas: questions})  
+                            res.status(200).render( 'question/questionAll', { message: "Question successfully eliminated", preguntas: questions})  
                         })      
             }
             else {
@@ -229,7 +229,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
         
     } 
     else {
-        console.log(req.body.category);
+
         if (mongoose.Types.ObjectId.isValid(id)) {
             question.where({'_id': id})
                     .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category}})
@@ -240,7 +240,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                             .populate('category', ['name'])
                             .exec()
                             .then( cuestion => { 
-                                    res.status(200).render( 'question/questionDetail', { pregunta: cuestion})                      
+                                    res.status(200).render( 'question/questionDetail', { pregunta: cuestion, message: "Question successfully modified"})                      
                                 })
                         }   
                         else {                        
