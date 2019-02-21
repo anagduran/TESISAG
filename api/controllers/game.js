@@ -43,12 +43,14 @@ function createPushNotification(game) {
             mesC = game.date.substring(0,2);
             diaC = game.date.substring(3,5);
         }
+    
        
-    }
+    
 
     var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC;
-    // ENVIO NOTIFICACION TIPO 1
-    cronometro.schedule(total ,()=> {
+        console.log(total);
+     //ENVIO NOTIFICACION TIPO 1
+    cronometro.schedule('* * * * *' ,()=> {
         console.log('aqi a las 3 y 58');
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
@@ -67,11 +69,13 @@ function createPushNotification(game) {
         })
 
     })
+    }
+
 
      // ENVIO NOTIFICACION TIPO 2
      var total2 = '0 ' + hora2[0] + ' ' + diaC + ' ' + mesC;
      console.log(total2);
-     cronometro.schedule(total2 ,()=> {
+     cronometro.schedule('* * * * *' ,()=> {
         console.log('aqi a las 3 y 58');
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
@@ -90,23 +94,24 @@ function createPushNotification(game) {
         })
 
     })
+    
 
 }
 
 
 function newGame(req,res) {
     
-    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
-    req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
-    req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
-    req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
-    req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
-    req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
-    req.check("subject").notEmpty().withMessage("El campo de subject no puede estar vacio");
-    req.check("message").notEmpty().withMessage("El campo de message no puede estar vacio");
-    req.check("subject2").notEmpty().withMessage("El campo de subject no puede estar vacio");
-    req.check("message2").notEmpty().withMessage("El campo de message no puede estar vacio");
+    req.check("title").notEmpty().withMessage("The title field can not be empty.");
+    req.check("date").exists().withMessage("The date field can not be empty.");
+    req.check("time").exists().withMessage("The time field can not be empty.");
+    req.check("prize").notEmpty().withMessage("The prize field can not be empty.");
+    req.check("preguntasCombo").exists().withMessage("You must choose 12 questions, 4 for each level.");
+    req.check('prize').matches('[0-9]').withMessage('Only numbers are allowed in the prize field.');
+    req.check('title').isLength({min: 4}).withMessage('The title field can not be that short.');
+    req.check("subject").notEmpty().withMessage("The subject field can not be empty (Notification 1).");
+    req.check("message").notEmpty().withMessage("The message field can not be empty (Notification 1).");
+    req.check("subject2").notEmpty().withMessage("The subject field can not be empty (Notification 2).");
+    req.check("message2").notEmpty().withMessage("The message field can not be empty (Notification 2).");
 
     var errors = req.validationErrors();
     if (errors){
@@ -116,9 +121,9 @@ function newGame(req,res) {
                     var rand = Math.floor(Math.random() *resultCount);
                     var rand2 = Math.floor(Math.random() *resultCount2);
                     var rand3 = Math.floor(Math.random() *resultCount3);
-                    question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
-                        question.find({level:"medio", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
-                            question.find({level:"alto", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
+                    question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).exec().then(result1=> {
+                        question.find({level:"medio", status:"available"},{"question": 1}).limit(10).exec().then(result2=> {
+                            question.find({level:"alto", status:"available"},{"question": 1}).limit(10).exec().then(result3=> {
                                 res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3,  error: errors})
                                 return;
                             });                   
@@ -183,7 +188,7 @@ function newGame(req,res) {
                                     .exec()
                                 .then( newG => {
                                       createPushNotification(newG);
-                                      res.status(200).render('game/gameDetail',{partida: newG})
+                                      res.status(200).render('game/gameDetail',{partida: newG, message: "Game added successfully"})
                                       
                                 })
                             })
@@ -259,17 +264,17 @@ function updateGameByID(req, res, next){
     //const id = mongoose.Types.ObjectId(req.body._id)
     const id = req.params.gameID;
 
-    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio");
-    req.check("date").exists().withMessage("El campo de fecha no puede estar vacio");
-    req.check("time").exists().withMessage("El campo de hora no puede estar vacio");
-    req.check("prize").notEmpty().withMessage("El campo de premio no puede estar vacio");
-    req.check("preguntasCombo").exists().withMessage("Debe escoger 12 preguntas, 4 de cada nivel");
-    req.check('prize').matches('[0-9]').withMessage('Solo numeros');
-    req.check('title').isLength({min: 4}).withMessage('titulo muy corto');
-    req.check("subject").notEmpty().withMessage("El campo de subject no puede estar vacio");
-    req.check("message").notEmpty().withMessage("El campo de message no puede estar vacio");
-    req.check("subject2").notEmpty().withMessage("El campo de subject no puede estar vacio");
-    req.check("message2").notEmpty().withMessage("El campo de message no puede estar vacio");
+    req.check("title").notEmpty().withMessage("The title field can not be empty.");
+    req.check("date").exists().withMessage("The date field can not be empty.");
+    req.check("time").exists().withMessage("The time field can not be empty.");
+    req.check("prize").notEmpty().withMessage("The prize field can not be empty.");
+    req.check("preguntasCombo").exists().withMessage("You must choose 12 questions, 4 for each level.");
+    req.check('prize').matches('[0-9]').withMessage('Only numbers are allowed in the prize field.');
+    req.check('title').isLength({min: 4}).withMessage('The title field can not be that short.');
+    req.check("subject").notEmpty().withMessage("The subject field can not be empty (Notification 1).");
+    req.check("message").notEmpty().withMessage("The message field can not be empty (Notification 1).");
+    req.check("subject2").notEmpty().withMessage("The subject field can not be empty (Notification 2).");
+    req.check("message2").notEmpty().withMessage("The message field can not be empty (Notification 2).");
 
     var errors = req.validationErrors();
     if (errors){
@@ -377,7 +382,7 @@ function updateGameByID(req, res, next){
                                 .exec()
                                 .then(juego => {
                                     createPushNotification(juego);
-                                    res.status(200).render( 'game/gameDetail' , { partida: juego})    
+                                    res.status(200).render( 'game/gameDetail' , { partida: juego, message: "Game successfully modified"})    
                                 })
                             }   
                             else {                        
@@ -413,14 +418,25 @@ function deleteGameByID(req, res){
     
     const id = req.params.gameID;    
     game.findById(id).exec().then( resultado => {
+        
+        if(resultado!=null) {
+
+        
+        
+        
         var cambio= [];
         var cambio = resultado.questions;
         
-        for (let i=0; i < cambio.length; i++ ){   
-            question.where({'_id': cambio[i]})
-                    .update( {status: 'available'})
-                    .exec()
-        }
+        console.log(cambio.length);
+
+      
+            for (let i=0; i < cambio.length; i++ ){   
+                question.where({'_id': cambio[i]})
+                        .update( {status: 'available'})
+                        .exec()
+            }
+        
+        
     
     
             if(mongoose.Types.ObjectId.isValid(id)){
@@ -429,7 +445,7 @@ function deleteGameByID(req, res){
                         game.find()
                             .exec()
                             .then(games => {                               
-                                res.status(200).render( 'game/gameAll', { message: "eliminado con exito", partidas: games})
+                                res.status(200).render( 'game/gameAll', { message: "Game successfully eliminated", partidas: games})
                             })
                  
                     }
@@ -442,14 +458,30 @@ function deleteGameByID(req, res){
                     }
                 })
                 .catch(err =>{
-                   
-                    res.status(500).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                   console.log("en el catch");
+                    game.find()
+                    .exec()
+                    .then(games => {                               
+                        res.status(500).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                    })
                 })
             }
             else{
-                res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                game.find()
+                .exec()
+                .then(games => {                               
+                    res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                })
             }
+        } else {
+            game.find()
+                    .exec()
+                    .then(games => {                               
+                        res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                    })
+        }
         })
+    
 }
 
 
@@ -461,9 +493,9 @@ function createGame(req,res, next){
                 var rand = Math.floor(Math.random() *resultCount);
                 var rand2 = Math.floor(Math.random() *resultCount2);
                 var rand3 = Math.floor(Math.random() *resultCount3);
-                question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
-                    question.find({level:"medio", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
-                        question.find({level:"alto", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
+                question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).exec().then(result1=> {
+                    question.find({level:"medio", status:"available"},{"question": 1}).limit(10).exec().then(result2=> {
+                        question.find({level:"alto", status:"available"},{"question": 1}).limit(10).exec().then(result3=> {
                             res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
                         });                   
                     });

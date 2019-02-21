@@ -106,7 +106,7 @@ function updateCategoryByID(req, res){
                         .then(result =>{
                             
                             if(result.nModified===1){
-                            res.status(200).render('category/categoryDetail', {categoria: req.body})
+                            res.status(200).render('category/categoryDetail', {categoria: req.body, message: "Category successfully modified"})
                             
                             }
                             else { 
