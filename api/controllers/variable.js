@@ -3,10 +3,10 @@ import variable from "../models/variable"
 
 function newVariable(req,res,next) {
 
-    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio") 
-    req.check("description").notEmpty().withMessage("El campo de descripcion no puede estar vacio")
-    req.check('description').isLength({min: 10}).withMessage('La descripcion es muy corta') 
-    req.check('title').isLength({min: 5}).withMessage('El titulo es muy corto') 
+    req.check("title").notEmpty().withMessage("The title field can not be empty") 
+    req.check("description").notEmpty().withMessage("The description field can not be empty")
+    req.check('description').isLength({min: 10}).withMessage('The description is very short') 
+    req.check('title').isLength({min: 5}).withMessage('The title is very short') 
     
 
     var errors = req.validationErrors();
@@ -24,12 +24,12 @@ function newVariable(req,res,next) {
                 variableC.save()
                         .then(nuevavariable => { 
                             if(nuevavariable){
-                                res.status(201).render('variable/variableDetail',{variableC: nuevavariable})
+                                res.status(201).render('variable/variableDetail',{variableC: nuevavariable,  message: "Setting added successfully"})
                             } else {
                                 variable.find()
                                         .exec()
                                         .then(variables => {                               
-                                            res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                            res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                                         });
                                 }
                            
@@ -38,7 +38,7 @@ function newVariable(req,res,next) {
                             variable.find()
                                         .exec()
                                         .then(variables => {                               
-                                            res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                            res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                                         });
                         }); 
             
@@ -58,7 +58,7 @@ function getVariables(req,res,next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(404).render('index',{ error: "Error al conectar con el servidor, intente nuevamente"})          
+                                    res.status(404).render('index',{ error:"Server error, try again"})          
                                 });
                     }                         
                          
@@ -66,7 +66,7 @@ function getVariables(req,res,next){
                     variable.find()
                             .exec()
                             .then(variables => {                               
-                                res.status(500).render('index',{error: "Error al conectar con el servidor, intente nuevamente"})          
+                                res.status(500).render('index',{error:"Server error, try again"})          
                             });   
                 })  
 
@@ -86,7 +86,7 @@ function getVariableID(req,res,next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                                 });
                     }                
                 })
@@ -94,7 +94,7 @@ function getVariableID(req,res,next){
                     variable.find()
                             .exec()
                             .then(variables => {                               
-                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                             });
                     })
     }
@@ -102,17 +102,17 @@ function getVariableID(req,res,next){
         variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                 });
     }
 }
 
 function updateVariableByID(req, res, next){
    
-    req.check("title").notEmpty().withMessage("El campo de titulo no puede estar vacio") 
-    req.check("description").notEmpty().withMessage("El campo de descripcion no puede estar vacio")
-    req.check('description').isLength({min: 10}).withMessage('La descripcion es muy corta') 
-    req.check('title').isLength({min: 5}).withMessage('El titulo es muy corto') 
+    req.check("title").notEmpty().withMessage("The title field can not be empty") 
+    req.check("description").notEmpty().withMessage("The description field can not be empty")
+    req.check('description').isLength({min: 10}).withMessage('The description is very short') 
+    req.check('title').isLength({min: 5}).withMessage('The title is very short')  
     
     var errors = req.validationErrors();
     if (errors){
@@ -128,13 +128,13 @@ function updateVariableByID(req, res, next){
                     .exec()
                     .then(result =>{                    
                         if(result.nModified===1){
-                        res.status(200).render('variable/variableDetail',{variableC: req.body})                      
+                        res.status(200).render('variable/variableDetail',{variableC: req.body, message: "Setting successfully modified"})                      
                         }
                         else {                        
                             variable.find()
                                     .exec()
                                     .then(variables => {                               
-                                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again" })          
                                     });
                         }
                     })
@@ -142,7 +142,7 @@ function updateVariableByID(req, res, next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                    res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                                 });
                     })
         }
@@ -150,7 +150,7 @@ function updateVariableByID(req, res, next){
             variable.find()
                     .exec()
                     .then(variables => {                               
-                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                     });
         }
     }
@@ -167,14 +167,14 @@ function deleteVariableByID(req, res, next){
                 variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(200).render('variable/variableAll',{message: "eliminado con exito", variableConfiguracion: variables})          
+                    res.status(200).render('variable/variableAll',{message: "Setting successfully eliminated", variableConfiguracion: variables})          
                 })     
             }
             else {
                 variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{message: "Error con el servidor, intente nuevamente", variableConfiguracion: variables})          
+                    res.status(404).render('variable/variableAll',{error:"Server error, try again", variableConfiguracion: variables})          
                 }) 
             }
         })
@@ -182,7 +182,7 @@ function deleteVariableByID(req, res, next){
             variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(500).render('variable/variableAll',{message: "Error con el servidor, intente nuevamente", variableConfiguracion: variables})          
+                    res.status(500).render('variable/variableAll',{error:"Server error, try again", variableConfiguracion: variables})          
                 }) 
         })
     }
@@ -190,7 +190,7 @@ function deleteVariableByID(req, res, next){
         variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{message: "Error con el servidor, intente nuevamente", variableConfiguracion: variables})          
+                    res.status(404).render('variable/variableAll',{error:"Server error, try again", variableConfiguracion: variables})          
                 }) 
     }
 }
@@ -210,14 +210,14 @@ function editVariable(req,res, next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                                 });
                     }
                 }).catch(err=> {
                     variable.find()
                             .exec()
                             .then(variables => {                               
-                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                             });
                 })
             }
@@ -225,7 +225,7 @@ function editVariable(req,res, next){
                 variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Error al conectar con el servidor, intente nuevamente"})          
+                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
                 });
             }
         
