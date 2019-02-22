@@ -554,3 +554,15 @@ span.multiselect-native-select select {
     color: black;
 }
 
+form .button-logout-custom {
+    background-color: transparent;
+    border: none;
+    text-decoration:none;
+    color: #e1ffff;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+form i {
+    padding-left: 20px;
+}

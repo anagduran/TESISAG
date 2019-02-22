@@ -53,6 +53,7 @@ html(lang="en")
                             i(class='fas fa-cog fa-lg fa-lg') 
                             p(class='estilo') Execute Game
                     li(data-toggle="collapse" data-target="#settings" class="collapsed active")
-                    form(action="/logout" class= "link" method="GET")
-                        button(value='Log out' type='submit') Logout
-                    
+                        form(action="/logout" class= "link" method="GET")  
+                            i(class="fas fa-sign-out-alt fa-lg")                          
+                            button(value='Log out' type='submit' role="link" class='button-logout-custom estilo') Logout
+                            
