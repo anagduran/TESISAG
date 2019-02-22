@@ -31,7 +31,7 @@ function doingLogin(req, res) {
                         });
                         session.token = tokenSession;   
                         console.log("en el if");              
-                        res.status(200).render("index");
+                        res.status(200).render("index", {message: "Welcome Admin"});
                 }
                 else {
                         console.log("en el else"); 
@@ -52,7 +52,7 @@ function logOut(req, res){
                 }
                 else {
                         console.log("en el else");
-                res.status(200).render("index", {error: "error al tratar de cerrar sesion, intente nuevamente"});
+                res.status(200).render("index", {error: "Server error, try again"});
                 }
         });
         
@@ -102,7 +102,7 @@ function doingResetPW(req, res, next) {
 
                 }else {
                         
-                  res.status(404).render("login/forgot", {error: "este email no esta en la bd intente nuevamente"})
+                  res.status(404).render("login/forgot", {error: "This email is not registered, try again"})
                 }
         })
 }
@@ -157,7 +157,7 @@ function ResetPW(req, res, next) {
                 }
                 else { 
                            
-                 res.status(404).render( 'login/reset', { error: "Error de servidor, intente nuevamente"} )
+                 res.status(404).render( 'login/reset', { error: "Server error, try again"} )
                                                      
                        
                 }

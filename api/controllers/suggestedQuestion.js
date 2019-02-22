@@ -140,10 +140,10 @@ import question from "../models/question"
                     res.status(200).render('suggested/suggestedAll',{preguntas: suggested})
                      
                 } else {
-                    res.status(404).render('index' , {error: "error en servidor intente nuevamente"}) 
+                    res.status(404).render('index' , {error: "Server error, try again"}) 
                 }                    
             }).catch(err => {                    
-                res.status(404).render('index', {error: "error en servidor intente nuevamente"}) 
+                res.status(404).render('index', {error: "Server error, try again"}) 
             });
         
         
@@ -173,7 +173,7 @@ function getQuestionID(req,res,next){
                                         suggestedQuestion.find()
                                                          .exec()
                                                          .then(suggested => { 
-                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                                                          })     
                                         
                                     }                
@@ -182,7 +182,7 @@ function getQuestionID(req,res,next){
                             suggestedQuestion.find()
                                              .exec()
                                              .then(suggested => { 
-                                                    res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                    res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                                             })     
                          })
         }
@@ -190,7 +190,7 @@ function getQuestionID(req,res,next){
         suggestedQuestion.find()
                          .exec()
                          .then(suggested => { 
-                                res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                         })     
     }
 }
@@ -206,7 +206,7 @@ function deleteQuestionByID(req, res, next){
                 suggestedQuestion.find()
                 .exec()
                 .then(suggested => {                     
-                    res.status(200).render('suggested/suggestedAll',{message: "eliminado con exito" , preguntas: suggested})                     
+                    res.status(200).render('suggested/suggestedAll',{message: "Question successfully eliminated" , preguntas: suggested})                     
                        
                 }) 
             }
@@ -214,7 +214,7 @@ function deleteQuestionByID(req, res, next){
                 suggestedQuestion.find()
                                 .exec()
                                 .then(suggested => {                     
-                                    res.status(404).render('suggested/suggestedAll',{error: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                    res.status(404).render('suggested/suggestedAll',{error: "Server error, try again" , preguntas: suggested})                     
                                         
                                 }) 
             }
@@ -223,7 +223,7 @@ function deleteQuestionByID(req, res, next){
             suggestedQuestion.find()
                             .exec()
                             .then(suggested => {                     
-                                res.status(500).render('suggested/suggestedAll',{error: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                                res.status(500).render('suggested/suggestedAll',{error: "Server error, try again" , preguntas: suggested})                     
                                 
                             }) 
         })
@@ -232,7 +232,7 @@ function deleteQuestionByID(req, res, next){
         suggestedQuestion.find()
                         .exec()
                         .then(suggested => {                     
-                            res.status(404).render('suggested/suggestedAll',{error: "Error con el servidor, intente nuevamente" , preguntas: suggested})                     
+                            res.status(404).render('suggested/suggestedAll',{error: "Server error, try again" , preguntas: suggested})                     
                                 
                         }) 
     }
@@ -254,7 +254,7 @@ function createQuestion(req,res, next){
                                         suggestedQuestion.find()
                                                          .exec()
                                                          .then(suggested => { 
-                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                                                          })     
                                     }                
                          })
@@ -262,7 +262,7 @@ function createQuestion(req,res, next){
                             suggestedQuestion.find()
                                              .exec()
                                              .then(suggested => { 
-                                                res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                                             })     
                          })
         }
@@ -270,7 +270,7 @@ function createQuestion(req,res, next){
         suggestedQuestion.find()
                          .exec()
                          .then(suggested => { 
-                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                         })     
     }
 
@@ -326,14 +326,14 @@ function newQuestion(req, res) {
                                     .populate('category', ['name'])
                                     .exec()
                                     .then( newQ => {
-                                        res.status(201).render('question/questionDetail', {pregunta :newQ})
+                                        res.status(201).render('question/questionDetail', {pregunta :newQ, message: "Question added successfully"})
                                     })
                         })
                         .catch(err => {
                             suggestedQuestion.find()
                                              .exec()
                                              .then(suggested => { 
-                                                    res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error:" error con el servidor intente mas tarde"})  
+                                                    res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
                                             })     
                         }); 
 
