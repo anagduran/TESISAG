@@ -23,7 +23,7 @@ html(lang="en")
         br
         div(class='row')
             div(class='col offset-2')    
-                form(id='form', action='/variable/update/#{variableC._id}?_method=PUT', method='POST', style='white-space:pre;')
+                form(id='form', action='/variable/update/#{variableC._id}?_method=PUT', method='POST', style='white-space:pre;' autocomplete="off")
                     input(id='_id', name='_id', type='hidden', value='#{variableC._id}') 
 
                     div(class='col-8')

@@ -28,7 +28,7 @@ html(lang="en")
         br
         div(class='row')
             div(class='col offset-2')    
-                form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;')
+                form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;' autocomplete="off")
                     input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
                     label(class='label-form-style') DATA
                     hr

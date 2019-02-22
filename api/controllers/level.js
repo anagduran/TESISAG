@@ -41,7 +41,7 @@ function getLevel(req,res) {
                     
                 })
             }).catch(err=>{
-                res.render('index',{ error: "error al conectar con el servidor, intente nuevamente"})
+                res.render('index',{ error: "Server error, try again"})
             })
 
        
