@@ -7,12 +7,12 @@ import randomToken from 'random-token'
 function newUser(req,res) {
     var username = req.body.nickname;
 
-    req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');
-    req.check('nickname').notEmpty().withMessage('El nickname no puede estar vacio');
-    req.check('country_code').exists().withMessage('Debe seleccionar un codigo de pais');
-    req.check('phone').isLength({min: 4}).withMessage('El telefono es muy corto, minimo 8 digitos');
-    req.check('phone').notEmpty().withMessage('El numero de telefono no puede estar vacio');
-    req.check('phone').matches('[0-9]').withMessage('Solo se permiten numeros en el campo de Telefono');
+    req.check('nickname').isLength({min: 4}).withMessage('The nickname field is very short');
+    req.check('nickname').notEmpty().withMessage('The nickname field can not be empty');
+    req.check('country_code').exists().withMessage('You must select a country code');
+    req.check('phone').isLength({min: 4}).withMessage('Phone field is very short, minimum 8 digits');
+    req.check('phone').notEmpty().withMessage('The phone field can not be empty');
+    req.check('phone').matches('[0-9]').withMessage('Only numbers are allowed in the Phone field');
   
     
    var codigo = random.generate(4);
@@ -44,13 +44,13 @@ function newUser(req,res) {
                     usuarioN.save()
                             .then(nuevouser => {
                                 if(nuevouser){
-                                    res.status(200).render('user/userDetail',{usuario: nuevouser})
+                                    res.status(200).render('user/userDetail',{usuario: nuevouser,  message: "User added successfully"})
                                 }
                                 else {
                                     user.find()
                                     .exec()
                                     .then(users => {                                          
-                                        res.status(404).render('user/userAll',{usuarios: users,error: "Error de servidor, intente mas tarde" })         
+                                        res.status(404).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
                                     })
                                 }
                                
@@ -59,7 +59,7 @@ function newUser(req,res) {
                                 user.find()
                                     .exec()
                                     .then(users => {                                          
-                                        res.status(500).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                                        res.status(500).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
                                     })
                             }); 
                 
@@ -75,10 +75,10 @@ function getUsers(req,res,next){
                     if(users){
                         res.status(200).render('user/userAll',{usuarios: users})  
                     }  else {
-                        res.status(404).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+                        res.status(404).render( 'index', { error: "Server error, try again"} )
                     }                                      
                 }).catch(err => {
-                    res.status(500).render( 'index', { error: "Error de servidor, intente mas tarde"} )
+                    res.status(500).render( 'index', { error: "Server error, try again"} )
                 })
 }
 
@@ -96,7 +96,7 @@ function getUserID(req,res,next){
                         user.find()
                         .exec()
                         .then(users => {                                          
-                            res.status(5404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                            res.status(5404).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
                         })
                     }                
                 })
@@ -104,7 +104,7 @@ function getUserID(req,res,next){
                     user.find()
                         .exec()
                         .then(users => {                                          
-                            res.status(500).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                            res.status(500).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
                         })
                 })
     }
@@ -112,19 +112,19 @@ function getUserID(req,res,next){
         user.find()
         .exec()
         .then(users => {                                          
-            res.status(404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+            res.status(404).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
         })
     }
 }
 
 function updateUserByID(req, res, next){
 
-    req.check('nickname').isLength({min: 4}).withMessage('El nickname es muy corto');
-    req.check('nickname').notEmpty().withMessage('El nickname no puede estar vacio');
-    req.check('country_code').exists().withMessage('Debe seleccionar un codigo de pais');
-    req.check('phone').isLength({min: 4}).withMessage('El telefono es muy corto, minimo 8 digitos');
-    req.check('phone').notEmpty().withMessage('El numero de telefono no puede estar vacio');
-    req.check('phone').matches('[0-9]').withMessage('Solo se permiten numeros en el campo de Telefono');
+    req.check('nickname').isLength({min: 4}).withMessage('The nickname field is very short');
+    req.check('nickname').notEmpty().withMessage('The nickname field can not be empty');
+    req.check('country_code').exists().withMessage('You must select a country code');
+    req.check('phone').isLength({min: 4}).withMessage('Phone field is very short, minimum 8 digits');
+    req.check('phone').notEmpty().withMessage('The phone field can not be empty');
+    req.check('phone').matches('[0-9]').withMessage('Only numbers are allowed in the Phone field');
 
     var errors = req.validationErrors();
     if (errors){
@@ -140,13 +140,13 @@ function updateUserByID(req, res, next){
                     .exec()
                     .then(result =>{                    
                         if(result.nModified===1){
-                        res.status(200).render('user/userDetail',{usuario: req.body})                      
+                        res.status(200).render('user/userDetail',{usuario: req.body, message: "User successfully modified"})                      
                         }
                         else {                        
                             user.find()
                                 .exec()
                                 .then(users => {                                          
-                                    res.status(404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                                    res.status(404).render('user/userAll',{usuarios: users,  error: "Server error, try again" })         
                                 })
                         }
                     })
@@ -154,7 +154,7 @@ function updateUserByID(req, res, next){
                         user.find()
                             .exec()
                             .then(users => {                                          
-                                res.status(500).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                                res.status(500).render('user/userAll',{usuarios: users,  error: "Server error, try again" })         
                             })
                     })
         }
@@ -162,7 +162,7 @@ function updateUserByID(req, res, next){
             user.find()
             .exec()
             .then(users => {                                          
-                res.status(404).render('user/userAll',{usuarios: users, error: "Error de servidor, intente mas tarde" })         
+                res.status(404).render('user/userAll',{usuarios: users,  error: "Server error, try again" })         
             })
         }
     }
@@ -179,14 +179,14 @@ function deleteUserByID(req, res, next){
                 user.find()
                 .exec()
                 .then(users => {                                            
-                    res.status(200).render('user/userAll',{message: "Eliminado con exito",usuarios: users})         
+                    res.status(200).render('user/userAll',{ message: "User successfully eliminated",usuarios: users})         
                 })    
             }
             else {
                 user.find()
                 .exec()
                 .then(users => {                                            
-                    res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                    res.status(404).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
                 })    
             }
         })
@@ -194,7 +194,7 @@ function deleteUserByID(req, res, next){
             user.find()
                 .exec()
                 .then(users => {                                            
-                    res.status(500).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                    res.status(500).render('user/userAll',{  error: "Server error, try again" ,usuarios: users})         
                 })   
         })
     }
@@ -202,7 +202,7 @@ function deleteUserByID(req, res, next){
         user.find()
             .exec()
             .then(users => {                                            
-                res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                res.status(404).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
             })  
     }
 }
@@ -222,14 +222,14 @@ function editUser(req,res, next){
                         user.find()
                         .exec()
                         .then(users => {                                            
-                            res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                            res.status(404).render('user/userAll',{ error: "Server error, try again",usuarios: users})         
                         })  
                     }
                 }).catch(err=> {
                     user.find()
                         .exec()
                         .then(users => {                                            
-                            res.status(500).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                            res.status(500).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
                         })  
                 })
             }
@@ -237,7 +237,7 @@ function editUser(req,res, next){
                 user.find()
                     .exec()
                     .then(users => {                                            
-                        res.status(404).render('user/userAll',{error: "Error con el servidor, intente nuevamente",usuarios: users})         
+                        res.status(404).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
                     })  
             }  
 }

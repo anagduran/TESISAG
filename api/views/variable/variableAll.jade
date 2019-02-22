@@ -64,14 +64,13 @@ html(lang="en")
         div(class="modal-dialog" role='document')
             div(class="modal-content")
                 div(class='modal-header')
-                    h5 Eliminar Variable   
+                    h5 Delete Configuration   
                     input(type='text' id='lista' style="visibility:hidden")                                        
-                div(class="modal-body")
-                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-body") Are you sure you want to delete this record?
                 div(class="modal-footer")
-                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') No
                     form(action="" class= "link" method="POST" id='formEliminar')
-                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Aceptar
+                    a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Yes
     br                   
     div(class='row')
         div(class='col-sm-4 offset-2') 

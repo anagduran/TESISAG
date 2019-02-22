@@ -65,14 +65,13 @@ html(lang="en")
         div(class="modal-dialog" role='document')
             div(class="modal-content")
                 div(class='modal-header')
-                    h5 Eliminar Categoria   
+                    h5 Delete Category   
                     input(type='text' id='lista' style="visibility:hidden")                                        
-                div(class="modal-body")
-                    ¿Estas seguro que desea eliminar este registro?
+                div(class="modal-body") Are you sure you want to delete this record?
                 div(class="modal-footer")
-                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') Close
+                    button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') No
                     form(action="" class= "link" method="POST" id='formEliminar')
-                    a(class="btn btn-success" href='#' name='POST' id='eliminar') Aceptar             
+                    a(class="btn btn-success" href='#' name='POST' id='eliminar') Yes             
                                
     
     br                  
