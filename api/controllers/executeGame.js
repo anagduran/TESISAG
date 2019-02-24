@@ -1,17 +1,41 @@
 import game from "../models/game"
+import question from "../models/question"
 
 
 function getExecuteGame(req, res) {
-    res.render('executeGame/executeGame');
+    
     let now = new Date();
     var cambio = JSON.parse(JSON.stringify(now));
-    console.log('stringify', cambio);
     var cambio2 = cambio.split("T");
-    var cambio3 = 
+    var cambio3 = cambio2[0].split("-");
+    var concatenar = cambio3[1] + "/"+ cambio3[2] +"/" + cambio3[0];
+    var Partidas = [];
+    
+    game.find().exec().then(result=>{
+
+        for(let i=0; i< result.length; i++){
+            var fecha = result[i].date.split("T");
+
+            if(fecha[0]==concatenar){
+                Partidas.push(result[i]);          
+            }
+        }
+        res.render('executeGame/executeGame', {partidas: Partidas});
+       
+    }).catch(err=>{
+        res.render('index',{error: "Server error, try again"});
+    });
+
+    function getQuestiosGame(req, res){
+
+        // hacer un for con el lenght de game seleccionado.
+        // por cada game.question.id buscar la pregunta con sus opciones
+        // enviarlo al front
+    }
+  
 
   
-    console.log("split", cambio2[0]);
-    console.log('La fecha actual es',now);
+    
 
 
     
