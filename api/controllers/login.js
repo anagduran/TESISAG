@@ -144,7 +144,7 @@ function ResetPW(req, res, next) {
                                 };
                 
                                 smtpTransport.sendMail(mailOptions, function(err) {
-                                        if (err) {
+                                        if (err) { 
                                                 console.log('There was a problem')
                                                 console.log(err);   
                                                 res.status(404).render('login/login', {error: "There was a problem, try again"})       

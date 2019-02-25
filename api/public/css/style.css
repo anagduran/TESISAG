@@ -566,3 +566,7 @@ form .button-logout-custom {
 form i {
     padding-left: 20px;
 }
+
+.combobox-question-custom{
+    text-align: center !important;
+}
