@@ -26,22 +26,19 @@ function getExecuteGame(req, res) {
         res.render('index',{error: "Server error, try again"});
     });
 
-    function getQuestiosGame(req, res){
-
-        // hacer un for con el lenght de game seleccionado.
-        // por cada game.question.id buscar la pregunta con sus opciones
-        // enviarlo al front
-    }
+     
   
+}
 
-  
+function getQuestionsGame(req, res){
+    var id = req.params.gameID;
     
 
-
-    
-  
+    // hacer un for con el lenght de game seleccionado.
+    // por cada game.question.id buscar la pregunta con sus opciones
+    // enviarlo al front
 }
 
 
 
-module.exports ={getExecuteGame};
+module.exports ={getExecuteGame, getQuestionsGame};

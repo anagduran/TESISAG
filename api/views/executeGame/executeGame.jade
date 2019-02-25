@@ -28,14 +28,30 @@ html(lang="en")
             select(id='lowq' class="form-control"   name='preguntasCombo')
                 option(class='') Select Game
                 - for (let i=0; i< partidas.length; i++) {
-                    -var cambio = JSON.parse(JSON.stringify(partidas))[i]                  
-                    option(class='')  #{cambio.title}
+                    -var cambio = JSON.parse(JSON.stringify(partidas))[i]  
+                    - console.log(cambio._id);          
+                    option(value='#{cambio._id}' id='optionGame')  #{cambio.title}
                 - }
             br
             div(class=' d-flex justify-content-center')
                 button(class="btn btn-outline-info") Get Questions
+                
         div(class='col-3')
-    br
+    
+
+    
+        script(type="text/javascript" src='js/bootstrap.js') 
+        script(type="text/javascript" src="js/jquery.min.js")
+        script(type="text/javascript" src="js/bootstrap.min.js")
+
+script(type="text/javascript").
+
+    $(document).ready(function() {
+
+       var game = document.getElementById("optionGame").value;
+       console.log(game);
+
+    })
 
     
     
