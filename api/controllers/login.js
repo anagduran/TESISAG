@@ -66,7 +66,7 @@ function doingResetPW(req, res, next) {
         var token = randomToken(40);
         admin.findOne({'email': req.body.email}).exec().then(result=>{
                 if(result){
-                  console.log("holi");
+                 
                   var smtpTransport = nodemailer.createTransport( {
                         host: "smtp.gmail.com",
                         port: 465,
@@ -111,10 +111,13 @@ function ResetPW(req, res, next) {
         
         
         var pw1 = req.body.pw;
-        var pw2 = req.body.pw2;     
-     
-    if(pw1 != pw2) {
-            res.render('login/reset', {error: "Confirm Password dont match with Password"});
+        var pw2 = req.body.pw2;  
+        req.check("pw").isLength({min:6}).withMessage("The password field must have a minimum of 6 characters");
+        
+        var errors = req.validationErrors();
+
+    if((pw1 != pw2) || (errors)) {
+            res.render('login/reset', {error: "Confirm Password dont match with Password", error2: errors});
             return;
     }
     else {    

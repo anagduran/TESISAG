@@ -14,7 +14,7 @@ function newQuestion(req, res) {
 
     req.check("question").notEmpty().withMessage("The question field can not be empty.")
     req.check("options").notEmpty().withMessage("The options fields can not be empty.")
-    req.check("level").isIn(['bajo','medio','alto']).withMessage("You must select a level.")
+    req.check("level").exists().withMessage("You must select a level.")
     req.check('categoriasCombo').exists().withMessage('You must select at least one category.')
   
    
@@ -207,8 +207,8 @@ const id = mongoose.Types.ObjectId(req.body._id)
   
    req.check("question").notEmpty().withMessage("The question field can not be empty.")
    req.check("options").notEmpty().withMessage("The options fields can not be empty.")
-   req.check("level").isIn(['bajo','medio','alto']).withMessage("You must select a level.")
-   req.check('categoriasCombo').exists().withMessage('You must select at least one category.')
+   req.check("level").exists().withMessage("You must select a level.")
+   req.check('category').exists().withMessage('You must select at least one category.')
     
 
     var errors = req.validationErrors();

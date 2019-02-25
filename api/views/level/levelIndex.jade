@@ -14,15 +14,22 @@ html(lang="en")
 
 
     div(class='offset-2')
-
+        //-TORTA PORCENTAJES
         -var cambio4 = JSON.parse(JSON.stringify(total))[0]
         -var cambio5 = JSON.parse(JSON.stringify(total))[1]
         -var cambio6 = JSON.parse(JSON.stringify(total))[2]
-        
+        -var porcentaje1 = ((cambio4.count*100)/totalQ);
+        -var porcentaje2 = ((cambio5.count*100)/totalQ).toFixed(2);
+        -var porcentaje3 = ((cambio6.count*100)/totalQ).toFixed(2);
+     
+     
+        input(type='hidden' value = '#{totalQ}' id='totalQ')
+        input(type='hidden' value = '#{porcentaje1}' id='porcentaje1')
+        input(type='hidden' value = '#{porcentaje2}' id='porcentaje2')
+        input(type='hidden' value = '#{porcentaje3}' id='porcentaje3')
         input(type='hidden' value = '#{cambio4.count}' id='position4')
         input(type='hidden' value = '#{cambio5.count}' id='position5')
         input(type='hidden' value = '#{cambio6.count}' id='position6')
-        input(type='hidden' value = '#{totalQ}' id='totalQ')
         
        
         //- Febrero Barras
@@ -91,26 +98,33 @@ html(lang="en")
 
     
 
-        var count1 = document.getElementById("position4").value;
-        var count2 = document.getElementById("position5").value;
-        var count3 = document.getElementById("position6").value;
+       
         var count4 = document.getElementById("position7").value;
         var count5 = document.getElementById("position8").value;
         var count6 = document.getElementById("position9").value;
+        var porcent1 = document.getElementById("porcentaje1").value;
+        var porcent2 = document.getElementById("porcentaje2").value;
+        var porcent3 = document.getElementById("porcentaje3").value;
+
+        var concat1 = Math.ceil(porcent1);
+        var concat2 = Math.ceil(porcent2);
+        var concat3 = Math.ceil(porcent3);
+   
 
         /* MARZO BARRAS
         var cambioMar1 = document.getElementById("cm1").value;
         var cambioMar2 = document.getElementById("cm2").value;
         var cambioMar3 = document.getElementById("cm3").value;*/ 
-
+        
+        //TORTAA
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: ["High " , "Medium ", "Low "],
                 datasets: [{
-                    label: '# of Levels',
-                    data: [count1, count2, count3],
+                    label: '% of Levels',
+                    data: [concat1, concat2, concat3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -133,7 +147,7 @@ html(lang="en")
             options: {
                 title: {
                     display: true,
-                    text: 'System Levels',
+                    text: '% of System Levels',
                     fontSize: 40
                    
                 },
@@ -154,7 +168,7 @@ html(lang="en")
             
             }
         }); 
-
+        // BARRAS
         var ctx = document.getElementById("myChart2").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',

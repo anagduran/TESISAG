@@ -6,7 +6,7 @@ const gameSchema =  mongoose.Schema({
     date:{type: String } ,
     questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'question'}],
     prize: {type: String},
-    status: {type: String, estatus: ["sin inicio", "en progreso", "finalizada"]}, 
+    status: {type: String, estatus: ["No start", "In progress", "Finished"]}, 
     notification: [{
         type: {type: Number},
         subject: {type: String},

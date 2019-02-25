@@ -136,7 +136,7 @@ function newGame(req,res) {
 
     } else {  
     
-            var estadoDefault = "sin inicio"
+            var estadoDefault = "No start"
             var ver = req.body.date;    
             var tiempo = req.body.time;
             var timeN = tiempo.substring(0,2);

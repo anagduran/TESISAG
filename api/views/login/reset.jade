@@ -20,6 +20,12 @@ html(lang="en")
                 div(class="col mt-2 alert alert-danger fade show" role="alert") #{error}    
                     button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                         span(aria-hidden="true")&times;  
+        div(class='row')
+            -if(error2)
+                - for errors in error2
+                    div(class="col mt-2 alert alert-danger fade show" role="alert") #{errors.msg}    
+                        button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                            span(aria-hidden="true")&times; 
 
         div(class='row')
             div(class='col-sm-9 col-md-7 col-lg-5 mx-auto')
