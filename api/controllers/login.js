@@ -78,9 +78,9 @@ function doingResetPW(req, res, next) {
                       });
 
                       var mailOptions = {
-                        from: 'anaduranwork@gmail.com',
+                        from: 'Triviaguest System',
                         to: result.email,                        
-                        subject: 'Node.js Password Reset',
+                        subject: 'Triviaguest System Reset Password',
                         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                           'http://' + req.headers.host + '/reset/'+ token + '\n\n' +
@@ -136,11 +136,11 @@ function ResetPW(req, res, next) {
                                 });
                 
                                 var mailOptions = {
-                                        from: 'anaduranwork@gmail.com',
+                                        from: 'Triviaguest Sytem',
                                         to: result2.email,                        
-                                        subject: 'Node.js Password Reset',
+                                        subject: 'Triviaguest System Password Reset Confirmation',
                                         text: 'Hello,\n\n' +
-                                        'This is a confirmation that the password for your account '+result.email +' has just been changed.\n'
+                                        'This is a confirmation that the password for your account '+result2.email +' has just been changed.\n'
                                 };
                 
                                 smtpTransport.sendMail(mailOptions, function(err) {
