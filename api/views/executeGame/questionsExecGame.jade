@@ -18,31 +18,148 @@ html(lang="en")
     div(class='col-md-3 offset-2 pt-3')
         h2 Execute Game
 
+       
+        - var cambio = JSON.parse(JSON.stringify(questionsB))
+        - console.log(questionsB);
+        //- PREGUNTAS NIVEL BAJO
+        //- PREGUNTA #1
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0].question}'  class="0") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[0]}' class="0") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[1]}' class="0") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[2]}' class="0") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0].level}'  class="0") 
 
-        -console.log("en la vista");
-        - console.log(preguntas);
-    
-        label #{preguntas}
+        //- PREGUNTA #2
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[1].question}'  class="1") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[1].options[0]}' class="1") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[1].options[1]}' class="1") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[1].options[2]}' class="1") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[1].level}'  class="1") 
+
+        //- PREGUNTA #3
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[2].question}'  class="2") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[2].options[0]}' class="2") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[2].options[1]}' class="2") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[2].options[2]}' class="2") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[2].level}'  class="2") 
+
+        //- PREGUNTA #4
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[3].question}'  class="3") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[3].options[0]}' class="3") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[3].options[1]}' class="3") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[3].options[2]}' class="3") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[3].level}'  class="3") 
+
+        //- PREGUNTAS NIVEL MEDIO
+        //- PREGUNTA #5
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[0].question}'  class="4") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[0].options[0]}' class="4") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[0].options[1]}' class="4") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[0].options[2]}' class="4") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[0].level}'  class="4") 
+
+        //- PREGUNTA #6
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[1].question}'  class="5") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[1].options[0]}' class="5") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[1].options[1]}' class="5") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[1].options[2]}' class="5") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[1].level}'  class="5") 
+        
+        //- PREGUNTA #7
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[2].question}'  class="6") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[2].options[0]}' class="6") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[2].options[1]}' class="6") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[2].options[2]}' class="6") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[2].level}'  class="6") 
+        
+        //- PREGUNTA #8
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[3].question}'  class="7") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[3].options[0]}' class="7") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[3].options[1]}' class="7") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[3].options[2]}' class="7") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[3].level}'  class="7")
+        
+        //- PREGUNTAS NIVEL ALTO
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[0].question}'  class="8") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[0].options[0]}' class="8") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[0].options[1]}' class="8") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[0].options[2]}' class="8") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[0].level}'  class="8")
+
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[1].question}'  class="9") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[1].options[0]}' class="9") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[1].options[1]}' class="9") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[1].options[2]}' class="9") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[1].level}'  class="9")
+
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[2].question}'  class="10") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[2].options[0]}' class="10") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[2].options[1]}' class="10") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[2].options[2]}' class="10") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[2].level}'  class="10")
+
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[3].question}'  class="11") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[3].options[0]}' class="11") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[3].options[1]}' class="11") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[3].options[2]}' class="11") 
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[3].level}'  class="11")
+
 
     div(class='row offset-2') 
             div(class='col-11') 
                 div(class="card")
-                    div(class="card-header") Panel Game
+                    div(class="card-header card-header-custom") Questions
                     
                     div(class="card-body")
-                        h5(class="card-title") Special title treatment
-                        p(class="card-text") With supporting text below as a natural lead-in to additional content
+                        h5(class="card-title h5-cardbody-custom")
+                        input(class="card-text p-cardbody-custom" id='100' value='')
+                        input(class="card-text p-cardbody-custom" id='101' value='')
+                        input(class="card-text p-cardbody-custom" id='102' value='')
+                        input(class="card-text p-cardbody-custom" id='103' value='')
+                        input(class="card-text p-cardbody-custom" id='104' value='')
 
-            
+                    hr
                     div(class='row form-group offset-1')
                         div(class='col-11 d-flex justify-content-between')       
                             button(class='btn btn-outline-info') Start Game
-                            button(class='btn btn-outline-info') Next Question
-                            button(class='btn btn-outline-info') End Game
+                            button(class='btn btn-outline-info' id='buttonNext') Send Question
+                            button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
     
 
         script(type="text/javascript" src='/js/bootstrap.js') 
         script(type="text/javascript" src="/js/jquery.min.js")
         script(type="text/javascript" src="/js/bootstrap.min.js")
 
+
 script(type="text/javascript").
+    $(document).ready(function() {
+       
+    
+        var contador = 0;
+        $("#buttonNext").click(function(){
+            var contadorInput = 100;
+            var i,j;
+            for(i=0, j=100; i < 5; i++, j++)
+            {
+                var pregunta1 = document.getElementsByClassName(contador)[i]
+                var inputs = document.getElementById(j);
+                inputs.setAttribute('value', pregunta1.value);
+                var cambio1 = pregunta1.value;
+            
+          
+             
+            }
+            contador = contador + 1;
+            if(contador ==11){
+                $('#buttonNext').attr("disabled", true);
+                $('#buttonEnd').attr("disabled", false);
+            }
+            console.log("dentro del boton");
+            console.log(contador);
+          
+        })
+       console.log("fuera del boton");
+       console.log(contador);
+       
+    });
+

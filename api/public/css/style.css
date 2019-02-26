@@ -574,3 +574,11 @@ form i {
 .select-custom{
     text-align-last: center;
 }
+
+
+.h5-cardbody-custom , .p-cardbody-custom, .card-header-custom{
+    text-align: center;
+    font-family: 'Calibri';
+    color: black;
+}
+

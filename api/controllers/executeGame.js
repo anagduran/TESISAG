@@ -32,13 +32,26 @@ function getExecuteGame(req, res) {
 
 function getQuestionsGame(req, res){
     var id = req.params.gameID;
-    
+    var questionsBajas=[];
+    var questionsMedios=[];
+    var questionsAltas=[];
   
 
     game.findById(id).exec().then(result=>{
     
-        question.find({'_id': {$in: result.questions}}).exec().then(result2=>{
-            res.render('executeGame/questionsExecGame', {preguntas: result2})
+        question.find({'_id': {$in: result.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{
+            for(let i=0; i < result2.length; i++){
+                if(result2[i].level=="bajo"){
+                    questionsBajas.push(result2[i])
+                }
+                if(result2[i].level=="medio"){
+                    questionsMedios.push(result2[i])
+                }
+                if(result2[i].level=="alto"){
+                    questionsAltas.push(result2[i])
+                }
+            }
+            res.render('executeGame/questionsExecGame', {preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas})
         })
 
        
