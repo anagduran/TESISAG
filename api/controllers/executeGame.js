@@ -33,10 +33,20 @@ function getExecuteGame(req, res) {
 function getQuestionsGame(req, res){
     var id = req.params.gameID;
     
+  
 
-    // hacer un for con el lenght de game seleccionado.
-    // por cada game.question.id buscar la pregunta con sus opciones
-    // enviarlo al front
+    game.findById(id).exec().then(result=>{
+    
+        question.find({'_id': {$in: result.questions}}).exec().then(result2=>{
+            res.render('executeGame/questionsExecGame', {preguntas: result2})
+        })
+
+       
+    }).catch(err=>{
+        console.log("en el catch de game");
+        console.log(err);
+    })
+
 }
 
 

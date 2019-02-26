@@ -570,3 +570,7 @@ form i {
 .combobox-question-custom{
     text-align: center !important;
 }
+
+.select-custom{
+    text-align-last: center;
+}
