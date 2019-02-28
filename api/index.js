@@ -37,7 +37,7 @@ const server ={
        
 
         _server = app.listen(app.locals.config.PORT, ()=>{
-            connect()
+            connect() //SOCKET
             const address = _server.address()
             const host = address.address==='::'
             ? 'localhost'

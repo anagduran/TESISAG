@@ -51,14 +51,15 @@ function getQuestionsGame(req, res){
                     questionsAltas.push(result2[i])
                 }
             }
-            res.render('executeGame/questionsExecGame', {preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas})
-        })
+            res.render('executeGame/questionsExecGame', {juego: result ,preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas})
+        }).catch(err=>{
+            res.render('index',{error: "Server error, try again"});
+        });
 
        
     }).catch(err=>{
-        console.log("en el catch de game");
-        console.log(err);
-    })
+        res.render('index',{error: "Server error, try again"});
+    });
 
 }
 

@@ -16,11 +16,10 @@ html(lang="en")
 
 
     div(class='col-md-3 offset-2 pt-3')
-        h2 Execute Game
+        h2 Execute Game: #{juego.title}
 
        
-        - var cambio = JSON.parse(JSON.stringify(questionsB))
-        - console.log(questionsB);
+   
         //- PREGUNTAS NIVEL BAJO
         //- PREGUNTA #1
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].question}'  class="0") 
@@ -108,7 +107,7 @@ html(lang="en")
     div(class='row offset-2') 
             div(class='col-11') 
                 div(class="card")
-                    div(class="card-header card-header-custom") Questions
+                    div(class="card-header card-header-custom" id="divUno") Questions
                     
                     div(class="card-body")
                         h5(class="card-title h5-cardbody-custom")
@@ -121,8 +120,9 @@ html(lang="en")
                     hr
                     div(class='row form-group offset-1')
                         div(class='col-11 d-flex justify-content-between')       
-                            button(class='btn btn-outline-info') Start Game
-                            button(class='btn btn-outline-info' id='buttonNext') Send Question
+                            button(class='btn btn-outline-info' id='buttonStart') Start Game
+                            button(class='btn btn-outline-info' id='buttonNext' disabled='true') Next Question
+                            button(class='btn btn-outline-info' id='buttonSend' disabled='true') Send Question
                             button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
     
 
@@ -133,33 +133,96 @@ html(lang="en")
 
 script(type="text/javascript").
     $(document).ready(function() {
-       
+        var botonS =document.getElementById("buttonSend");
+        var botonN =document.getElementById("buttonNext");
+        
+        function bloquea(){
+            if(botonS.disabled==false){
+                botonS.disabled=true;
+                botonN.disabled=true;
+
+                setTimeout(function(){
+                    // botonS.disabled=false;
+                    botonN.disabled=false;
+                    if(contador==12){
+                     
+                        botonN.disabled=true;
+                
+                    }
+                }, 1000)
+            }
+           
+        }
     
-        var contador = 0;
+        var contador = 1;
+        var contador2 = 2;
+
+
+
         $("#buttonNext").click(function(){
+            
             var contadorInput = 100;
             var i,j;
             for(i=0, j=100; i < 5; i++, j++)
             {
-                var pregunta1 = document.getElementsByClassName(contador)[i]
+                var pregunta = document.getElementsByClassName(contador)[i]
                 var inputs = document.getElementById(j);
-                inputs.setAttribute('value', pregunta1.value);
-                var cambio1 = pregunta1.value;
-            
-          
-             
+                inputs.setAttribute('value', pregunta.value);
+                $('#buttonSend').attr("disabled", false);
             }
             contador = contador + 1;
-            if(contador ==11){
+            $("#divUno").html("Question "+ contador2);
+            contador2 = contador2 + 1;
+            
+            if(contador == 12){            
                 $('#buttonNext').attr("disabled", true);
                 $('#buttonEnd').attr("disabled", false);
             }
-            console.log("dentro del boton");
-            console.log(contador);
           
         })
-       console.log("fuera del boton");
-       console.log(contador);
+
+
+
+       $("#buttonStart").click(function(){
+
+
+           var pregunta = document.getElementsByClassName("0")[0]
+           var opcion1 =  document.getElementsByClassName("0")[1]
+           var opcion2 =  document.getElementsByClassName("0")[2]
+           var opcion3 =  document.getElementsByClassName("0")[3]
+           var level =  document.getElementsByClassName("0")[4]
+
+           var inputPregunta = document.getElementById("100");
+           inputPregunta.setAttribute('value', pregunta.value);
+
+           var inputOpcion1 = document.getElementById("101");
+           inputOpcion1.setAttribute('value', opcion1.value);
+
+           var inputOpcion2 = document.getElementById("102");
+           inputOpcion2.setAttribute('value', opcion2.value);
+
+           var inputOpcion3 = document.getElementById("103");
+           inputOpcion3.setAttribute('value', opcion3.value);
+
+           var inputLevel = document.getElementById("104");
+           inputLevel.setAttribute('value', level.value);
+
+           $('#buttonStart').attr("disabled", true);
+           $('#buttonSend').attr("disabled", false);
+           $("#divUno").html("Question 1");
+        
+        
+           
+       });
+
+       $("#buttonSend").click(function(){
+           bloquea();
+           $("#divUno").html("Question " +contador+" Sent"); 
+           
+
+       })
+
+       
        
     });
 
