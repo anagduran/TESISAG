@@ -585,3 +585,15 @@ form i {
     color: black;
 }
 
+.div-inputs-custom{
+    margin: 0 !important;
+    padding: 0;
+}
+
+.cardb-custom{
+    margin-left: 31% !important;
+}
+
+.input-custom{
+    border: none;
+}

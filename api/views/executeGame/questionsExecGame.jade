@@ -110,14 +110,37 @@ html(lang="en")
                 div(class="card")
                     div(class="card-header card-header-custom" id="divUno") Questions
                     
-                    div(class="card-body")
-                        h5(class="card-title h5-cardbody-custom")
-                        input(class="card-text p-cardbody-custom" id='100' value='')
-                        input(class="card-text p-cardbody-custom" id='101' value='')
-                        input(class="card-text p-cardbody-custom" id='102' value='')
-                        input(class="card-text p-cardbody-custom" id='103' value='')
-                        input(class="card-text p-cardbody-custom" id='104' value='')
+                    div(class="card-body cardb-custom")
+                        
+                        div(class='row')
+                            label(class='p-cardbody-custom col-sm-2') Question:
+                            div(class='col-sm-10 div-inputs-custom')
+                                input(class="card-text p-cardbody-custom input-custom" id='100' value='' readonly)
 
+                        br
+                        div(class='row')
+                            label(class='p-cardbody-custom col-sm-2')  Option A:
+                            div(class='col-sm-10 div-inputs-custom col-sm-2')
+                                input(class="card-text p-cardbody-custom input-custom" id='101' value='' readonly)
+                                
+                        br
+                        div(class='row')
+                            label(class='p-cardbody-custom col-sm-2')  Option B:
+                            div(class='col-sm-10 div-inputs-custom')
+                                input(class="card-text p-cardbody-custom input-custom" id='102' value='' readonly)
+                        br
+                        div(class='row')
+                            label(class='p-cardbody-custom col-sm-2')  Answer:
+                            div(class='col-sm-10 div-inputs-custom')
+                                input(class="card-text p-cardbody-custom input-custom" id='103' value='' readonly)
+                        br
+                        
+                        div(class='row')
+                            label(class='p-cardbody-custom col-sm-2')  Level:
+                            div(class='col-sm-10 div-inputs-custom')
+                                input(class="card-text p-cardbody-custom input-custom" id='104' value='' readonly)
+
+                    div(class="card-header card-header-custom border-top" id="divUno") Counting
                     hr
                     div(class='row form-group offset-1')
                         div(class='col-11 d-flex justify-content-between')       
@@ -164,8 +187,6 @@ script(type="text/javascript").
         var target = document.getElementById('foo');
         var spinner = new Spinner(opts).spin(target);
         
-        // $("#foo").show();
-        
         function bloquea(){
             if(botonS.disabled==false){
                 botonS.disabled=true;
@@ -178,9 +199,7 @@ script(type="text/javascript").
                     target.style.display =' none';
                     
                     if(contador==12){
-                        
                         botonN.disabled=true;
-                
                     }
                 }, 10000)
             }
@@ -189,8 +208,6 @@ script(type="text/javascript").
     
         var contador = 1;
         var contador2 = 2;
-
-
 
         $("#buttonNext").click(function(){
             
@@ -213,7 +230,6 @@ script(type="text/javascript").
             }
           
         })
-
 
 
        $("#buttonStart").click(function(){
@@ -253,9 +269,7 @@ script(type="text/javascript").
            $("#divUno").html("Question " +contador+" Sent"); 
            
 
-       })
-
-       
+       }) 
        
     });
 
