@@ -12,7 +12,7 @@ import login from './routes/login'
 
 
 export default app => {
-    // app.use('/',index)
+     app.use('/home',index)
     app.use('/category', category)
     app.use('/question', question)
     app.use('/game', game)

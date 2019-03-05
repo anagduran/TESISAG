@@ -1,6 +1,6 @@
 import game from "../models/game"
 import question from "../models/question"
-
+import {connect} from '../socket'
 
 function getExecuteGame(req, res) {
     
@@ -35,7 +35,8 @@ function getQuestionsGame(req, res){
     var questionsBajas=[];
     var questionsMedios=[];
     var questionsAltas=[];
-  
+    var hola = "hola hola";
+    console.log("en el metodo get questions")
 
     game.findById(id).exec().then(result=>{
     
@@ -51,6 +52,7 @@ function getQuestionsGame(req, res){
                     questionsAltas.push(result2[i])
                 }
             }
+            //connect(hola);
             res.render('executeGame/questionsExecGame', {juego: result ,preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas})
         }).catch(err=>{
             res.render('index',{error: "Server error, try again"});
@@ -63,6 +65,15 @@ function getQuestionsGame(req, res){
 
 }
 
+function startGame(req, res, next){
+    var hola ="hola hola";
+    console.log("en la funcion que llama al socket");
+    connect(hola);
+    res.status(200);
+
+}
 
 
-module.exports ={getExecuteGame, getQuestionsGame};
+
+
+module.exports ={getExecuteGame, getQuestionsGame, startGame};

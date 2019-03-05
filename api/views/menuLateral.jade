@@ -11,13 +11,15 @@ html(lang="en")
         
 
     div(class='nav-side-menu')
-        div(class='brand') HQ Latino Logo 
+        div(class='brand') 
+            br
+            img(src="/images/fondo-obscuro.png" id="logo-custom")
         i(class='fa fa-bars fa-2x toggle-btn' data-toggle='collapse' data-target='#menu-content')
         
         div(class='menu-list')
                 ul(id='menu-content' class='menu-content collapse out')
                     li
-                        a(href='/')
+                        a(href='home')
                             i(class='fa fa-dashboard fa-lg') 
                             p(class='estilo') Dashboard
                     li(data-toggle="collapse" data-target="#categories" class="collapsed active")

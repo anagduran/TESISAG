@@ -143,11 +143,13 @@ html(lang="en")
                     div(class="card-header card-header-custom border-top" id="divUno") Counting
                     hr
                     div(class='row form-group offset-1')
-                        div(class='col-11 d-flex justify-content-between')       
-                            button(class='btn btn-outline-info' id='buttonStart') Start Game
+                        div(class='col-11 d-flex justify-content-between')
+                            button( class='btn btn-outline-info' id='buttonStart') Start Game
                             button(class='btn btn-outline-info' id='buttonNext' disabled='true') Next Question
                             button(class='btn btn-outline-info' id='buttonSend' disabled='true') Send Question
                             button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
+                            form(action="/executeGame/5c6f1c839dbad8ab88a4f6ec" class= "link" method="GET")
+                                button( class='btn btn-outline-info' id='buttonStart') Start Game 2
     
     div(id='foo' style="display: none")
  
@@ -155,7 +157,7 @@ html(lang="en")
         script(type="text/javascript" src="/js/jquery.min.js")
         script(type="text/javascript" src="/js/bootstrap.min.js")
         script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js" )
-        
+        script(src="/js/socket.js" )
         
 
 
@@ -239,7 +241,7 @@ script(type="text/javascript").
            var opcion1 =  document.getElementsByClassName("0")[1]
            var opcion2 =  document.getElementsByClassName("0")[2]
            var opcion3 =  document.getElementsByClassName("0")[3]
-           var level =  document.getElementsByClassName("0")[4]
+           var level =    document.getElementsByClassName("0")[4]
 
            var inputPregunta = document.getElementById("100");
            inputPregunta.setAttribute('value', pregunta.value);
@@ -259,6 +261,10 @@ script(type="text/javascript").
            $('#buttonStart').attr("disabled", true);
            $('#buttonSend').attr("disabled", false);
            $("#divUno").html("Question 1");
+            var hola = "hola";
+            connect(hola);
+        
+    
         
         
            
