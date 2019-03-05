@@ -8,9 +8,121 @@ html(lang="en")
         link(rel="stylesheet" href="/css/bootstrap.css")
         script(src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous")      
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
-        
 
-    div(class='nav-side-menu')
+
+
+    div(id="wrapper")
+        div(class="overlay")
+    
+    
+        nav(class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation")
+            ul(class="nav sidebar-nav")
+                div(class="sidebar-header")
+                    br
+                    img(src="/images/fondo-obscuro.png" id="logo-custom")
+                   
+                        
+                hr
+                li
+                    a(href='home')
+                        i(class='fa fa-dashboard fa-lg') 
+                        p Dashboard
+                    
+                li
+                    a(href='/category') 
+                        i(class='fas fa-hashtag fa-lg')  Categories
+                        
+                li
+                    a(href='/question') 
+                        i(class='far fa-question-circle fa-lg') Questions
+                        
+                li
+                    a(href='/game') 
+                        i(class='fas fa-gamepad fa-lg fa-lg') Games
+                       
+                li
+                    a(href='/user') 
+                        i(class='fas fa-users fa-lg fa-lg') Users
+                       
+                li 
+                    a(href='/suggestedQuestion') 
+                        i(class='fas fa-plus-circle fa-lg') Suggested Questions
+                      
+                li
+                    a(href='/variable') 
+                        i(class='fas fa-cog fa-lg fa-lg') Settings
+                        
+                li 
+                    a(href='/executeGame') 
+                        i(class='fas fa-cog fa-lg fa-lg') Execute Game
+                       
+                li 
+                    form(action="/logout" class= "link" method="GET")  
+                        i(class="fas fa-sign-out-alt fa-lg")                          
+                        button(value='Log out' type='submit' role="link" class='button-logout-custom estilo') Logout
+                            
+
+                
+    
+        div(id="page-content-wrapper")
+            button(type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas")
+                span(class="hamb-top")
+                span(class="hamb-middle")
+                span(class="hamb-bottom")
+         
+           
+   
+        script(type="text/javascript" src='/js/bootstrap.js') 
+        script(type="text/javascript" src="/js/jquery.min.js")
+        script(type="text/javascript" src="/js/bootstrap.min.js")
+
+    script(type="text/javascript").
+        $(document).ready(function () {
+        var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+            trigger.click(function () {
+            hamburger_cross();      
+            });
+
+            function hamburger_cross() {
+
+            if (isClosed == true) {          
+                overlay.hide();
+                trigger.removeClass('is-open');
+                trigger.addClass('is-closed');
+                isClosed = false;
+            } else {   
+                overlay.show();
+                trigger.removeClass('is-closed');
+                trigger.addClass('is-open');
+                isClosed = true;
+            }
+        }
+        
+        $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+        });  
+        });
+
+           
+
+                            
+                        
+                    
+
+            
+           
+
+
+            
+
+
+
+    
+
+    //- div(class='nav-side-menu')
         div(class='brand') 
             br
             img(src="/images/fondo-obscuro.png" id="logo-custom")
