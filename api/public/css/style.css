@@ -321,17 +321,9 @@ footer {
 
 
 
-/*LOGIN STYLES*/
-
-/*.h2-custom {
-    text-align: center;
-}*/
 
 
-.wrapper {	
-	margin-top: 140px;
-    margin-bottom: 80px;
-}
+
 
 
 .label-custom {
@@ -356,13 +348,17 @@ form .button-logout-custom {
     background-color: transparent;
     border: none;
     text-decoration:none;
-    color: #e1ffff;
-    padding-left: 10px;
+    color: ffffff;
+    padding-left: 25px;
     cursor: pointer;
+    font-size: 20px;
+    font-family: 'Calibri'
 }
 
 form i {
-    padding-left: 20px;
+    color: #ffffff;
+    position: relative;
+    left: 30px;
 }
 
 .combobox-question-custom{
@@ -448,7 +444,7 @@ html { height: 100%;}
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 220px;
+    width: 240px;
 }
 
 #page-content-wrapper {
@@ -467,7 +463,7 @@ html { height: 100%;}
 /*     Sidebar nav styles        */
 /*-------------------------------*/
 .navbar {
-    padding: 0;
+    padding: 0 !important;
   }
   
   .sidebar-nav {
@@ -517,9 +513,17 @@ html { height: 100%;}
     display: block;
     color: #ffffff;
     text-decoration: none;
-    padding: 10px 15px 10px 30px;   
+    padding: 5px 23px 5px 30px;   
     font-family: 'Calibri';
     font-size: 20px; 
+}
+.ip-custom{
+    margin: 0;
+    position: relative;
+    font-family: 'Calibri';
+    font-size: 20px;
+    top: -20px;
+    left: 30px;
 }
 
 .sidebar-nav li a:hover,

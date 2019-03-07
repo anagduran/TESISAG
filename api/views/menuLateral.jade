@@ -20,41 +20,53 @@ html(lang="en")
                 div(class="sidebar-header")
                     br
                     img(src="/images/fondo-obscuro.png" id="logo-custom")
-                   
+                    br
                         
-                hr
+                br
                 li
                     a(href='home')
-                        i(class='fa fa-dashboard fa-lg') 
-                        p Dashboard
+                        i(class='fa fa-hashtag fa-md i-custom')    
+                        p(class='ip-custom') Dashboard
+                        
                     
-                li
+                li  
+                    
                     a(href='/category') 
-                        i(class='fas fa-hashtag fa-lg')  Categories
+                        i(class='fas fa-hashtag fa-md i-custom')     
+                        p(class='ip-custom') Categories
+                         
+                        
                         
                 li
                     a(href='/question') 
-                        i(class='far fa-question-circle fa-lg') Questions
+                        i(class='far fa-question-circle fa-md i-custom')  
+                        p(class='ip-custom') Questions
                         
                 li
                     a(href='/game') 
-                        i(class='fas fa-gamepad fa-lg fa-lg') Games
+                        i(class='fas fa-gamepad  fa-md i-custom')    
+                        p(class='ip-custom') Games
                        
                 li
                     a(href='/user') 
-                        i(class='fas fa-users fa-lg fa-lg') Users
+                        i(class='fas fa-users  fa-md i-custom')    
+                        p(class='ip-custom') Users
                        
                 li 
                     a(href='/suggestedQuestion') 
-                        i(class='fas fa-plus-circle fa-lg') Suggested Questions
+                        i(class='fas fa-plus-circle fa-md i-custom')
+                        p(class='ip-custom')    Suggested Questions
                       
                 li
                     a(href='/variable') 
-                        i(class='fas fa-cog fa-lg fa-lg') Settings
+                        i(class='fas fa-cog  fa-md') 
+                        p(class='ip-custom') Settings
+                           
                         
                 li 
                     a(href='/executeGame') 
-                        i(class='fas fa-cog fa-lg fa-lg') Execute Game
+                        i(class='fas fa-cog  fa-md i-custom')     
+                        p(class='ip-custom') Execute Game
                        
                 li 
                     form(action="/logout" class= "link" method="GET")  
