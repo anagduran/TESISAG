@@ -29,20 +29,24 @@ html(lang="en")
 
 
    
-
-    div(class='col-md-3 offset-2 pt-3')
-        h2 Categories
+    div(class='row ')
+        div(class='col-1')
+            
+        div(class='col-10')
+            h2 Categories
+        div(class='col-1')
     br
     div(class='container-fluid')
-        div(class='row offset-2')
+        div(class='row ')
+            div(class='col-1')
             div(class='col-10')               
-                    div(class='box-body')        
+                           
                         table(id='tablaUno' class='table table-sm table-bordered table-striped')
                             thead
                                 tr
-                                    th(class='tableAll') #
+                                    th(class='tableAll th-actions-custom') #
                                     th(class='tableAll') Name 
-                                    th(class='tableAll') Actions
+                                    th(class='tableAll th-actions-custom') Actions
                             
                             tbody
                                 -var i= -1
@@ -58,7 +62,7 @@ html(lang="en")
                                             a(class='action-icon' href='/category/edit/#{categoria._id}') 
                                                 i( class='fas fa-pencil-alt icon-edit')
                                             button(type='button' id='button1' class='fas fa-trash-alt button ' data-toggle="modal" data-target="#myModal2" value= categoria._id onclick='obtenervalor(`#{categoria._id}`);')                            
-                                        
+            div(class='col-1')                        
                                         
                             
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
@@ -76,9 +80,10 @@ html(lang="en")
     
     br                  
     div(class='row')
-        div(class='col-sm-4 offset-2')           
+        div(class='col-1') 
+        div(class='col-10')           
             a(href='/category/create' class='btn btn-outline-success' role='button') New Category
-
+        div(class='col-1') 
     script(type="text/javascript" src='/js/bootstrap.js') 
     script(type="text/javascript" src="/js/jquery.min.js")
     script(type="text/javascript" src="/js/bootstrap.min.js")
@@ -86,8 +91,7 @@ html(lang="en")
     script(type="text/javascript" src="/js/dataTables.bootstrap4.min.js")
     
     
-    footer(class="page-footer font-small blue")  
-        div(class="footer-copyright text-center py-3 offset-2")© 2018 Copyright HQ Latino SCT
+
     
  
     

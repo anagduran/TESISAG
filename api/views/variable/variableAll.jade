@@ -24,20 +24,25 @@ html(lang="en")
                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                     span(aria-hidden="true")&times;  
                     
-    div(class='col-md-3 offset-2 pt-3')
-        h2 Settings
+    div(class='row ')
+        div(class='col-1')
+            
+        div(class='col-10')
+            h2 Settings
+        div(class='col-1')
     br
     div(class='container-fluid')
-        div(class='row offset-2 pl-12')
+        div(class='row')
+            div(class='col-1')
             div(class='col-10')               
                     div(class='box-body')        
                         table(id='tablaUno' class='table table-sm table-bordered table-striped')
                             thead
                                 tr   
-                                    th(class='tableAll') #
+                                    th(class='tableAll th-actions-custom') #
                                     th(class='tableAll') Title
                                     th(class='tableAll') Description
-                                    th(class='tableAll') Actions
+                                    th(class='tableAll th-actions-custom') Actions
                                     
         
                             tbody
@@ -58,7 +63,7 @@ html(lang="en")
                                             a(href='/variable/edit/#{variable._id}') 
                                                 i( class='fas fa-pencil-alt icon-edit')   
                                             button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= variable._id onclick='obtenervalor(`#{variable._id}`);')                                                     
-
+            div(class='col-1')
                     
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
         div(class="modal-dialog" role='document')
@@ -73,9 +78,10 @@ html(lang="en")
                     a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Yes
     br                   
     div(class='row')
-        div(class='col-sm-4 offset-2') 
+        div(class='col-1') 
+        div(class='col-10') 
             a(href='/variable/create' class='btn btn-outline-success' role='button') New Setting     
-                   
+        div(class='col-1')          
     script(type="text/javascript" src='/js/bootstrap.js') 
     script(type="text/javascript" src="/js/jquery.min.js")
     script(type="text/javascript" src="/js/bootstrap.min.js")

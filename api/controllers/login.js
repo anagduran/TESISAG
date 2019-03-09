@@ -16,9 +16,8 @@ function doingLogin(req, res) {
         admin.findOne({'email': req.body.email, 'password': req.body.password}).exec().then(result =>{
 
                 if(result) {
-                        var tokenSession = randomToken(16);
-                        //var tokenSessionCript = token.generateHash(tokenSession);
-                        //console.log(tokenSessionCript);
+                        var tokenSession = randomToken(40);
+            
                         
                         const TOKEN = new token({
                          _id: new mongoose.Types.ObjectId(),
@@ -30,12 +29,12 @@ function doingLogin(req, res) {
                                 console.log(err);
                         });
                         session.token = tokenSession;   
-                        console.log("en el if");              
+                             
                         res.status(200).render("index", {message: "Welcome Admin"});
                 }
                 else {
-                        console.log("en el else"); 
-                        res.status(404).render("login/login");  
+                       
+                        res.status(404).render("login/login", {error: "Invalid password or email"});  
                 }
         })
   

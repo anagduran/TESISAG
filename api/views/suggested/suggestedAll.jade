@@ -27,19 +27,24 @@ html(lang="en")
                     span(aria-hidden="true")&times;     
 
         
-    div(class='col-md-3 offset-2 pt-4')
-        h2 Suggested Questions
+    div(class='row ')
+        div(class='col-1')
+            
+        div(class='col-10')
+            h2 Suggested Questions
+        div(class='col-1')
     br
     div(class='container-fluid')
-        div(class='row offset-2')
-            div(class='col-11')               
+        div(class='row')
+            div(class='col-1')
+            div(class='col-10')               
                     div(class='box-body')        
                         table(id='tablaUno' class='table table-sm table-bordered table-striped')
                             thead
                                 tr
-                                    th(class='tableAll') #
+                                    th(class='tableAll th-actions-custom') #
                                     th(class='tableAll') Question 
-                                    th(class='tableAll') Action
+                                    th(class='tableAll th-actions-custom') Action
                         
                             tbody
                     
@@ -57,6 +62,7 @@ html(lang="en")
                                             a(href='/suggestedQuestion/#{pregunta._id}') 
                                                 i(id='icon-see' class='fa fa-eye')
         
+            div(class='col-1')
 
     
                         

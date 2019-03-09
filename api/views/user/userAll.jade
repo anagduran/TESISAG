@@ -27,21 +27,26 @@ html(lang="en")
                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                     span(aria-hidden="true")&times;   
 
-    div(class='col-md-3 offset-2 pt-3')
-        h2 Users
+    div(class='row ')
+        div(class='col-1')
+            
+        div(class='col-10')
+            h2 Users
+        div(class='col-1')
     br
     div(class='container-fluid')
-        div(class='row offset-2 pl-12')
+        div(class='row')
+            div(class='col-1')
             div(class='col-10')               
                     div(class='box-body')        
                         table(id='tablaUno' class='table table-sm table-bordered table-striped')
                             thead
                                 tr
-                                    th(class='tableAll') #
+                                    th(class='tableAll th-actions-custom') #
                                     th(class='tableAll') Nickname
                                     th(class='tableAll') Extra Life
                                     th(class='tableAll') Balance
-                                    th(class='tableAll') Actions
+                                    th(class='tableAll th-actions-custom') Actions
             
                             tbody
                     
@@ -63,7 +68,7 @@ html(lang="en")
                                                 i(class='fas fa-pencil-alt icon-edit')   
                                             button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= usuario._id onclick='obtenervalor(`#{usuario._id}`);')
                     
-                    
+            div(class='col-1')   
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
         div(class="modal-dialog" role='document')
             div(class="modal-content")
@@ -77,9 +82,11 @@ html(lang="en")
                     a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Yes
     br                  
     div(class='row')
-        div(class='col-sm-4 offset-2') 
+        div(class='col-1')
+        div(class='col-10') 
             a(href='/user/create' class='btn btn-outline-success' role='button') New User      
-                   
+        div(class='col-1')      
+    div(class='row')
     script(type="text/javascript" src='/js/bootstrap.js') 
     script(type="text/javascript" src="/js/jquery.min.js")
     script(type="text/javascript" src="/js/bootstrap.min.js")
