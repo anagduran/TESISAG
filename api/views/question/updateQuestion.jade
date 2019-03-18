@@ -11,7 +11,8 @@ html(lang="en")
 
     div(class='container-fluid')
         div(class='row')
-            div(class='col-9 offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10')
                 h2 Update Question
                 - if(error)
                     ul(class='list-group ul-style')  
@@ -21,9 +22,11 @@ html(lang="en")
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times;
 
+            div(class='col-1')
         br
         div(class='row')
-            div(class='col offset-2')    
+            div(class='col-1')
+            div(class='col-10')    
                 form(id='form', action='/question/update/#{pregunta._id}?_method=PUT', method='POST', style='white-space:pre;')
                     input(id='_id', name='_id', type='hidden', value='#{pregunta._id}') 
 
@@ -71,29 +74,35 @@ html(lang="en")
         
                     br
                     div(class="row")
-                        label(class='label-form-style') Categories
+                        
                     
                     div(class="row")      
-                        div(class="col d-flex justify-content-start")                 
+                        div(class="col-5 button-change-custom")   
+                            label(class='label-form-style') Categories              
                             select(class="select-style" id="origen" type='combobox' name='category' multiple)
                                 -each cat, i in pregunta.category                
                                     option(value="#{cat._id}") #{cat.name} 
 
                     
-                        div(class="col")                        
-                            input(type='button' id="pasar" value='pasar a der')                        
-                            input(type='button' id="quitar" value='pasar a izq')
-                    
-                    
-                        
-
-                    
-                        div(class="col")  
+                        div(class="col-2 button-change-custom")  
+                            div(class='row')  
+                                div(class='col d-flex justify-content-start btn-left-right-custom')                        
+                                    input(type='button' id="pasar" value='>>>>' class='btn btn-primary') 
+                               
+                             
+                            br   
+                            div(class='row')    
+                                div(class='col d-flex justify-content-start btn-left-right-custom')                                           
+                                    input(type='button' id="quitar" value='<<<<' class='btn btn-primary')
+                              
+                                   
+                        div(class="col-5 button-change-custom")  
                             label(class='label-form-style') Categories System
                             select(class="select-style" id="destino" type='combobox' name='categoriaCombos2' multiple selected='selected') 
                                 
                                 -each categoria, i in categorias       
                                     option(value= "#{categoria._id}") #{categoria.name} 
+                    
                     br
                     div(class='row')
                         div(class='col d-flex justify-content-between')
@@ -102,7 +111,7 @@ html(lang="en")
 
                     
         
-                   
+            div(class='col-1') 
 
     script(type="text/javascript").
         

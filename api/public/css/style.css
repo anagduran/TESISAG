@@ -2,7 +2,12 @@
     width: 15% !important;
 }
 
-
+.button-change-custom {
+    padding: 0 !important;
+}
+.btn-left-right-custom{
+    padding-left: 50px !important;
+}
 #myChart {
     padding: 0 !important;
     margin: 0 !important;
