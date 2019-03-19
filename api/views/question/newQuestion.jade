@@ -10,7 +10,8 @@ html(lang="en")
     
     div(class='container-fluid')
         div(class='row')
-            div(class='col-9 offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10')
                 h2 New Question
 
                 - if(error)
@@ -20,38 +21,49 @@ html(lang="en")
                              li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times; 
-            
+            div(class='col-1')
+
+
         div(class='row')
-            div(id='alert' class="col-9 offset-2 alert alert-info div-alert-custom" role="alert") The system suggests that the level of this question is:
+            div(class='col-1')
+            div(id='alert' class="col-10 alert alert-info div-alert-custom" role="alert") The system suggests that the level of this question is:
                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                     span(aria-hidden="true")&times;
                 p(id='palert' class='p-alert-custom') 
+            div(class='col-1')
+
         br
         form(id='form', action='/question/new', method='POST' autocomplete="off")
-            div(class='row offset-2')
+            div(class='row')
+                div(class='col-1')
                 div(class='col-10')
                     Label(class='label-form-style') Question                
                     input(id='question', class='form-control' name='question' placeholder='Type question')
+                div(class='col-1')
 
             br   
-            div(class='row form-group offset-2')
-                div(class='col-4')
-                    Label(class='label-form-style') Option A                
-                    input(id='option1', class='form-control', name='options' placeholder='Type option A')
+            div(class='row form-group')
+                div(class='col-1')
+                
+                div(class='col-3')
+                        Label(class='label-form-style') Option A                
+                        input(id='option1', class='form-control', name='options' placeholder='Type option A')
 
                 div(class='col-4')
-                    Label(class='label-form-style') Option B               
-                    input(id='option2', class='form-control', name='options' placeholder='Type option B')
+                        Label(class='label-form-style') Option B               
+                        input(id='option2', class='form-control', name='options' placeholder='Type option B')
+                    
                 
-            
-                div(class='col-4')
-                    Label(class='label-form-style') Option C and Answer                      
-                    input(id='option3', class='form-control', name='options' placeholder='Type Answer')
+                div(class='col-3')
+                        Label(class='label-form-style') Option C and Answer                      
+                        input(id='option3', class='form-control', name='options' placeholder='Type Answer')
+                div(class='col-1')
             
             br
-            div(class='row form-group offset-2')
+            div(class='row form-group')
             
-                div(class='col')
+                div(class='col-1')
+                div(class='col-10')
                     Label(class='level-label-form-style') Level
                     br
                     label(class= "label-radio-button-style") Low 
@@ -62,24 +74,29 @@ html(lang="en")
 
                     label(class= "label-radio-button-style2") High 
                     input(type='radio', name='level', value='High')
+                div(class='col-1')
 
             
             br
-            div(class='form-group col-10 offset-2')
-                Label(class='level-label-form-style') Categories
-                hr
-                -each categoria, i in categorias
-                    div(class='form-check form-check-inline')                             
-                        input(type='checkbox' class='form-check-input' name='categoriasCombo' value="#{categoria._id}") 
-                        label(class="form-check-label" for="gridCheck1") #{categoria.name} 
-                        
-                        
+            div(class='row form-group') 
+                div(class='col-1')
+                div(class='form-group col-10')
+                    Label(class='level-label-form-style') Categories
+                    hr
+                    -each categoria, i in categorias
+                        div(class='form-check form-check-inline')                             
+                            input(type='checkbox' class='form-check-input' name='categoriasCombo' value="#{categoria._id}") 
+                            label(class="form-check-label" for="gridCheck1") #{categoria.name} 
+                            
+                div(class='col-1')      
                            
             br
-            div(class='row form-group offset-2')  
+            div(class='row form-group') 
+                div(class='col-1') 
                 div(class='col-10 d-flex justify-content-between')                         
                     a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
+                div(class='col-1')
                 
             
 

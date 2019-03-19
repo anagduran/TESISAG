@@ -12,61 +12,67 @@ html(lang="en")
 
     - if(message)
         div(class='row')
-            div(class="mt-2 col-9 offset-2 alert alert-success fade show" role="alert") #{message}    
+            div(class='col-1')
+            div(class="mt-2 col-10  alert alert-success fade show" role="alert") #{message}    
                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                     span(aria-hidden="true")&times; 
+            div(class='col-1')
 
                     
     div(class='container-fluid')
         div(class='row')
-            div(class='col offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10')
                 h2 Question Detail
+            div(class='col-1')
 
         br
-        div(class='form-group offset-2')
+        div(class='form-group')
             div(class='row')
-                div(class='col')
+                div(class='col-1')
+                div(class='col-10')
                     Label(class='label-form-style') Question        
                     input(type='text' class='form-control' value= '#{pregunta.question}' readonly)
+                div(class='col-1')
             
             br
             div(class='row')
-                div(class='col')
+                div(class='col-1')
+                div(class='col-3')
                     Label(class='label-form-style') Option A                
                     input(type='text' class='form-control' value= '#{pregunta.options[0]}' readonly)
                 
-                div(class='col')
+                div(class='col-4')
                     Label(class='label-form-style') Option B            
                     input(type='text' class='form-control' value= '#{pregunta.options[1]}' readonly)
                 
-                div(class='col')
-                    Label(class='label-form-style') Option C              
+                div(class='col-3')
+                    Label(class='label-form-style') Option C and Answer           
                     input(type='text' class='form-control' value= '#{pregunta.options[2]}' readonly)
-            
+                div(class='col-1')
             br
             div(class='row')
-                div(class='col')
-                    Label(class='label-form-style') Answer                
-                    input(type='text' class='form-control' value= '#{pregunta.answer}' readonly)
-
-
-                div(class='col')
+                div(class='col-1')
+                div(class='col-5')
                     Label(class='label-form-style') Level                
                     input(type='text' class='form-control' value= '#{pregunta.level}' readonly)
-
-
-                div(class='col')
+                
+            
+                
+                div(class='col-5')
                     Label(class='label-form-style') Categories                            
                             -var j= 0
                             - each categoria in pregunta.category                   
                                 -var categoryChange2= JSON.parse(JSON.stringify(pregunta.category))[j]
                                 - ++j       
                                 p(size='65' class='form-control' readonly) #{categoryChange2.name}
+                div(class='col-1')
             br
             div(class='row')
-                div(class='col justify-content-start')        
+                div(class='col-1')
+                div(class='col-10 justify-content-start')        
                     a(href='/question' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Questions
-            
+                div(class='col-1')
         br
         br
     

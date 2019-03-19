@@ -232,7 +232,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
 
         if (mongoose.Types.ObjectId.isValid(id)) {
             question.where({'_id': id})
-                    .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.answer, level: req.body.level, category: req.body.category}})
+                    .update( {$set: {question: req.body.question, options: req.body.options, answer: req.body.options[2], level: req.body.level, category: req.body.category}})
                     .exec()
                     .then(result =>{                    
                         if(result.nModified===1){
