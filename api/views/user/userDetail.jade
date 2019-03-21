@@ -10,51 +10,63 @@ html(lang="en")
 
     - if(message)
         div(class='row')
-            div(class="mt-2 col-9 offset-2 alert alert-success fade show" role="alert") #{message}    
+            div(class='col-1')
+            div(class="mt-2 col-10 alert alert-success fade show" role="alert") #{message}    
                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                     span(aria-hidden="true")&times; 
+            div(class='col-1')
                     
     div(class='container-fluid')
         div(class='row')
-            div(class='col offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10 pt-3')
                 h2 User Detail
+            div(class='col-1')
 
         br
-        div(class='row form-group offset-2')
-            div(class='col')
+        div(class='row form-group')
+            div(class='col-1')
+
+            div(class='col-3')
                 Label(class='label-form-style') Nickname                
                 input(type='text' class='form-control' value= '#{usuario.nickname}' readonly)
             
            
-            div(class='col')
+            div(class='col-4')
                 Label(class='label-form-style') Country Code                
                 input(type='text' class='form-control' value= '#{usuario.country_code}' readonly)
             
-            div(class='col')
+            div(class='col-3')
                 Label(class='label-form-style') Phone                
                 input(type='text' class='form-control' value= '#{usuario.phone}' readonly)
+
+            div(class='col-1')
         br
-        div(class='row form-group offset-2')
-            div(class='col')
+        div(class='row form-group')
+            div(class='col-1')
+            div(class='col-3')
                 Label(class='label-form-style') Shared Code
                 input(type='text' class='form-control' value= '#{usuario.share_code}' readonly)
 
 
-            div(class='col')
+            div(class='col-2')
                 Label(class='label-form-style') Extra Life
                 input(type='text' class='form-control' value= '#{usuario.extra_life}' readonly)
 
-            div(class='col')
+            div(class='col-2')
                 Label(class='label-form-style') Balance
                 input(type='text' class='form-control' value= '#{usuario.balance}' readonly)
 
             
-            div(class='col')
+            div(class='col-3')
                 Label(class='label-form-style') Referral Code
                 input(type='text' class='form-control' value= '#{usuario.balance}' readonly)
+            div(class='col-1')
         br
-        div(class='row offset-2')
-            div(class='col d-flex justify-content-start')        
+        div(class='row')
+            div(class='col-1')
+            div(class='col-10 d-flex justify-content-start')        
                 a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Back to All Users
+            div(class='col-1')
 
         br

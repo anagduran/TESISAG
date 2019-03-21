@@ -15,7 +15,7 @@
     width: 400px !important;
     height: 400px !important;
     position: absolute !important;
-    top: 216 !important;
+    top: 300 !important;
     bottom: 0 !important;
     left: 860 !important;
     right: 0 !important;
@@ -400,6 +400,10 @@ form i {
 
 #logo-custom{
     width: 90%;
+}
+
+#logo-login-custom{
+    width: 50%;
 }
 
 

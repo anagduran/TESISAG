@@ -13,7 +13,8 @@ html(lang="en")
     
     div(class='container-fluid')
         div(class='row')
-            div(class='col-9 offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10 pt-3')
                 h2 New User
 
                 - if(error2 > 0)
@@ -26,18 +27,21 @@ html(lang="en")
                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times;
+            div(class='col-1')
                             
 
 
         br
         form(id='form', action='/user/new', method='POST' autocomplete="off")
-            div(class='row form-group offset-2')
-                div(class='col')
+            div(class='row form-group')
+                div(class='col-1')
+                
+                div(class='col-4')
                     Label(class='label-form-style') Nickname              
                     input(id='nickname', class='form-control' name='nickname' placeholder='Type nickname')
-                    
+                        
 
-                div(class='col')
+                div(class='col-2')
                     Label(class='label-form-style') Country Code
                     select(id='country_code', class='form-control', name='country_code' placeholder='Pick a country code')
                         option +58
@@ -61,17 +65,20 @@ html(lang="en")
                         option +507
 
 
-            
-                div(class='col')
+                
+                div(class='col-4')
                     Label(class='label-form-style') Phone                
                     input(id='phone', class='form-control', name='phone' placeholder='Type a phone number')
+                
+                div(class='col-1')
 
             br
-            div(class='row form-group offset-2')
-                div(class='col d-flex justify-content-between') 
+            div(class='row form-group')
+                div(class='col-1')
+                div(class='col-10 d-flex justify-content-between') 
                     a(href='/user' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
-            
+                div(class='col-1')
             
                 
               
