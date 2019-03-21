@@ -87,6 +87,14 @@ html(lang="en")
                                                 button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= pregunta._id onclick='obtenervalor(`#{pregunta._id}`);')                                                     
             div(class='col-1')
 
+    
+                        
+        div(class='row')
+            div(class='col-1') 
+            div(class='col-10') 
+                a(href='/question/create' class='btn btn-outline-success' role='button') New Question      
+            div(class='col-1')         
+
     div(class="modal fade" id="myModal2" tabindex="-1" role="dialog")
         div(class="modal-dialog" role='document')
             div(class="modal-content")
@@ -98,13 +106,6 @@ html(lang="en")
                     button(type="button" class="btn btn-default" id="closeModal" data-dismiss='modal') No
                     form(action="" class= "link" method="POST" id='formEliminar')
                     a(class="btn btn-success" href='#' name='POST' onclick='' id='eliminar') Yes
-                        
-    div(class='row')
-        div(class='col-1') 
-        div(class='col-10') 
-            a(href='/question/create' class='btn btn-outline-success' role='button') New Question      
-        div(class='col-1')         
-
             
     div(class='row')
     script(type="text/javascript" src='/js/bootstrap.js') 
