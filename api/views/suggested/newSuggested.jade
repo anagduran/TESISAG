@@ -10,7 +10,8 @@ html(lang="en")
     
     div(class='container-fluid')
         div(class='row')
-            div(class='col-9 offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10')
                 h2 Suggested Question Detail
                 
                 - if(error)
@@ -20,12 +21,16 @@ html(lang="en")
                              li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times; 
+            div(class='col-1')
+
 
         div(class='row')
-            div(id='alert' class="col-9 offset-2 alert alert-info div-alert-custom" role="alert") The system suggests that the level of this question is:
+            div(class='col-1')
+            div(id='alert' class="col-10 alert alert-info div-alert-custom" role="alert") The system suggests that the level of this question is:
                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                     span(aria-hidden="true")&times;
                 p(id='palert' class='p-alert-custom')
+             div(class='col-1')
         br
         form(id='form', action='/suggestedQuestion/new', method='POST')
             input(id='_id', name='_id', type='hidden', value='#{pregunta._id}') 
@@ -38,20 +43,21 @@ html(lang="en")
             
             br
 
-            div(class='row form-group offset-2')
-                div(class='col')
+            div(class='row form-group')
+                div(class='col-1')
+                div(class='col-3')
                     Label(class='label-form-style') Answer
                     input(type='text' class='form-control' name='options' value= '#{pregunta.correctAnswer}' readonly)
 
-                div(class='col')
+                div(class='col-2')
                     Label(class='label-form-style') Option B
                     input(type='text' class='form-control' name= 'options' value= '#{pregunta.optionB}' readonly)
                     
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Option C
                     input(type='text' class='form-control' name='options' value= '#{pregunta.optionC}' readonly)
                     
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Category
                      - var categoryChange = JSON.parse(JSON.stringify(pregunta.category))[0]
                     input(type='text' class='form-control'  value= '#{categoryChange.name}' readonly)
@@ -72,11 +78,12 @@ html(lang="en")
                     input(type='radio', name='level', value='alto')
 
             br
-            div(class='row form-group offset-2')  
-                div(class='col d-flex justify-content-between')                         
+            div(class='row form-group')  
+                div(class='col-1')
+                div(class='col-10 d-flex justify-content-between')                         
                     a(href='/suggested' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
-        
+                div(class='col-1')
         script(type="text/javascript").
 
               $(document).ready(function() {   

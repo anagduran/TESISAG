@@ -45,13 +45,15 @@ function createPushNotification(game) {
         }
     
        
+        // https://www.npmjs.com/package/node-schedule
     
-
-    var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC;
+    var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC + '0';
+    var date = new Date(2019,mesC, diaC, hora[0], 50, 0);
         console.log(total);
      //ENVIO NOTIFICACION TIPO 1
-    cronometro.schedule('* * * * *' ,()=> {
+    cronometro.schedule(date ,()=> {
         console.log('aqi a las 3 y 58');
+        console.log(total);
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
             notification: {

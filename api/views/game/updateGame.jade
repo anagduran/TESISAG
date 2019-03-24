@@ -12,10 +12,12 @@ html(lang="en")
 
     include ../menuLateral.jade
 
-    div(class='container-fluid')
+    div(class='container-fluid mb-5')
         div(class='row')
-            div(class='col-9 offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10')
                 h2 Edit Game: #{partida.title}
+          
             
                 
                 - if(error)
@@ -25,179 +27,197 @@ html(lang="en")
                             li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times; 
+            div(class='col-1')
         br
-        div(class='row')
-            div(class='col offset-2')    
-                form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;' autocomplete="off")
-                    input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
+
+        
+        form(id='form', action='/game/update/#{partida._id}?_method=PUT', method='POST', style='white-space:pre;' autocomplete="off")
+            input(id='_id', name='_id', type='hidden', value='#{partida._id}') 
+                    
+            div(class='row')
+                div(class='col-1')
+                div(class='col-11')
                     label(class='label-form-style') DATA
                     hr
-                    div(class='row')
-                        div(class='col')
-                            label(class='label-form-style') Title
-                            input(class='form-control' id='title', name='title', type='text', value='#{partida.title}')
+            
+            div(class='row')
+                div(class='col-1')
+                div(class='col-2')
+                    label(class='label-form-style') Title
+                    input(class='form-control' id='title', name='title', type='text', value='#{partida.title}')
 
-                        div(class='col')
-                            - var separar = partida.date.substring(0,10);
-                            label(class='label-form-style') Date
-                            input(class='form-control pull-right'  id="datepicker", name='date' value='#{separar}')
+                div(class='col-3')
+                    - var separar = partida.date.substring(0,10);
+                    label(class='label-form-style') Date
+                    input(class='form-control pull-right'  id="datepicker", name='date' value='#{separar}')
                         
                         
-                        div(class='col')
-                            - var separar2 = partida.date.substring(11,16);
-                            Label(class='label-form-style') Time                  
-                            select(id='hora', class='form-control', name='time')
-                                option #{separar2}
-                                option 05:00
-                                option 06:00
-                                option 07:00
-                                option 08:00
-                                option 09:00
-                                option 10:00
-                                option 11:00
-                                option 12:00
-                                option 13:00
-                                option 14:00
-                                option 15:00
-                                option 16:00
-                                option 17:00
-                                option 18:00
-                                option 19:00
-                                option 20:00
-                                option 21:00
-                                option 22:00
-                                option 23:00
+                div(class='col-2')
+                    - var separar2 = partida.date.substring(11,16);
+                    Label(class='label-form-style') Time                  
+                    select(id='hora', class='form-control', name='time')
+                        option #{separar2}
+                        option 05:00
+                        option 06:00
+                        option 07:00
+                        option 08:00
+                        option 09:00
+                        option 10:00
+                        option 11:00
+                        option 12:00
+                        option 13:00
+                        option 14:00
+                        option 15:00
+                        option 16:00
+                        option 17:00
+                        option 18:00
+                        option 19:00
+                        option 20:00
+                        option 21:00
+                        option 22:00
+                        option 23:00
                     
                     
                     
-                        div(class='col')
-                            label(class='label-form-style') Prize
-                            input(class='form-control' id='prize', name='prize', type='text', value='#{partida.prize}')
+                div(class='col-2')
+                    label(class='label-form-style') Prize
+                    input(class='form-control' id='prize', name='prize', type='text', value='#{partida.prize}')
 
-                        div(class='col')
-                            label(class='label-form-style') Status
-                            input(class='form-control' id='status', name='status', type='text', value='#{partida.status}' readonly)         
-                   
-                    br
+                div(class='col-2')
+                    label(class='label-form-style') Status
+                    input(class='form-control' id='status', name='status', type='text', value='#{partida.status}' readonly)         
+                        
+            br
+            div(class='row')
+                div(class='col-1')
+                div(class='col-11')
                     label(class='label-form-style') NOTIFICATIONS
                     hr
-                    div(class='row') 
-                        label(class='label-form-style d-flex align-items-center') Notification 1
+            
+            div(class='row')
+                div(class='col-1')
+                label(class='label-form-style d-flex align-items-center') Notification 1
                         
-                        div(class='col')
-                            label(class='label-form-style') Subject
-                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
-                            input(class='form-control' id='prize', name='subject', type='text', value='#{changeNotification.subject}')
+                div(class='col-5')
+                    label(class='label-form-style') Subject
+                    - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                    input(class='form-control' id='prize', name='subject', type='text', value='#{changeNotification.subject}')
 
 
-                        div(class='col')
-                            label(class='label-form-style') Message
-                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
-                            input(class='form-control' id='prize', name='message', type='text', value='#{changeNotification.message}')
-                    br 
-                    div(class='row')    
-                        label(class='label-form-style d-flex align-items-center') Notification 2
+                div(class='col-5')
+                    label(class='label-form-style') Message
+                    - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                    input(class='form-control' id='prize', name='message', type='text', value='#{changeNotification.message}')
+                div(class='col-1')
+            br 
+            div(class='row')
+                div(class='col-1')    
+                label(class='label-form-style d-flex align-items-center') Notification 2
                         
-                        div(class='col')
-                            label(class='label-form-style') Subject
-                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
-                            input(class='form-control' id='prize', name='subject2', type='text', value='#{changeNotification.subject}')
+                div(class='col-5')
+                    label(class='label-form-style') Subject
+                    - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
+                    input(class='form-control' id='prize', name='subject2', type='text', value='#{changeNotification.subject}')
                         
-                        div(class='col')
-                            label(class='label-form-style') Message
-                            - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
-                            input(class='form-control' id='prize', name='message2', type='text', value='#{changeNotification.message}')
-                    br
+                div(class='col-5')
+                    label(class='label-form-style') Message
+                    - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                    input(class='form-control' id='prize', name='message2', type='text', value='#{changeNotification.message}')
+                div(class='col-1')
+            br
+            div(class='row')
+                div(class='col-1')
+                div(class='col-11')
                     label(class='label-form-style') QUESTIONS
-                    hr
-                    div(class= 'row')
-                        div(class= 'col')
-                            label(class='label-form-style') Low Questions
-                    div(class= 'row')
-                        div(class='col d-block d-flex justify-content-start')                            
-                            select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
-                                -each bajo, i in partidaBaja                                         
-                                    option(value="#{bajo._id}") #{bajo.question}    
-                    br                
+                    hr          
+            
+            div(class='row') 
+                div(class='col-1')           
+                div(class='col-5')  
+                    label(class='label-form-style') Low Questions                                              
+                    select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
+                        -each bajo, i in partidaBaja                                         
+                            option(value="#{bajo._id}") #{bajo.question}    
+                           
+                div(class='col-1')
                     div(class='row')
-                        div(class='col d-flex justify-content-around')
-                                input(type='button' id="pasarL" value='Down LQ')
-                                input(type='button' id="quitarL" value='Up LQ')
+                        div(class='col') 
+                            input(type='button' class='btn btn-primary' id="pasarL" value='>>>>')
 
-                    br
                     div(class='row')
-                        div(class= 'col')
-                            label(class='label-form-style') Low Questions System
-                    div(class='row')
-                        div(class='col')
-                            select(class="select-style" id="destinoL" type='combobox' name='preguntasCombo2' multiple selected='selected')  
-                                -each bajos, i in bajo     
-                                    option(value= "#{bajos._id}") #{bajos.question} 
+                        div(class='col') 
+                            input(type='button' class='btn btn-primary' id="quitarL" value='<<<<')
+
+                
                     
-                    br
-                    hr
-                    div(class= 'row')
-                        div(class='col')
-                            label(class='label-form-style') Medium Question
-                    br
-                    div(class= 'row')
-                        div(class='col')
-                            select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
-                                -each medio, i in partidaMedio          
-                                    option(value="#{medio._id}") #{medio.question}
+             
+                div(class='col-5')
+                    label(class='label-form-style') Low Questions System
+                    select(class="select-style" id="destinoL" type='combobox' name='preguntasCombo2' multiple selected='selected')  
+                        -each bajos, i in bajo     
+                            option(value= "#{bajos._id}") #{bajos.question} 
+                
+             
+            br         
+           
+            div(class= 'row')
+                div(class='col-1')  
+                div(class='col-5')
+                    label(class='label-form-style') Medium Question
+                    select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
+                        -each medio, i in partidaMedio          
+                            option(value="#{medio._id}") #{medio.question}
 
-                    br
-                    div(class= 'row')
-                        div(class='col d-flex justify-content-center')
-                            input(type='button' id="pasarM" value='down MQ')
-                            input(type='button' id="quitarM" value='up MQ')
-
-                    br
+            
+                div(class='col-1')
                     div(class='row')
                         div(class='col')
-                            label(class='label-form-style') Medium Question System
-                    br
-                    div(class= 'row')
+                        input(type='button' id="pasarM" class='btn btn-primary' value='>>>>')
+                    div(class='row')
                         div(class='col')
-                            select(class="select-style" id="destinoM" type='combobox' name='preguntasCombo2' multiple selected='selected') 
-                                -each medios, i in medio    
-                                    option(value= "#{medios._id}") #{medios.question} 
-                    br
-                    hr
-                    div(class= 'row')
-                        div(class='col')
-                            label(class='label-form-style') High Questions
-                    br
-                    div(class= 'row')
-                        div(class='col')
-                            select(class="select-style" id="highq"  name='preguntasCombo' multiple)
-                                -each alto, i in partidaAlta             
-                                    option(value="#{alto._id}") #{alto.question}
+                            input(type='button' id="quitarM" class='btn btn-primary' value='<<<<')
 
-                    br
-                    div(class= 'row')
-                        div(class='col d-flex justify-content-center')                        
-                            input(type='button' id="pasarH" value='down HQ')                        
-                            input(type='button' id="quitarH" value='up HQ')
-                    
-                    
-                    br
-                    div(class= 'row')
-                        div(class='col')
-                            label(class='label-form-style') High Questions System 
-                    div(class= 'row')
-                        div(class='col')
-                            select(class="select-style" id="destinoH" type='combobox' name='preguntasCombo2' multiple selected='selected') 
-                                -each altos, i in alto    
-                                    option(value= "#{altos._id}") #{altos.question}
-                    br
-                    div(class= 'row')
-                        div(class='col d-flex justify-content-between')
-                            a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
-                            input(type='submit', class='input-style-update btn btn-success' value='Save' id='botonUpdate')
+                div(class='col-5')
+                        label(class='label-form-style') Medium Question System
+                        select(class="select-style" id="destinoM" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                            -each medios, i in medio    
+                                option(value= "#{medios._id}") #{medios.question} 
+            br
+            
+         
+            div(class= 'row')
+                div(class='col-1')
+                div(class='col-5')
+                    label(class='label-form-style') High Questions
+                    select(class="select-style" id="highq"  name='preguntasCombo' multiple)
+                        -each alto, i in partidaAlta             
+                            option(value="#{alto._id}") #{alto.question}
 
+
+         
+                div(class='col-1') 
+                    div(class='row')  
+                        div(class='col')                 
+                            input(type='button' class='btn btn-primary' id="pasarH" value='>>>>') 
+                        div(class='col')                        
+                            input(type='button' class='btn btn-primary' id="quitarH" value='<<<<')                  
                     
-        
+  
+
+                   
+                div(class='col-5')
+                    label(class='label-form-style') High Questions System 
+                    select(class="select-style" id="destinoH" type='combobox' name='preguntasCombo2' multiple selected='selected') 
+                        -each altos, i in alto    
+                            option(value= "#{altos._id}") #{altos.question}
+            br
+            div(class= 'row')
+                div(class='col-1')
+                div(class='col-10 d-flex justify-content-between')
+                    a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-success' role="button")  Cancel
+                    input(type='submit', class='input-style-update btn btn-success' value='Save' id='botonUpdate')
+
+                div(class='col-1')
                     
 
                     

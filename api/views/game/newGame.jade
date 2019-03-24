@@ -22,9 +22,10 @@ html(lang="en")
         title New Game
     include ../menuLateral.jade
     
-    div(class='container-fluid')
+    div(class='container-fluid mb-5')
         div(class='row')
-            div(class='col offset-2 pt-3')
+            div(class='col-1')
+            div(class='col-10')
                 h2 New Game
 
                 - if(error)
@@ -34,23 +35,26 @@ html(lang="en")
                              li(class="list-group-item list-group-item-danger alert alert-danger alert-dismissible fade show" role="alert")  #{errors.msg}    
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true")&times; 
+            div(class='col-1')
 
         br
         form(id='form', action='/game/new', method='POST' autocomplete="off")
-            div(class='row offset-2')
-                div(class='col')
+            div(class='row')
+                div(class='col-1')
+                div(class='col-10')
                     label(class='label-form-style') INSERT DATA
                     hr
-            div(class='row offset-2')
-                div(class='col')
+            div(class='row')
+                div(class='col-1')
+                div(class='col-2')
                     Label(class='label-form-style') Title
                     input(class='form-control' id='title', name='title' placeholder='Type  title')
                     
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Date           
                     input(class="form-control pull-right" id="datepicker" placeholder='Pick a date' name='date')           
                     
-                div(class='col')
+                div(class='col-3')
                     Label(class='label-form-style') Time                   
                     select(id='hora', class='form-control', name='time' placeholder='Pick time')
                         option 05:00
@@ -73,42 +77,50 @@ html(lang="en")
                         option 22:00
                         option 23:00
                             
-                div(class='col')
+                div(class='col-2')
                     Label(class='label-form-style') Prize                
                     input(class='form-control' id='prize', name='prize' placeholder='Type  prize')
-
+                div(class='col-1')
             br
-            div(class='row offset-2')
-                div(class='col')
+            div(class='row')
+                div(class='col-1')
+                div(class='col-10')
                     label(class='label-form-style') SELECT QUESTIONS
                     hr
             
-            div(class='row form-group offset-2')
-                div(class='col')                    
+            div(class='row form-group')
+                div(class='col-2')
+                div(class='col-9')                    
                         Label(class='label-form-style')  Low Level Questions
                         select(id='lowq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
                             -each bajo in bajos
                                 option(value='#{bajo._id}') #{bajo.question}
+               
 
             br
-            div(class='row form-group offset-2')
-                div(class='col')                     
+            div(class='row form-group')
+                div(class='col-2')
+                div(class='col-9')                     
                     Label(class='label-form-style')  Medium Level Questions
                     select(id='mediumq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
                         -each medio in medios
                             option(value='#{medio._id}') #{medio.question}
+                
                         
             br
-            div(class='row form-group offset-2')
-                div(class='col')                   
+            div(class='row form-group')
+                div(class='col-2')
+                div(class='col-9')                   
                     Label(class='label-form-style')  High Level Questions
                     select(id='highq' class="form-control select2" multiple="multiple"  name='preguntasCombo' data-placeholder="Select four Question" style="width: 87%;")
                        -each alto in altos
                             option(value='#{alto._id}') #{alto.question} 
+               
             br
             
-            div(class='row offset-2')
-                div(class='col')
+            div(class='row')
+                div(class='col-1')
+                div(class='col-10')
                     label(class='label-form-style') NOTIFICATIONS
                     hr
             
@@ -135,10 +147,12 @@ html(lang="en")
                     input(class='form-control' id='title', name='message2' placeholder='Type  message')
                  
             br
-            div(class='row form-group offset-2')
-                div(class='col-11 d-flex justify-content-between')       
+            div(class='row form-group')
+                div(class='col-1')
+                div(class='col-10 d-flex justify-content-between')       
                     a(href='/game' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
+                div(class='col-1')
                 
 
         script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
