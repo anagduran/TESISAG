@@ -133,20 +133,20 @@ html(lang="en")
             
             div(class='row') 
                 div(class='col-1')           
-                div(class='col-5')  
+                div(class='col-5 button-change-custom')  
                     label(class='label-form-style') Low Questions                                              
                     select(class="select-style" id="lowq"  name='preguntasCombo' multiple)
                         -each bajo, i in partidaBaja                                         
                             option(value="#{bajo._id}") #{bajo.question}    
                            
-                div(class='col-1')
+                div(class='col-1 mt-4 button-change-custom')
                     div(class='row')
                         div(class='col') 
-                            input(type='button' class='btn btn-primary' id="pasarL" value='>>>>')
-
+                            input(type='button' class='btn btn-primary' id="pasarL" value='>>>')
+                    br
                     div(class='row')
                         div(class='col') 
-                            input(type='button' class='btn btn-primary' id="quitarL" value='<<<<')
+                            input(type='button' class='btn btn-primary' id="quitarL" value='<<<')
 
                 
                     
@@ -162,20 +162,21 @@ html(lang="en")
            
             div(class= 'row')
                 div(class='col-1')  
-                div(class='col-5')
+                div(class='col-5 button-change-custom')
                     label(class='label-form-style') Medium Question
                     select(class="select-style" id="mediumq"  name='preguntasCombo' multiple)
                         -each medio, i in partidaMedio          
                             option(value="#{medio._id}") #{medio.question}
 
             
-                div(class='col-1')
+                div(class='col-1 mt-4 button-change-custom')
                     div(class='row')
                         div(class='col')
-                        input(type='button' id="pasarM" class='btn btn-primary' value='>>>>')
+                            input(type='button' id="pasarM" class='btn btn-primary' value='>>>')
+                    br
                     div(class='row')
                         div(class='col')
-                            input(type='button' id="quitarM" class='btn btn-primary' value='<<<<')
+                            input(type='button' id="quitarM" class='btn btn-primary' value='<<<')
 
                 div(class='col-5')
                         label(class='label-form-style') Medium Question System
@@ -187,7 +188,7 @@ html(lang="en")
          
             div(class= 'row')
                 div(class='col-1')
-                div(class='col-5')
+                div(class='col-5 button-change-custom')
                     label(class='label-form-style') High Questions
                     select(class="select-style" id="highq"  name='preguntasCombo' multiple)
                         -each alto, i in partidaAlta             
@@ -195,12 +196,14 @@ html(lang="en")
 
 
          
-                div(class='col-1') 
+                div(class='col-1 button-change-custom') 
                     div(class='row')  
                         div(class='col')                 
-                            input(type='button' class='btn btn-primary' id="pasarH" value='>>>>') 
+                            input(type='button' class='btn btn-primary' id="pasarH" value='>>>') 
+
+                    div(class='row') 
                         div(class='col')                        
-                            input(type='button' class='btn btn-primary' id="quitarH" value='<<<<')                  
+                            input(type='button' class='btn btn-primary' id="quitarH" value='<<<')                  
                     
   
 

@@ -110,16 +110,16 @@ html(lang="en")
 
                                 tbody
                                     -var i= -1
-                                    each partidas in partida
+                                    each pregunta in questions
                                         -var questionChange0 = JSON.parse(JSON.stringify(partida.questions))[0]  
                                         - ++i   
                                         tr
                                             td #{i} 
-                                            td #{questionChange0.question}
-                                            td  Opcion 1
-                                            td Opcion 2
-                                            td Opcion C
-                                            td Low
+                                            td #{pregunta.question}
+                                            td #{pregunta.options[0]}
+                                            td #{pregunta.options[1]}
+                                            td #{pregunta.options[2]}
+                                            td #{pregunta.level}
                                     
                         
                     

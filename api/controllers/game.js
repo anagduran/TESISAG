@@ -227,20 +227,21 @@ function getGameID(req,res,next){
    
     if(mongoose.Types.ObjectId.isValid(id)){
         game.findById(id)
-            .populate('questions', ['question'])
             .exec()
-            .then(gameByID =>{                
-                if(gameByID){ 
-                    res.status(200).render('game/gameDetail',{ partida: gameByID})                       
-                }
-                else { 
-                    game.find()
-                    .exec()
-                    .then(games => {          
-                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
-                
-                    })
-                }                
+            .then(gameByID =>{  
+                question.find({'_id': {$in: gameByID.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{              
+                    if(gameByID){ 
+                        res.status(200).render('game/gameDetail',{ partida: gameByID, questions: result2})                       
+                    }
+                    else { 
+                        game.find()
+                        .exec()
+                        .then(games => {          
+                            res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                    
+                        })
+                    }  
+                })              
             })
             .catch(err=>{                
                 game.find()
