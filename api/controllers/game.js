@@ -381,12 +381,13 @@ function updateGameByID(req, res, next){
                         .then(result =>{                
                             if(result.nModified===1){  
                                 game.findById(id)
-                                .populate('questions', ['question'])
                                 .exec()
                                 .then(juego => {
-                                    createPushNotification(juego);
-                                    res.status(200).render( 'game/gameDetail' , { partida: juego, message: "Game successfully modified"})    
-                                })
+                                    question.find({'_id': {$in: juego.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{              
+                                        // createPushNotification(juego);
+                                        res.status(200).render( 'game/gameDetail' , { partida: juego, questions: result2, message: "Game successfully modified"})    
+                                    })
+                                })  
                             }   
                             else {                        
                                 game.find()

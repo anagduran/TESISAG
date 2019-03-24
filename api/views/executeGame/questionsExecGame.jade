@@ -13,11 +13,11 @@ html(lang="en")
         title  Execute Game
     include ../menuLateral.jade
 
-    
-
-
-    div(class='col-md-3 offset-2 pt-3')
-        h2 Execute Game: #{juego.title}
+    div(class='row')
+        div(class='col-1')
+        div(class='col-10 mb-5')
+            h2 Execute Game: #{juego.title}
+        div(class='col-1')
 
        
    
@@ -105,8 +105,9 @@ html(lang="en")
         input(type='hidden' style="visibility:hidden" value='#{questionsA[3].level}'  class="11")
 
 
-    div(class='row offset-2') 
-            div(class='col-11') 
+    div(class='row') 
+            div(class='col-1') 
+            div(class='col-10') 
                 div(class="card")
                     div(class="card-header card-header-custom" id="divUno") Questions
                     
@@ -144,20 +145,20 @@ html(lang="en")
                     hr
                     div(class='row form-group offset-1')
                         div(class='col-11 d-flex justify-content-between')
-                            button( class='btn btn-outline-info' id='buttonStart') Start Game
+                            button(class='btn btn-outline-info' id='buttonStart') Start Game
                             button(class='btn btn-outline-info' id='buttonNext' disabled='true') Next Question
                             button(class='btn btn-outline-info' id='buttonSend' disabled='true') Send Question
                             button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
-                            form(action="/executeGame/5c6f1c839dbad8ab88a4f6ec" class= "link" method="GET")
+                            form(action="/executeGame/5c7311e0a84c035f80b724a5" class= "link" method="GET")
                                 button( class='btn btn-outline-info' id='buttonStart') Start Game 2
-    
+            div(class='col-1') 
     div(id='foo' style="display: none")
  
         script(type="text/javascript" src='/js/bootstrap.js') 
         script(type="text/javascript" src="/js/jquery.min.js")
         script(type="text/javascript" src="/js/bootstrap.min.js")
         script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js" )
-        script(src="/js/socket.js" )
+     
         
 
 
@@ -261,8 +262,7 @@ script(type="text/javascript").
            $('#buttonStart').attr("disabled", true);
            $('#buttonSend').attr("disabled", false);
            $("#divUno").html("Question 1");
-            var hola = "hola";
-            connect(hola);
+          
         
     
         
