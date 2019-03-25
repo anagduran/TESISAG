@@ -17,13 +17,14 @@ import question from "../models/question"
         .then(suggested => {      
             if(suggested)    {  
                // SI LA PREGUNTA TIENE UNICAMENTE UNA PALABRA
+               
                 for(let i=0; i < suggested.length; i++ ){
-                 
+                    
                     var separacion = suggested[i].question.split(" ");
                    
                     if((separacion.length==0) || (separacion.length==1)){
                         suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                        
+                        console.log("aqui 1");
                     }
                     
                 }
@@ -33,7 +34,7 @@ import question from "../models/question"
                     var separacion2 = trivia[1].split(" ");
                     var separacion3 = trivia[2].split(" ");
                     var separacion4 = trivia[3].split(" ");
-                 
+                   
                     
                     for(let i=0; i < separacion2.length; i++ ){
                         allObject.push(separacion2[i]);
@@ -57,6 +58,7 @@ import question from "../models/question"
                     }
     
                     if(contador>0){
+                        console.log("aqui 2");
                         suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
                     }
                     contador=0;
@@ -66,67 +68,75 @@ import question from "../models/question"
                
                 //SI LAS OPCIONES TIENE MAS DE 3 CAMPOS
                for(let i=0; i < suggested.length; i++ ){
-                    
+                
                     var separacion6 = suggested[i].correctAnswer.split(" ");
                     var separacion7 = suggested[i].optionB.split(" ");
                     var separacion8 = suggested[i].optionC.split(" ");                          
                    
                     if((separacion6.length > 3) || (separacion7.length > 3) || (separacion8.length > 3)) {
                         suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                        
+                        console.log("aqui 3");
                     }
                                                        
                 }
                 // SI EL LENGHT DE LAS OPCIONES PASA DE 30
                 for(let i=0; i < suggested.length; i++ ){                        
-                   
+                    
                     if((suggested[i].correctAnswer.length > 25) || (suggested[i].optionB.length > 25) || (suggested[i].optionC.length > 25)) {
                         suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                        
+                        console.log("aqui 4");
                     }
                                                        
                 }
     
                 //SI TIENE CARACTERES ALFABETICOS CONSECUTIVOS: aaaa,bbbb,cccc,dddd,eeees EN LA PREGUNTA
          
-                
-                for(let i=0; i < suggested.length; i++ ){                        
-                   
-                    if(palabrasConsecutivas.test(suggested[i].question)) {
-                        suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                        
-                    }                                                     
-                }
+                // ARREGLAR PALABRAS REGEX DE PALABRAS CONSECUTIVAS
+                for(let i=0; i < suggested.length; i++){                        
+                    console.log(suggested[i].question)
+                    console.log(palabrasConsecutivas)
+                    var separacionquestion = suggested[i].question.split(" ");
 
+
+                    for(let j=0; j <separacionquestion.length; j++) {   
+                        console.log(separacionquestion[j]);               
+                        if(palabrasConsecutivas.test(separacionquestion[j])) {
+                            suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
+                            console.log("aqui 5");
+                        }     
+                    }                                                
+                }
+                
+                // ARREGLAR PALABRAS REGEX DE PALABRAS CONSECUTIVAS
                 //SI TIENE CARACTERES ALFABETICOS CONSECUTIVOS: aaaa,bbbb,cccc,dddd,eeees EN LAS OPCIONES
                 for(let i=0; i < suggested.length; i++ ){                        
                     var separacion6 = suggested[i].correctAnswer.split(" ");
                     var separacion7 = suggested[i].optionB.split(" ");
                     var separacion8 = suggested[i].optionC.split(" ");   
-
+                    
                     if( (palabrasConsecutivas.test(separacion6[0])) || (palabrasConsecutivas.test(separacion7[0])) || (palabrasConsecutivas.test(separacion8[0]))) {
                         suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                        
+                        console.log("aqui 6");
                     }                                                     
                 }
 
-                //SI EXISTEN CARACTERES ESPECIALES CONSECUTIVOS
+                //SI EXISTEN CARACTERES ESPECIALES CONSECUTIVOS EN LA PREGUNTA
                 for(let i=0; i < suggested.length; i++ ){                        
-                   
+                    
                     if(regexEspeciales.test(suggested[i].question)) {
                         suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                        
+                        console.log("aqui 7");
                     }                                                     
                 }
 
-                //SI EXISTEN CARACTERES ESPECIALES CONSECUTIVOS
+                //SI LA LOGINTUD DE LA PREGUNTA ES MENOR A 4
                 for(let i=0; i < suggested.length; i++ ){                        
-                    console.log("en el for de los split de question");
+        
                     
                     var separacion6 = suggested[i].question.split(" ");
                      if(separacion.length < 4) {
                          suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
-                         
+                         console.log("aqui 8");
                      }                                                     
                  }
 

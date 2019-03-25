@@ -35,8 +35,9 @@ html(lang="en")
         form(id='form', action='/suggestedQuestion/new', method='POST')
             input(id='_id', name='_id', type='hidden', value='#{pregunta._id}') 
             
-            div(class='row form-group offset-2')
-                div(class='col')
+            div(class='row form-group')
+                div(class='col-1')
+                div(class='col-10')
                     Label(class='label-form-style') Question
                     input(type='text' class='form-control' name='question' value= '#{pregunta.question}' readonly)
                     
@@ -45,15 +46,15 @@ html(lang="en")
 
             div(class='row form-group')
                 div(class='col-1')
-                div(class='col-3')
+                div(class='col-2')
                     Label(class='label-form-style') Answer
                     input(type='text' class='form-control' name='options' value= '#{pregunta.correctAnswer}' readonly)
 
-                div(class='col-2')
+                div(class='col-3')
                     Label(class='label-form-style') Option B
                     input(type='text' class='form-control' name= 'options' value= '#{pregunta.optionB}' readonly)
                     
-                div(class='col-3')
+                div(class='col-2')
                     Label(class='label-form-style') Option C
                     input(type='text' class='form-control' name='options' value= '#{pregunta.optionC}' readonly)
                     
@@ -62,10 +63,11 @@ html(lang="en")
                      - var categoryChange = JSON.parse(JSON.stringify(pregunta.category))[0]
                     input(type='text' class='form-control'  value= '#{categoryChange.name}' readonly)
                     input(type='hidden' class='form-control' name='category' value= '#{categoryChange._id}' readonly)
-            
+                div(class='col-1')
             br
-            div(class='row form-group offset-2')
-                div(class='col')
+            div(class='row form-group')
+                div(class='col-1')
+                div(class='col-10')
                     Label(class='level-label-form-style') Level
                     br
                     label(class= "label-radio-button-style") Low 
@@ -81,7 +83,7 @@ html(lang="en")
             div(class='row form-group')  
                 div(class='col-1')
                 div(class='col-10 d-flex justify-content-between')                         
-                    a(href='/suggested' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
+                    a(href='/suggestedQuestion' class='back-style pl-3 pr-3 btn btn-outline-info' role="button")  Cancel
                     input(type='submit', class='btn btn-outline-success'  value='Save')
                 div(class='col-1')
         script(type="text/javascript").

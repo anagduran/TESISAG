@@ -29,15 +29,15 @@ html(lang="en")
         br    
         div(class='row form-group')
             div(class='col-1')
-            div(class='col-3')
+            div(class='col-2')
                 Label(class='label-form-style') Answer
                 input(type='text' class='form-control' value= '#{pregunta.correctAnswer}' readonly)
 
-            div(class='col-2')
+            div(class='col-3')
                 Label(class='label-form-style') Option B
                 input(type='text' class='form-control' value= '#{pregunta.optionB}' readonly)
                 
-            div(class='col-3')
+            div(class='col-2')
                 Label(class='label-form-style') Option C
                 input(type='text' class='form-control' value= '#{pregunta.optionC}' readonly)
                 
@@ -45,6 +45,7 @@ html(lang="en")
                 Label(class='label-form-style') Category
                  - var categoryChange = JSON.parse(JSON.stringify(pregunta.category))[0]
                 input(type='text' name='category' class='form-control' value= '#{categoryChange.name}' readonly)
+            div(class='col-1')
         br
          
         div(class='row form-group')  
