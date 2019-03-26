@@ -1,6 +1,7 @@
 import game from "../models/game"
 import question from "../models/question"
 import {connect} from '../socket'
+import { rejects } from "assert";
 
 function getExecuteGame(req, res) {
     
@@ -65,15 +66,49 @@ function getQuestionsGame(req, res){
 
 }
 
-function startGame(req, res, next){
-    var hola ="hola hola";
-    console.log("en la funcion que llama al socket");
-    connect(hola);
-    res.status(200);
 
+ /*function conectandoAlSocket(res){
+    var hola ="hola hola";
+    connect(hola);
+    
+    res.status(200);
+   
 }
 
+function startGame(req, res, next){
+    
+    console.log("en la funcion que llama al socket");
+    return new Promise((resolve, rejects)=>{
+        
+        setTimeout(() => {
+            conectandoAlSocket(res);
+          }, 2000);
+    })
+ 
+}*/
+
+
+ function conectandoAlSocket() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+        connect('hola');
+        return;
+      }, 2000);
+    });
+  }
+  
+  async function startGame(res) {
+    console.log('calling');
+    var result = await conectandoAlSocket();
+    console.log(result);
+    next();
+    //res.send('hola');
+    // expected output: 'resolved'
+  }
 
 
 
-module.exports ={getExecuteGame, getQuestionsGame, startGame};
+
+
+module.exports ={getExecuteGame, getQuestionsGame, startGame, conectandoAlSocket};
