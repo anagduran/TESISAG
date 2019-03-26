@@ -93,16 +93,20 @@ function startGame(req, res, next){
       setTimeout(() => {
         resolve('resolved');
         connect('hola');
-        return;
+        
       }, 2000);
     });
   }
   
-  async function startGame(res) {
+ async function startGame(req, res, next) {
     console.log('calling');
     var result = await conectandoAlSocket();
     console.log(result);
-    next();
+    //connect('hola');
+    //next();
+    res.redirect('back');
+    //res.end();
+
     //res.send('hola');
     // expected output: 'resolved'
   }

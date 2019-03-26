@@ -7,7 +7,7 @@ export const connect = (variable) => {
 
     socket.on('connection', ws=> {
         instance = ws
-        ws.send('Conectado al socket'+ variable)
+        ws.send('Conectado al socket '+ variable)
         ws.onmessage = function(e) {
             console.log(e.data);
         }
