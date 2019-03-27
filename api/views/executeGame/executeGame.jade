@@ -35,7 +35,7 @@ html(lang="en")
                 - }
             br
             div(class='d-flex justify-content-center')
-                a(href='#' class='btn btn-outline-info' role="button" id='actionA')  Get Questions
+                a(href='#' class='btn btn-outline-info' role="button" id='actionA')  Next
                 
         div(class='col-3')
     
@@ -51,7 +51,8 @@ script(type="text/javascript").
 
 
        $("#games").change(function(){
-             $("#actionA").attr("href","/executeGame/"+$("#games").val());
+       
+              $("#actionA").attr("href","/executeGame/connection/"+$("#games").val());;
         });
 
        

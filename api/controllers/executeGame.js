@@ -30,7 +30,10 @@ function getExecuteGame(req, res) {
      
   
 }
-
+function connectionGame(req,res,next){
+    var identificador= req.params.gameID;
+    res.render('executeGame/conexionExecuteGame' ,{partida: identificador})
+}
 function getQuestionsGame(req, res){
     var id = req.params.gameID;
     var questionsBajas=[];
@@ -53,7 +56,7 @@ function getQuestionsGame(req, res){
                     questionsAltas.push(result2[i])
                 }
             }
-            //connect(hola);
+            connect(hola);
             res.render('executeGame/questionsExecGame', {juego: result ,preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas})
         }).catch(err=>{
             res.render('index',{error: "Server error, try again"});
@@ -67,25 +70,6 @@ function getQuestionsGame(req, res){
 }
 
 
- /*function conectandoAlSocket(res){
-    var hola ="hola hola";
-    connect(hola);
-    
-    res.status(200);
-   
-}
-
-function startGame(req, res, next){
-    
-    console.log("en la funcion que llama al socket");
-    return new Promise((resolve, rejects)=>{
-        
-        setTimeout(() => {
-            conectandoAlSocket(res);
-          }, 2000);
-    })
- 
-}*/
 
 
  function conectandoAlSocket() {
@@ -102,17 +86,13 @@ function startGame(req, res, next){
     console.log('calling');
     var result = await conectandoAlSocket();
     console.log(result);
-    //connect('hola');
-    //next();
-    res.redirect('back');
-    //res.end();
 
-    //res.send('hola');
-    // expected output: 'resolved'
+ 
+  
   }
 
 
 
 
 
-module.exports ={getExecuteGame, getQuestionsGame, startGame, conectandoAlSocket};
+module.exports ={getExecuteGame, getQuestionsGame, startGame, conectandoAlSocket, connectionGame};
