@@ -27,7 +27,7 @@ html(lang="en")
             h5(class='label-form-style combobox-question-custom')  Games for Today
             hr
             select(id='games' class="form-control select-custom"   name='preguntasCombo')
-                option(class='') Select Game
+                option Select Game
                 - for (let i=0; i< partidas.length; i++) {
                     -var cambio = JSON.parse(JSON.stringify(partidas))[i]  
                     - console.log(cambio._id);          
@@ -41,18 +41,18 @@ html(lang="en")
     
 
     
-        script(type="text/javascript" src='js/bootstrap.js') 
-        script(type="text/javascript" src="js/jquery.min.js")
-        script(type="text/javascript" src="js/bootstrap.min.js")
+        script(type="text/javascript" src='/js/bootstrap.js') 
+        script(type="text/javascript" src="/js/jquery.min.js")
+        script(type="text/javascript" src="/js/bootstrap.min.js")
 
 script(type="text/javascript").
 
     $(document).ready(function() {
 
-
        $("#games").change(function(){
-       
-              $("#actionA").attr("href","/executeGame/connection/"+$("#games").val());;
+           var valor =  $("#games").val();
+           console.log(valor);
+           $("#actionA").attr("href","/executeGame/connection/"+$("#games").val());
         });
 
        

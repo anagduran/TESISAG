@@ -2,12 +2,12 @@ import WebSocket from 'ws'
 
 let instance 
 
-export const connect = (variable) => {
+export const connect = () => {
     const socket = new WebSocket.Server({port: 4500})
 
     socket.on('connection', ws=> {
         instance = ws
-        ws.send('Conectado al socket '+ variable)
+        ws.send('Conectado al socket de TriviaGuest')
         ws.onmessage = function(e) {
             console.log(e.data);
         }

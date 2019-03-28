@@ -19,10 +19,19 @@ html(lang="en")
             h2 Execute Game: #{juego.title}
         div(class='col-1')
 
+    - if(message)
+        div(class='row')
+            div(class='col-1')
+            div(class="mt-2 col-10 alert alert-success fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+            div(class='col-1')
+
        
-   
+        - console.log(questionsB[0])
         //- PREGUNTAS NIVEL BAJO
         //- PREGUNTA #1
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0]}' id='questionsB') 
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].question}'  class="0") 
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[0]}' class="0") 
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[1]}' class="0") 
@@ -167,8 +176,9 @@ script(type="text/javascript").
     $(document).ready(function() {
         var botonS =document.getElementById("buttonSend");
         var botonN =document.getElementById("buttonNext");
-       
-       
+        var questionsB =document.getElementById("questionsB").value;
+        var ws = new WebSocket('ws://localhost:4500');
+       console.log(questionsB)
         var opts = {
                 lines: 10, // The number of lines to draw
                 length: 42, // The length of each line
@@ -235,7 +245,20 @@ script(type="text/javascript").
           
         })
 
-
+        function conexionSocket(){
+           
+            // event emmited when connected
+            ws.onopen = function () {
+                console.log('websocket is connected ...')
+                // sending a send event to websocket server
+                ws.send('connected')
+            }
+            // event emmited when receiving message 
+            ws.onmessage = function (ev) {
+                console.log(ev);
+            }
+        }
+       
        $("#buttonStart").click(function(){
 
 
@@ -259,10 +282,12 @@ script(type="text/javascript").
 
            var inputLevel = document.getElementById("104");
            inputLevel.setAttribute('value', level.value);
-
+            conexionSocket();
            $('#buttonStart').attr("disabled", true);
            $('#buttonSend').attr("disabled", false);
            $("#divUno").html("Question 1");
+
+           
           
         
     
@@ -273,10 +298,14 @@ script(type="text/javascript").
 
        $("#buttonSend").click(function(){
            bloquea();
+      
+           var questionsB =document.getElementById("questionsB").value;
+           ws.send(questionsB);
            $("#divUno").html("Question " +contador+" Sent"); 
            
 
        }) 
-       
+
+      
     });
 

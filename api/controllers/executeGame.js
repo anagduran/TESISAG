@@ -39,7 +39,7 @@ function getQuestionsGame(req, res){
     var questionsBajas=[];
     var questionsMedios=[];
     var questionsAltas=[];
-    var hola = "hola hola";
+    
     console.log("en el metodo get questions")
 
     game.findById(id).exec().then(result=>{
@@ -56,8 +56,8 @@ function getQuestionsGame(req, res){
                     questionsAltas.push(result2[i])
                 }
             }
-            connect(hola);
-            res.render('executeGame/questionsExecGame', {juego: result ,preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas})
+            connect();
+            res.render('executeGame/questionsExecGame', {juego: result ,preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas, message: "The server is available to connect. You can connect when you are ready to start the game."})
         }).catch(err=>{
             res.render('index',{error: "Server error, try again"});
         });

@@ -21,17 +21,17 @@ html(lang="en")
     
 
     
-    div(class='row')
+    div(class='row mt-5')
         div(class='col-3')
         div(class='col-6')                    
-            h5(class='label-form-style combobox-question-custom')  Presione el siguiente boton para establecer conexion con el servidor
+            h5(class='label-form-style combobox-question-custom')  Before starting, you must activate the server. Press the next button when you are ready to turn on the server.
             hr
             
             //- form(action='/executeGame/#{partida}' class= "link" style="margin:0 !important;" method="GET" id='buttonStart')
             
             
             //- button( class='btn btn-outline-info' id='conexion') Establish Connection
-            a(class='btn btn-outline-info' id='conexion') Establish Connection
+            a(href='#' class='d-flex justify-content-center btn btn-outline-info' role="button"  id='conexion') Establish Connection
             input(type='hidden' style="visibility:hidden" value='#{partida}'  id='identificador') 
         div(class='col-3')
     
