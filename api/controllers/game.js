@@ -4,6 +4,7 @@ import question from "../models/question"
 import fcm from 'fcm-node'
 import user from '../models/user'
 import cronometro from 'node-cron'
+import agenda from 'node-schedule'
 
 function createPushNotification(game) {
     var serverkey = 'AAAA98IRcAQ:APA91bF8dcgsiMKqsuLz65q87e8tIiGUz_VFUHEeAjH_wAA3L_FK5tanevbY9ykqI08A2KUWXeYX_S1FeB91MaiZNVtc_O8IVsCHJbRDQmUl8-cBdcjcCcE1xacSBxA7YNaroe3MUQ3R';
@@ -49,10 +50,11 @@ function createPushNotification(game) {
     
     var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC + '0';
     var date = new Date(2019,mesC, diaC, hora[0], 50, 0);
-        console.log(total);
+
+        console.log("fecha y hora de notificacion 1"+ date);
      //ENVIO NOTIFICACION TIPO 1
-    cronometro.schedule(date ,()=> {
-        console.log('aqi a las 3 y 58');
+    agenda.scheduleJob(date ,()=> {
+        console.log('aqi a las 3 y 581');
         console.log(total);
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
@@ -75,10 +77,14 @@ function createPushNotification(game) {
 
 
      // ENVIO NOTIFICACION TIPO 2
+
+
+    var date2 = new Date(2019,mesC, diaC,  hora2[0], 0, 0);
+
      var total2 = '0 ' + hora2[0] + ' ' + diaC + ' ' + mesC;
-     console.log(total2);
-     cronometro.schedule('* * * * *' ,()=> {
-        console.log('aqi a las 3 y 58');
+     console.log(date2);
+     agenda.scheduleJob(date2 ,()=> {
+        console.log('aqi a las 3 y 582');
         var message = {
             to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
             notification: {
@@ -384,7 +390,7 @@ function updateGameByID(req, res, next){
                                 .exec()
                                 .then(juego => {
                                     question.find({'_id': {$in: juego.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{              
-                                        // createPushNotification(juego);
+                                        createPushNotification(juego);
                                         res.status(200).render( 'game/gameDetail' , { partida: juego, questions: result2, message: "Game successfully modified"})    
                                     })
                                 })  

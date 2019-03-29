@@ -31,7 +31,19 @@ html(lang="en")
         - console.log(questionsB[0])
         //- PREGUNTAS NIVEL BAJO
         //- PREGUNTA #1
-        input(type='hidden' style="visibility:hidden" value='#{questionsB[0]}' id='questionsB') 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[0]}' id='20') 
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[1]}' id='21')
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[2]}' id='22')
+        input(type='hidden' style="visibility:hidden" value='#{questionsB[3]}' id='23')
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[0]}' id='24')
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[1]}' id='25')
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[2]}' id='26')
+        input(type='hidden' style="visibility:hidden" value='#{questionsM[3]}' id='27')
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[0]}' id='28')
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[1]}' id='29')
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[2]}' id='30')
+        input(type='hidden' style="visibility:hidden" value='#{questionsA[3]}' id='31')
+
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].question}'  class="0") 
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[0]}' class="0") 
         input(type='hidden' style="visibility:hidden" value='#{questionsB[0].options[1]}' class="0") 
@@ -176,9 +188,12 @@ script(type="text/javascript").
     $(document).ready(function() {
         var botonS =document.getElementById("buttonSend");
         var botonN =document.getElementById("buttonNext");
-        var questionsB =document.getElementById("questionsB").value;
+        var botonE =document.getElementById("buttonEnd");
+
         var ws = new WebSocket('ws://localhost:4500');
-       console.log(questionsB)
+        var contador3 = 20;
+
+       
         var opts = {
                 lines: 10, // The number of lines to draw
                 length: 42, // The length of each line
@@ -214,6 +229,7 @@ script(type="text/javascript").
                     
                     if(contador==12){
                         botonN.disabled=true;
+                        botonE.disabled = false;
                     }
                 }, 10000)
             }
@@ -233,6 +249,7 @@ script(type="text/javascript").
                 var inputs = document.getElementById(j);
                 inputs.setAttribute('value', pregunta.value);
                 $('#buttonSend').attr("disabled", false);
+                $('#buttonNext').attr("disabled", true);
             }
             contador = contador + 1;
             $("#divUno").html("Question "+ contador2);
@@ -240,7 +257,7 @@ script(type="text/javascript").
             
             if(contador == 12){            
                 $('#buttonNext').attr("disabled", true);
-                $('#buttonEnd').attr("disabled", false);
+                // $('#buttonEnd').attr("disabled", false);
             }
           
         })
@@ -298,13 +315,24 @@ script(type="text/javascript").
 
        $("#buttonSend").click(function(){
            bloquea();
-      
-           var questionsB =document.getElementById("questionsB").value;
+            
+           var questionsB = document.getElementById(contador3).value;
+            console.log(questionsB);
            ws.send(questionsB);
            $("#divUno").html("Question " +contador+" Sent"); 
+           contador3++;
+           console.log(contador3);
+           
            
 
        }) 
+
+       $("#buttonEnd").click(function(){
+           ws.send("closed connection");
+
+           ws.close();
+           $('#buttonEnd').attr("disabled", true);
+       })
 
       
     });
