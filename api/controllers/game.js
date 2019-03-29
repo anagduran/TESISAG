@@ -47,11 +47,11 @@ function createPushNotification(game) {
     
        
         // https://www.npmjs.com/package/node-schedule
-    
-    var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesC + '0';
-    var date = new Date(2019,mesC, diaC, hora[0], 50, 0);
-
-        console.log("fecha y hora de notificacion 1"+ date);
+    var mesConResta = mesC - 1;
+    var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesConResta + '0';
+    var date = new Date(2019,mesConResta, diaC, hora[0], 50, 0);
+        console.log(mesC);
+        console.log("fecha y hora de notificacion 1 "+ date);
      //ENVIO NOTIFICACION TIPO 1
     agenda.scheduleJob(date ,()=> {
         console.log('aqi a las 3 y 581');
@@ -79,10 +79,11 @@ function createPushNotification(game) {
      // ENVIO NOTIFICACION TIPO 2
 
 
-    var date2 = new Date(2019,mesC, diaC,  hora2[0], 0, 0);
+    var date2 = new Date(2019,mesConResta, diaC, hora2[0], 0, 0);
 
-     var total2 = '0 ' + hora2[0] + ' ' + diaC + ' ' + mesC;
-     console.log(date2);
+
+     console.log("fecha y hora de notificacion 2 "+ date2);
+   
      agenda.scheduleJob(date2 ,()=> {
         console.log('aqi a las 3 y 582');
         var message = {
