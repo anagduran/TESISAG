@@ -9,13 +9,9 @@ const adminSchema =  mongoose.Schema({
     versionKey: false
 });
 
-// cifrar la contrase;a antes de guardarla dentro de la BD
-adminSchema.methods.generateHash = function (pass) {
-    return bcrypt.hashSync(pass, bcrypt.genSaltSync(8), null);
 
-}
 
-//transformacion de la contrase;a del usuario cuando se hace login 
+//transformacion de la contraseña del usuario cuando se hace login 
 
 adminSchema.methods.validatePassword = function(pw) {
     return bcrypt.compareSync(pw, this.password);

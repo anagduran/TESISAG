@@ -5,8 +5,12 @@ import randomToken from 'random-token'
 import token from '../models/token'
 import mongoose from "mongoose"
 import nodemailer from 'nodemailer'
+import bcrypt from 'bcrypt-nodejs'
 
-
+function generateHash(pass) {
+        return bcrypt.hashSync(pass, bcrypt.genSaltSync(8), null);
+    
+}
 function getLogin(req, res) {
         res.status(200).render('login/login'); 
 }
@@ -120,7 +124,11 @@ function ResetPW(req, res, next) {
             return;
     }
     else {    
-        admin.update({$set: {password: req.body.pw}}).exec().then( result=>{
+        var newpw = generateHash(req.body.pw);
+        console.log("encriptando");
+        console.log(newpw);
+       
+        admin.update({$set: {password: newpw}}).exec().then( result=>{
            
                 if(result.nModified===1){
                         admin.findOne().exec().then(result2=>{                       
@@ -172,4 +180,4 @@ function ResetPW(req, res, next) {
 function getResetPW(req, res, next) {
  res.status(200).render("login/reset");
 }
-module.exports ={getLogin, doingLogin, logOut, forgotPW, doingResetPW, ResetPW,  getResetPW};
+module.exports ={getLogin, doingLogin, logOut, forgotPW, doingResetPW, ResetPW,  getResetPW, generateHash};
