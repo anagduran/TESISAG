@@ -10,12 +10,6 @@ const adminSchema =  mongoose.Schema({
 });
 
 
-
-//transformacion de la contraseña del usuario cuando se hace login 
-
-adminSchema.methods.validatePassword = function(pw) {
-    return bcrypt.compareSync(pw, this.password);
-}
 const admin = mongoose.model('admin', adminSchema, 'admin')
 
 
