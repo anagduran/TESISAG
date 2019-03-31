@@ -66,6 +66,11 @@ form.link {
     color:#009933;
     pointer-events: none; 
 }
+.div-counting-custom {
+    font-size:30px;
+    color: #333;
+    font-weight:bold;
+}
 
 #icon-see{ color:#df80ff;}
 
@@ -386,6 +391,11 @@ form i {
     text-align: center;
     font-family: 'Calibri';
     color: black;
+    font-size: 18px;
+}
+
+.card-header-custom2 {
+    font-weight: bold;
 }
 
 .div-inputs-custom{

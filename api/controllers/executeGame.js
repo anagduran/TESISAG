@@ -12,7 +12,7 @@ function getExecuteGame(req, res) {
     var concatenar = cambio3[1] + "/"+ cambio3[2] +"/" + cambio3[0];
     var Partidas = [];
     
-    game.find({'status': "No start"}).exec().then(result=>{
+    game.find().exec().then(result=>{
 
         for(let i=0; i< result.length; i++){
             var fecha = result[i].date.split("T");
