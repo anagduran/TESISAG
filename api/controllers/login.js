@@ -48,6 +48,8 @@ function doingLogin(req, res) {
                        
                         res.status(404).render("login/login", {error: "Invalid password or email"});  
                 }
+        }).catch(err=>{
+                res.status(500).render( "login/login", { error: "Server error, try again"} )
         })
       
   
@@ -58,12 +60,12 @@ function logOut(req, res){
         token.remove().exec().then(result=>{
                 if(result)
                 {
-                  console.log("en el if de logout");
+                 
                   res.status(200).render('login/login');
                         
                 }
                 else {
-                        console.log("en el else");
+                   
                 res.status(200).render("index", {error: "Server error, try again"});
                 }
         });
@@ -101,7 +103,7 @@ function doingResetPW(req, res, next) {
 
                       smtpTransport.sendMail(mailOptions, function(err) {
                         if (err) {
-                                console.log('There was a problem')                              
+                                                       
                                 res.status(404).render("login/forgot", {error: "There was a problem, try again"})
                             }
                             //Yay!! Email sent
@@ -116,6 +118,8 @@ function doingResetPW(req, res, next) {
                         
                   res.status(404).render("login/forgot", {error: "This email is not registered, try again"})
                 }
+        }).catch(err=>{
+                res.status(500).render( "login/forgot", { error: "Server error, try again"} )
         })
 }
 function ResetPW(req, res, next) {
@@ -160,13 +164,12 @@ function ResetPW(req, res, next) {
                 
                                 smtpTransport.sendMail(mailOptions, function(err) {
                                         if (err) { 
-                                                console.log('There was a problem')
-                                                console.log(err);   
+                                              
                                                 res.status(404).render('login/login', {error: "There was a problem, try again"})       
                                         }
                                         //Yay!! Email sent
                                         else {
-                                                console.log('Email sent!')
+                                                
                                                 res.status(200).render('login/login', {message: "Success! Your password has been changed."})  
                                         }
                                 })
@@ -180,6 +183,8 @@ function ResetPW(req, res, next) {
                        
                 }
 
+        }).catch(err=>{
+                res.status(500).render( 'login/reset', { error: "Server error, try again"} )
         })
     }
 

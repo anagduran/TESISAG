@@ -2,8 +2,6 @@ import mongoose from "mongoose"
 import game from "../models/game"
 import question from "../models/question"
 import fcm from 'fcm-node'
-import user from '../models/user'
-import cronometro from 'node-cron'
 import agenda from 'node-schedule'
 
 function createPushNotification(game) {

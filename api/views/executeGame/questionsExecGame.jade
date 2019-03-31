@@ -171,7 +171,10 @@ html(lang="en")
                             button( class='btn btn-outline-info' id='buttonStart' ) Start Game
                             button(class='btn btn-outline-info' id='buttonNext' disabled='true') Next Question
                             button(class='btn btn-outline-info' id='buttonSend' disabled='true') Send Question
-                            button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
+                            //- button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
+                            form(id='form', action='/executeGame/endGame/#{juego._id}', method='GET' autocomplete="off")
+                                button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game2 
+
                             
             div(class='col-1') 
     div(id='foo' style="display: none")
@@ -231,7 +234,7 @@ script(type="text/javascript").
                         botonN.disabled=true;
                         botonE.disabled = false;
                     }
-                }, 10000)
+                }, 1000)
             }
            
         }
@@ -332,6 +335,11 @@ script(type="text/javascript").
 
            ws.close();
            $('#buttonEnd').attr("disabled", true);
+
+            document.getElementById("form").submit();
+
+
+
        })
 
       

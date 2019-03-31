@@ -13,11 +13,23 @@ html(lang="en")
     include ../menuLateral.jade
 
     
+    
+    - if(message)
+        div(class='row')
+            div(class='col-1')
+            div(class="mt-2 col-10  alert alert-success fade show" role="alert") #{message}    
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true")&times;  
+            div(class='col-1')
+    
+    
     div(class='row')
         div(class='col-1')
         div(class='col-10')
             h2 Execute Game
         div(class='col-10')
+
+    
     
     
 
