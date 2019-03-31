@@ -8,18 +8,26 @@ import nodemailer from 'nodemailer'
 import bcrypt from 'bcrypt-nodejs'
 
 function generateHash(pass) {
-        return bcrypt.hashSync(pass, bcrypt.genSaltSync(8), null);
+        return bcrypt.hashSync(pass, bcrypt.genSaltSync(8), null);      
     
 }
+
+function validatePassword(pass, pass2) {
+        
+        return bcrypt.compareSync(pass, pass2);
+}
+
 function getLogin(req, res) {
         res.status(200).render('login/login'); 
 }
 
 function doingLogin(req, res) {
-       
-        admin.findOne({'email': req.body.email, 'password': req.body.password}).exec().then(result =>{
-
-                if(result) {
+        console.log("Antes del resultado") ;
+        admin.findOne({'email': req.body.email}).exec().then( respuesta => {
+               
+                var resultado = validatePassword(req.body.password, respuesta.password);   
+        
+                if(resultado) {
                         var tokenSession = randomToken(40);
             
                         
@@ -41,6 +49,7 @@ function doingLogin(req, res) {
                         res.status(404).render("login/login", {error: "Invalid password or email"});  
                 }
         })
+      
   
 }
 
@@ -125,8 +134,7 @@ function ResetPW(req, res, next) {
     }
     else {    
         var newpw = generateHash(req.body.pw);
-        console.log("encriptando");
-        console.log(newpw);
+
        
         admin.update({$set: {password: newpw}}).exec().then( result=>{
            
@@ -180,4 +188,4 @@ function ResetPW(req, res, next) {
 function getResetPW(req, res, next) {
  res.status(200).render("login/reset");
 }
-module.exports ={getLogin, doingLogin, logOut, forgotPW, doingResetPW, ResetPW,  getResetPW, generateHash};
+module.exports ={getLogin, doingLogin, logOut, forgotPW, doingResetPW, ResetPW,  getResetPW, generateHash, validatePassword};
