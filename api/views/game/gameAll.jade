@@ -63,7 +63,7 @@ html(lang="en")
                                         td
                                             a(class='action-icon' href='/game/#{partida._id}') 
                                                 i(id='icon-see' class='fa fa-eye')
-                                            - if (partida.status != 'sin inicio') {
+                                            - if (partida.status != 'No Start') {
                                                 a(class='action-icon not-active') 
                                                     i(class='fas fa-pencil-alt icon-edit')
                                             -}

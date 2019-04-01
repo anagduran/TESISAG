@@ -122,6 +122,7 @@ function newGame(req,res) {
 
     var errors = req.validationErrors();
     if (errors){
+        // Low Medium High
         question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
             question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
                 question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
@@ -269,7 +270,7 @@ function getGameID(req,res,next){
 
 function updateGameByID(req, res, next){
 
-    //const id = mongoose.Types.ObjectId(req.body._id)
+    
     const id = req.params.gameID;
 
     req.check("title").notEmpty().withMessage("The title field can not be empty.");
@@ -286,7 +287,7 @@ function updateGameByID(req, res, next){
 
     var errors = req.validationErrors();
     if (errors){
-
+        // Low Medium High
         question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
             question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
                 question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
@@ -295,7 +296,7 @@ function updateGameByID(req, res, next){
                     var rand3 = Math.floor(Math.random() *resultCount3);
 
 
-
+                    // Low Medium High
                     question.find({level:"bajo" , status:"available"},{"question":1}).limit(10).skip(rand).exec().then(result1 =>{
                         question.find({level:"medio", status:"available"},{"question":1}).limit(10).skip(rand2).exec().then(result2 =>{
                             question.find({level:"alto", status:"available"},{"question":1}).limit(10).skip(rand3).exec().then(result3 =>{
@@ -495,7 +496,8 @@ function deleteGameByID(req, res){
 
 
 function createGame(req,res, next){
-
+    // Low Medium High
+    // REVISAR RAND
     question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
         question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
             question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
@@ -519,7 +521,7 @@ function createGame(req,res, next){
 
 function editGame(req,res){
 
-    
+    // Low Medium High
     const id= req.params.gameID;
     question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
         question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {

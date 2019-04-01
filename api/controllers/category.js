@@ -4,6 +4,8 @@ import question from "../models/question"
 
 
 
+
+
 //obtener informacion de las categorias
 function getCategories(req,res, next){
     
@@ -14,6 +16,7 @@ function getCategories(req,res, next){
             .exec()
             .then(categories => { 
                 if(categories) {
+                  
                   res.status(200).render( 'category/categoryAll', { categorias: categories})
                 }else{
                     res.status(404).render( 'index', { error: "Server error, try again"} )

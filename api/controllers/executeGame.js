@@ -12,7 +12,7 @@ function getExecuteGame(req, res) {
     var concatenar = cambio3[1] + "/"+ cambio3[2] +"/" + cambio3[0];
     var Partidas = [];
     
-    game.find().exec().then(result=>{
+    game.find({'status': "No start"}).exec().then(result=>{
 
         for(let i=0; i< result.length; i++){
             var fecha = result[i].date.split("T");
@@ -46,13 +46,13 @@ function getQuestionsGame(req, res){
     
         question.find({'_id': {$in: result.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{
             for(let i=0; i < result2.length; i++){
-                if(result2[i].level=="bajo"){
+                if(result2[i].level=="bajo"){ //Low
                     questionsBajas.push(result2[i])
                 }
-                if(result2[i].level=="medio"){
+                if(result2[i].level=="medio"){ //Medium
                     questionsMedios.push(result2[i])
                 }
-                if(result2[i].level=="alto"){
+                if(result2[i].level=="alto"){ //High
                     questionsAltas.push(result2[i])
                 }
             }
