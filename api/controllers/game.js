@@ -44,7 +44,7 @@ function createPushNotification(game) {
         }
     
        
-        // https://www.npmjs.com/package/node-schedule
+
     var mesConResta = mesC - 1;
     var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesConResta + '0';
     var date = new Date(2019,mesConResta, diaC, hora[0], 50, 0);
@@ -123,15 +123,15 @@ function newGame(req,res) {
     var errors = req.validationErrors();
     if (errors){
         // Low Medium High
-        question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
-            question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
-                question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+        question.count().where({level:"Low", status:"available"},{"question": 1}).exec().then( resultCount=> {
+            question.count().where({level:"Medium", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+                question.count().where({level:"High", status:"available"},{"question": 1}).exec().then( resultCount3=> {
                     var rand = Math.floor(Math.random() *resultCount);
                     var rand2 = Math.floor(Math.random() *resultCount2);
                     var rand3 = Math.floor(Math.random() *resultCount3);
-                    question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).exec().then(result1=> {
-                        question.find({level:"medio", status:"available"},{"question": 1}).limit(10).exec().then(result2=> {
-                            question.find({level:"alto", status:"available"},{"question": 1}).limit(10).exec().then(result3=> {
+                    question.find({level:"Low", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
+                        question.find({level:"Medium", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
+                            question.find({level:"High", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
                                 res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3,  error: errors})
                                 return;
                             });                   
@@ -287,19 +287,19 @@ function updateGameByID(req, res, next){
 
     var errors = req.validationErrors();
     if (errors){
-        // Low Medium High
-        question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
-            question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
-                question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+        
+        question.count().where({level:"Low", status:"available"},{"question": 1}).exec().then( resultCount=> {
+            question.count().where({level:"Medium", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+                question.count().where({level:"High", status:"available"},{"question": 1}).exec().then( resultCount3=> {
                     var rand = Math.floor(Math.random() *resultCount);
                     var rand2 = Math.floor(Math.random() *resultCount2);
                     var rand3 = Math.floor(Math.random() *resultCount3);
 
 
-                    // Low Medium High
-                    question.find({level:"bajo" , status:"available"},{"question":1}).limit(10).skip(rand).exec().then(result1 =>{
-                        question.find({level:"medio", status:"available"},{"question":1}).limit(10).skip(rand2).exec().then(result2 =>{
-                            question.find({level:"alto", status:"available"},{"question":1}).limit(10).skip(rand3).exec().then(result3 =>{
+                   
+                    question.find({level:"Low" , status:"available"},{"question":1}).limit(10).skip(rand).exec().then(result1 =>{
+                        question.find({level:"Medium", status:"available"},{"question":1}).limit(10).skip(rand2).exec().then(result2 =>{
+                            question.find({level:"High", status:"available"},{"question":1}).limit(10).skip(rand3).exec().then(result3 =>{
                                 if(mongoose.Types.ObjectId.isValid(id)){
                                 
                                     game.findById(id)
@@ -496,17 +496,16 @@ function deleteGameByID(req, res){
 
 
 function createGame(req,res, next){
-    // Low Medium High
-    // REVISAR RAND
-    question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
-        question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
-            question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+   
+    question.count().where({level:"Low", status:"available"},{"question": 1}).exec().then( resultCount=> {
+        question.count().where({level:"Medium", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+            question.count().where({level:"High", status:"available"},{"question": 1}).exec().then( resultCount3=> {
                 var rand = Math.floor(Math.random() *resultCount);
                 var rand2 = Math.floor(Math.random() *resultCount2);
                 var rand3 = Math.floor(Math.random() *resultCount3);
-                question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).exec().then(result1=> {
-                    question.find({level:"medio", status:"available"},{"question": 1}).limit(10).exec().then(result2=> {
-                        question.find({level:"alto", status:"available"},{"question": 1}).limit(10).exec().then(result3=> {
+                question.find({level:"Low", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
+                    question.find({level:"Medium", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
+                        question.find({level:"High", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
                             res.render('game/newGame',{bajos: result1,  medios: result2, altos: result3})
                         });                   
                     });
@@ -521,17 +520,17 @@ function createGame(req,res, next){
 
 function editGame(req,res){
 
-    // Low Medium High
+    
     const id= req.params.gameID;
-    question.count().where({level:"bajo", status:"available"},{"question": 1}).exec().then( resultCount=> {
-        question.count().where({level:"medio", status:"available"},{"question": 1}).exec().then( resultCount2=> {
-            question.count().where({level:"alto", status:"available"},{"question": 1}).exec().then( resultCount3=> {
+    question.count().where({level:"Low", status:"available"},{"question": 1}).exec().then( resultCount=> {
+        question.count().where({level:"Medium", status:"available"},{"question": 1}).exec().then( resultCount2=> {
+            question.count().where({level:"High", status:"available"},{"question": 1}).exec().then( resultCount3=> {
                 var rand = Math.floor(Math.random() *resultCount);
                 var rand2 = Math.floor(Math.random() *resultCount2);
                 var rand3 = Math.floor(Math.random() *resultCount3);
-                question.find({level:"bajo", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
-                    question.find({level:"medio", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
-                        question.find({level:"alto", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
+                question.find({level:"Low", status:"available"},{"question": 1}).limit(10).skip(rand).exec().then(result1=> {
+                    question.find({level:"Medium", status:"available"},{"question": 1}).limit(10).skip(rand2).exec().then(result2=> {
+                        question.find({level:"High", status:"available"},{"question": 1}).limit(10).skip(rand3).exec().then(result3=> {
                             
                             if(mongoose.Types.ObjectId.isValid(id)){
                 

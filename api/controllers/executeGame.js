@@ -46,13 +46,13 @@ function getQuestionsGame(req, res){
     
         question.find({'_id': {$in: result.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{
             for(let i=0; i < result2.length; i++){
-                if(result2[i].level=="bajo"){ //Low
+                if(result2[i].level=="Low"){ 
                     questionsBajas.push(result2[i])
                 }
-                if(result2[i].level=="medio"){ //Medium
+                if(result2[i].level=="Medium"){ 
                     questionsMedios.push(result2[i])
                 }
-                if(result2[i].level=="alto"){ //High
+                if(result2[i].level=="High"){ 
                     questionsAltas.push(result2[i])
                 }
             }

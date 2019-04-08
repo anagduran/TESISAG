@@ -294,8 +294,7 @@ function capitalizeFirstLetter(string){
 
 function newQuestion(req, res) {
 
-    // Low Medium High
-    req.check("level").isIn(['bajo','medio','alto']).withMessage("El nivel debe ser bajo, medio o alto")
+    req.check("level").isIn(['Low','Medium','High']).withMessage("El nivel debe ser bajo, medio o alto")
     let id = req.body._id;
     
     var errors = req.validationErrors();

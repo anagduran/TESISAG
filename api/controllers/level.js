@@ -9,7 +9,7 @@ function getLevel(req,res) {
                 question.aggregate([
                     {
                         $match: {
-                            created_at: {$gte: new Date("2019-02-01"), $lte: new Date("2019-02-28")}
+                            created_at: {$gte: new Date("2019-01-01"), $lte: new Date("2019-01-31")}
                         }
                     },
                     {
@@ -18,11 +18,11 @@ function getLevel(req,res) {
                             count: {$sum: 1}
                         }
                     }    
-               ]).exec().then(resultadoF => {
+               ]).exec().then(resultadoE => {
                         question.aggregate([
                             {
                                 $match: {
-                                    created_at: {$gte: new Date("2019-03-01"), $lte: new Date("2019-03-31")}
+                                    created_at: {$gte: new Date("2019-02-01"), $lte: new Date("2019-02-28")}
                                 }
                             },
                             {
@@ -31,9 +31,24 @@ function getLevel(req,res) {
                                     count: {$sum: 1}
                                 }
                             }    
-                        ]).exec().then(resultadoM => {
-                            console.log(resultadoM);
-                        res.status(200).render('level/levelIndex',{ total: result, totalQ: contadorT, barras: resultadoF, barrasM: resultadoM})
+                        ]).exec().then(resultadoF => {
+
+                            question.aggregate([
+                                {
+                                    $match: {
+                                        created_at: {$gte: new Date("2019-03-01"), $lte: new Date("2019-03-31")}
+                                    }
+                                },
+                                {
+                                    $group: {
+                                        _id: '$level',
+                                        count: {$sum: 1}
+                                    }
+                                }    
+                            ]).exec().then(resultadoM => {
+                               
+                                res.status(200).render('level/levelIndex',{ total: result, totalQ: contadorT, barras: resultadoF, barrasM: resultadoM, barrasE: resultadoE})
+                            })
                     })
                         
                         
