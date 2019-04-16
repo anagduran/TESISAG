@@ -9,8 +9,14 @@ import cookieParser from 'cookie-parser'
 
 
 //CONEXION A MONGODB
-mongoose.connect('mongodb://127.0.0.1/TRIVIA')
+//mongoose.connect('mongodb://127.0.0.1/TRIVIA')
+
+const uri = "mongodb+srv://anagduran:21415776@triviagest-h5erg.mongodb.net/test"; 
+
+mongoose.connect(uri);
 mongoose.Promise= global.Promise
+
+
 
 //SERVIDOR
 let _server 
