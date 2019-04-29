@@ -19,7 +19,7 @@ function getCategories(req,res, next){
                   
                   res.status(200).render( 'category/categoryAll', { categorias: categories})
                 }else{
-                    res.status(404).render( 'index', { error: "Server error, try again"} )
+                    res.status(404).render( 'index', { error: "Bad Request, try again"} )
                 }   
                 
             }).catch(err => {
@@ -65,7 +65,7 @@ function newCategory(req,res,next) {
                             category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
+                                    res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )
                                     })
                         }
                         
@@ -73,7 +73,7 @@ function newCategory(req,res,next) {
                         category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
+                                    res.status(500).render( 'category/categoryAll', { error: "Internal server error, try again", categorias: categories} )
                                     })
                      })
         
@@ -116,7 +116,7 @@ function updateCategoryByID(req, res){
                                 category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
+                                    res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )
                                     })                       
                            
                             }
@@ -125,7 +125,7 @@ function updateCategoryByID(req, res){
                             category.find()
                                     .exec()
                                     .then(categories => { 
-                                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )
+                                    res.status(500).render( 'category/categoryAll', { error: "Internal server error, try again", categorias: categories} )
                                     })
                         })
             }
@@ -162,14 +162,14 @@ function deleteCategoryByID(req, res, next){
                         category.find()
                                 .exec()
                                 .then(categories => {                                                                
-                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                                    res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )                                   
                                 })
                     }
                 }).catch(err=>{
                     category.find()
                                 .exec()
                                 .then(categories => {                                                                
-                                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                                    res.status(500).render( 'category/categoryAll', { error: "Internal server error, try again", categorias: categories} )                                   
                                 })
                 })
                
@@ -183,7 +183,7 @@ function deleteCategoryByID(req, res, next){
         category.find()
         .exec()
         .then(categories => {                                                                
-            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+            res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )                                   
         })
     }
     
@@ -210,7 +210,7 @@ function getCategoryID(req,res,next) {
                     category.find()
                                 .exec()
                                 .then(categories => {                                                                
-                                    res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                                    res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )                                   
                                 })
             
                 }
@@ -220,7 +220,7 @@ function getCategoryID(req,res,next) {
                 category.find()
                 .exec()
                 .then(categories => {                                                                
-                    res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                    res.status(500).render( 'category/categoryAll', { error: "Internal server error, try again", categorias: categories} )                                   
                 })
             })
     }
@@ -228,7 +228,7 @@ function getCategoryID(req,res,next) {
         category.find()
         .exec()
         .then(categories => {                                                                
-            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+            res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )                                   
         })
     }
 }
@@ -250,7 +250,7 @@ function editCategory(req,res, next){
                         category.find()
                         .exec()
                         .then(categories => {                                                                
-                            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                            res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )                                   
                         })
                     }   
                    
@@ -258,7 +258,7 @@ function editCategory(req,res, next){
                     category.find()
                             .exec()
                             .then(categories => {                                                                
-                                res.status(500).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                                res.status(500).render( 'category/categoryAll', { error: "Internal server error, try again", categorias: categories} )                                   
                             })
                 })
             }
@@ -266,7 +266,7 @@ function editCategory(req,res, next){
                 category.find()
                         .exec()
                         .then(categories => {                                                                
-                            res.status(404).render( 'category/categoryAll', { error: "Server error, try again", categorias: categories} )                                   
+                            res.status(404).render( 'category/categoryAll', { error: "Bad Request, try again", categorias: categories} )                                   
                         })
             }  
 }

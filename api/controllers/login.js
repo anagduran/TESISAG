@@ -12,6 +12,9 @@ function generateHash(pass) {
     
 }
 
+
+
+
 function validatePassword(pass, pass2) {
         
         return bcrypt.compareSync(pass, pass2);
@@ -46,10 +49,10 @@ function doingLogin(req, res) {
                 }
                 else {
                        
-                        res.status(404).render("login/login", {error: "Invalid password or email"});  
+                        res.status(401).render("login/login", {error: "Unathorized, Invalid password or email"});  
                 }
         }).catch(err=>{
-                res.status(500).render( "login/login", { error: "Server error, try again"} )
+                res.status(500).render( "login/login", { error: "Internal server error, try again"} )
         })
       
   
@@ -66,7 +69,7 @@ function logOut(req, res){
                 }
                 else {
                    
-                res.status(200).render("index", {error: "Server error, try again"});
+                res.status(500).render("index", {error: "Internal server error, try again"});
                 }
         });
         
@@ -104,7 +107,7 @@ function doingResetPW(req, res, next) {
                       smtpTransport.sendMail(mailOptions, function(err) {
                         if (err) {
                                                        
-                                res.status(404).render("login/forgot", {error: "There was a problem, try again"})
+                                res.status(404).render("login/forgot", {error: "Bad Request, try again"})
                             }
                             //Yay!! Email sent
                             else {
@@ -119,7 +122,7 @@ function doingResetPW(req, res, next) {
                   res.status(404).render("login/forgot", {error: "This email is not registered, try again"})
                 }
         }).catch(err=>{
-                res.status(500).render( "login/forgot", { error: "Server error, try again"} )
+                res.status(500).render( "login/forgot", { error: "Internal server error, try again"} )
         })
 }
 function ResetPW(req, res, next) {
@@ -165,7 +168,7 @@ function ResetPW(req, res, next) {
                                 smtpTransport.sendMail(mailOptions, function(err) {
                                         if (err) { 
                                               
-                                                res.status(404).render('login/login', {error: "There was a problem, try again"})       
+                                                res.status(404).render('login/login', {error: "Bad Request, try again"})       
                                         }
                                         //Yay!! Email sent
                                         else {
@@ -178,13 +181,13 @@ function ResetPW(req, res, next) {
                 }
                 else { 
                            
-                 res.status(404).render( 'login/reset', { error: "Server error, try again"} )
+                 res.status(404).render( 'login/reset', { error: "Bad Request, try again"} )
                                                      
                        
                 }
 
         }).catch(err=>{
-                res.status(500).render( 'login/reset', { error: "Server error, try again"} )
+                res.status(500).render( 'login/reset', {error: "Internal server error, try again"} )
         })
     }
 

@@ -64,7 +64,7 @@ function newQuestion(req, res) {
                                             .populate('category', ['name']) 
                                             .exec()
                                             .then(questions => {                                                
-                                                res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})
+                                                res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Bad Request, try again"})
                                             })
 
                                 }
@@ -76,7 +76,7 @@ function newQuestion(req, res) {
                                      .populate('category', ['name']) 
                                      .exec()
                                      .then(questions => {                                                
-                                            res.status(500).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})
+                                            res.status(500).render( 'question/questionAll', { preguntas: questions, error: "Internal server error, try again"})
                                     })
                         }); 
             
@@ -98,7 +98,7 @@ function getQuestions(req, res)
                     
         
             }).catch(err => {
-                res.status(404).render( 'index', { error: "Server error, try again"} )          
+                res.status(404).render( 'index', { error: "Bad Request, try again"} )          
             })
    
 
@@ -127,7 +127,7 @@ function getQuestionID(req, res){
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})               
+                                    res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Bad Request, try again"})               
                                 })
                     }                
                 })
@@ -136,7 +136,7 @@ function getQuestionID(req, res){
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(500).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})               
+                                    res.status(500).render( 'question/questionAll', { preguntas: questions, error: "Internal server error, try again"})               
                                 })
                 })
     }
@@ -145,7 +145,7 @@ function getQuestionID(req, res){
         .populate('category', ['name']) 
         .exec()
         .then(questions => {                                                
-            res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Server error, try again"})               
+            res.status(404).render( 'question/questionAll', { preguntas: questions, error: "Bad Request, try again"})               
         })
     }
 }
@@ -174,7 +174,7 @@ function deleteQuestionByID(req,res){
                         .populate('category', ['name']) 
                         .exec()
                         .then(questions => {                                                
-                            res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                            res.status(404).render( 'question/questionAll', { error: "Bad Request, try again", preguntas: questions})  
                         })      
             }
         })
@@ -183,7 +183,7 @@ function deleteQuestionByID(req,res){
                     .populate('category', ['name']) 
                     .exec()
                     .then(questions => {                                                
-                        res.status(500).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                        res.status(500).render( 'question/questionAll', { error: "Internal server error, try again", preguntas: questions})  
                     })
         })
     }
@@ -192,7 +192,7 @@ function deleteQuestionByID(req,res){
                 .populate('category', ['name']) 
                 .exec()
                 .then(questions => {                                                
-                    res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                    res.status(404).render( 'question/questionAll', { error: "Bad Request, try again", preguntas: questions})  
                 })      
     }
 }
@@ -249,7 +249,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                                     .populate('category', ['name']) 
                                     .exec()
                                     .then(questions => {                                                
-                                        res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                                        res.status(404).render( 'question/questionAll', { error: "Bad Request, try again", preguntas: questions})  
                                     })
                         }
                     })
@@ -258,7 +258,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(500).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                                    res.status(500).render( 'question/questionAll', {error: "Internal server error, try again", preguntas: questions})  
                                 })
                     })
         }
@@ -267,7 +267,7 @@ const id = mongoose.Types.ObjectId(req.body._id)
                     .populate('category', ['name']) 
                     .exec()
                     .then(questions => {                                                
-                        res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                        res.status(404).render( 'question/questionAll', {error: "Bad Request, try again", preguntas: questions})  
                     })
         }
     }
@@ -295,7 +295,7 @@ function editQuestion(req,res){
                                 .populate('category', ['name']) 
                                 .exec()
                                 .then(questions => {                                                
-                                    res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                                    res.status(404).render( 'question/questionAll', { error: "Bad Request, try again", preguntas: questions})  
                                 })
                     })
         }
@@ -304,7 +304,7 @@ function editQuestion(req,res){
                     .populate('category', ['name']) 
                     .exec()
                     .then(questions => {                                                
-                        res.status(404).render( 'question/questionAll', { error: "Server error, try again", preguntas: questions})  
+                        res.status(404).render( 'question/questionAll', { error: "Bad Request, try again", preguntas: questions})  
                     })
         }
     })

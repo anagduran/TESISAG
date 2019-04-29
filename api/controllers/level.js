@@ -56,7 +56,7 @@ function getLevel(req,res) {
                     
                 })
             }).catch(err=>{
-                res.render('index',{ error: "Server error, try again"})
+                res.render('index',{ error: "Internal server error, try again"})
             })
 
        

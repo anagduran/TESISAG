@@ -63,12 +63,12 @@ function getQuestionsGame(req, res){
 
             res.render('executeGame/questionsExecGame', {juego: result ,preguntas: result2, questionsB: questionsBajas, questionsM: questionsMedios, questionsA: questionsAltas, message: "The server is available to connect. You can connect when you are ready to start the game."})
         }).catch(err=>{
-            res.render('index',{error: "Server error, try again"});
+            res.render('index',{error: "Internal server error, try again"});
         });
 
        
     }).catch(err=>{
-        res.render('index',{error: "Server error, try again"});
+        res.render('index',{error: "Internal server error, try again"});
     });
 
 }
@@ -118,7 +118,7 @@ function getQuestionsGame(req, res){
         res.render('executeGame/executeGame', {partidas: Partidas, message: "The game has ended successfully. The connection to the server has been closed."});
        
     }).catch(err=>{
-        res.render('index',{error: "Server error, try again"});
+        res.render('index',{error: "Internal server error, try again"});
     });
 
   }

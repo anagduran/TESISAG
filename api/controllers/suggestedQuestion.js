@@ -150,10 +150,10 @@ import question from "../models/question"
                     res.status(200).render('suggested/suggestedAll',{preguntas: suggested})
                      
                 } else {
-                    res.status(404).render('index' , {error: "Server error, try again"}) 
+                    res.status(404).render('index' , {error: "Bad Request, try again"}) 
                 }                    
             }).catch(err => {                    
-                res.status(404).render('index', {error: "Server error, try again"}) 
+                res.status(500).render('index', {error: "Internal server error, try again"}) 
             });
         
         
@@ -183,7 +183,7 @@ function getQuestionID(req,res,next){
                                         suggestedQuestion.find()
                                                          .exec()
                                                          .then(suggested => { 
-                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Bad Request, try again"})  
                                                          })     
                                         
                                     }                
@@ -192,7 +192,7 @@ function getQuestionID(req,res,next){
                             suggestedQuestion.find()
                                              .exec()
                                              .then(suggested => { 
-                                                    res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                                                    res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error: "Internal server error, try again"})  
                                             })     
                          })
         }
@@ -200,7 +200,7 @@ function getQuestionID(req,res,next){
         suggestedQuestion.find()
                          .exec()
                          .then(suggested => { 
-                                res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                                res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Bad Request, try again"})  
                         })     
     }
 }
@@ -224,7 +224,7 @@ function deleteQuestionByID(req, res, next){
                 suggestedQuestion.find()
                                 .exec()
                                 .then(suggested => {                     
-                                    res.status(404).render('suggested/suggestedAll',{error: "Server error, try again" , preguntas: suggested})                     
+                                    res.status(404).render('suggested/suggestedAll',{error: "Bad Request, try again" , preguntas: suggested})                     
                                         
                                 }) 
             }
@@ -233,7 +233,7 @@ function deleteQuestionByID(req, res, next){
             suggestedQuestion.find()
                             .exec()
                             .then(suggested => {                     
-                                res.status(500).render('suggested/suggestedAll',{error: "Server error, try again" , preguntas: suggested})                     
+                                res.status(500).render('suggested/suggestedAll',{error: "Internal server error, try again" , preguntas: suggested})                     
                                 
                             }) 
         })
@@ -242,7 +242,7 @@ function deleteQuestionByID(req, res, next){
         suggestedQuestion.find()
                         .exec()
                         .then(suggested => {                     
-                            res.status(404).render('suggested/suggestedAll',{error: "Server error, try again" , preguntas: suggested})                     
+                            res.status(404).render('suggested/suggestedAll',{error: "Bad Request, try again" , preguntas: suggested})                     
                                 
                         }) 
     }
@@ -264,7 +264,7 @@ function createQuestion(req,res, next){
                                         suggestedQuestion.find()
                                                          .exec()
                                                          .then(suggested => { 
-                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                                                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Bad Request, try again"})  
                                                          })     
                                     }                
                          })
@@ -272,7 +272,7 @@ function createQuestion(req,res, next){
                             suggestedQuestion.find()
                                              .exec()
                                              .then(suggested => { 
-                                                res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                                                res.status(500).render('suggested/suggestedAll',{preguntas: suggested, error: "Internal server error, try again"})  
                                             })     
                          })
         }
@@ -280,7 +280,7 @@ function createQuestion(req,res, next){
         suggestedQuestion.find()
                          .exec()
                          .then(suggested => { 
-                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                            res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Bad Request, try again"})  
                         })     
     }
 
@@ -342,12 +342,12 @@ function newQuestion(req, res) {
                             suggestedQuestion.find()
                                              .exec()
                                              .then(suggested => { 
-                                                    res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Server error, try again"})  
+                                                    res.status(404).render('suggested/suggestedAll',{preguntas: suggested, error: "Bad Request, try again"})  
                                             })     
                         }); 
 
 
-            try {
+            /*try {
                 if(mongoose.Types.ObjectId.isValid(id)){
                     suggestedQuestion.findByIdAndRemove(id).exec();
                 }
@@ -355,7 +355,7 @@ function newQuestion(req, res) {
             }
             catch(error){
                 console.log(error)
-            }
+            }*/
     }
     
 

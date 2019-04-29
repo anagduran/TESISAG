@@ -50,7 +50,7 @@ function newUser(req,res) {
                                     user.find()
                                     .exec()
                                     .then(users => {                                          
-                                        res.status(404).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
+                                        res.status(404).render('user/userAll',{usuarios: users, error: "Bad Request, try again" })         
                                     })
                                 }
                                
@@ -59,7 +59,7 @@ function newUser(req,res) {
                                 user.find()
                                     .exec()
                                     .then(users => {                                          
-                                        res.status(500).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
+                                        res.status(500).render('user/userAll',{usuarios: users, error: "Internal server error, try again" })         
                                     })
                             }); 
                 
@@ -75,10 +75,10 @@ function getUsers(req,res,next){
                     if(users){
                         res.status(200).render('user/userAll',{usuarios: users})  
                     }  else {
-                        res.status(404).render( 'index', { error: "Server error, try again"} )
+                        res.status(404).render( 'index', { error: "Bad Request, try again"} )
                     }                                      
                 }).catch(err => {
-                    res.status(500).render( 'index', { error: "Server error, try again"} )
+                    res.status(500).render( 'index', { error: "Internal server error, try again"} )
                 })
 }
 
@@ -96,7 +96,7 @@ function getUserID(req,res,next){
                         user.find()
                         .exec()
                         .then(users => {                                          
-                            res.status(5404).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
+                            res.status(404).render('user/userAll',{usuarios: users, error: "Bad Request, try again" })         
                         })
                     }                
                 })
@@ -104,7 +104,7 @@ function getUserID(req,res,next){
                     user.find()
                         .exec()
                         .then(users => {                                          
-                            res.status(500).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
+                            res.status(500).render('user/userAll',{usuarios: users, error: "Internal server error, try again" })         
                         })
                 })
     }
@@ -112,7 +112,7 @@ function getUserID(req,res,next){
         user.find()
         .exec()
         .then(users => {                                          
-            res.status(404).render('user/userAll',{usuarios: users, error: "Server error, try again" })         
+            res.status(404).render('user/userAll',{usuarios: users, error: "Bad Request, try again" })         
         })
     }
 }
@@ -146,7 +146,7 @@ function updateUserByID(req, res, next){
                             user.find()
                                 .exec()
                                 .then(users => {                                          
-                                    res.status(404).render('user/userAll',{usuarios: users,  error: "Server error, try again" })         
+                                    res.status(404).render('user/userAll',{usuarios: users,  error: "Bad Request, try again" })         
                                 })
                         }
                     })
@@ -154,7 +154,7 @@ function updateUserByID(req, res, next){
                         user.find()
                             .exec()
                             .then(users => {                                          
-                                res.status(500).render('user/userAll',{usuarios: users,  error: "Server error, try again" })         
+                                res.status(500).render('user/userAll',{usuarios: users,  error: "Internal server error, try again" })         
                             })
                     })
         }
@@ -162,7 +162,7 @@ function updateUserByID(req, res, next){
             user.find()
             .exec()
             .then(users => {                                          
-                res.status(404).render('user/userAll',{usuarios: users,  error: "Server error, try again" })         
+                res.status(404).render('user/userAll',{usuarios: users, error: "Bad Request, try again" })         
             })
         }
     }
@@ -186,7 +186,7 @@ function deleteUserByID(req, res, next){
                 user.find()
                 .exec()
                 .then(users => {                                            
-                    res.status(404).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
+                    res.status(404).render('user/userAll',{ error: "Bad Request, try again" ,usuarios: users})         
                 })    
             }
         })
@@ -194,7 +194,7 @@ function deleteUserByID(req, res, next){
             user.find()
                 .exec()
                 .then(users => {                                            
-                    res.status(500).render('user/userAll',{  error: "Server error, try again" ,usuarios: users})         
+                    res.status(500).render('user/userAll',{  error: "Internal server error, try again",usuarios: users})         
                 })   
         })
     }
@@ -202,7 +202,7 @@ function deleteUserByID(req, res, next){
         user.find()
             .exec()
             .then(users => {                                            
-                res.status(404).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
+                res.status(404).render('user/userAll',{ error: "Bad Request, try again" ,usuarios: users})         
             })  
     }
 }
@@ -222,14 +222,14 @@ function editUser(req,res, next){
                         user.find()
                         .exec()
                         .then(users => {                                            
-                            res.status(404).render('user/userAll',{ error: "Server error, try again",usuarios: users})         
+                            res.status(404).render('user/userAll',{ error: "Bad Request, try again",usuarios: users})         
                         })  
                     }
                 }).catch(err=> {
                     user.find()
                         .exec()
                         .then(users => {                                            
-                            res.status(500).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
+                            res.status(500).render('user/userAll',{ error: "Internal server error, try again" ,usuarios: users})         
                         })  
                 })
             }
@@ -237,7 +237,7 @@ function editUser(req,res, next){
                 user.find()
                     .exec()
                     .then(users => {                                            
-                        res.status(404).render('user/userAll',{ error: "Server error, try again" ,usuarios: users})         
+                        res.status(404).render('user/userAll',{ error: "Bad Request, try again" ,usuarios: users})         
                     })  
             }  
 }

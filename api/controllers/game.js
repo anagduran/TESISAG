@@ -204,7 +204,7 @@ function newGame(req,res) {
                                 game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                                        res.status(500).render( 'game/gameAll', { partidas: games, error: "Internal server error, try again"})                 
                                 
                                     })
                             }); 
@@ -221,7 +221,7 @@ function getGames(req,res,next){
                 res.status(200).render( 'game/gameAll', { partidas: games})                 
             
             }).catch(err => {                  
-                res.status(500).render( 'index', { error: "Server error, try again"} )
+                res.status(500).render( 'index', {error: "Internal server error, try again"} )
             })
     
 
@@ -243,7 +243,7 @@ function getGameID(req,res,next){
                         game.find()
                         .exec()
                         .then(games => {          
-                            res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                            res.status(404).render( 'game/gameAll', { partidas: games, error: "Bad Request, try again"})                 
                     
                         })
                     }  
@@ -253,7 +253,7 @@ function getGameID(req,res,next){
                 game.find()
                     .exec()
                     .then(games => {          
-                        res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                        res.status(500).render( 'game/gameAll', { partidas: games, error: "Internal server error, try again"})                 
                                 
                     })
             })
@@ -262,7 +262,7 @@ function getGameID(req,res,next){
         game.find()
         .exec()
         .then(games => {          
-            res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+            res.status(404).render( 'game/gameAll', { partidas: games, error: "Bad Request, try again"})                 
     
         })
     }
@@ -321,7 +321,7 @@ function updateGameByID(req, res, next){
                                     game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error: "Bad Request, try again"})                 
                                     })
                                 }
                             })
@@ -399,7 +399,7 @@ function updateGameByID(req, res, next){
                                 game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error: "Bad Request, try again"})                 
                                 
                                     })
                             }
@@ -408,7 +408,7 @@ function updateGameByID(req, res, next){
                             game.find()
                             .exec()
                             .then(games => {          
-                                res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                                res.status(500).render( 'game/gameAll', { partidas: games, error: "Internal server error, try again"})                 
                         
                             })
                         })
@@ -417,7 +417,7 @@ function updateGameByID(req, res, next){
                 game.find()
                 .exec()
                 .then(games => {          
-                    res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                    res.status(404).render( 'game/gameAll', { partidas: games, error: "Bad Request, try again"})                 
             
                 })
             }
@@ -463,7 +463,7 @@ function deleteGameByID(req, res){
                         game.find()
                             .exec()
                             .then(games => {                               
-                                res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                                res.status(404).render( 'game/gameAll', {error: "Bad Request, try again", partidas: games})
                             })
                     }
                 })
@@ -472,7 +472,7 @@ function deleteGameByID(req, res){
                     game.find()
                     .exec()
                     .then(games => {                               
-                        res.status(500).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                        res.status(500).render( 'game/gameAll', { error: "Internal server error, try again", partidas: games})
                     })
                 })
             }
@@ -480,14 +480,14 @@ function deleteGameByID(req, res){
                 game.find()
                 .exec()
                 .then(games => {                               
-                    res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                    res.status(404).render( 'game/gameAll', {error: "Bad Request, try again", partidas: games})
                 })
             }
         } else {
             game.find()
                     .exec()
                     .then(games => {                               
-                        res.status(404).render( 'game/gameAll', { error: "Server error, try again", partidas: games})
+                        res.status(404).render( 'game/gameAll', {error: "Bad Request, try again", partidas: games})
                     })
         }
         })
@@ -550,7 +550,7 @@ function editGame(req,res){
                                         game.find()
                                             .exec()
                                             .then(games => {          
-                                                res.status(500).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                                                res.status(500).render( 'game/gameAll', { partidas: games, error: "Internal server error, try again"})                 
                                             
                                             })
                                     })
@@ -559,7 +559,7 @@ function editGame(req,res){
                                 game.find()
                                     .exec()
                                     .then(games => {          
-                                        res.status(404).render( 'game/gameAll', { partidas: games, error:"Server error, try again"})                 
+                                        res.status(404).render( 'game/gameAll', { partidas: games, error: "Bad Request, try again"})                 
                                             
                                     })
                                 }

@@ -6,6 +6,8 @@ import path from 'path'
 import {connect} from './socket'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
+import admin from './models/admin'
+import bcrypt from 'bcrypt-nodejs'
 
 
 //CONEXION A MONGODB
@@ -13,8 +15,21 @@ import cookieParser from 'cookie-parser'
 
 const uri = "mongodb+srv://anagduran:21415776@triviagest-h5erg.mongodb.net/test"; 
 
+
 mongoose.connect(uri);
 mongoose.Promise= global.Promise
+
+/*var contra = bcrypt.hashSync("21415776", bcrypt.genSaltSync(8), null); 
+const adminN= new admin({
+    _id: new mongoose.Types.ObjectId(),
+    email: "anagabriela@sweetcherrytech.com",
+    password: contra
+    
+    });
+
+    adminN.save();*/
+
+
 
 
 

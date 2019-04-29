@@ -29,7 +29,7 @@ function newVariable(req,res,next) {
                                 variable.find()
                                         .exec()
                                         .then(variables => {                               
-                                            res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                            res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Bad Request, try again"})          
                                         });
                                 }
                            
@@ -38,7 +38,7 @@ function newVariable(req,res,next) {
                             variable.find()
                                         .exec()
                                         .then(variables => {                               
-                                            res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                            res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Internal server error, try again"})          
                                         });
                         }); 
             
@@ -58,7 +58,7 @@ function getVariables(req,res,next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(404).render('index',{ error:"Server error, try again"})          
+                                    res.status(404).render('index',{ error:"Bad Request, try again"})          
                                 });
                     }                         
                          
@@ -66,7 +66,7 @@ function getVariables(req,res,next){
                     variable.find()
                             .exec()
                             .then(variables => {                               
-                                res.status(500).render('index',{error:"Server error, try again"})          
+                                res.status(500).render('index',{error: "Internal server error, try again"})          
                             });   
                 })  
 
@@ -86,7 +86,7 @@ function getVariableID(req,res,next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Bad Request, try again"})          
                                 });
                     }                
                 })
@@ -94,7 +94,7 @@ function getVariableID(req,res,next){
                     variable.find()
                             .exec()
                             .then(variables => {                               
-                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Internal server error, try again"})          
                             });
                     })
     }
@@ -102,7 +102,7 @@ function getVariableID(req,res,next){
         variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Bad Request, try again"})          
                 });
     }
 }
@@ -134,7 +134,7 @@ function updateVariableByID(req, res, next){
                             variable.find()
                                     .exec()
                                     .then(variables => {                               
-                                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again" })          
+                                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Bad Request, try again" })          
                                     });
                         }
                     })
@@ -142,7 +142,7 @@ function updateVariableByID(req, res, next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                    res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Internal server error, try again"})          
                                 });
                     })
         }
@@ -150,7 +150,7 @@ function updateVariableByID(req, res, next){
             variable.find()
                     .exec()
                     .then(variables => {                               
-                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                        res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Bad Request, try again"})          
                     });
         }
     }
@@ -174,7 +174,7 @@ function deleteVariableByID(req, res, next){
                 variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{error:"Server error, try again", variableConfiguracion: variables})          
+                    res.status(404).render('variable/variableAll',{error: "Bad Request, try again", variableConfiguracion: variables})          
                 }) 
             }
         })
@@ -182,7 +182,7 @@ function deleteVariableByID(req, res, next){
             variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(500).render('variable/variableAll',{error:"Server error, try again", variableConfiguracion: variables})          
+                    res.status(500).render('variable/variableAll',{error: "Internal server error, try again", variableConfiguracion: variables})          
                 }) 
         })
     }
@@ -190,7 +190,7 @@ function deleteVariableByID(req, res, next){
         variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{error:"Server error, try again", variableConfiguracion: variables})          
+                    res.status(404).render('variable/variableAll',{error: "Bad Request, try again", variableConfiguracion: variables})          
                 }) 
     }
 }
@@ -210,14 +210,14 @@ function editVariable(req,res, next){
                         variable.find()
                                 .exec()
                                 .then(variables => {                               
-                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Bad Request, try again"})          
                                 });
                     }
                 }).catch(err=> {
                     variable.find()
                             .exec()
                             .then(variables => {                               
-                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                                res.status(500).render('variable/variableAll',{variableConfiguracion: variables, error: "Internal server error, try again"})          
                             });
                 })
             }
@@ -225,7 +225,7 @@ function editVariable(req,res, next){
                 variable.find()
                 .exec()
                 .then(variables => {                               
-                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error:"Server error, try again"})          
+                    res.status(404).render('variable/variableAll',{variableConfiguracion: variables, error: "Bad Request, try again"})          
                 });
             }
         
