@@ -63,7 +63,7 @@ html(lang="en")
                                         td
                                             a(class='action-icon' href='/game/#{partida._id}') 
                                                 i(id='icon-see' class='fa fa-eye')
-                                            - if (partida.status != 'No Start') {
+                                            - if (partida.status != 'No start') {
                                                 a(class='action-icon not-active') 
                                                     i(class='fas fa-pencil-alt icon-edit')
                                             -}
@@ -71,7 +71,7 @@ html(lang="en")
                                                 a(class='action-icon' href='/game/edit/#{partida._id}') 
                                                     i(class='fas fa-pencil-alt icon-edit')
                                             -}
-                                            - if (partida.status != 'No Start')
+                                            - if (partida.status != 'No start')
                                                 button(disable='true' type='button' class='fas fa-trash-alt button')                            
                                             -else 
                                                 button(type='button' id='button1' class='fas fa-trash-alt button' data-toggle="modal" data-target="#myModal2" value= partida._id onclick='obtenervalor(`#{partida._id}`);')      

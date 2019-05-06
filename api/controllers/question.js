@@ -42,7 +42,7 @@ function newQuestion(req, res) {
                 level: req.body.level,
                 status: estado,
                 category: req.body.categoriasCombo,
-                created_at: new Date("2019-01-22T16:00:00Z").toISOString()
+                created_at: new Date("2019-05-02T11:00:00Z").toISOString()
                
 
  

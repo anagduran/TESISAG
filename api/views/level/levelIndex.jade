@@ -40,13 +40,37 @@ html(lang="en")
         input(type='hidden' value = '#{cambio8.count}' id='position8')
         input(type='hidden' value = '#{cambio9.count}' id='position9')
 
-        //- Marzo Barras
-        //- -var cambioM1 = JSON.parse(JSON.stringify(barrasM))[0]
-        //- -var cambioM2 = JSON.parse(JSON.stringify(barrasM))[1]
-        //- -var cambioM3 = JSON.parse(JSON.stringify(barrasM))[2]
-        //- input(type='hidden' value = '#{cambioM1.count}' id='cm1')
-        //- input(type='hidden' value = '#{cambioM2.count}' id='cm2')
-        //- input(type='hidden' value = '#{cambioM3.count}' id='cm3')
+        //-Marzo Barras
+        -var cambioM1 = JSON.parse(JSON.stringify(barrasM))[0]
+        -var cambioM2 = JSON.parse(JSON.stringify(barrasM))[1]
+        -var cambioM3 = JSON.parse(JSON.stringify(barrasM))[2]
+        input(type='hidden' value = '#{cambioM1.count}' id='cm1')
+        input(type='hidden' value = '#{cambioM2.count}' id='cm2')
+        input(type='hidden' value = '#{cambioM3.count}' id='cm3')
+
+        //-Enero Barras
+        -var cambioE1 = JSON.parse(JSON.stringify(barrasE))[0]
+        -var cambioE2 = JSON.parse(JSON.stringify(barrasE))[1]
+        -var cambioE3 = JSON.parse(JSON.stringify(barrasE))[2]
+        input(type='hidden' value = '#{cambioE1.count}' id='ce1')
+        input(type='hidden' value = '#{cambioE2.count}' id='ce2')
+        input(type='hidden' value = '#{cambioE3.count}' id='ce3')
+
+        //-Abril Barras
+        -var cambioA1 = JSON.parse(JSON.stringify(barrasA))[0]
+        -var cambioA2 = JSON.parse(JSON.stringify(barrasA))[1]
+        -var cambioA3 = JSON.parse(JSON.stringify(barrasA))[2]
+        input(type='hidden' value = '#{cambioA1.count}' id='ca1')
+        input(type='hidden' value = '#{cambioA2.count}' id='ca2')
+        input(type='hidden' value = '#{cambioA3.count}' id='ca3')
+
+        //-Mayo Barras
+        -var cambioMay1 = JSON.parse(JSON.stringify(barrasMay))[0]
+        -var cambioMay2 = JSON.parse(JSON.stringify(barrasMay))[1]
+        -var cambioMay3 = JSON.parse(JSON.stringify(barrasMay))[2]
+        input(type='hidden' value = '#{cambioMay1.count}' id='cmay1')
+        input(type='hidden' value = '#{cambioMay2.count}' id='cmay2')
+        input(type='hidden' value = '#{cambioMay3.count}' id='cmay3')
 
     div(class='row ')
         div(class='col-1')
@@ -97,187 +121,203 @@ html(lang="en")
         script(type="text/javascript" src="js/Chart.min.js")
         
     script(type="text/javascript").
-        Chart.defaults.global.defaultFontSize = 30;
-        var Q = document.getElementById("totalQ").value;
-
-    
-
-       
-        var count4 = document.getElementById("position7").value;
-        var count5 = document.getElementById("position8").value;
-        var count6 = document.getElementById("position9").value;
-        var porcent1 = document.getElementById("porcentaje1").value;
-        var porcent2 = document.getElementById("porcentaje2").value;
-        var porcent3 = document.getElementById("porcentaje3").value;
-
-        var concat1 = Math.ceil(porcent1);
-        var concat2 = Math.ceil(porcent2);
-        var concat3 = Math.ceil(porcent3);
-   
-
-        /* MARZO BARRAS
-        var cambioMar1 = document.getElementById("cm1").value;
-        var cambioMar2 = document.getElementById("cm2").value;
-        var cambioMar3 = document.getElementById("cm3").value;*/ 
         
-        //TORTAA
-        var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ["High " , "Medium ", "Low "],
-                datasets: [{
-                    label: '% of Levels',
-                    data: [concat1, concat2, concat3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: '% of System Levels',
-                    fontSize: 40
-                   
-                },
-                legend: {
-                    display: true,
-                    labels: {
-                        fontSize: 40
-                    }
-                },
-                 layout: {
-                        padding: {
-                            left: 50,
-                            right: 0,
-                            top: 0,
-                            bottom: 0
-                        }
-                }
-            
-            }
-        }); 
-        // BARRAS
-        var ctx = document.getElementById("myChart2").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov","Dec"],
-                datasets: [{
-                    label: ' High ',
-                    backgroundColor: [
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)',
-                        'rgba(132, 208, 158, 0.8)'
-                    
-                    ],
-                    yAxisID: 'y-axis-1',
-                    data: [5,count4, 19, 3, 5, 2, 3],
-                }, { 
-                    label: ' Medium ',
-                    backgroundColor: [
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)',
-                        'rgba(215, 47, 158, 0.8)'
-                    ],
-                    yAxisID: 'y-axis-2',
-                    data: [4,count5, 19, 4, 6, 3, 4],
-                }, { 
-                    label: ' Low ',
-                    backgroundColor: [
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)',
-                        'rgba(61, 69, 150, 0.8)'
-                    ],
-                    yAxisID: 'y-axis-3',
-                    data: [4,count6,19, 5, 7, 4, 5],
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Number of Questions Created in 2019'
-                },
-                responsive: true,
-                tooltips: {
-                    mode: 'index',
-                    intersect: true
-                },
-                scales: {
-                    
-                    yAxes: [{
-                        type: 'linear',
-                        id: 'y-axis-1',
-                        ticks: {
-                        max: 20,
-                        min: 1 
-                        }
-                    }, {
-                        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for
-                        id: 'y-axis-2',
-                        display: false,
-                        ticks: {
-                        max: 20,
-                        min: 1 
-                        }
-                    }, 
-                    {
-                        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                        id: 'y-axis-3',
-                        display: false,
-                        ticks: {
-                        max: 20,
-                        min: 1 
-                        }
-                    }]
-                }
-            }
-        });
+            Chart.defaults.global.defaultFontSize = 30;
+            var Q = document.getElementById("totalQ").value;
 
-   
+        
+
+            //FEBRERO BARRAS
+            var count4 = document.getElementById("position7").value;
+            var count5 = document.getElementById("position8").value;
+            var count6 = document.getElementById("position9").value;
+
+            var porcent1 = document.getElementById("porcentaje1").value;
+            var porcent2 = document.getElementById("porcentaje2").value;
+            var porcent3 = document.getElementById("porcentaje3").value;
+
+            var concat1 = Math.ceil(porcent1);
+            var concat2 = Math.ceil(porcent2);
+            var concat3 = Math.ceil(porcent3);
+    
+            //ENERO BARRAS
+            var cambioEne1 = document.getElementById("ce1").value;
+            var cambioEne2 = document.getElementById("ce2").value;
+            var cambioEne3 = document.getElementById("ce3").value;
+
+            //MARZO BARRAS
+            var cambioMar1 = document.getElementById("cm1").value;
+            var cambioMar2 = document.getElementById("cm2").value;
+            var cambioMar3 = document.getElementById("cm3").value;
+
+
+            //ABRIL BARRAS
+            var cambioAb1 = document.getElementById("ca1").value;
+            var cambioAb2 = document.getElementById("ca2").value;
+            var cambioAb3 = document.getElementById("ca3").value;
+
+            //MAYO BARRAS
+            var cambioMay1 = document.getElementById("cmay1").value;
+            var cambioMay2 = document.getElementById("cmay2").value;
+            var cambioMay3 = document.getElementById("cmay3").value;
             
-       
+            //TORTAA
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ["High " , "Medium ", "Low "],
+                    datasets: [{
+                        label: '% of Levels',
+                        data: [concat1, concat2, concat3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '% of System Levels',
+                        fontSize: 40
+                    
+                    },
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontSize: 40
+                        }
+                    },
+                    layout: {
+                            padding: {
+                                left: 50,
+                                right: 0,
+                                top: 0,
+                                bottom: 0
+                            }
+                    }
+                
+                }
+            });
+            // BARRAS
+            var ctx = document.getElementById("myChart2").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov","Dec"],
+                    datasets: [{
+                        label: ' High ',
+                        backgroundColor: [
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)',
+                            'rgba(132, 208, 158, 0.8)'
+                        
+                        ],
+                        yAxisID: 'y-axis-1',
+                        data: [cambioEne1,count4, cambioMar1, cambioAb1, cambioMay1 ]
+                    }, { 
+                        label: ' Medium ',
+                        backgroundColor: [
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)',
+                            'rgba(215, 47, 158, 0.8)'
+                        ],
+                        yAxisID: 'y-axis-2',
+                        data: [cambioEne2,count5, cambioMar2, cambioAb2, cambioMay2 ],
+                    }, { 
+                        label: ' Low ',
+                        backgroundColor: [
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)',
+                            'rgba(61, 69, 150, 0.8)'
+                        ],
+                        yAxisID: 'y-axis-3',
+                        data: [cambioEne3,count6,cambioMar3, cambioAb3, cambioMay3 ],
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Number of Questions Created in 2019'
+                    },
+                    responsive: true,
+                    tooltips: {
+                        mode: 'index',
+                        intersect: true
+                    },
+                    scales: {
+                        
+                        yAxes: [{
+                            type: 'linear',
+                            id: 'y-axis-1',
+                            ticks: {
+                            max: 40,
+                            min: 5 
+                            }
+                        }, {
+                            type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for
+                            id: 'y-axis-2',
+                            display: false,
+                            ticks: {
+                            max: 40,
+                            min: 5
+                            }
+                        }, {
+                            type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                            id: 'y-axis-3',
+                            display: false,
+                            ticks: {
+                            max: 40,
+                            min: 5
+                            }
+                        }]
+                    }
+                }
+            
+            });
+
+
+

@@ -46,9 +46,38 @@ function getLevel(req,res) {
                                     }
                                 }    
                             ]).exec().then(resultadoM => {
-                               
-                                res.status(200).render('level/levelIndex',{ total: result, totalQ: contadorT, barras: resultadoF, barrasM: resultadoM, barrasE: resultadoE})
+                                question.aggregate([
+                                    {
+                                        $match: {
+                                            created_at: {$gte: new Date("2019-04-01"), $lte: new Date("2019-04-30")}
+                                        }
+                                    },
+                                    {
+                                        $group: {
+                                            _id: '$level',
+                                            count: {$sum: 1}
+                                        }
+                                    }    
+                                ]).exec().then(resultadoA => {
+                                    
+                                    question.aggregate([
+                                        {
+                                            $match: {
+                                                created_at: {$gte: new Date("2019-05-01"), $lte: new Date("2019-05-31")}
+                                            }
+                                        },
+                                        {
+                                            $group: {
+                                                _id: '$level',
+                                                count: {$sum: 1}
+                                            }
+                                        }    
+                                    ]).exec().then(resultadoMay => {
+
+                                        res.status(200).render('level/levelIndex',{ total: result, totalQ: contadorT, barras: resultadoF, barrasM: resultadoM, barrasE: resultadoE, barrasA: resultadoA, barrasMay:resultadoMay})
+                                })
                             })
+                        })
                     })
                         
                         

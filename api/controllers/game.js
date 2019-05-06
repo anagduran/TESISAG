@@ -80,7 +80,7 @@ function createPushNotification(game) {
     var date2 = new Date(2019,mesConResta, diaC, hora2[0], 0, 0);
 
 
-     console.log("fecha y hora de notificacion 2 "+ date2);
+    // console.log("fecha y hora de notificacion 2 "+ date2);
    
      agenda.scheduleJob(date2 ,()=> {
         console.log('aqi a las 3 y 582');
@@ -192,11 +192,24 @@ function newGame(req,res) {
                     partida.save()
                             .then(nuevapartida => {
                                 game.findById(nuevapartida._id)
-                                    .populate('questions', ['question'])
                                     .exec()
                                 .then( newG => {
-                                      createPushNotification(newG);
-                                      res.status(200).render('game/gameDetail',{partida: newG, message: "Game added successfully"})
+                                    question.find({'_id': {$in: newG.questions}}, {"question":1, "options":1, "level":1}).sort({"level": 1}).exec().then(result2=>{ 
+                                        if(newG){
+                                            createPushNotification(newG);
+                                            res.status(200).render('game/gameDetail',{partida: newG, questions: result2, message: "Game added successfully"})
+                                        }else {
+                                            game.find()
+                                            .exec()
+                                            .then(games => {          
+                                                res.status(500).render( 'game/gameAll', { partidas: games, error: "Internal server error, try again"})                 
+                                        
+                                            })
+                                            
+                                        }
+                                    })
+                                    
+                                     
                                       
                                 })
                             })
