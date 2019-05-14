@@ -391,7 +391,7 @@ form i {
     text-align: center;
     font-family: 'Calibri';
     color: black;
-    font-size: 18px;
+    font-size: 25px;
 }
 
 .card-header-custom2 {
@@ -409,6 +409,7 @@ form i {
 
 .input-custom{
     border: none;
+    width: 100%;
 }
 
 #logo-custom{
@@ -719,4 +720,12 @@ footer {
     width: 100%;
     height: 40px;
     color: white;
+  }
+
+  #divUno {
+      font-size: '21px';
+  }
+
+  .btn-custom-execute{
+      font-size: 20px !important;
   }

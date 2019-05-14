@@ -5,6 +5,7 @@ import fcm from 'fcm-node'
 import agenda from 'node-schedule'
 
 function createPushNotification(game) {
+    console.log('hola');
     var serverkey = 'AAAA98IRcAQ:APA91bF8dcgsiMKqsuLz65q87e8tIiGUz_VFUHEeAjH_wAA3L_FK5tanevbY9ykqI08A2KUWXeYX_S1FeB91MaiZNVtc_O8IVsCHJbRDQmUl8-cBdcjcCcE1xacSBxA7YNaroe3MUQ3R';
     var FCM = new fcm(serverkey);
     
@@ -43,67 +44,69 @@ function createPushNotification(game) {
             diaC = game.date.substring(3,5);
         }
     
-       
-
-    var mesConResta = mesC - 1;
-    var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesConResta + '0';
-    var date = new Date(2019,mesConResta, diaC, hora[0], 50, 0);
-        console.log(mesC);
-        console.log("fecha y hora de notificacion 1 "+ date);
-     //ENVIO NOTIFICACION TIPO 1
-    agenda.scheduleJob(date ,()=> {
-        console.log('aqi a las 3 y 581');
-        console.log(total);
-        var message = {
-            to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
-            notification: {
-                title: titulo,
-                body: mensaje
-            }
-        };
-        
-        FCM.send(message, (err,response) => {
-            if (err) {
-                console.log("Something has gone wrong!", err);
-            } else {
-                console.log("Successfully sent with response:", response);
-            }
-        })
-
-    })
     }
 
+            var mesConResta = mesC - 1;
+            var total = '50 ' + hora[0] + ' ' + diaC + ' ' + mesConResta + '0';
+            var date = new Date(2019,mesConResta, diaC, hora[0], 50, 0);
+            
+                console.log("fecha y hora de notificacion 1 "+ date);
+            //ENVIO NOTIFICACION TIPO 1
+                agenda.scheduleJob(date ,()=> {
+                    console.log('aqi a las 3 y 581');
+                    console.log(total);
+                    var message = {
+                        to: 'dS9eoEvW5J4:APA91bHLK3JZo80GRe5TAZ8xPDs-GXnB8akHwolDCGseUx15kEZtElUtLdKdl2EaSyeBGi2JXYwpK43tO7aWZpkuoQz0LFDt16S8fJju7kYCYKWioaCNs5Yu9OiS7w0c43Y24BT-I-NT',
+                        notification: {
+                            title: titulo,
+                            body: mensaje
+                        }
+                    };
+                    
+                    FCM.send(message, (err,response) => {
+                        if (err) {
+                            console.log("Something has gone wrong!", err);
+                        } else {
+                            console.log("Successfully sent with response:", response);
+                        }
+                    })
 
-     // ENVIO NOTIFICACION TIPO 2
+                })
+            
 
 
-    var date2 = new Date(2019,mesConResta, diaC, hora2[0], 0, 0);
+            // ENVIO NOTIFICACION TIPO 2
 
 
-    // console.log("fecha y hora de notificacion 2 "+ date2);
-   
-     agenda.scheduleJob(date2 ,()=> {
-        console.log('aqi a las 3 y 582');
-        var message = {
-            to: 'eaZol7mhW7E:APA91bHuvl6ch_1bfTE-IzrZMOqIWrHoyPJvkFWtSXait2ixtu_dbRMIArJw5TD9Fhd2LJXzOxTjMDe4dWkgaitoklWUu440eKB-jxnyERfgU17CS2nzWHl7L_giPvfjSSD40Q-EWvDh',
-            notification: {
-                title: titulo2,
-                body: mensaje2
-            }
-        };
+            var date2 = new Date(2019,mesConResta, diaC, hora2[0], 0, 0);
+
+
+            console.log("fecha y hora de notificacion 2 "+ date2);
         
-        FCM.send(message, (err,response) => {
-            if (err) {
-                console.log("Something has gone wrong!", err);
-            } else {
-                console.log("Successfully sent with response:", response);
-            }
-        })
+                agenda.scheduleJob(date2 ,()=> {
+                    console.log('aqi a las 3 y 582');
+                    var message = {
+                        to: 'dS9eoEvW5J4:APA91bHLK3JZo80GRe5TAZ8xPDs-GXnB8akHwolDCGseUx15kEZtElUtLdKdl2EaSyeBGi2JXYwpK43tO7aWZpkuoQz0LFDt16S8fJju7kYCYKWioaCNs5Yu9OiS7w0c43Y24BT-I-NT',
+                        notification: {
+                            title: titulo2,
+                            body: mensaje2
+                        }
+                    };
+                    
+                    FCM.send(message, (err,response) => {
+                        if (err) {
+                            console.log("Something has gone wrong!", err);
+                        } else {
+                            console.log("Successfully sent with response:", response);
+                        }
+                    })
 
-    })
+                })
+        
+    }
     
 
-}
+
 
 
 function newGame(req,res) {
@@ -155,8 +158,7 @@ function newGame(req,res) {
             var concatFecha = ver + 'T' + tiempo;
             var totalT2 = timeN - 0;
             var concatT2 = totalT2 + ':00'
-       
-
+    
 
 
             const partida = new game({

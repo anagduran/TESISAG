@@ -121,7 +121,7 @@ html(lang="en")
                         
                 div(class='col-5')
                     label(class='label-form-style') Message
-                    - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[0]
+                    - var changeNotification  = JSON.parse(JSON.stringify(partida.notification))[1]
                     input(class='form-control' id='prize', name='message2', type='text', value='#{changeNotification.message}')
                 div(class='col-1')
             br

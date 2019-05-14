@@ -8,7 +8,7 @@ import question from "../models/question"
  function getSuggestedQuestion(req,res,next){
    
     var regexEspeciales = /[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]{3}/;
-    var palabrasConsecutivas = /[a-zA-Z]{4}$/;
+    var palabrasConsecutivas =  /^(?=.*\d)(?=.*[A-Za-z]){4}/ ;
     var trivia = [];
     var allObject = [];
     var contador= 0;
@@ -16,7 +16,7 @@ import question from "../models/question"
         .exec()
         .then(suggested => {      
             if(suggested)    {  
-               // SI LA PREGUNTA TIENE UNICAMENTE UNA PALABRA
+               //1.  SI LA PREGUNTA TIENE UNICAMENTE UNA PALABRA
                
                 for(let i=0; i < suggested.length; i++ ){
                     
@@ -28,7 +28,7 @@ import question from "../models/question"
                     }
                     
                 }
-                // SI UNA MISMA PALABRA ESTA EN LAS OPCIONES A B Y C
+                //2.  SI UNA MISMA PALABRA ESTA EN LAS OPCIONES A B Y C
                 for(let i=1; i < suggested.length; i++ ){
                   trivia.push(suggested[i].question.toLowerCase(), suggested[i].correctAnswer.toLowerCase(), suggested[i].optionB.toLowerCase(), suggested[i].optionC.toLowerCase());
                     var separacion2 = trivia[1].split(" ");
@@ -66,7 +66,7 @@ import question from "../models/question"
                     allObject=[];
                 }
                
-                //SI LAS OPCIONES TIENE MAS DE 3 CAMPOS
+                //3. SI LAS OPCIONES TIENE MAS DE 3 CAMPOS
                for(let i=0; i < suggested.length; i++ ){
                 
                     var separacion6 = suggested[i].correctAnswer.split(" ");
@@ -79,7 +79,7 @@ import question from "../models/question"
                     }
                                                        
                 }
-                // SI EL LENGHT DE LAS OPCIONES PASA DE 30
+                //4. SI EL LENGHT DE LAS OPCIONES PASA DE 30
                 for(let i=0; i < suggested.length; i++ ){                        
                     
                     if((suggested[i].correctAnswer.length > 25) || (suggested[i].optionB.length > 25) || (suggested[i].optionC.length > 25)) {
@@ -89,10 +89,10 @@ import question from "../models/question"
                                                        
                 }
     
-                //SI TIENE CARACTERES ALFABETICOS CONSECUTIVOS: aaaa,bbbb,cccc,dddd,eeees EN LA PREGUNTA
+                //5. SI TIENE CARACTERES ALFABETICOS CONSECUTIVOS: aaaa,bbbb,cccc,dddd,eeees EN LA PREGUNTA
          
                 // ARREGLAR PALABRAS REGEX DE PALABRAS CONSECUTIVAS
-                for(let i=0; i < suggested.length; i++){                        
+               for(let i=0; i < suggested.length; i++){                        
                     console.log(suggested[i].question)
                     console.log(palabrasConsecutivas)
                     var separacionquestion = suggested[i].question.split(" ");
@@ -106,9 +106,9 @@ import question from "../models/question"
                         }     
                     }                                                
                 }
-                
+              
                 // ARREGLAR PALABRAS REGEX DE PALABRAS CONSECUTIVAS
-                //SI TIENE CARACTERES ALFABETICOS CONSECUTIVOS: aaaa,bbbb,cccc,dddd,eeees EN LAS OPCIONES
+                //6. SI TIENE CARACTERES ALFABETICOS CONSECUTIVOS: aaaa,bbbb,cccc,dddd,eeees EN LAS OPCIONES
                 for(let i=0; i < suggested.length; i++ ){                        
                     var separacion6 = suggested[i].correctAnswer.split(" ");
                     var separacion7 = suggested[i].optionB.split(" ");
@@ -120,7 +120,19 @@ import question from "../models/question"
                     }                                                     
                 }
 
-                //SI EXISTEN CARACTERES ESPECIALES CONSECUTIVOS EN LA PREGUNTA
+                //7. SI EXISTEN CARACTERES ESPECIALES CONSECUTIVOS EN LA PREGUNTA
+                for(let i=0; i < suggested.length; i++ ){                        
+                    var separacion6 = suggested[i].correctAnswer.split(" ");
+                    var separacion7 = suggested[i].optionB.split(" ");
+                    var separacion8 = suggested[i].optionC.split(" "); 
+
+                    if( (regexEspeciales.test(separacion6[0])) || (regexEspeciales.test(separacion7[0])) || (regexEspeciales.test(separacion8[0]))) {
+                        suggestedQuestion.findByIdAndRemove(suggested[i]._id).exec();
+                        console.log("aqui 6");
+                    }  
+                                                  
+                }
+
                 for(let i=0; i < suggested.length; i++ ){                        
                     
                     if(regexEspeciales.test(suggested[i].question)) {
@@ -129,7 +141,7 @@ import question from "../models/question"
                     }                                                     
                 }
 
-                //SI LA LOGINTUD DE LA PREGUNTA ES MENOR A 4
+                //8. SI LA LOGINTUD DE LA PREGUNTA ES MENOR A 4
                 for(let i=0; i < suggested.length; i++ ){                        
         
                     
@@ -347,7 +359,7 @@ function newQuestion(req, res) {
                         }); 
 
 
-            /*try {
+            try {
                 if(mongoose.Types.ObjectId.isValid(id)){
                     suggestedQuestion.findByIdAndRemove(id).exec();
                 }
@@ -355,7 +367,7 @@ function newQuestion(req, res) {
             }
             catch(error){
                 console.log(error)
-            }*/
+            }
     }
     
 

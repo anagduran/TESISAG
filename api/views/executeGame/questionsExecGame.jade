@@ -179,12 +179,12 @@ html(lang="en")
                         div(class='col-11 d-flex justify-content-between')
                     
                            
-                            button( class='btn btn-outline-success' id='buttonStart' ) Start Game
-                            button(class='btn btn-outline-success' id='buttonNext' disabled='true') Next Question
-                            button(class='btn btn-outline-success' id='buttonSend' disabled='true') Send Question
+                            button( class='btn btn-outline-success btn-custom-execute' id='buttonStart' ) Start Game
+                            button(class='btn btn-outline-success btn-custom-execute' id='buttonNext' disabled='true') Next Question
+                            button(class='btn btn-outline-success btn-custom-execute' id='buttonSend' disabled='true') Send Question
                             //- button(class='btn btn-outline-info' id='buttonEnd' disabled='true') End Game
                             form(id='form', action='/executeGame/endGame/#{juego._id}', method='GET' autocomplete="off" class='mb-0')
-                                button(class='btn btn-outline-success' id='buttonEnd' disabled='true') End Game 
+                                button(class='btn btn-outline-success btn-custom-execute' id='buttonEnd' disabled='true') End Game 
 
                             
             div(class='col-1') 
@@ -206,7 +206,7 @@ script(type="text/javascript").
         var botonN =document.getElementById("buttonNext");
         var botonE =document.getElementById("buttonEnd");
 
-        var ws = new WebSocket('ws://localhost:4500');
+        var ws = new WebSocket('ws://te-env.aaehw3v6ps.us-west-2.elasticbeanstalk.com:4500');
         var contador3 = 20;
 
        
