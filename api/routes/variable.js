@@ -6,6 +6,7 @@ import log from "../middlewares/session"
 const router = express.Router()
 const loggin = log.isLoggedIn
 
+
 router.get('/', loggin, variableController.getVariables)
 router.get('/create', loggin, variableController.createVariable)
 router.post('/new', loggin, variableController.newVariable)
